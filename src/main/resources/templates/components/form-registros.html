@@ -14,13 +14,17 @@
         <label th:for="${#ids.prev('sexo')}" th:text="${sexo}"></label>
     </div>
     <label for="informacion_adicional">Informaci&oacute;n adicional: </label>
-    <input type="text" id="informacion_adicional" th:field="*{informacion_adicional}">
+    <div>
+        <textarea type="text" rows="10" cols="50" id="informacion_adicional" th:field="*{informacion_adicional}"></textarea>
+    </div>
     <br>
     <label for="DUI">DUI: </label>
     <input type="text" id="DUI" th:field="*{Dui}">
     <br>
     <label for="direccion">Direcci&oacute;n: </label>
-    <input type="text" id="direccion" th:field="*{direccion}">
+    <div>
+        <textarea type="text" rows="5" cols="50" id="direccion" th:field="*{direccion}"></textarea>
+    </div>
     <br>
 
 </section>

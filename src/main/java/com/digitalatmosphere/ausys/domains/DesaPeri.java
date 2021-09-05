@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(schema="public", name="DESAPERI")
 public class DesaPeri {
@@ -43,6 +45,7 @@ public class DesaPeri {
 	@Column(name="DUI")
 	private String Dui;
 	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name="fecha_registro")
 	private Date fecha_registro;
 	
@@ -62,6 +65,18 @@ public class DesaPeri {
 
 	public DesaPeri() {
 	}
+
+	public Date getFecha_registro() {
+		return fecha_registro;
+	}
+
+
+
+	public void setFecha_registro(Date fecha_registro) {
+		this.fecha_registro = fecha_registro;
+	}
+
+
 
 	public Integer getId_desaperi() {
 		return id_desaperi;
