@@ -1,0 +1,26 @@
+<section th:fragment="registros">
+    <label for="tipo_de_caso">Tipo de caso: </label>
+    <input type="text" id="tipo_de_caso" th:field="*{tipo_de_caso}">
+    <br>
+    <label for="nombre">Nombre: </label>
+    <input type="text" id="nombre" th:field="*{nombre}">
+    <br>
+    <label for="apellido">Apellido: </label>
+    <input type="text" id="apellido" th:field="*{apellido}">
+    <br>
+    <label>Sexo: </label>
+    <div th:each="sexo : ${listaSexo}">
+        <input type="radio" th:field="*{sexo}" th:value="${sexo}">
+        <label th:for="${#ids.prev('sexo')}" th:text="${sexo}"></label>
+    </div>
+    <label for="informacion_adicional">Informaci&oacute;n adicional: </label>
+    <input type="text" id="informacion_adicional" th:field="*{informacion_adicional}">
+    <br>
+    <label for="DUI">DUI: </label>
+    <input type="text" id="DUI" th:field="*{Dui}">
+    <br>
+    <label for="direccion">Direcci&oacute;n: </label>
+    <input type="text" id="direccion" th:field="*{direccion}">
+    <br>
+
+</section>
