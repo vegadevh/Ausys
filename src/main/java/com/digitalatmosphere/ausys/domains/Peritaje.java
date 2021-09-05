@@ -1,13 +1,16 @@
 package com.digitalatmosphere.ausys.domains;
 
+//import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+//import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -17,7 +20,7 @@ public class Peritaje {
 
 	@Id
 	@Column(name="id_peritaje")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_peritaje;
 	
 	@Column(name="identificado")
@@ -35,6 +38,17 @@ public class Peritaje {
 	
 	@Transient
 	private Integer id_division;
+	
+//	@OneToMany(mappedBy="peritaje")
+//	private Set<DesaPeri> desaPei;
+
+//	public Set<DesaPeri> getDesaPei() {
+//		return desaPei;
+//	}
+//
+//	public void setDesaPei(Set<DesaPeri> desaPei) {
+//		this.desaPei = desaPei;
+//	}
 
 	public Integer getId_peritaje() {
 		return id_peritaje;

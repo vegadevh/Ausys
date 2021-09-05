@@ -1,5 +1,7 @@
 package com.digitalatmosphere.ausys.domains;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,6 +43,9 @@ public class DesaPeri {
 	@Column(name="DUI")
 	private String Dui;
 	
+	@Column(name="fecha_registro")
+	private Date fecha_registro;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_desaparecido")
 	private Desaparecido desaparecido;
@@ -54,6 +59,9 @@ public class DesaPeri {
 	
 	@Transient
 	private Integer id_peritaje;
+
+	public DesaPeri() {
+	}
 
 	public Integer getId_desaperi() {
 		return id_desaperi;
