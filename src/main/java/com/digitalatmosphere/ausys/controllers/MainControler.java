@@ -3,9 +3,12 @@ package com.digitalatmosphere.ausys.controllers;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+//import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,11 +83,12 @@ public class MainControler {
 	}
 	
 	@PostMapping("/validarPeritaje")
-	public ModelAndView validarPeritaje(@ModelAttribute DesaPeri desaPeri, BindingResult result, @ModelAttribute Peritaje peritaje, BindingResult result2) {
+	public ModelAndView validarPeritaje(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result, @Valid @ModelAttribute Peritaje peritaje, BindingResult result2) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		if(result.hasErrors()) {
+		if(result.hasErrors() && result2.hasErrors()) {
+			mav.addObject("titulo", "Ingresar Peritajes");
 			mav.setViewName("IngresarPeritaje");
 		}else {
 			try {
@@ -93,6 +97,7 @@ public class MainControler {
 			}catch(Exception e){
 				e.getStackTrace();
 			}
+			mav.addObject("titulo", "Ingresar Peritajes");
 			String mensaje ="Peritaje creado con éxito";
 			mav.addObject("mensaje", mensaje);
 			mav.setViewName("index");

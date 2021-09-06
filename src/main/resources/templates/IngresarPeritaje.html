@@ -26,10 +26,10 @@
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <div>
-            <form action="@{/validarPeritaje}" th:object="${desaPeri}" >
+            <form th:action="@{/validarPeritaje}" th:object="${desaPeri}" method="POST">
                 <label for="id_peritaje">Identficador del registro: </label>
                 <input type="text" id="id_peritaje" th:field="*{peritaje.id_peritaje}">
-                <div th:if="${#fields.hasErrors('peritaje.id_peritaje')}" th:errors="*{sexo}"></div>
+                <div th:if="${#fields.hasErrors('peritaje.id_peritaje')}" th:errors="*{peritaje.id_peritaje}" class="alert alert-danger" role="alert"></div>
                 <br>
 
                 <label for="identificado">Persona identificada: </label>
@@ -40,7 +40,7 @@
 
                 <label for="edad_estimada">Edad estimada: </label>
                 <input type="number" id="edad_estimada" th:field="*{peritaje.edad_estimada}">
-                <div th:if="${#fields.hasErrors('peritaje.edad_estimada')}" th:errors="*{peritaje.edad_estimada}"></div>
+                <div th:if="${#fields.hasErrors('peritaje.edad_estimada')}" th:errors="*{peritaje.edad_estimada}" class="alert alert-danger" role="alert"></div>
                 <br>
 
                 <label class="col-form-label">Departamento:</label>

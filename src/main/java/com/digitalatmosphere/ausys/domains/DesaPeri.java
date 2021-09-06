@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -62,6 +63,7 @@ public class DesaPeri {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_peritaje")
+	@NotNull
 	private Peritaje peritaje;
 	
 	@Transient

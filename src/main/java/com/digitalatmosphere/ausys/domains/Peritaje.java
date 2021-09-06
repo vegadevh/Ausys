@@ -41,17 +41,6 @@ public class Peritaje {
 	
 	@Transient
 	private Integer id_division;
-	
-//	@OneToMany(mappedBy="peritaje")
-//	private Set<DesaPeri> desaPei;
-
-//	public Set<DesaPeri> getDesaPei() {
-//		return desaPei;
-//	}
-//
-//	public void setDesaPei(Set<DesaPeri> desaPei) {
-//		this.desaPei = desaPei;
-//	}
 
 	public Integer getId_peritaje() {
 		return id_peritaje;

@@ -1,39 +1,39 @@
 <section th:fragment="registros">
     <label for="tipo_de_caso">Tipo de caso: </label>
     <input type="text" id="tipo_de_caso" th:field="*{tipo_de_caso}">
-    <div th:if="${#fields.hasErrors('tipo_de_caso')}" th:errors="*{tipo_de_caso}"></div>
+    <div th:if="${#fields.hasErrors('tipo_de_caso')}" th:errors="*{tipo_de_caso}" class="alert alert-danger" role="alert"></div>
     <br>
     <label for="nombre">Nombre: </label>
     <input type="text" id="nombre" th:field="*{nombre}">
-    <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+    <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="alert alert-danger" role="alert"></div>
     <br>
     <label for="apellido">Apellido: </label>
     <input type="text" id="apellido" th:field="*{apellido}">
-    <div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
+    <div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="alert alert-danger" role="alert"></div>
     <br>
     <label>Sexo: </label>
     <div th:each="sexo : ${listaSexo}">
         <input type="radio" th:field="*{sexo}" th:value="${sexo}">
         <label th:for="${#ids.prev('sexo')}" th:text="${sexo}"></label>
     </div>
-    <div th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></div>
+    <div th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}" class="alert alert-danger" role="alert"></div>
     <br>
     <label for="informacion_adicional">Informaci&oacute;n adicional: </label>
     <div>
         <textarea type="text" rows="10" cols="50" id="informacion_adicional"
             th:field="*{informacion_adicional}"></textarea>
     </div>
-    <div th:if="${#fields.hasErrors('informacion_adicional')}" th:errors="*{informacion_adicional}"></div>
+    <div th:if="${#fields.hasErrors('informacion_adicional')}" th:errors="*{informacion_adicional}" class="alert alert-danger" role="alert"></div>
     <br>
     <label for="DUI">DUI: </label>
     <input type="text" id="DUI" th:field="*{Dui}">
-    <div th:if="${#fields.hasErrors('Dui')}" th:errors="*{Dui}"></div>
+    <div th:if="${#fields.hasErrors('Dui')}" th:errors="*{Dui}" class="alert alert-danger" role="alert"></div>
     <br>
     <label for="direccion">Direcci&oacute;n: </label>
     <div>
         <textarea type="text" rows="5" cols="50" id="direccion" th:field="*{direccion}"></textarea>
     </div>
-    <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></div>
+    <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="alert alert-danger" role="alert"></div>
     <br>
 
 </section>
