@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 //import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(schema="public", name="PERITAJES")
@@ -20,6 +21,7 @@ public class Peritaje {
 
 	@Id
 	@Column(name="id_peritaje")
+	@NotNull
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_peritaje;
 	
@@ -29,6 +31,7 @@ public class Peritaje {
 	@Column(name="es_menor")
 	private Boolean es_menor;
 	
+	@NotNull
 	@Column(name="edad_estimada")
 	private Integer edad_estimada;
 	

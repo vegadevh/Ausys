@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,21 +25,27 @@ public class DesaPeri {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_desaperi;
 	
+	@NotEmpty
 	@Column(name="tipo_de_caso")
 	private String tipo_de_caso;
 	
+	@NotEmpty
 	@Column(name="nombre")
 	private String nombre;
 	
+	@NotEmpty
 	@Column(name="apellido")
 	private String apellido;
 	
+	@NotEmpty
 	@Column(name="direccion")
 	private String direccion;
 	
+	@NotEmpty
 	@Column(name="sexo")
 	private String sexo;
 	
+	@NotEmpty
 	@Column(name="informacion_adicional")
 	private String informacion_adicional;
 	
