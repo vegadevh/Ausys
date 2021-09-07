@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 //import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -21,17 +24,16 @@ public class Peritaje {
 
 	@Id
 	@Column(name="id_peritaje")
-	@NotNull
+	@NotEmpty
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_peritaje;
+	private String id_peritaje;
 	
 	@Column(name="identificado")
 	private Boolean identificado;
 	
-	@Column(name="es_menor")
-	private Boolean es_menor;
-	
 	@NotNull
+	@Min(0)
+	@Max(110)
 	@Column(name="edad_estimada")
 	private Integer edad_estimada;
 	
@@ -42,11 +44,11 @@ public class Peritaje {
 	@Transient
 	private Integer id_division;
 
-	public Integer getId_peritaje() {
+	public String getId_peritaje() {
 		return id_peritaje;
 	}
 
-	public void setId_peritaje(Integer id_peritaje) {
+	public void setId_peritaje(String id_peritaje) {
 		this.id_peritaje = id_peritaje;
 	}
 
@@ -56,14 +58,6 @@ public class Peritaje {
 
 	public void setIdentificado(Boolean identificado) {
 		this.identificado = identificado;
-	}
-
-	public Boolean getEs_menor() {
-		return es_menor;
-	}
-
-	public void setEs_menor(Boolean es_menor) {
-		this.es_menor = es_menor;
 	}
 
 	public Integer getEdad_estimada() {

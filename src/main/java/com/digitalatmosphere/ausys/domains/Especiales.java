@@ -35,10 +35,10 @@ public class Especiales {
 	private Desaparecido desaparecido;
 	
 	@Transient
-	private Integer id_peritaje;
+	private String id_peritaje;
 	
 	@Transient
-	private Integer id_desaparecido;
+	private String id_desaparecido;
 
 	public Integer getId_especial() {
 		return id_especial;
@@ -80,19 +80,19 @@ public class Especiales {
 		this.desaparecido = desaparecido;
 	}
 
-	public Integer getId_peritaje() {
+	public String getId_peritaje() {
 		return id_peritaje;
 	}
 
-	public void setId_peritaje(Integer id_peritaje) {
+	public void setId_peritaje(String id_peritaje) {
 		this.id_peritaje = id_peritaje;
 	}
 
-	public Integer getId_desaparecido() {
+	public String getId_desaparecido() {
 		return id_desaparecido;
 	}
 
-	public void setId_desaparecido(Integer id_desaparecido) {
+	public void setId_desaparecido(String id_desaparecido) {
 		this.id_desaparecido = id_desaparecido;
 	}
 	

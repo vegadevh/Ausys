@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.digitalatmosphere.ausys.domains.Peritaje;
 
-public interface IPeritajeRepo extends JpaRepository<Peritaje, Integer> {
+public interface IPeritajeRepo extends JpaRepository<Peritaje, String> {
 
 }

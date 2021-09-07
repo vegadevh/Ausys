@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.digitalatmosphere.ausys.domains.Departamento;
@@ -50,13 +51,42 @@ public class MainControler {
 	}
 	//
 
+//	@RequestMapping("/ingresarPeritaje")
+//	public ModelAndView ingresarPeritaje() {
+//		ModelAndView mav = new ModelAndView();
+//		DesaPeri desaPeri = new DesaPeri();
+//		Peritaje peritaje = new Peritaje();
+//		desaPeri.setFecha_registro(new java.util.Date());
+//		
+//		
+//		List<Departamento> departamentos = null;
+//		List<Municipio> municipios = null;
+//		List<Division> divisiones = null;
+//		
+//		try {
+//			departamentos = departamentoS.findAll();
+//			municipios = municipioS.findAll();
+//			divisiones = divisionS.findAll();
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
+//		
+//		mav.addObject("titulo", "Ingresar Peritajes");
+//		
+//		mav.addObject("departamentos", departamentos);
+//		mav.addObject("municipios", municipios);
+//		mav.addObject("divisiones", divisiones);
+//		
+//		mav.addObject("desaPeri", desaPeri);
+//		mav.addObject("peritaje", peritaje);
+//		mav.setViewName("IngresarPeritaje");
+//		return mav;
+//	}
+	
 	@RequestMapping("/ingresarPeritaje")
 	public ModelAndView ingresarPeritaje() {
 		ModelAndView mav = new ModelAndView();
-		DesaPeri desaPeri = new DesaPeri();
 		Peritaje peritaje = new Peritaje();
-		desaPeri.setFecha_registro(new java.util.Date());
-		
 		
 		List<Departamento> departamentos = null;
 		List<Municipio> municipios = null;
@@ -76,30 +106,54 @@ public class MainControler {
 		mav.addObject("municipios", municipios);
 		mav.addObject("divisiones", divisiones);
 		
-		mav.addObject("desaPeri", desaPeri);
 		mav.addObject("peritaje", peritaje);
 		mav.setViewName("IngresarPeritaje");
 		return mav;
 	}
 	
 	@PostMapping("/validarPeritaje")
-	public ModelAndView validarPeritaje(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result, @Valid @ModelAttribute Peritaje peritaje, BindingResult result2) {
+	public ModelAndView validarPeritaje(@Valid @ModelAttribute Peritaje peritaje, BindingResult result, @RequestParam(value= "id_peritaje") String id) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		if(result.hasErrors() && result2.hasErrors()) {
+		if(result.hasErrors()) {
+			List<Departamento> departamentos = null;
+			List<Municipio> municipios = null;
+			List<Division> divisiones = null;
+			
+			try {
+				departamentos = departamentoS.findAll();
+				municipios = municipioS.findAll();
+				divisiones = divisionS.findAll();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
 			mav.addObject("titulo", "Ingresar Peritajes");
+			
+			mav.addObject("departamentos", departamentos);
+			mav.addObject("municipios", municipios);
+			mav.addObject("divisiones", divisiones);
+			
+			mav.addObject("peritaje", peritaje);
 			mav.setViewName("IngresarPeritaje");
 		}else {
 			try {
-				desaPeriS.save(desaPeri);
 				peritajeS.save(peritaje);
 			}catch(Exception e){
 				e.getStackTrace();
 			}
-			mav.addObject("titulo", "Ingresar Peritajes");
-			String mensaje ="Peritaje creado con éxito";
-			mav.addObject("mensaje", mensaje);
+			DesaPeri desaPeri = new DesaPeri();
+			Peritaje peritaje2 = new Peritaje();
+			
+			desaPeri.setId_peritaje(id);
+			
+			try {
+				peritaje2 = IPeritajeService.;
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 			mav.setViewName("index");
 		}
 		return mav;
