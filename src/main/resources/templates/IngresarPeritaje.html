@@ -26,7 +26,7 @@
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <div>
-            <form th:action="@{/validarPeritaje}" th:object="${peritaje}" method="POST">
+            <form th:action="@{/validarPeritaje}" th:object="${peritaje}" method="GET">
 
                 <label for="id_peritaje">Identficador del registro: </label>
                 <input type="text" id="id_peritaje" th:field="*{id_peritaje}">
@@ -70,9 +70,7 @@
                         th:text="${division.division}"></option>
                 </select>
 
-                <div>
-                    <input type="submit" value="Ingresar Peritaje" class="btn btn-primary">
-                </div>
+                <input type="submit" value="Siguiente" class="btn btn-primary">
 
             </form>
         </div>
