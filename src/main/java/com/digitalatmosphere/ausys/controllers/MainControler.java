@@ -50,38 +50,6 @@ public class MainControler {
 		return Arrays.asList("Hombre", "Mujer");
 	}
 	//
-
-//	@RequestMapping("/ingresarPeritaje")
-//	public ModelAndView ingresarPeritaje() {
-//		ModelAndView mav = new ModelAndView();
-//		DesaPeri desaPeri = new DesaPeri();
-//		Peritaje peritaje = new Peritaje();
-//		desaPeri.setFecha_registro(new java.util.Date());
-//		
-//		
-//		List<Departamento> departamentos = null;
-//		List<Municipio> municipios = null;
-//		List<Division> divisiones = null;
-//		
-//		try {
-//			departamentos = departamentoS.findAll();
-//			municipios = municipioS.findAll();
-//			divisiones = divisionS.findAll();
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
-//		
-//		mav.addObject("titulo", "Ingresar Peritajes");
-//		
-//		mav.addObject("departamentos", departamentos);
-//		mav.addObject("municipios", municipios);
-//		mav.addObject("divisiones", divisiones);
-//		
-//		mav.addObject("desaPeri", desaPeri);
-//		mav.addObject("peritaje", peritaje);
-//		mav.setViewName("IngresarPeritaje");
-//		return mav;
-//	}
 	
 	@RequestMapping("/ingresarPeritaje")
 	public ModelAndView ingresarPeritaje() {
@@ -157,7 +125,6 @@ public class MainControler {
 			
 			desaPeri.setPeritaje(peritaje2);
 			mav.addObject("titulo", "Ingresar Peritajes p2");
-			mav.addObject("peritaje2", peritaje2);
 			mav.addObject("desaPeri",desaPeri);
 			mav.setViewName("ingresarDesaPeri");
 		}
@@ -165,15 +132,23 @@ public class MainControler {
 	}
 	
 	@PostMapping("/validarPeritaje2")
-	public ModelAndView validarPeritaje2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result,@Valid @ModelAttribute Peritaje peritaje2, BindingResult result2) {
+	public ModelAndView validarPeritaje2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result, @ModelAttribute Peritaje peritaje2, BindingResult result2) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		if(result.hasErrors() && result2.hasErrors()) {
+			Peritaje peritaje = new Peritaje();
+			desaPeri.setFecha_registro(new java.util.Date());
+			
+			try {
+				peritaje = peritajeS.findOne(desaPeri.getId_peritaje());
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			desaPeri.setPeritaje(peritaje);
 			mav.addObject("titulo", "Ingresar Peritajes p2");
-						
-			mav.addObject("peritaje", peritaje2);
-			mav.addObject("desaPeri", desaPeri);
+			mav.addObject("desaPeri",desaPeri);
 			mav.setViewName("ingresarDesaPeri");
 		}else {
 			try {
@@ -181,8 +156,6 @@ public class MainControler {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			
-			desaPeri.setPeritaje(peritaje2);
 			mav.addObject("mensaje", "Peritaje ingresado con exito");
 			mav.setViewName("index");
 		}

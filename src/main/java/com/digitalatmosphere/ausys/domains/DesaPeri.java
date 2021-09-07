@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(schema="public", name="DESAPERI")
+@Table(schema="public", name="DESA_PERI")
 public class DesaPeri {
 
 	@Id
@@ -63,7 +63,6 @@ public class DesaPeri {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_peritaje")
-	@NotNull
 	private Peritaje peritaje;
 	
 	@Transient

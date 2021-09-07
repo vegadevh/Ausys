@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(schema="public", name="SE-ESPECIALES")
+@Table(schema="public", name="SE_ESPECIALES")
 public class Especiales {
 	
 	@Id

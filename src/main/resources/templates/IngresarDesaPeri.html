@@ -28,7 +28,7 @@
         <div>
             <form th:action="@{/validarPeritaje2}" th:object="${desaPeri}" method="POST">
                 <th:block th:replace="components/form-registros :: registros"></th:block>
-                <input type="hidden" th:field="${peritaje.id_peritaje}">
+                <input type="text" th:field="${peritaje.id_peritaje}">
 
                 <input type="submit" value="Ingresar Peritaje" class="btn btn-primary">
 
