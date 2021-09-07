@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -57,6 +56,14 @@ public class DesaPeri {
 	@Column(name="fecha_registro")
 	private Date fecha_registro;
 	
+	public Date getFecha_registro() {
+		return fecha_registro;
+	}
+
+	public void setFecha_registro(Date fecha_registro) {
+		this.fecha_registro = fecha_registro;
+	}
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_desaparecido")
 	private Desaparecido desaparecido;
@@ -73,18 +80,6 @@ public class DesaPeri {
 
 	public DesaPeri() {
 	}
-
-	public Date getFecha_registro() {
-		return fecha_registro;
-	}
-
-
-
-	public void setFecha_registro(Date fecha_registro) {
-		this.fecha_registro = fecha_registro;
-	}
-
-
 
 	public Integer getId_desaperi() {
 		return id_desaperi;

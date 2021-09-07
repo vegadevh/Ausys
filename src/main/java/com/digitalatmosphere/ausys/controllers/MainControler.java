@@ -80,7 +80,7 @@ public class MainControler {
 	}
 	
 	@RequestMapping("/validarPeritaje")
-	public ModelAndView validarPeritaje(@Valid @ModelAttribute Peritaje peritaje, BindingResult result, @RequestParam(value= "id_peritaje") String id) {
+	public ModelAndView validarPeritaje(@Valid @ModelAttribute Peritaje peritaje, BindingResult result) {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -112,18 +112,19 @@ public class MainControler {
 				e.getStackTrace();
 			}
 			DesaPeri desaPeri = new DesaPeri();
-			Peritaje peritaje2 = new Peritaje();
+//			Peritaje peritaje2 = new Peritaje();
 			
-			desaPeri.setId_peritaje(id);
+//			desaPeri.setId_peritaje(id);
 			desaPeri.setFecha_registro(new java.util.Date());
 			
-			try {
-				peritaje2 = peritajeS.findOne(id);
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+//			try {
+//				peritaje2 = peritajeS.findOne(id);
+//			}catch(Exception e) {
+//				e.printStackTrace();
+//			}
 			
-			desaPeri.setPeritaje(peritaje2);
+			String id_peritaje = peritajeS.findOne(peritaje.getId_peritaje()).getId_peritaje();
+			mav.addObject("id_peritaje",id_peritaje);
 			mav.addObject("titulo", "Ingresar Peritajes p2");
 			mav.addObject("desaPeri",desaPeri);
 			mav.setViewName("ingresarDesaPeri");
@@ -132,30 +133,42 @@ public class MainControler {
 	}
 	
 	@PostMapping("/validarPeritaje2")
-	public ModelAndView validarPeritaje2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result, @ModelAttribute Peritaje peritaje2, BindingResult result2) {
+	public ModelAndView validarPeritaje2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result, @ModelAttribute Peritaje peritaje, BindingResult result2,@RequestParam(value="id_peritaje") String id) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		if(result.hasErrors() && result2.hasErrors()) {
-			Peritaje peritaje = new Peritaje();
+		if(result.hasErrors()) {
 			desaPeri.setFecha_registro(new java.util.Date());
 			
-			try {
-				peritaje = peritajeS.findOne(desaPeri.getId_peritaje());
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-			desaPeri.setPeritaje(peritaje);
+//			try {
+//				peritaje = peritajeS.findOne(desaPeri.getId_peritaje());
+//			}catch(Exception e) {
+//				e.printStackTrace();
+//			}
+//			
+//			desaPeri.setPeritaje(peritaje);
 			mav.addObject("titulo", "Ingresar Peritajes p2");
 			mav.addObject("desaPeri",desaPeri);
 			mav.setViewName("ingresarDesaPeri");
 		}else {
+			Peritaje peritaje2 = new Peritaje();
+			
+			desaPeri.setId_peritaje(id);
+			try {
+				peritaje2 = peritajeS.findOne(id);
+//				desaPeriS.save(desaPeri);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			desaPeri.setPeritaje(peritaje2);
+			
 			try {
 				desaPeriS.save(desaPeri);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+			
 			mav.addObject("mensaje", "Peritaje ingresado con exito");
 			mav.setViewName("index");
 		}
