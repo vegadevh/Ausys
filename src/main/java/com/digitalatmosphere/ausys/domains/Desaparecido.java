@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(schema="public", name="DESAPARECIDOS")
@@ -19,8 +20,9 @@ public class Desaparecido {
 	
 	@Id
 	@Column(name="id_desaparecido")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_desaparecido;
+	@NotEmpty
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private String id_desaparecido;
 	
 	@Column(name="edad")
 	private Integer edad;
@@ -42,11 +44,13 @@ public class Desaparecido {
 	@Transient
 	private Integer id_familiar;
 
-	public Integer getId_desaparecido() {
+	
+
+	public String getId_desaparecido() {
 		return id_desaparecido;
 	}
 
-	public void setId_desaparecido(Integer id_desaparecido) {
+	public void setId_desaparecido(String id_desaparecido) {
 		this.id_desaparecido = id_desaparecido;
 	}
 
