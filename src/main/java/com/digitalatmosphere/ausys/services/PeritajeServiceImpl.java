@@ -13,7 +13,7 @@ import com.digitalatmosphere.ausys.repositories.IPeritajeRepo;
 public class PeritajeServiceImpl implements IPeritajeService{
 
 	@Autowired
-	IPeritajeRepo peritajeRepo;
+	public IPeritajeRepo peritajeRepo;
 	
 	@Override
 	public List<Peritaje> findALL() throws DataAccessException {
