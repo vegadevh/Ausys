@@ -5,14 +5,15 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(schema="public", name="DESAPARECIDOS")
@@ -24,10 +25,9 @@ public class Desaparecido {
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id_desaparecido;
 	
-	@Column(name="edad")
-	private Integer edad;
-	
+	@NotNull
 	@Column(name="fecha_nacimiento")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fecha_nacimiento;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -52,14 +52,6 @@ public class Desaparecido {
 
 	public void setId_desaparecido(String id_desaparecido) {
 		this.id_desaparecido = id_desaparecido;
-	}
-
-	public Integer getEdad() {
-		return edad;
-	}
-
-	public void setEdad(Integer edad) {
-		this.edad = edad;
 	}
 
 	public Date getFecha_nacimiento() {

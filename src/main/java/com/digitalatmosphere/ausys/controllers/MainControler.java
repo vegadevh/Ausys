@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-//import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +16,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.digitalatmosphere.ausys.domains.Departamento;
 import com.digitalatmosphere.ausys.domains.DesaPeri;
+import com.digitalatmosphere.ausys.domains.Desaparecido;
 import com.digitalatmosphere.ausys.domains.Division;
+import com.digitalatmosphere.ausys.domains.Familiar;
 import com.digitalatmosphere.ausys.domains.Municipio;
 import com.digitalatmosphere.ausys.domains.Peritaje;
 import com.digitalatmosphere.ausys.services.IDepartamentoService;
 import com.digitalatmosphere.ausys.services.IDesaPeriService;
+import com.digitalatmosphere.ausys.services.IDesaparecidoService;
 import com.digitalatmosphere.ausys.services.IDivisionService;
+import com.digitalatmosphere.ausys.services.IFamiliarService;
 import com.digitalatmosphere.ausys.services.IMunicipioService;
 import com.digitalatmosphere.ausys.services.IPeritajeService;
 
@@ -43,6 +46,12 @@ public class MainControler {
 	
 	@Autowired
 	private IPeritajeService peritajeS;
+	
+	@Autowired
+	private IDesaparecidoService desaparecidoS;
+	
+	@Autowired
+	private IFamiliarService familiarS;
 	
 	//Listas
 	@ModelAttribute("listaSexo")
@@ -159,5 +168,45 @@ public class MainControler {
 		return mav;
 	}
 	//ingresar desaparecido
+	
+	@RequestMapping("/ingresarDesaparecido")
+	public ModelAndView ingresarDesaparecido() {
+		ModelAndView mav = new ModelAndView();
+		Familiar familiar = new Familiar();
+		
+		mav.addObject("titulo", "Ingresar Desaparecido");
+		mav.addObject("familiar", familiar);
+		mav.setViewName("ingresarDesaparecido");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/validarDesaparecido")
+	public ModelAndView validarDesaparecido(@Valid @ModelAttribute Familiar familiar, BindingResult result) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(result.hasErrors()) {
+			mav.addObject("titulo", "Ingresar Desaparecido");
+			mav.addObject("familiar", familiar);
+			mav.setViewName("ingresarDesaparecido");
+		}else {
+			try {
+				familiarS.save(familiar);
+				
+			}catch(Exception e){
+				e.getStackTrace();
+			}
+		}
+//		Integer fam = familiarS.findLastId();
+		Desaparecido desaparecido = new Desaparecido();
+		mav.addObject("titulo", "Ingresar Desaparecido p2");
+		
+		mav.addObject("desaparecido", desaparecido);
+//		mav.addObject("fam", fam);
+		
+		mav.setViewName("ingresarDesaparecido2");
+		
+		return mav;
+	}
 	
 }

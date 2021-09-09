@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(schema="public", name="FAMILIARES")
@@ -16,9 +17,11 @@ public class Familiar {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id_familiar;
 	
+	@NotEmpty
 	@Column(name="nombre")
 	private String nombre;
 	
+	@NotEmpty
 	@Column(name="contacto")
 	private String contacto;
 
