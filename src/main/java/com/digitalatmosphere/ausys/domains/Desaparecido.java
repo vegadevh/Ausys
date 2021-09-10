@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,25 +27,43 @@ public class Desaparecido {
 	private String id_desaparecido;
 	
 	@NotNull
+	@Past
 	@Column(name="fecha_nacimiento")
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fecha_nacimiento;
+	
+	@NotEmpty
+	@Column(name="nombre_familiar")
+	private String nombre_familiar;
+	
+	@NotEmpty
+	@Column(name="contacto_familiar")
+	private String contacto_familiar;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_division")
 	private Division division;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_familiar")
-	private Familiar familiar;
-	
 	@Transient
 	private Integer id_division;
-	
-	@Transient
-	private Integer id_familiar;
 
 	
+
+	public String getNombre_familiar() {
+		return nombre_familiar;
+	}
+
+	public void setNombre_familiar(String nombre_familiar) {
+		this.nombre_familiar = nombre_familiar;
+	}
+
+	public String getContacto_familiar() {
+		return contacto_familiar;
+	}
+
+	public void setContacto_familiar(String contacto_familiar) {
+		this.contacto_familiar = contacto_familiar;
+	}
 
 	public String getId_desaparecido() {
 		return id_desaparecido;
@@ -70,14 +89,6 @@ public class Desaparecido {
 		this.division = division;
 	}
 
-	public Familiar getFamiliar() {
-		return familiar;
-	}
-
-	public void setFamiliar(Familiar familiar) {
-		this.familiar = familiar;
-	}
-
 	public Integer getId_division() {
 		return id_division;
 	}
@@ -85,15 +96,5 @@ public class Desaparecido {
 	public void setId_division(Integer id_division) {
 		this.id_division = id_division;
 	}
-
-	public Integer getId_familiar() {
-		return id_familiar;
-	}
-
-	public void setId_familiar(Integer id_familiar) {
-		this.id_familiar = id_familiar;
-	}
-	
-	
 
 }
