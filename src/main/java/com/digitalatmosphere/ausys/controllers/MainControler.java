@@ -18,14 +18,12 @@ import com.digitalatmosphere.ausys.domains.Departamento;
 import com.digitalatmosphere.ausys.domains.DesaPeri;
 import com.digitalatmosphere.ausys.domains.Desaparecido;
 import com.digitalatmosphere.ausys.domains.Division;
-import com.digitalatmosphere.ausys.domains.Familiar;
 import com.digitalatmosphere.ausys.domains.Municipio;
 import com.digitalatmosphere.ausys.domains.Peritaje;
 import com.digitalatmosphere.ausys.services.IDepartamentoService;
 import com.digitalatmosphere.ausys.services.IDesaPeriService;
 import com.digitalatmosphere.ausys.services.IDesaparecidoService;
 import com.digitalatmosphere.ausys.services.IDivisionService;
-import com.digitalatmosphere.ausys.services.IFamiliarService;
 import com.digitalatmosphere.ausys.services.IMunicipioService;
 import com.digitalatmosphere.ausys.services.IPeritajeService;
 
@@ -49,9 +47,6 @@ public class MainControler {
 	
 	@Autowired
 	private IDesaparecidoService desaparecidoS;
-	
-	@Autowired
-	private IFamiliarService familiarS;
 	
 	//Listas
 	@ModelAttribute("listaSexo")
@@ -172,41 +167,110 @@ public class MainControler {
 	@RequestMapping("/ingresarDesaparecido")
 	public ModelAndView ingresarDesaparecido() {
 		ModelAndView mav = new ModelAndView();
-		Familiar familiar = new Familiar();
+		
+		Desaparecido desaparecido = new Desaparecido();
+		
+		List<Departamento> departamentos = null;
+		List<Municipio> municipios = null;
+		List<Division> divisiones = null;
+		
+		try {
+			departamentos = departamentoS.findAll();
+			municipios = municipioS.findAll();
+			divisiones = divisionS.findAll();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
 		mav.addObject("titulo", "Ingresar Desaparecido");
-		mav.addObject("familiar", familiar);
+		
+		mav.addObject("departamentos", departamentos);
+		mav.addObject("municipios", municipios);
+		mav.addObject("divisiones", divisiones);
+		
+		mav.addObject("desaparecido", desaparecido);
+		
 		mav.setViewName("ingresarDesaparecido");
 		
 		return mav;
 	}
 	
 	@RequestMapping("/validarDesaparecido")
-	public ModelAndView validarDesaparecido(@Valid @ModelAttribute Familiar familiar, BindingResult result) {
+	public ModelAndView validarPeritaje(@Valid @ModelAttribute Desaparecido desaparecido, BindingResult result) {
+		
 		ModelAndView mav = new ModelAndView();
 		
 		if(result.hasErrors()) {
-			mav.addObject("titulo", "Ingresar Desaparecido");
-			mav.addObject("familiar", familiar);
-			mav.setViewName("ingresarDesaparecido");
+			List<Departamento> departamentos = null;
+			List<Municipio> municipios = null;
+			List<Division> divisiones = null;
+			
+			try {
+				departamentos = departamentoS.findAll();
+				municipios = municipioS.findAll();
+				divisiones = divisionS.findAll();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			mav.addObject("titulo", "Ingresar Peritajes");
+			
+			mav.addObject("departamentos", departamentos);
+			mav.addObject("municipios", municipios);
+			mav.addObject("divisiones", divisiones);
+			
+			mav.addObject("desaparecido", desaparecido);
+			mav.setViewName("IngresarDesaparecido");
 		}else {
 			try {
-				familiarS.save(familiar);
-				
+				desaparecidoS.save(desaparecido);
 			}catch(Exception e){
 				e.getStackTrace();
 			}
+			DesaPeri desaPeri = new DesaPeri();
+			desaPeri.setFecha_registro(new java.util.Date());
+			
+			String id_desaparecido = desaparecidoS.findOne(desaparecido.getId_desaparecido()).getId_desaparecido();
+			mav.addObject("id_desaparecido",id_desaparecido);
+			mav.addObject("titulo", "Ingresar Peritajes p2");
+			mav.addObject("desaPeri",desaPeri);
+			mav.setViewName("ingresarDesaparecido2");
 		}
-//		Integer fam = familiarS.findLastId();
-		Desaparecido desaparecido = new Desaparecido();
-		mav.addObject("titulo", "Ingresar Desaparecido p2");
-		
-		mav.addObject("desaparecido", desaparecido);
-//		mav.addObject("fam", fam);
-		
-		mav.setViewName("ingresarDesaparecido2");
-		
 		return mav;
 	}
 	
+	@PostMapping("/validarDesaparecido2")
+	public ModelAndView validarDesaparecido2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result, @ModelAttribute Desaparecido desaparecido, BindingResult result2,@RequestParam(value="id_desaparecido") String id) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(result.hasErrors()) {
+			desaPeri.setFecha_registro(new java.util.Date());
+
+			mav.addObject("titulo", "Ingresar Desaparecido p2");
+			mav.addObject("desaPeri",desaPeri);
+			mav.setViewName("ingresarDesaparecido2");
+		}else {
+			Desaparecido desaparecido2 = new Desaparecido();
+			
+			desaPeri.setId_peritaje(id);
+			try {
+				desaparecido2 = desaparecidoS.findOne(id);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			desaPeri.setDesaparecido(desaparecido2);
+			
+			try {
+				desaPeriS.save(desaPeri);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			mav.addObject("mensaje", "Desaparecido ingresado con exito");
+			mav.setViewName("index");
+		}
+		return mav;
+	}
 }
