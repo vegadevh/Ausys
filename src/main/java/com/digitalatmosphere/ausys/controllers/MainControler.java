@@ -275,7 +275,7 @@ public class MainControler {
 			mav.addObject("desaPeri", desaPeri);
 			mav.addObject("desaparecido",desaparecido);
 			mav.addObject("mensaje", "Desaparecido ingresado con exito");
-			mav.setViewName("index");
+			mav.setViewName("verDesaparecidoInd");
 		}
 		return mav;
 	}

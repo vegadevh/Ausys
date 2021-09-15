@@ -33,16 +33,20 @@
                     <p class="d-inline" th:text="${desaPeri.id_desaperi}"></p>
                 </div>
                 <div>
-                    <b class="d-inline">Persona identificada: </b>
-                    <p class="d-inline" th:text="${desaPeri.peritaje.identificado}"></p>
+                    <b class="d-inline">Fecha de nacimiento: </b>
+                    <p class="d-inline" th:text="${desaPeri.desaparecido.fecha_nacimiento}"></p>
                 </div>
                 <div>
-                    <b class="d-inline">Edad estimada: </b>
-                    <p class="d-inline" th:text="${desaPeri.peritaje.edad_estimada}"></p>
+                    <b class="d-inline">Nombre de familiar: </b>
+                    <p class="d-inline" th:text="${desaPeri.desaparecido.nombre_familiar}"></p>
+                </div>
+                <div>
+                    <b class="d-inline">Contacto familiar: </b>
+                    <p class="d-inline" th:text="${desaPeri.desaparecido.contacto_familiar}"></p>
                 </div>
                 <div>
                     <b class="d-inline">Divici&oacute;n: </b>
-                    <p class="d-inline" th:text="${desaPeri.peritaje.division.id_division}"></p>
+                    <p class="d-inline" th:text="${desaPeri.desaparecido.division.id_division}"></p>
                 </div>
                 <div>
                     <b class="d-inline">Direcci&oacute;n: </b>
