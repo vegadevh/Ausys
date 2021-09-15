@@ -279,4 +279,40 @@ public class MainControler {
 		}
 		return mav;
 	}
+	
+	@RequestMapping("/listaPeritajes")
+	public ModelAndView listaPeritajes() {
+		ModelAndView mav = new ModelAndView();
+
+		List<DesaPeri> desaPeriL = null;
+		try {
+			desaPeriL = desaPeriS.findAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		mav.addObject("titulo", "Lista de peritajes");
+		mav.addObject("desaPeriL", desaPeriL);
+		mav.setViewName("listaPeritajes");
+
+		return mav;
+	}
+	
+	@RequestMapping("/listaDesaparecidos")
+	public ModelAndView listaDesaparecidos() {
+		ModelAndView mav = new ModelAndView();
+
+		List<DesaPeri> desaPeriL = null;
+		try {
+			desaPeriL = desaPeriS.findAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		mav.addObject("titulo", "Lista de desaparecidos");
+		mav.addObject("desaPeriL", desaPeriL);
+		mav.setViewName("listaDesaparecidos");
+
+		return mav;
+	}
 }

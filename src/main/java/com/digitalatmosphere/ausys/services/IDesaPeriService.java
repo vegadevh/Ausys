@@ -15,4 +15,6 @@ public List<DesaPeri> findALL() throws DataAccessException;
 	public Integer saveR(DesaPeri desaPeri) throws DataAccessException;
 	
 	public DesaPeri findOne(Integer id_desaperi) throws DataAccessException;
+	
+	public List<DesaPeri> findAll() throws DataAccessException;
 }
