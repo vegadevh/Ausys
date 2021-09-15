@@ -150,15 +150,18 @@ public class MainControler {
 			}
 			
 			desaPeri.setPeritaje(peritaje2);
-			
+			Integer idDesaPeri = null;
 			try {
-				desaPeriS.save(desaPeri);
+				idDesaPeri = desaPeriS.saveR(desaPeri);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+			desaPeri.setId_desaperi(idDesaPeri);
 			
+			mav.addObject("desaPeri", desaPeri);
+			mav.addObject("peritaje", peritaje);
 			mav.addObject("mensaje", "Peritaje ingresado con exito");
-			mav.setViewName("index");
+			mav.setViewName("verPeritajeInd");
 		}
 		return mav;
 	}
@@ -261,13 +264,16 @@ public class MainControler {
 			}
 			
 			desaPeri.setDesaparecido(desaparecido2);
-			
+			Integer idDesaPeri = null;
 			try {
-				desaPeriS.save(desaPeri);
+				idDesaPeri = desaPeriS.saveR(desaPeri);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+			desaPeri.setId_desaperi(idDesaPeri);
 			
+			mav.addObject("desaPeri", desaPeri);
+			mav.addObject("desaparecido",desaparecido);
 			mav.addObject("mensaje", "Desaparecido ingresado con exito");
 			mav.setViewName("index");
 		}
