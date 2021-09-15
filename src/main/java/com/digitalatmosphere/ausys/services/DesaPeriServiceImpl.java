@@ -52,5 +52,15 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		return desaPeriRepo.findAll();
 	}
 
+	@Override
+	public List<DesaPeri> findAllPeritajes() throws DataAccessException {
+		return desaPeriRepo.findAllPeritajes();
+	}
+
+	@Override
+	public List<DesaPeri> findAllDesaparecidos() throws DataAccessException {
+		return desaPeriRepo.findAllDesaparecidos();
+	}
+
 
 }

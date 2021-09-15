@@ -17,4 +17,8 @@ public List<DesaPeri> findALL() throws DataAccessException;
 	public DesaPeri findOne(Integer id_desaperi) throws DataAccessException;
 	
 	public List<DesaPeri> findAll() throws DataAccessException;
+	
+	public List<DesaPeri> findAllPeritajes() throws DataAccessException;
+	
+	public List<DesaPeri> findAllDesaparecidos() throws DataAccessException;
 }

@@ -286,7 +286,7 @@ public class MainControler {
 
 		List<DesaPeri> desaPeriL = null;
 		try {
-			desaPeriL = desaPeriS.findAll();
+			desaPeriL = desaPeriS.findAllPeritajes();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -304,7 +304,7 @@ public class MainControler {
 
 		List<DesaPeri> desaPeriL = null;
 		try {
-			desaPeriL = desaPeriS.findAll();
+			desaPeriL = desaPeriS.findAllDesaparecidos();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
