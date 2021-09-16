@@ -315,4 +315,22 @@ public class MainControler {
 
 		return mav;
 	}
+	
+	@RequestMapping("/listaRegistros")
+	public ModelAndView listaRegistros() {
+		ModelAndView mav = new ModelAndView();
+
+		List<DesaPeri> desaPeriL = null;
+		try {
+			desaPeriL = desaPeriS.findAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		mav.addObject("titulo", "Lista de registros");
+		mav.addObject("desaPeriL", desaPeriL);
+		mav.setViewName("listaRegistros");
+
+		return mav;
+	}
 }
