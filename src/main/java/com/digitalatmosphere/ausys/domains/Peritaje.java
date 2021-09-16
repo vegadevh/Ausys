@@ -84,5 +84,11 @@ public class Peritaje {
 		this.id_division = id_division;
 	}
 	
+	public String getEstadoDelegate() {
+		if(this.identificado == null) return "";
+		else {
+			return identificado == true ? "Identificado" : "No identificado";
+		}
+	}
 	
 }

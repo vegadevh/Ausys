@@ -161,7 +161,7 @@ public class MainControler {
 			mav.addObject("desaPeri", desaPeri);
 			mav.addObject("peritaje", peritaje);
 			mav.addObject("mensaje", "Peritaje ingresado con exito");
-			mav.setViewName("verPeritajeInd");
+			mav.setViewName("verPeritaje");
 		}
 		return mav;
 	}
@@ -275,7 +275,7 @@ public class MainControler {
 			mav.addObject("desaPeri", desaPeri);
 			mav.addObject("desaparecido",desaparecido);
 			mav.addObject("mensaje", "Desaparecido ingresado con exito");
-			mav.setViewName("verDesaparecidoInd");
+			mav.setViewName("verDesaparecido");
 		}
 		return mav;
 	}
