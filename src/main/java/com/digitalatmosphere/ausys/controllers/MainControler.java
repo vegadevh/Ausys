@@ -216,7 +216,7 @@ public class MainControler {
 				e.printStackTrace();
 			}
 			
-			mav.addObject("titulo", "Ingresar Peritajes");
+			mav.addObject("titulo", "Ingresar Desaparecido");
 			
 			mav.addObject("departamentos", departamentos);
 			mav.addObject("municipios", municipios);
@@ -235,7 +235,7 @@ public class MainControler {
 			
 			String id_desaparecido = desaparecidoS.findOne(desaparecido.getId_desaparecido()).getId_desaparecido();
 			mav.addObject("id_desaparecido",id_desaparecido);
-			mav.addObject("titulo", "Ingresar Peritajes p2");
+			mav.addObject("titulo", "Ingresar Desaparecido p2");
 			mav.addObject("desaPeri",desaPeri);
 			mav.setViewName("ingresarDesaparecido2");
 		}
