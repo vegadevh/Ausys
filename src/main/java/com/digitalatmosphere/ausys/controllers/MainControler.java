@@ -53,6 +53,12 @@ public class MainControler {
 	public List<String> listaSexo(){
 		return Arrays.asList("Hombre", "Mujer");
 	}
+	
+	@ModelAttribute("listaCasos")
+	public List<String> listaCasos(){
+		return Arrays.asList("Análisis toxicólogico", "Análisis toxicólogico Medio ambientales", 
+				"Asistencia a vistas públicas", "Examenes odontológicos");
+	}
 	//
 	
 	//Ingresar peritaje
@@ -231,7 +237,9 @@ public class MainControler {
 				e.getStackTrace();
 			}
 			DesaPeri desaPeri = new DesaPeri();
+			String caso = "Desaparecido";
 			desaPeri.setFecha_registro(new java.util.Date());
+			desaPeri.setTipo_de_caso(caso);
 			
 			String id_desaparecido = desaparecidoS.findOne(desaparecido.getId_desaparecido()).getId_desaparecido();
 			mav.addObject("id_desaparecido",id_desaparecido);
@@ -248,8 +256,10 @@ public class MainControler {
 		ModelAndView mav = new ModelAndView();
 		
 		if(result.hasErrors()) {
+			String caso = "Desaparecido";
 			desaPeri.setFecha_registro(new java.util.Date());
-
+			desaPeri.setTipo_de_caso(caso);
+			
 			mav.addObject("titulo", "Ingresar Desaparecido p2");
 			mav.addObject("desaPeri",desaPeri);
 			mav.setViewName("ingresarDesaparecido2");
