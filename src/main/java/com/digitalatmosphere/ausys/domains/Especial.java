@@ -10,10 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(schema="public", name="SE_ESPECIALES")
-public class Especiales {
+public class Especial {
 	
 	@Id
 	@Column(name="id_especial")
@@ -23,6 +24,7 @@ public class Especiales {
 	@Column(name="especial")
 	private String especial;
 	
+	@NotEmpty
 	@Column(name="descripcion")
 	private String descripcion;
 	
