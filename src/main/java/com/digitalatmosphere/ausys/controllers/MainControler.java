@@ -20,6 +20,8 @@ import com.digitalatmosphere.ausys.domains.Desaparecido;
 import com.digitalatmosphere.ausys.domains.Division;
 import com.digitalatmosphere.ausys.domains.Municipio;
 import com.digitalatmosphere.ausys.domains.Peritaje;
+import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
+import com.digitalatmosphere.ausys.dto.PeritajeDTO;
 import com.digitalatmosphere.ausys.services.IDepartamentoService;
 import com.digitalatmosphere.ausys.services.IDesaPeriService;
 import com.digitalatmosphere.ausys.services.IDesaparecidoService;
@@ -294,7 +296,7 @@ public class MainControler {
 	public ModelAndView listaPeritajes() {
 		ModelAndView mav = new ModelAndView();
 
-		List<DesaPeri> desaPeriL = null;
+		List<PeritajeDTO> desaPeriL = null;
 		try {
 			desaPeriL = desaPeriS.findAllPeritajes();
 		} catch (Exception e) {
@@ -312,7 +314,7 @@ public class MainControler {
 	public ModelAndView listaDesaparecidos() {
 		ModelAndView mav = new ModelAndView();
 
-		List<DesaPeri> desaPeriL = null;
+		List<DesaparecidoDTO> desaPeriL = null;
 		try {
 			desaPeriL = desaPeriS.findAllDesaparecidos();
 		} catch (Exception e) {

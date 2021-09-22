@@ -1,6 +1,7 @@
 package com.digitalatmosphere.ausys.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -10,6 +11,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.digitalatmosphere.ausys.domains.DesaPeri;
+import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
+import com.digitalatmosphere.ausys.dto.PeritajeDTO;
 import com.digitalatmosphere.ausys.repositories.IDesaPeriRepo;
 
 @Service
@@ -53,13 +56,31 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	}
 
 	@Override
-	public List<DesaPeri> findAllPeritajes() throws DataAccessException {
-		return desaPeriRepo.findAllPeritajes();
+	public List<PeritajeDTO> findAllPeritajes() throws DataAccessException {
+		List<PeritajeDTO> peritajes = desaPeriRepo.findAllPeritajes().stream().map(obj -> {
+			PeritajeDTO p = new PeritajeDTO();
+			p.setId_peritaje(obj[0].toString());
+			p.setTipo_de_caso(obj[1].toString());
+			p.setNombre(obj[2].toString());
+			p.setApellido(obj[3].toString());
+			p.setFecha_registro(obj[4].toString());
+			return p;
+		}).collect(Collectors.toList());
+		return peritajes;
 	}
 
 	@Override
-	public List<DesaPeri> findAllDesaparecidos() throws DataAccessException {
-		return desaPeriRepo.findAllDesaparecidos();
+	public List<DesaparecidoDTO> findAllDesaparecidos() throws DataAccessException {
+		List<DesaparecidoDTO> desaparecidos = desaPeriRepo.findAllDesaparecidos().stream().map(obj -> {
+			DesaparecidoDTO d = new DesaparecidoDTO();
+			d.setId_desaparecido(obj[0].toString());
+			d.setTipo_de_caso(obj[1].toString());
+			d.setNombre(obj[2].toString());
+			d.setApellido(obj[3].toString());
+			d.setFecha_registro(obj[4].toString());
+			return d;
+		}).collect(Collectors.toList());
+		return desaparecidos;
 	}
 
 
