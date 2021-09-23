@@ -26,22 +26,31 @@
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <div>
-            <form th:action="@{/validarEdicion/desaparecido2/} + ${id_desaparecidoParam} + '/' + ${id_desaperiParam}"
-                th:object="${desaPeri}" method="POST">
+            <form th:action="@{/editar/peritaje2/} + ${id_peritajeParam} + '/' + ${id_desaperiParam}" th:object="${peritaje}" method="GET">
 
-                <input th:name="id_desaperi" type="hidden" th:value=${id_desaperiParam}>
-                <input th:name="id_desaparecido" type="hidden" th:value=${id_desaparecidoParam}>
+				<input th:name="id_desaperi" type="hidden" th:value=${id_desaperiParam}>
 
-                <input type="hidden" th:field="*{tipo_de_caso}">
+                <input type="hidden" id="id_peritaje" th:field="*{id_peritaje}">
+                
+
+                <label for="identificado">Persona identificada: </label>
+                <input type="checkbox" id="identificado" th:field="*{identificado}">
                 <br>
-                <th:block th:replace="components/form-registros :: registros"></th:block>
-                <input type="hidden" th:field="*{desaparecido.id_desaparecido}">
 
-                <input type="submit" value="Terminar edición" class="btn btn-primary">
+                <label for="edad_estimada">Edad estimada: </label>
+                <input type="number" id="edad_estimada" th:field="*{edad_estimada}">
+                <div th:if="${#fields.hasErrors('edad_estimada')}" th:errors="*{edad_estimada}"
+                    class="alert alert-danger" role="alert"></div>
+                <br>
+                <input type="hidden" th:field="*{division.id_division}">
+
+
+                <input type="submit" value="Siguiente" class="btn btn-primary">
 
             </form>
         </div>
     </div>
+
 
 </body>
 
