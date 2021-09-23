@@ -436,7 +436,7 @@ public class MainControler {
 	}
 	
 	@RequestMapping("/validarEdicion/desaparecido2/{id_desaparecido}/{id_desaperi}")
-	public ModelAndView validarEdicionDesaparecido2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result, @RequestParam(value="id_desaperi") String id_desaperi, @RequestParam(value="id_desaparecido") String id_desaparecido) {
+	public ModelAndView validarEdicionDesaparecido2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result, @Valid @ModelAttribute Desaparecido desaparecido, BindingResult result2, @RequestParam(value="id_desaperi") String id_desaperi, @RequestParam(value="id_desaparecido") String id_desaparecido) {
 		ModelAndView mav = new ModelAndView();
 		
 		if(result.hasErrors()) {
@@ -447,7 +447,25 @@ public class MainControler {
 			mav.addObject("id_desaperiParam", id_desaperi);
 			mav.setViewName("editarDesaparecido2");
 		}else {
-			//MOSTRAR DESAPARECIDO
+			Desaparecido desaparecido2 = new Desaparecido();
+			desaPeri.setId_desaparecido(id_desaparecido);
+			try {
+				desaparecido2 = desaparecidoS.findOne(id_desaparecido);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			try {
+				desaPeriS.save(desaPeri);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			desaPeri.setDesaparecido(desaparecido2);
+			
+			mav.addObject("desaPeri", desaPeri);
+			mav.addObject("desaparecido", desaparecido);
+			mav.addObject("mensaje", "Desaparecido ingresado con exito");
+			mav.setViewName("verDesaparecido");
 		}
 		
 		return mav;
