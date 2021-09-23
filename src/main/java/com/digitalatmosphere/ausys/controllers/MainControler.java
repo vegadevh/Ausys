@@ -207,7 +207,7 @@ public class MainControler {
 	}
 	
 	@RequestMapping("/validarDesaparecido")
-	public ModelAndView validarPeritaje(@Valid @ModelAttribute Desaparecido desaparecido, BindingResult result) {
+	public ModelAndView validarDesaparecido(@Valid @ModelAttribute Desaparecido desaparecido, BindingResult result) {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -343,6 +343,113 @@ public class MainControler {
 		mav.addObject("desaPeriL", desaPeriL);
 		mav.setViewName("listaRegistros");
 
+		return mav;
+	}
+	
+	//EDITAR
+	
+	@RequestMapping("/editar/desaparecido/{id_desaparecido}/{id_desaperi}")
+	public ModelAndView editarDesaparecido(@RequestParam(value="id_desaparecido") String id_desaparecido, @RequestParam(value="id_desaperi") String id_desaperi) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(id_desaparecido != null) {
+			Desaparecido desaparecido = desaparecidoS.findOne(id_desaparecido);
+			
+			List<Departamento> departamentos = null;
+			List<Municipio> municipios = null;
+			List<Division> divisiones = null;
+			
+			try {
+				departamentos = departamentoS.findAll();
+				municipios = municipioS.findAll();
+				divisiones = divisionS.findAll();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			mav.addObject("titulo", "Editar Desaparecido");
+			
+			mav.addObject("departamentos", departamentos);
+			mav.addObject("municipios", municipios);
+			mav.addObject("divisiones", divisiones);
+			
+			mav.addObject("desaparecido", desaparecido);
+			mav.addObject("id_desaparecidoParam", id_desaparecido);
+			mav.addObject("id_desaperiParam", id_desaperi);
+			mav.setViewName("editarDesaparecido");
+		}else {
+			mav.setViewName("listaDesaparecidos");
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping("/editar/desaparecido2/{id_desaparecido}/{id_desaperi}")
+	public ModelAndView editarDesaparecido2(@Valid @ModelAttribute Desaparecido desaparecido, BindingResult result, @RequestParam(value="id_desaperi") String id_desaperi, @RequestParam(value="id_desaparecido") String id_desaparecido) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(result.hasErrors()) {
+			List<Departamento> departamentos = null;
+			List<Municipio> municipios = null;
+			List<Division> divisiones = null;
+			
+			try {
+				departamentos = departamentoS.findAll();
+				municipios = municipioS.findAll();
+				divisiones = divisionS.findAll();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			mav.addObject("titulo", "Editar Desaparecido");
+			
+			mav.addObject("departamentos", departamentos);
+			mav.addObject("municipios", municipios);
+			mav.addObject("divisiones", divisiones);
+			
+			mav.addObject("desaparecido", desaparecido);
+			mav.addObject("id_desaparecidoParam", id_desaparecido);
+			mav.addObject("id_desaperiParam", id_desaperi);
+			mav.setViewName("editarDesaparecido");
+		}else {
+			try {
+				desaparecidoS.save(desaparecido);
+			}catch(Exception e){
+				e.getStackTrace();
+			}
+			
+			if(id_desaperi != null) {
+				DesaPeri desaPeri = desaPeriS.findOne(Integer.parseInt(id_desaperi));
+				
+				mav.addObject("titulo", "Editar Desaparecido p2");
+				mav.addObject("desaPeri", desaPeri);
+				
+				mav.addObject("id_desaparecidoParam", id_desaparecido);
+				mav.addObject("id_desaperiParam", id_desaperi);
+				mav.setViewName("editarDesaparecido2");
+				
+			}
+			
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping("/validarEdicion/desaparecido2/{id_desaparecido}/{id_desaperi}")
+	public ModelAndView validarEdicionDesaparecido2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result, @RequestParam(value="id_desaperi") String id_desaperi, @RequestParam(value="id_desaparecido") String id_desaparecido) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(result.hasErrors()) {
+			
+			mav.addObject("titulo", "Editar Desaparecido p2");
+			mav.addObject("desaPeri",desaPeri);
+			mav.addObject("id_desaparecidoParam", id_desaparecido);
+			mav.addObject("id_desaperiParam", id_desaperi);
+			mav.setViewName("editarDesaparecido2");
+		}else {
+			//MOSTRAR DESAPARECIDO
+		}
+		
 		return mav;
 	}
 }

@@ -46,10 +46,14 @@
                     <td th:text="${desaPeri.fecha_registro}"></td>
                     <td>
                         <div class="d-flex">
-                            <form class="p-1" action="" method="post">
-                                <button type="button" class="btn btn-success">Editar</button>
+                            <form class="p-1" th:action="@{/editar/desaparecido/} + ${desaPeri.id_desaparecido} + '/' + ${desaPeri.id_desaperi}" method="GET">
+                                <input th:name="id_desaparecido" type="text" th:value=${desaPeri.id_desaparecido}>
+                                <input th:name="id_desaperi" type="text" th:value=${desaPeri.id_desaperi}>
+                                <input type="submit" class="btn btn-success" value="Editar">
                             </form>
-                            <form class="p-1" action="" method="post">
+                            <form class="p-1" action="" method="GET">
+                                <input th:name="id_desaparecido" type="text" th:value=${desaPeri.id_desaparecido}>
+                                <input th:name="id_desaperi" type="text" th:value=${desaPeri.id_desaperi}>
                                 <button type="button" class="btn btn-danger">Eliminar</button>
                             </form>
                         </div>

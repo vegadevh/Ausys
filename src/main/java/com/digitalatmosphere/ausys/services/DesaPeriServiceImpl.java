@@ -64,6 +64,7 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 			p.setNombre(obj[2].toString());
 			p.setApellido(obj[3].toString());
 			p.setFecha_registro(obj[4].toString());
+			p.setId_desaperi(obj[5].toString());
 			return p;
 		}).collect(Collectors.toList());
 		return peritajes;
@@ -78,6 +79,7 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 			d.setNombre(obj[2].toString());
 			d.setApellido(obj[3].toString());
 			d.setFecha_registro(obj[4].toString());
+			d.setId_desaperi(obj[5].toString());
 			return d;
 		}).collect(Collectors.toList());
 		return desaparecidos;

@@ -8,6 +8,7 @@ public class DesaparecidoDTO {
 	private String nombre;
 	private String apellido;
 	private String fecha_registro;
+	private String id_desaperi;
 	
 	public String getId_desaparecido() {
 		return id_desaparecido;
@@ -38,6 +39,12 @@ public class DesaparecidoDTO {
 	}
 	public void setFecha_registro(String fecha_registro) {
 		this.fecha_registro = fecha_registro;
+	}
+	public String getId_desaperi() {
+		return id_desaperi;
+	}
+	public void setId_desaperi(String id_desaperi) {
+		this.id_desaperi = id_desaperi;
 	}
 	
 	
