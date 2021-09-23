@@ -25,4 +25,12 @@ public List<DesaPeri> findALL() throws DataAccessException;
 	public List<PeritajeDTO> findAllPeritajes() throws DataAccessException;
 	
 	public List<DesaparecidoDTO> findAllDesaparecidos() throws DataAccessException;
+	
+	public List<PeritajeDTO> buscarNombrePeritaje(String nombre) throws DataAccessException;
+
+	public List<PeritajeDTO> buscarIdPeritaje(String id) throws DataAccessException;
+	
+	public List<DesaparecidoDTO> buscarNombreDesaparecido(String nombre) throws DataAccessException;
+	
+	public List<DesaparecidoDTO> buscarIdDesaparecido(String id) throws DataAccessException;
 }

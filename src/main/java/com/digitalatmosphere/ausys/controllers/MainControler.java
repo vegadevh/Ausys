@@ -595,4 +595,112 @@ public class MainControler {
 		
 		return mav;
 	}
+
+	//BUSQUEDA DE REPORTES
+	
+	@RequestMapping("/buscarPeritajes")
+	public ModelAndView buscarPeritajes(){
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("titulo", "Busqueda de Registros de Peritajes");
+		mav.setViewName("busquedaP");
+		return mav;
+	}
+	
+	@RequestMapping(value="/busquedaPeritajes", params="action=buscarnombre")
+	public ModelAndView BuscarNombre(@RequestParam(value="nombre_registro") String nombre) {
+		ModelAndView mav = new ModelAndView();
+		List<PeritajeDTO> desaPeriL = null;
+		try {
+			desaPeriL = desaPeriS.buscarNombrePeritaje(nombre);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		if(desaPeriL != null && desaPeriL.size() !=0 ) {
+			mav.addObject("titulo", "Lista de Peritajes");
+			mav.addObject("desaPeriL", desaPeriL);
+			mav.setViewName("listaPeritajes");
+			
+		}else {
+			mav.addObject("titulo", "Busqueda de Registros");
+			mav.addObject("mensaje", "No se ha encontrado un registro con el nombre: ".concat(nombre));
+			mav.setViewName("busqueda");
+		}
+		return mav;
+	}
+	//Buscar por Identificador
+	@RequestMapping(value="/busquedaPeritajes", params="action=buscaridentificador")
+	public ModelAndView BuscarIdentificador(@RequestParam(value="id_registro") String id) {
+		ModelAndView mav = new ModelAndView();
+		List<PeritajeDTO> desaPeriL = null;
+		try {
+			desaPeriL = desaPeriS.buscarIdPeritaje(id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		if(desaPeriL != null && desaPeriL.size() !=0 ) {
+			mav.addObject("titulo", "Lista de Peritajes");
+			mav.addObject("desaPeriL", desaPeriL);
+			mav.setViewName("listaPeritajes");
+			
+		}else {
+			mav.addObject("titulo", "Busqueda de Registros");
+			mav.addObject("mensaje", "No se ha encontrado un registro con el identificador: ".concat(id));
+			mav.setViewName("busqueda");
+		}
+		return mav;
+	}
+	//DESAPARECIDOS
+	@RequestMapping("/buscarDesaparecidos")
+	public ModelAndView buscarDesaparecidos(){
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("titulo", "Busqueda de Desaparecidos");
+		mav.setViewName("busquedaD");
+		return mav;
+	}
+	
+	@RequestMapping(value="/busquedaDesaparecidos", params="action=buscarnombre")
+	public ModelAndView BuscarNombreD(@RequestParam(value="nombre_registro") String nombre) {
+		ModelAndView mav = new ModelAndView();
+		List<DesaparecidoDTO> desaPeriL = null;
+		try {
+			desaPeriL = desaPeriS.buscarNombreDesaparecido(nombre);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		if(desaPeriL != null && desaPeriL.size() !=0 ) {
+			mav.addObject("titulo", "Lista de Desaparecidos");
+			mav.addObject("desaPeriL", desaPeriL);
+			mav.setViewName("listaDesaparecidos");
+			
+		}else {
+			mav.addObject("titulo", "Busqueda de Registros");
+			mav.addObject("mensaje", "No se ha encontrado un registro con el nombre: ".concat(nombre));
+			mav.setViewName("busquedaD");
+		}
+		return mav;
+	}
+	//Buscar por Identificador
+	@RequestMapping(value="/busquedaDesaparecidos", params="action=buscaridentificador")
+	public ModelAndView BuscarIdentificadorD(@RequestParam(value="id_registro") String id) {
+		ModelAndView mav = new ModelAndView();
+		List<DesaparecidoDTO> desaPeriL = null;
+		try {
+			desaPeriL = desaPeriS.buscarIdDesaparecido(id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		if(desaPeriL != null && desaPeriL.size() !=0 ) {
+			mav.addObject("titulo", "Lista de Desaparecidos");
+			mav.addObject("desaPeriL", desaPeriL);
+			mav.setViewName("listaDesaparecidos");
+			
+		}else {
+			mav.addObject("titulo", "Busqueda de Registros");
+			mav.addObject("mensaje", "No se ha encontrado un registro con el identificador: ".concat(id));
+			mav.setViewName("busquedaD");
+		}
+		return mav;
+	}
 }

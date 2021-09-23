@@ -18,4 +18,25 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 			+ "FROM public.desaparecidos INNER JOIN public.desa_peri ON desaparecidos.id_desaparecido = desa_peri.id_desaparecido;")
 	public List<Object[]> findAllDesaparecidos() throws DataAccessException;
 	
+	//PERITAJES
+	@Query(nativeQuery=true, value="SELECT peritajes.id_peritaje, desa_peri.tipo_de_caso, desa_peri.nombre, desa_peri.apellido, desa_peri.fecha_registro, desa_peri.id_desaperi\r\n"
+			+ "FROM public.peritajes INNER JOIN public.desa_peri ON peritajes.id_peritaje = desa_peri.id_peritaje\r\n"
+			+ "WHERE desa_peri.nombre = :nombre ;")
+	public List<Object[]> buscarNombrePeritaje(String nombre) throws DataAccessException;
+	
+	@Query(nativeQuery=true, value="SELECT peritajes.id_peritaje, desa_peri.tipo_de_caso, desa_peri.nombre, desa_peri.apellido, desa_peri.fecha_registro, desa_peri.id_desaperi\r\n"
+			+ "FROM public.peritajes INNER JOIN public.desa_peri ON peritajes.id_peritaje = desa_peri.id_peritaje\r\n"
+			+ "WHERE peritajes.id_peritaje = :id ;")
+	public List<Object[]> buscarIdPeritaje(String id) throws DataAccessException;
+	
+	//DESAPARECIDOS
+	@Query(nativeQuery=true, value="SELECT desaparecidos.id_desaparecido, desa_peri.tipo_de_caso, desa_peri.nombre, desa_peri.apellido, desa_peri.fecha_registro, desa_peri.id_desaperi\r\n"
+			+ "FROM public.desaparecidos INNER JOIN public.desa_peri ON desaparecidos.id_desaparecido = desa_peri.id_desaparecido\r\n"
+			+ "WHERE desa_peri.nombre = :nombre ;")
+	public List<Object[]> buscarNombreDesaparecido(String nombre) throws DataAccessException;
+	
+	@Query(nativeQuery=true, value="SELECT desaparecidos.id_desaparecido, desa_peri.tipo_de_caso, desa_peri.nombre, desa_peri.apellido, desa_peri.fecha_registro, desa_peri.id_desaperi\r\n"
+			+ "FROM public.desaparecidos INNER JOIN public.desa_peri ON desaparecidos.id_desaparecido = desa_peri.id_desaparecido\r\n"
+			+ "WHERE desaparecidos.id_desaparecido = :id ;")
+	public List<Object[]> buscarIdDesaparecido(String id) throws DataAccessException;
 }
