@@ -29,13 +29,14 @@
             <form th:action="@{/validarEdicion/desaparecido2/} + ${id_desaparecidoParam} + '/' + ${id_desaperiParam}" th:object="${desaPeri}" method="POST">
                 
                 <input th:name="id_desaperi" type="text" th:value=${id_desaperiParam}>
+                <input th:name="id_desaparecido" type="text" th:value=${id_desaparecidoParam}>
 				
                 <input type="hidden" th:field="*{tipo_de_caso}">
                 <br>
                 <th:block th:replace="components/form-registros :: registros"></th:block>
                 <input type="text" th:field="*{desaparecido.id_desaparecido}">
 
-                <input type="submit" th:name="id_desaparecido" value="Terminar edición" class="btn btn-primary">
+                <input type="submit" value="Terminar edición" class="btn btn-primary">
 
             </form>
         </div>
