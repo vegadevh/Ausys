@@ -33,8 +33,8 @@
             <form th:action="@{/editar/desaparecido2/} + ${id_desaparecidoParam} + '/' + ${id_desaperiParam}"
                 th:object="${desaparecido}" method="GET">
 
-				<input th:name="id_desaperi" type="text" th:value=${id_desaperiParam}>
-				
+                <input th:name="id_desaperi" type="text" th:value=${id_desaperiParam}>
+
                 <label for="id_desaparecido">Identficador del registro: </label>
                 <input type="text" id="id_desaparecido" th:name="id_desaparecido" th:field="*{id_desaparecido}">
                 <div th:if="${#fields.hasErrors('id_desaparecido')}" th:errors="*{id_desaparecido}"
@@ -57,6 +57,7 @@
                 <div th:if="${#fields.hasErrors('fecha_nacimiento')}" th:errors="*{fecha_nacimiento}"
                     class="alert alert-danger" role="alert"></div>
                 <br>
+                <input type="text" th:field="*{division.id_division}" >
                 <!-- <label class="col-form-label">Departamento:</label>
                 <select class="form-control" id="deptoSelect">
                     <option value="col">Selecciona una opci&oacute;n</option>
