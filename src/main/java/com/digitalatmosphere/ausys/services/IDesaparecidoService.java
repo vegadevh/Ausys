@@ -12,6 +12,8 @@ public interface IDesaparecidoService {
 	
 	public void save(Desaparecido desaparecido) throws DataAccessException;
 	
+	public void delete(String id_desaparecido) throws DataAccessException;
+	
 	public Desaparecido findOne(String id_desaparecido) throws DataAccessException;
 
 }

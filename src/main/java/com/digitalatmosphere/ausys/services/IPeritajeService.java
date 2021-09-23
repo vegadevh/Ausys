@@ -12,5 +12,7 @@ public interface IPeritajeService {
 	
 	public void save(Peritaje peritaje) throws DataAccessException;
 	
+	public void delete(String id_peritaje) throws DataAccessException;
+	
 	public Peritaje findOne(String id_peritaje) throws DataAccessException;
 }

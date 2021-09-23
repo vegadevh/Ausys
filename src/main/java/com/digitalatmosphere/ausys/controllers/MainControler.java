@@ -567,4 +567,32 @@ public class MainControler {
 		}
 		return mav;
 	}
+	
+	//ELIMINAR
+	
+	@RequestMapping("/eliminar/peritaje/{id_peritaje}/{id_desaperi}")
+	public ModelAndView eliminarPeritaje(@RequestParam(value="id_desaperi") String id_desaperi, @RequestParam(value="id_peritaje") String id_peritaje) {
+		ModelAndView mav = new ModelAndView();
+		if(id_desaperi !=null) {
+			desaPeriS.delete(Integer.parseInt(id_desaperi));
+			peritajeS.delete(id_peritaje);
+			
+		}
+		mav.setViewName("redirect:/listaPeritajes");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/eliminar/desaparecido/{id_desaparecido}/{id_desaperi}")
+	public ModelAndView eliminarDesaparecido(@RequestParam(value="id_desaperi") String id_desaperi, @RequestParam(value="id_desaparecido") String id_desaparecido) {
+		ModelAndView mav = new ModelAndView();
+		if(id_desaperi !=null) {
+			desaPeriS.delete(Integer.parseInt(id_desaperi));
+			desaparecidoS.delete(id_desaparecido);
+			
+		}
+		mav.setViewName("redirect:/listaDesaparecidos");
+		
+		return mav;
+	}
 }

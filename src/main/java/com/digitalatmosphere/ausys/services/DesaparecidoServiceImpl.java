@@ -31,6 +31,11 @@ public class DesaparecidoServiceImpl implements IDesaparecidoService {
 		return desaparecidoRepo.getById(id_desaparecido);
 	}
 
-	
+	@Override
+	public void delete(String id_desaparecido) throws DataAccessException {
+		Desaparecido desaparecido = desaparecidoRepo.getById(id_desaparecido);
+		desaparecidoRepo.delete(desaparecido);
+		
+	}
 
 }

@@ -85,5 +85,12 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		return desaparecidos;
 	}
 
+	@Override
+	public void delete(Integer id_desaperi) throws DataAccessException {
+		DesaPeri desaPeri = desaPeriRepo.getById(id_desaperi);
+		desaPeriRepo.delete(desaPeri);
+		
+	}
+
 
 }

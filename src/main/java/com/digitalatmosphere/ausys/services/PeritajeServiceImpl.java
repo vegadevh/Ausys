@@ -31,4 +31,11 @@ public class PeritajeServiceImpl implements IPeritajeService{
 		return peritajeRepo.getById(id_peritaje);
 	}
 
+	@Override
+	public void delete(String id_peritaje) throws DataAccessException {
+		Peritaje peritaje = peritajeRepo.getById(id_peritaje);
+		peritajeRepo.delete(peritaje);
+		
+	}
+
 }
