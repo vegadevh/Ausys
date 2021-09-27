@@ -151,6 +151,14 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		}).collect(Collectors.toList());
 		return peritajes;
 	}
-
-
+	
+	@Override
+	public List<DesaPeri> findByKeyword(String keyword) throws DataAccessException {
+		return desaPeriRepo.findByKeyword(keyword.toLowerCase());
+	}
+	
+	@Override
+	public List<DesaPeri> findByKeywordAndtipe(String keyword, String tipo) throws DataAccessException {
+		return desaPeriRepo.findByKeywordAndtipe(keyword.toLowerCase(), tipo);
+	}
 }

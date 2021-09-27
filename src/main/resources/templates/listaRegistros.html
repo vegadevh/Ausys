@@ -26,7 +26,23 @@
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <br>
-        <table class="table">
+        <div>
+        <form th:action="@{/listaRegistros}" method="get">
+        	<label for="filtro">Filtro temporal: </label>
+	        <input type="text" id="filtro" name="keyword">
+	        
+	        <label for="tipo_de_caso">Tipo de caso: </label>
+            <select class="form-control" id="casoSelect" name="type">
+                <option value="col2">Selecciona una opci&oacute;n</option>
+                <option th:each="caso : ${listaCasos}" th:id="${tipo_de_caso}" th:value="${caso}" th:text="${caso}">
+                </option>
+            </select>
+	        
+	        <input type="submit" value="Buscar" class="btn btn-primary">
+        </form>
+        </div>
+        <br>
+        <table class="table" id="TablaRegistro">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
@@ -58,7 +74,25 @@
             </tbody>
         </table>
     </div>
-
+    
+	
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </html>

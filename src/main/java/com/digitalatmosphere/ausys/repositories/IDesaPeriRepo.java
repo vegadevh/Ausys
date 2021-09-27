@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.digitalatmosphere.ausys.domains.DesaPeri;
 
@@ -39,4 +40,10 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 			+ "FROM public.desaparecidos INNER JOIN public.desa_peri ON desaparecidos.id_desaparecido = desa_peri.id_desaparecido\r\n"
 			+ "WHERE desaparecidos.id_desaparecido = :id ;")
 	public List<Object[]> buscarIdDesaparecido(String id) throws DataAccessException;
+	
+	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%)", nativeQuery=true)
+	public  List<DesaPeri> findByKeyword(@Param("keyword") String keyword);
+	
+	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%) and dp.tipo_de_caso = :type ;", nativeQuery=true)
+	public  List<DesaPeri> findByKeywordAndtipe(@Param("keyword") String keyword,@Param("type") String type);
 }

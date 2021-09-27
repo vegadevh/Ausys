@@ -33,4 +33,8 @@ public List<DesaPeri> findALL() throws DataAccessException;
 	public List<DesaparecidoDTO> buscarNombreDesaparecido(String nombre) throws DataAccessException;
 	
 	public List<DesaparecidoDTO> buscarIdDesaparecido(String id) throws DataAccessException;
+	
+	public List<DesaPeri> findByKeyword(String keyword) throws DataAccessException;
+	
+	public List<DesaPeri> findByKeywordAndtipe(String keyword, String type) throws DataAccessException;
 }

@@ -330,12 +330,21 @@ public class MainControler {
 	}
 	
 	@RequestMapping("/listaRegistros")
-	public ModelAndView listaRegistros() {
+	public ModelAndView listaRegistros(String keyword, String type) {
 		ModelAndView mav = new ModelAndView();
 
 		List<DesaPeri> desaPeriL = null;
 		try {
-			desaPeriL = desaPeriS.findAll();
+			System.out.println("type: "+type);
+			if(type != null) {
+				keyword = keyword.toLowerCase();
+				desaPeriL = desaPeriS.findByKeywordAndtipe(keyword,type);
+			}else if(keyword != null) {
+				keyword = keyword.toLowerCase();
+				desaPeriL = desaPeriS.findByKeyword(keyword);
+			}else {
+				desaPeriL = desaPeriS.findAll();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
