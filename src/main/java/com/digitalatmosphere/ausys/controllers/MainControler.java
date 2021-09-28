@@ -22,6 +22,7 @@ import com.digitalatmosphere.ausys.domains.Municipio;
 import com.digitalatmosphere.ausys.domains.Peritaje;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
+import com.digitalatmosphere.ausys.dto.RegistroDTO;
 import com.digitalatmosphere.ausys.services.IDepartamentoService;
 import com.digitalatmosphere.ausys.services.IDesaPeriService;
 import com.digitalatmosphere.ausys.services.IDesaparecidoService;
@@ -624,7 +625,7 @@ public class MainControler {
 		}else {
 			mav.addObject("titulo", "Busqueda de Registros");
 			mav.addObject("mensaje", "No se ha encontrado un registro con el nombre: ".concat(nombre));
-			mav.setViewName("busqueda");
+			mav.setViewName("busquedaP");
 		}
 		return mav;
 	}
@@ -646,7 +647,7 @@ public class MainControler {
 		}else {
 			mav.addObject("titulo", "Busqueda de Registros");
 			mav.addObject("mensaje", "No se ha encontrado un registro con el identificador: ".concat(id));
-			mav.setViewName("busqueda");
+			mav.setViewName("busquedaP");
 		}
 		return mav;
 	}
@@ -701,6 +702,30 @@ public class MainControler {
 			mav.addObject("mensaje", "No se ha encontrado un registro con el identificador: ".concat(id));
 			mav.setViewName("busquedaD");
 		}
+		return mav;
+	}
+	
+	//VER REGISTTRO INDIVIDUAL
+	
+	@RequestMapping("/verRegistro/{id_peritaje}/{id_desaperi}")
+	public ModelAndView verRegistroPeritaje(@RequestParam(value="id_peritaje") String id_peritaje, @RequestParam(value="id_desaperi") String id_desaperi) {
+		ModelAndView mav = new ModelAndView();
+		
+		List<RegistroDTO> registro = null;
+		try {
+			registro = desaPeriS.verRegistroPeritaje(id_peritaje, id_desaperi);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(registro != null && registro.size() !=0 ) {
+			mav.addObject("titulo", "Registro: ".concat(id_peritaje));
+			mav.addObject("registro", registro);
+			mav.setViewName("verRegistro");
+		}else {
+			mav.addObject("titulo", "Lista de Registros");
+			mav.setViewName("listaPeritajes");
+		}
+		
 		return mav;
 	}
 }

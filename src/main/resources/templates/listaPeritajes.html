@@ -61,6 +61,13 @@
                                 <input type="submit" class="btn btn-danger" value="Eliminar"
                                     onclick="return confirm('¿Estás seguro que deseas eliminar el peritaje?');">
                             </form>
+                            <form class="p-1"
+                                th:action="@{/verRegistro/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
+                                method="GET">
+                                <input th:name="id_peritaje" type="hidden" th:value=${desaPeri.id_peritaje}>
+                                <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
+                                <input type="submit" class="btn btn-primary" value="Ver">
+                            </form>
                         </div>
                     </td>
                 </tr>

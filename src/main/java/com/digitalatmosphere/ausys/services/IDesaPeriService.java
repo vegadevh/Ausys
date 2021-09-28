@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import com.digitalatmosphere.ausys.domains.DesaPeri;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
+import com.digitalatmosphere.ausys.dto.RegistroDTO;
 
 public interface IDesaPeriService {
 
@@ -33,4 +34,6 @@ public List<DesaPeri> findALL() throws DataAccessException;
 	public List<DesaparecidoDTO> buscarNombreDesaparecido(String nombre) throws DataAccessException;
 	
 	public List<DesaparecidoDTO> buscarIdDesaparecido(String id) throws DataAccessException;
+	
+	public List<RegistroDTO> verRegistroPeritaje(String id_peritaje, String id_desaperi) throws DataAccessException;
 }

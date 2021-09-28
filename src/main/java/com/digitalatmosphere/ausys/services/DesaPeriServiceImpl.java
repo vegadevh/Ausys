@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.digitalatmosphere.ausys.domains.DesaPeri;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
+import com.digitalatmosphere.ausys.dto.RegistroDTO;
 import com.digitalatmosphere.ausys.repositories.IDesaPeriRepo;
 
 @Service
@@ -150,6 +151,28 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 			return d;
 		}).collect(Collectors.toList());
 		return peritajes;
+	}
+
+	@Override
+	public List<RegistroDTO> verRegistroPeritaje(String id_peritaje, String id_desaperi) throws DataAccessException {
+		Integer desaperi = Integer.parseInt(id_desaperi);
+		List<RegistroDTO> registro = desaPeriRepo.verRegistroPeritaje(id_peritaje, desaperi).stream().map(obj->{
+			RegistroDTO r = new RegistroDTO();
+			r.setId_registro(obj[0].toString());
+			r.setIdentificado(obj[1].toString());
+			r.setEdad_estimada(obj[2].toString());
+			r.setDivision(obj[3].toString());
+			r.setDireccion(obj[4].toString());
+			r.setTipo_de_caso(obj[5].toString());
+			r.setNombre(obj[6].toString());
+			r.setApellido(obj[7].toString());
+			r.setSexo(obj[8].toString());
+			r.setInformacion_adicional(obj[9].toString());
+			r.setDui(obj[10].toString());
+			r.setFecha_registro(obj[11].toString());
+			return r;
+		}).collect(Collectors.toList());
+		return registro;
 	}
 
 
