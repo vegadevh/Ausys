@@ -1,4 +1,4 @@
-package com.digitalatmosphere.ausys.domains;
+	package com.digitalatmosphere.ausys.domains;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +21,7 @@ public class Especial {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_especial;
 	
+	@NotEmpty
 	@Column(name="especial")
 	private String especial;
 	

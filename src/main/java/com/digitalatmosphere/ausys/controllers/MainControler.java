@@ -18,6 +18,7 @@ import com.digitalatmosphere.ausys.domains.Departamento;
 import com.digitalatmosphere.ausys.domains.DesaPeri;
 import com.digitalatmosphere.ausys.domains.Desaparecido;
 import com.digitalatmosphere.ausys.domains.Division;
+import com.digitalatmosphere.ausys.domains.Especial;
 import com.digitalatmosphere.ausys.domains.Municipio;
 import com.digitalatmosphere.ausys.domains.Peritaje;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
@@ -61,6 +62,11 @@ public class MainControler {
 	public List<String> listaCasos(){
 		return Arrays.asList("Análisis toxicólogico", "Análisis toxicólogico Medio ambientales", 
 				"Asistencia a vistas públicas", "Examenes odontológicos");
+	}
+	
+	@ModelAttribute("listaMarcas")
+	public List<String> listaMarcas(){
+		return Arrays.asList("Cicatriz", "Desperfectos", "Tatuaje");
 	}
 	//
 	
@@ -726,6 +732,18 @@ public class MainControler {
 			mav.setViewName("listaPeritajes");
 		}
 		
+		return mav;
+	}
+	
+	//AGREGAR ESPECIAL
+	@RequestMapping("/especial/{id}/{id_registro}")
+	public ModelAndView agregarEspecial(@RequestParam(value="id_peritaje") String id_peritaje, @RequestParam(value="id_desaperi") String id_desaperi) {
+		ModelAndView mav = new ModelAndView();
+		Especial especial = new Especial();
+		
+		mav.addObject("titulo", "Ingresar marca especial");
+		mav.addObject("especial", especial);
+		mav.setViewName("ingresarEspecial");
 		return mav;
 	}
 }

@@ -14,7 +14,14 @@ public class RegistroDTO {
 	private String informacion_adicional;
 	private String dui;
 	private String fecha_registro;
+	private String id;
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getId_registro() {
 		return id_registro;
 	}

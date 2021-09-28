@@ -158,7 +158,7 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		Integer desaperi = Integer.parseInt(id_desaperi);
 		List<RegistroDTO> registro = desaPeriRepo.verRegistroPeritaje(id_peritaje, desaperi).stream().map(obj->{
 			RegistroDTO r = new RegistroDTO();
-			r.setId_registro(obj[0].toString());
+			r.setId(obj[0].toString());
 			r.setIdentificado(obj[1].toString());
 			r.setEdad_estimada(obj[2].toString());
 			r.setDivision(obj[3].toString());
@@ -170,6 +170,7 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 			r.setInformacion_adicional(obj[9].toString());
 			r.setDui(obj[10].toString());
 			r.setFecha_registro(obj[11].toString());
+			r.setId_registro(obj[12].toString());
 			return r;
 		}).collect(Collectors.toList());
 		return registro;
