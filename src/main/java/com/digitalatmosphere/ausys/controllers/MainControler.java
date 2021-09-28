@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ import com.digitalatmosphere.ausys.services.IDepartamentoService;
 import com.digitalatmosphere.ausys.services.IDesaPeriService;
 import com.digitalatmosphere.ausys.services.IDesaparecidoService;
 import com.digitalatmosphere.ausys.services.IDivisionService;
+import com.digitalatmosphere.ausys.services.IEspecialService;
 import com.digitalatmosphere.ausys.services.IMunicipioService;
 import com.digitalatmosphere.ausys.services.IPeritajeService;
 
@@ -51,6 +53,9 @@ public class MainControler {
 	
 	@Autowired
 	private IDesaparecidoService desaparecidoS;
+	
+	@Autowired
+	private IEspecialService especialS;
 	
 	//Listas
 	@ModelAttribute("listaSexo")
@@ -735,15 +740,66 @@ public class MainControler {
 		return mav;
 	}
 	
+	@RequestMapping("/verRegistroD/{id_desaparecido}/{id_desaperi}")
+	public ModelAndView verRegistroDesaparecido(@RequestParam(value="id_desaparecido") String id_desaparecido, @RequestParam(value="id_desaperi") String id_desaperi) {
+		ModelAndView mav = new ModelAndView();
+		
+		List<RegistroDTO> registro = null;
+		try {
+			registro = desaPeriS.verRegistroDesaparecido(id_desaparecido, id_desaperi);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(registro != null && registro.size() !=0 ) {
+			mav.addObject("titulo", "Registro: ".concat(id_desaparecido));
+			mav.addObject("registro", registro);
+			mav.setViewName("verRegistro");
+		}else {
+			mav.addObject("titulo", "Lista de Registros");
+			mav.setViewName("listaDesaparecidos");
+		}
+		
+		return mav;
+	}
+	
 	//AGREGAR ESPECIAL
 	@RequestMapping("/especial/{id}/{id_registro}")
-	public ModelAndView agregarEspecial(@RequestParam(value="id_peritaje") String id_peritaje, @RequestParam(value="id_desaperi") String id_desaperi) {
+	public ModelAndView agregarEspecial(@RequestParam(value="id") String id) {
 		ModelAndView mav = new ModelAndView();
 		Especial especial = new Especial();
 		
+		
 		mav.addObject("titulo", "Ingresar marca especial");
 		mav.addObject("especial", especial);
+		mav.addObject("id", id);
 		mav.setViewName("ingresarEspecial");
+		return mav;
+	}
+	
+	@RequestMapping("/validarEspecial/{id}")
+	public ModelAndView validarEspecial(@Valid @ModelAttribute Especial especial, BindingResult result,@PathVariable("id") String id) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(result.hasErrors()) {
+			
+			
+			mav.addObject("titulo", "Ingresar marca especial");
+			mav.addObject("especial", especial);
+			mav.addObject("id", id);
+			mav.setViewName("ingresarEspecial");
+		}else {
+			Peritaje peritaje = new Peritaje();
+			especial.setId_peritaje(id);
+			peritaje = peritajeS.findOne(id);
+			especial.setPeritaje(peritaje);
+			
+			try {
+				especialS.save(especial);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			mav.setViewName("redirect:/listaPeritajes");
+		}
 		return mav;
 	}
 }

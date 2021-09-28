@@ -16,6 +16,30 @@ public class RegistroDTO {
 	private String fecha_registro;
 	private String id;
 	
+	private String fecha_nacimiento;
+	private String nombre_familiar;
+	private String contacto_familiar;
+	
+	
+	
+	public String getFecha_nacimiento() {
+		return fecha_nacimiento;
+	}
+	public void setFecha_nacimiento(String fecha_nacimiento) {
+		this.fecha_nacimiento = fecha_nacimiento;
+	}
+	public String getNombre_familiar() {
+		return nombre_familiar;
+	}
+	public void setNombre_familiar(String nombre_familiar) {
+		this.nombre_familiar = nombre_familiar;
+	}
+	public String getContacto_familiar() {
+		return contacto_familiar;
+	}
+	public void setContacto_familiar(String contacto_familiar) {
+		this.contacto_familiar = contacto_familiar;
+	}
 	public String getId() {
 		return id;
 	}

@@ -176,5 +176,30 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		return registro;
 	}
 
+	@Override
+	public List<RegistroDTO> verRegistroDesaparecido(String id_desaparecido, String id_desaperi)
+			throws DataAccessException {
+		Integer desaperi = Integer.parseInt(id_desaperi);
+		List<RegistroDTO> registro = desaPeriRepo.verRegistroDesaparecido(id_desaparecido, desaperi).stream().map(obj->{
+			RegistroDTO r = new RegistroDTO();
+			r.setId(obj[0].toString());
+			r.setFecha_nacimiento(obj[1].toString());
+			r.setNombre_familiar(obj[2].toString());
+			r.setContacto_familiar(obj[3].toString());
+			r.setDivision(obj[4].toString());
+			r.setDireccion(obj[5].toString());
+			r.setTipo_de_caso(obj[6].toString());
+			r.setNombre(obj[7].toString());
+			r.setApellido(obj[8].toString());
+			r.setSexo(obj[9].toString());
+			r.setInformacion_adicional(obj[10].toString());
+			r.setDui(obj[11].toString());
+			r.setFecha_registro(obj[12].toString());
+			r.setId_registro(obj[13].toString());
+			return r;
+		}).collect(Collectors.toList());
+		return registro;
+	}
+
 
 }

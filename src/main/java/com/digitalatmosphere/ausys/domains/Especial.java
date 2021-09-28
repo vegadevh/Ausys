@@ -23,8 +23,8 @@ public class Especial {
 	
 	@NotEmpty
 	@Column(name="especial")
-	private String especial;
-	
+	private String nombre_especial;
+
 	@NotEmpty
 	@Column(name="descripcion")
 	private String descripcion;
@@ -42,6 +42,14 @@ public class Especial {
 	
 	@Transient
 	private String id_desaparecido;
+	
+	public String getNombre_especial() {
+		return nombre_especial;
+	}
+
+	public void setNombre_especial(String nombre_especial) {
+		this.nombre_especial = nombre_especial;
+	}
 
 	public Integer getId_especial() {
 		return id_especial;
@@ -49,14 +57,6 @@ public class Especial {
 
 	public void setId_especial(Integer id_especial) {
 		this.id_especial = id_especial;
-	}
-
-	public String getEspecial() {
-		return especial;
-	}
-
-	public void setEspecial(String especial) {
-		this.especial = especial;
 	}
 
 	public String getDescripcion() {

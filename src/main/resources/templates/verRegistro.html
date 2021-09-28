@@ -30,11 +30,23 @@
 
                 <b class="d-inline">Identficador del registro: </b>
                 <p class="d-inline" th:text="${registro.id}"></p>
-                <div>
+                <div th:if="${registro.identificado}">
                     <b class="d-inline">Persona identificada: </b>
                     <p class="d-inline" th:text="${registro.identificado}"></p>
                 </div>
-                <div>
+                <div th:if="${registro.fecha_nacimiento}">
+                    <b class="d-inline">Fecha de nacimiento: </b>
+                    <p class="d-inline" th:text="${registro.fecha_nacimiento}"></p>
+                </div>
+                <div th:if="${registro.nombre_familiar}">
+                    <b class="d-inline">Nombre de familiar: </b>
+                    <p class="d-inline" th:text="${registro.nombre_familiar}"></p>
+                </div>
+                <div th:if="${registro.contacto_familiar}">
+                    <b class="d-inline">Contacto del familiar: </b>
+                    <p class="d-inline" th:text="${registro.contacto_familiar}"></p>
+                </div>
+                <div th:if="${registro.edad_estimada}">
                     <b class="d-inline">Edad estimada: </b>
                     <p class="d-inline" th:text="${registro.edad_estimada}"></p>
                 </div>
@@ -77,10 +89,10 @@
                 <br>
                 <form class="p-1" th:action="@{/especial/} + ${registro.id} + '/' + ${registro.id_registro}"
                     method="GET">
-                    <input th:name="id_peritaje" type="hidden" th:value=${registro.id}>
-                    <input th:name="id_desaperi" type="hidden" th:value=${registro.id_registro}>
+                    <input th:name="id" type="hidden" th:value=${registro.id}>
+                    <input th:name="id_registro" type="hidden" th:value=${registro.id_registro}>
                     <button type="submit" class="btn btn-success">
-                        <i class="fas fa-plus"></i>  Agregar marca especial</button>
+                        <i class="fas fa-plus"></i> Agregar marca especial</button>
                 </form>
             </div>
         </div>

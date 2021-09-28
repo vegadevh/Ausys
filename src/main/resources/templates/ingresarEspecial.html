@@ -26,19 +26,10 @@
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <div>
-            <form th:action="@{/validarPeritaje}" th:object="${especial}" method="POST">
+            <form th:action="@{/validarEspecial/} + ${id}" th:object="${especial}" method="POST">
 
-
-
-                <label class="col-form-label">Tipo de caracteristica especial:</label>
-                <select class="form-control" th:field="*{especial}">
-                    <option value="col1">Selecciona una opci&oacute;n</option>
-                    <option th:each="marca : ${listaMarcas}" th:value="${marca}" th:text="${marca}"></option>
-                </select>
-                <div th:if="${#fields.hasErrors('especial')}" th:errors="*{edad_estimada}"
-                    class="alert alert-danger" role="alert"></div>
-                <br>
-
+                <th:block th:replace="components/form-especial :: especiales"></th:block>
+                <!-- <input type="text" th:name="id" th:field="*{id_peritaje}"> -->
                 <input type="submit" value="Siguiente" class="btn btn-primary">
 
             </form>

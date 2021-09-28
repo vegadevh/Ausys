@@ -2,10 +2,12 @@ package com.digitalatmosphere.ausys.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import com.digitalatmosphere.ausys.domains.Especial;
 import com.digitalatmosphere.ausys.repositories.IEspecialRepo;
 
+@Service
 public class EspecialServiceImpl implements IEspecialService {
 	
 	@Autowired

@@ -46,4 +46,10 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 			+ "WHERE desaparecidos.id_desaparecido = :id ;")
 	public List<Object[]> buscarIdDesaparecido(String id) throws DataAccessException;
 	
+	//VER REGISTROS INDIVIDUALES
+	@Query(nativeQuery=true, value="SELECT desaparecidos.id_desaparecido, desaparecidos.fecha_nacimiento, desaparecidos.nombre_familiar, desaparecidos.contacto_familiar, desaparecidos.id_division, desa_peri.direccion, desa_peri.tipo_de_caso, desa_peri.nombre, desa_peri.apellido, desa_peri.sexo, desa_peri.informacion_adicional, desa_peri.dui, desa_peri.fecha_registro, desa_peri.id_desaperi\r\n"
+			+ "FROM public.desaparecidos INNER JOIN public.desa_peri ON desaparecidos.id_desaparecido = desa_peri.id_desaparecido\r\n"
+			+ "WHERE desaparecidos.id_desaparecido = :id_desaparecido AND desa_peri.id_desaperi = :id_desaperi ;")
+	public List<Object[]> verRegistroDesaparecido(String id_desaparecido, Integer id_desaperi) throws DataAccessException;
+	
 }
