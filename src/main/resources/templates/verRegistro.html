@@ -87,12 +87,20 @@
                     <p class="d-inline" th:text="${registro.fecha_registro}"></p>
                 </div>
                 <br>
-                <form class="p-1" th:action="@{/especial/} + ${registro.id} + '/' + ${registro.id_registro}"
-                    method="GET">
+                <form th:if="${val} == 'Desaparecido'" class="p-1"
+                    th:action="@{/especialD/} + ${registro.id} + '/' + ${registro.id_registro}" method="GET">
                     <input th:name="id" type="hidden" th:value=${registro.id}>
                     <input th:name="id_registro" type="hidden" th:value=${registro.id_registro}>
                     <button type="submit" class="btn btn-success">
-                        <i class="fas fa-plus"></i> Agregar marca especial</button>
+                        <i class="fas fa-plus"></i> Agregar marca especialD</button>
+                </form>
+
+                <form th:if="${val} == 'Peritaje'" class="p-1"
+                    th:action="@{/especial/} + ${registro.id} + '/' + ${registro.id_registro}" method="GET">
+                    <input th:name="id" type="hidden" th:value=${registro.id}>
+                    <input th:name="id_registro" type="hidden" th:value=${registro.id_registro}>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-plus"></i> Agregar marca especialP</button>
                 </form>
             </div>
         </div>

@@ -731,6 +731,8 @@ public class MainControler {
 		if(registro != null && registro.size() !=0 ) {
 			mav.addObject("titulo", "Registro: ".concat(id_peritaje));
 			mav.addObject("registro", registro);
+			
+			mav.addObject("val", "Peritaje");
 			mav.setViewName("verRegistro");
 		}else {
 			mav.addObject("titulo", "Lista de Registros");
@@ -753,6 +755,7 @@ public class MainControler {
 		if(registro != null && registro.size() !=0 ) {
 			mav.addObject("titulo", "Registro: ".concat(id_desaparecido));
 			mav.addObject("registro", registro);
+			mav.addObject("val", "Desaparecido");
 			mav.setViewName("verRegistro");
 		}else {
 			mav.addObject("titulo", "Lista de Registros");
@@ -768,10 +771,10 @@ public class MainControler {
 		ModelAndView mav = new ModelAndView();
 		Especial especial = new Especial();
 		
-		
 		mav.addObject("titulo", "Ingresar marca especial");
 		mav.addObject("especial", especial);
 		mav.addObject("id", id);
+		mav.addObject("val", "Peritaje");
 		mav.setViewName("ingresarEspecial");
 		return mav;
 	}
@@ -786,6 +789,7 @@ public class MainControler {
 			mav.addObject("titulo", "Ingresar marca especial");
 			mav.addObject("especial", especial);
 			mav.addObject("id", id);
+			mav.addObject("val", "Peritaje");
 			mav.setViewName("ingresarEspecial");
 		}else {
 			Peritaje peritaje = new Peritaje();
@@ -799,6 +803,48 @@ public class MainControler {
 				e.printStackTrace();
 			}
 			mav.setViewName("redirect:/listaPeritajes");
+		}
+		return mav;
+	}
+	
+	@RequestMapping("/especialD/{id}/{id_registro}")
+	public ModelAndView agregarEspecialD(@RequestParam(value="id") String id) {
+		ModelAndView mav = new ModelAndView();
+		Especial especial = new Especial();
+		
+		
+		mav.addObject("titulo", "Ingresar marca especial");
+		mav.addObject("especial", especial);
+		mav.addObject("id", id);
+		mav.addObject("val", "Desaparecido");
+		mav.setViewName("ingresarEspecial");
+		return mav;
+	}
+	
+	@RequestMapping("/validarEspecialD/{id}")
+	public ModelAndView validarEspecialD(@Valid @ModelAttribute Especial especial, BindingResult result,@PathVariable("id") String id) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(result.hasErrors()) {
+			
+			//CAMBIAR LOGICA
+			mav.addObject("titulo", "Ingresar marca especial");
+			mav.addObject("especial", especial);
+			mav.addObject("id", id);
+			mav.addObject("val", "Desaparecido");
+			mav.setViewName("ingresarEspecial");
+		}else {
+			Desaparecido desaparecido = new Desaparecido();
+			especial.setId_desaparecido(id);
+			desaparecido = desaparecidoS.findOne(id);
+			especial.setDesaparecido(desaparecido);
+			
+			try {
+				especialS.save(especial);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			mav.setViewName("redirect:/listaDesaparecidos");
 		}
 		return mav;
 	}
