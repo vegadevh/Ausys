@@ -30,14 +30,20 @@
         <form th:action="@{/listaRegistros}" method="get">
         	<label for="filtro">Filtro temporal: </label>
 	        <input type="text" id="filtro" name="keyword">
-	        
+	        <br>
 	        <label for="tipo_de_caso">Tipo de caso: </label>
             <select class="form-control" id="casoSelect" name="type">
-                <option value="col2">Selecciona una opci&oacute;n</option>
-                <option th:each="caso : ${listaCasos}" th:id="${tipo_de_caso}" th:value="${caso}" th:text="${caso}">
+                <option th:each="caso : ${listaCasos2}" th:id="${tipo_de_caso}" th:value="${caso}" th:text="${caso}">
                 </option>
             </select>
-	        
+            <br>
+             <label>Sexo: </label>
+             <input type="radio" th:value="Ambos" name="sexo" th:id="Ambos" checked>
+		     <label th:for="Ambos" th:text="Ambos"></label> 
+		    <div th:each="sexo : ${listaSexo}">
+		        <input type="radio" th:value="${sexo}" name="sexo" th:id="${sexo}">
+		        <label th:for="${sexo}" th:text="${sexo}"></label> 
+		    </div>
 	        <input type="submit" value="Buscar" class="btn btn-primary">
         </form>
         </div>

@@ -41,9 +41,9 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 			+ "WHERE desaparecidos.id_desaparecido = :id ;")
 	public List<Object[]> buscarIdDesaparecido(String id) throws DataAccessException;
 	
-	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%)", nativeQuery=true)
-	public  List<DesaPeri> findByKeyword(@Param("keyword") String keyword);
+	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%) and lower(dp.sexo) like %:sexo%", nativeQuery=true)
+	public  List<DesaPeri> findByKeyword(@Param("keyword") String keyword,  String sexo);
 	
-	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%) and dp.tipo_de_caso = :type ;", nativeQuery=true)
-	public  List<DesaPeri> findByKeywordAndtipe(@Param("keyword") String keyword,@Param("type") String type);
+	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%) and ( lower(dp.sexo) like %:sexo%) and (dp.tipo_de_caso = :type) ;", nativeQuery=true)
+	public  List<DesaPeri> findByKeywordAndtipe(@Param("keyword") String keyword,@Param("type") String type, String sexo);
 }

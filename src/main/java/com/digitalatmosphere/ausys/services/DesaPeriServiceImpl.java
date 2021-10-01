@@ -153,12 +153,12 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	}
 	
 	@Override
-	public List<DesaPeri> findByKeyword(String keyword) throws DataAccessException {
-		return desaPeriRepo.findByKeyword(keyword.toLowerCase());
+	public List<DesaPeri> findByKeyword(String keyword, String sexo) throws DataAccessException {
+		return desaPeriRepo.findByKeyword(keyword.toLowerCase(), sexo.toLowerCase());
 	}
 	
 	@Override
-	public List<DesaPeri> findByKeywordAndtipe(String keyword, String tipo) throws DataAccessException {
-		return desaPeriRepo.findByKeywordAndtipe(keyword.toLowerCase(), tipo);
+	public List<DesaPeri> findByKeywordAndtipe(String keyword, String tipo, String sexo) throws DataAccessException {
+		return desaPeriRepo.findByKeywordAndtipe(keyword.toLowerCase(), tipo, sexo.toLowerCase());
 	}
 }
