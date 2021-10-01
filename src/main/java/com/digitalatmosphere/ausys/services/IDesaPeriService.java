@@ -38,4 +38,7 @@ public List<DesaPeri> findALL() throws DataAccessException;
 	public List<RegistroDTO> verRegistroPeritaje(String id_peritaje, String id_desaperi) throws DataAccessException;
 	
 	public List<RegistroDTO> verRegistroDesaparecido(String id_desaparecido, String id_desaperi) throws DataAccessException;
+	public List<DesaPeri> findByKeyword(String keyword, String sexo) throws DataAccessException;
+	
+	public List<DesaPeri> findByKeywordAndtipe(String keyword, String type, String sexo) throws DataAccessException;
 }

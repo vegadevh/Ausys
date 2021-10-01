@@ -82,6 +82,11 @@ public class MainController {
 		return Arrays.asList("Hombre", "Mujer");
 	}
 	
+		@ModelAttribute("listaSexo2")
+		public List<String> listaSexo2(){
+			return Arrays.asList("Ambos","Hombre", "Mujer");
+		}
+	
 	@ModelAttribute("listaCasos")
 	public List<String> listaCasos(){
 		return Arrays.asList("Análisis toxicólogico", "Análisis toxicólogico Medio ambientales", 
@@ -91,6 +96,11 @@ public class MainController {
 	@ModelAttribute("listaMarcas")
 	public List<String> listaMarcas(){
 		return Arrays.asList("Cicatriz", "Desperfectos", "Tatuaje");
+	}
+	@ModelAttribute("listaCasos2")
+	public List<String> listaCasos_2(){
+		return Arrays.asList("Selecciona una opción","Análisis toxicólogico", "Análisis toxicólogico Medio ambientales", 
+				"Asistencia a vistas públicas", "Examenes odontológicos", "Desaparecido");
 	}
 	//
 	
@@ -361,12 +371,31 @@ public class MainController {
 	}
 	
 	@RequestMapping("/listaRegistros")
-	public ModelAndView listaRegistros() {
+	public ModelAndView listaRegistros(String keyword, String type, String sexo) {
 		ModelAndView mav = new ModelAndView();
-
+		
 		List<DesaPeri> desaPeriL = null;
+		
+		String newType = "Selecciona una opción";
+		if(sexo != null) {
+			if(sexo.equals("Ambos")) {
+				sexo = "";
+			}
+		}else {
+			sexo = "";
+		}
+		System.out.println("sexo:"+sexo);
 		try {
-			desaPeriL = desaPeriS.findAll();
+			if(type != null && !type.equals(newType)) {
+				keyword = keyword.toLowerCase();
+				desaPeriL = desaPeriS.findByKeywordAndtipe(keyword,type, sexo);
+				
+			}else if(keyword != null) {
+				keyword = keyword.toLowerCase();
+				desaPeriL = desaPeriS.findByKeyword(keyword,sexo);
+			}else {
+				desaPeriL = desaPeriS.findAll();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -26,7 +26,29 @@
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <br>
-        <table class="table">
+        <div>
+        <form th:action="@{/listaRegistros}" method="get">
+        	<label for="filtro">Nombre o apellido: </label>
+	        <input type="text" id="filtro" name="keyword">
+	        <br>
+	        <label for="tipo_de_caso">Tipo de caso: </label>
+            <select class="form-control" id="casoSelect" name="type">
+                <option th:each="caso : ${listaCasos2}" th:id="${tipo_de_caso}" th:value="${caso}" th:text="${caso}">
+                </option>
+            </select>
+            <br>
+             <label>Sexo: </label>
+             <input type="radio" th:value="Ambos" name="sexo" th:id="Ambos" checked>
+		     <label th:for="Ambos" th:text="Ambos"></label> 
+		    <div th:each="sexo : ${listaSexo}">
+		        <input type="radio" th:value="${sexo}" name="sexo" th:id="${sexo}">
+		        <label th:for="${sexo}" th:text="${sexo}"></label> 
+		    </div>
+	        <input type="submit" value="Buscar" class="btn btn-primary">
+        </form>
+        </div>
+        <br>
+        <table class="table" id="TablaRegistro">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
@@ -58,7 +80,25 @@
             </tbody>
         </table>
     </div>
-
+    
+	
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </html>

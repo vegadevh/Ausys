@@ -201,5 +201,13 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		return registro;
 	}
 
-
+	@Override
+	public List<DesaPeri> findByKeyword(String keyword, String sexo) throws DataAccessException {
+		return desaPeriRepo.findByKeyword(keyword.toLowerCase(), sexo.toLowerCase());
+	}
+	
+	@Override
+	public List<DesaPeri> findByKeywordAndtipe(String keyword, String tipo, String sexo) throws DataAccessException {
+		return desaPeriRepo.findByKeywordAndtipe(keyword.toLowerCase(), tipo, sexo.toLowerCase());
+	}
 }
