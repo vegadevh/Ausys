@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -889,33 +893,50 @@ public class MainController {
 			
 			mav.addObject("titulo", "Ingresar Foto");
 			mav.addObject("foto", foto);
+			String alert = "El campo no puede ser vacio. Ingrese una foto.";
 			mav.addObject("id", id);
+			mav.addObject("alert", alert);
 			mav.addObject("val", "Desaparecido");
 			mav.setViewName("ingresarFoto");
 		}else {
 			StringBuilder fileName = new StringBuilder();
-			String filename = id.concat(file.getOriginalFilename().substring(file.getOriginalFilename().length()-4));
 			
-			Path fileNameAndPath = Paths.get(DirectorioArchivos, filename);
-			
-			try {
-				Files.write(fileNameAndPath, file.getBytes());
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
-			foto.setFoto(filename);
-			
-			Desaparecido desaparecido = new Desaparecido();
-			foto.setId_desaparecido(id);
-			desaparecido = desaparecidoS.findOne(id);
-			foto.setDesaparecido(desaparecido);
+			Date date = Calendar.getInstance().getTime();  
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+			String strDate = dateFormat.format(date);
+			String myDate = strDate.replaceAll(":","");
 			
 			try {
-				fotoS.save(foto);
-			}catch (Exception e) {
-				e.printStackTrace();
+				String filename = myDate.concat(id.concat(file.getOriginalFilename().substring(file.getOriginalFilename().length()-4)));
+				Path fileNameAndPath = Paths.get(DirectorioArchivos, filename);
+				
+				try {
+					Files.write(fileNameAndPath, file.getBytes());
+				}catch (IOException e) {
+					e.printStackTrace();
+				}
+				foto.setFoto(filename);
+				
+				Desaparecido desaparecido = new Desaparecido();
+				foto.setId_desaparecido(id);
+				desaparecido = desaparecidoS.findOne(id);
+				foto.setDesaparecido(desaparecido);
+				
+				try {
+					fotoS.save(foto);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+				mav.setViewName("redirect:/listaDesaparecidos");
+			}catch(StringIndexOutOfBoundsException e) {
+				String alert = "El campo no puede ser vacio. Ingrese una foto.";
+				mav.addObject("titulo", "Ingresar Foto");
+				mav.addObject("foto", foto);
+				mav.addObject("id", id);
+				mav.addObject("alert", alert);
+				mav.addObject("val", "Desaparecido");
+				mav.setViewName("ingresarFoto");
 			}
-			mav.setViewName("redirect:/listaDesaparecidos");
 		}
 		return mav;
 	}
