@@ -24,7 +24,7 @@ public class Foto {
 	
 //	@Type(type = "org.hibernate.type.BinaryType")
 	@Column(name="foto")
-	private byte[] foto;
+	private String foto;
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_peritaje")
@@ -40,20 +40,21 @@ public class Foto {
 	@Transient
 	private String id_desaparecido;
 
+	
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	public Integer getId_foto() {
 		return id_foto;
 	}
 
 	public void setId_foto(Integer id_foto) {
 		this.id_foto = id_foto;
-	}
-
-	public byte[] getFoto() {
-		return foto;
-	}
-
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
 	}
 
 	public Peritaje getPeritaje() {

@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+### Ocultar binarios
+/src/main/webapp/imagedata/

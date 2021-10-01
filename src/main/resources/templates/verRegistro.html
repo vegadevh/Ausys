@@ -102,6 +102,29 @@
                     <button type="submit" class="btn btn-success">
                         <i class="fas fa-plus"></i> Agregar marca especialP</button>
                 </form>
+                <!-- Ingresar imagenes -->
+                <form th:if="${val} == 'Desaparecido'" class="p-1"
+                    th:action="@{/fotografia/D/} + ${registro.id} + '/' + ${registro.id_registro}" method="GET">
+                    <input th:name="id" type="hidden" th:value=${registro.id}>
+                    <input th:name="id_registro" type="hidden" th:value=${registro.id_registro}>
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-plus"></i> Agregar fotografia</button>
+                </form>
+
+                <form th:if="${val} == 'Peritaje'" class="p-1"
+                    th:action="@{/fotografia/P/} + ${registro.id} + '/' + ${registro.id_registro}" method="GET">
+                    <input th:name="id" type="hidden" th:value=${registro.id}>
+                    <input th:name="id_registro" type="hidden" th:value=${registro.id_registro}>
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-plus"></i> Agregar fotografia</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <p>FOTOS</p>
+            <div th:each="foto : ${fotos}">
+                <img th:src="@{${'/imagedata/' + foto.filename}}" width="500" height="500">
             </div>
         </div>
 

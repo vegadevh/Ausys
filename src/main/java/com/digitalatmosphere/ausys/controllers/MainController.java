@@ -1,5 +1,9 @@
 package com.digitalatmosphere.ausys.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.digitalatmosphere.ausys.domains.Departamento;
@@ -20,21 +26,24 @@ import com.digitalatmosphere.ausys.domains.DesaPeri;
 import com.digitalatmosphere.ausys.domains.Desaparecido;
 import com.digitalatmosphere.ausys.domains.Division;
 import com.digitalatmosphere.ausys.domains.Especial;
+import com.digitalatmosphere.ausys.domains.Foto;
 import com.digitalatmosphere.ausys.domains.Municipio;
 import com.digitalatmosphere.ausys.domains.Peritaje;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
 import com.digitalatmosphere.ausys.dto.RegistroDTO;
+import com.digitalatmosphere.ausys.dto.fotografiaDTO;
 import com.digitalatmosphere.ausys.services.IDepartamentoService;
 import com.digitalatmosphere.ausys.services.IDesaPeriService;
 import com.digitalatmosphere.ausys.services.IDesaparecidoService;
 import com.digitalatmosphere.ausys.services.IDivisionService;
 import com.digitalatmosphere.ausys.services.IEspecialService;
+import com.digitalatmosphere.ausys.services.IFotoService;
 import com.digitalatmosphere.ausys.services.IMunicipioService;
 import com.digitalatmosphere.ausys.services.IPeritajeService;
 
 @Controller
-public class MainControler {
+public class MainController {
 	
 	@Autowired
 	private IDivisionService divisionS;
@@ -56,6 +65,11 @@ public class MainControler {
 	
 	@Autowired
 	private IEspecialService especialS;
+	
+	@Autowired
+	private IFotoService fotoS;
+	
+	public static String DirectorioArchivos = System.getProperty("user.dir")+ "/src/main/webapp/imagedata";
 	
 	//Listas
 	@ModelAttribute("listaSexo")
@@ -747,7 +761,9 @@ public class MainControler {
 		ModelAndView mav = new ModelAndView();
 		
 		List<RegistroDTO> registro = null;
+		List<fotografiaDTO> fotos = null;
 		try {
+			fotos = fotoS.fotosDesaparecido(id_desaparecido);
 			registro = desaPeriS.verRegistroDesaparecido(id_desaparecido, id_desaperi);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -755,6 +771,7 @@ public class MainControler {
 		if(registro != null && registro.size() !=0 ) {
 			mav.addObject("titulo", "Registro: ".concat(id_desaparecido));
 			mav.addObject("registro", registro);
+			mav.addObject("fotos", fotos);
 			mav.addObject("val", "Desaparecido");
 			mav.setViewName("verRegistro");
 		}else {
@@ -841,6 +858,60 @@ public class MainControler {
 			
 			try {
 				especialS.save(especial);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			mav.setViewName("redirect:/listaDesaparecidos");
+		}
+		return mav;
+	}
+	
+	//AGREGAR FOTOS
+	@RequestMapping("/fotografia/D/{id_registro}/{id_desaperi}")
+	public ModelAndView addFotoDesaparecido(@RequestParam(value="id") String id) {
+		ModelAndView mav = new ModelAndView();
+		Foto foto = new Foto();
+		
+		mav.addObject("titulo", "Ingresar Foto");
+		mav.addObject("foto", foto);
+		mav.addObject("id", id);
+		mav.addObject("val", "Desaparecido");
+		mav.setViewName("ingresarFoto");
+		return mav;
+	}
+	
+	@RequestMapping("/subir/D/{id_registro}")
+	@ResponseBody
+	public ModelAndView subirFoto(@Valid @ModelAttribute Foto foto, BindingResult result, @PathVariable(value="id_registro") String id, @RequestParam(value="img") MultipartFile file) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(result.hasErrors()) {
+			
+			mav.addObject("titulo", "Ingresar Foto");
+			mav.addObject("foto", foto);
+			mav.addObject("id", id);
+			mav.addObject("val", "Desaparecido");
+			mav.setViewName("ingresarFoto");
+		}else {
+			StringBuilder fileName = new StringBuilder();
+			String filename = id.concat(file.getOriginalFilename().substring(file.getOriginalFilename().length()-4));
+			
+			Path fileNameAndPath = Paths.get(DirectorioArchivos, filename);
+			
+			try {
+				Files.write(fileNameAndPath, file.getBytes());
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+			foto.setFoto(filename);
+			
+			Desaparecido desaparecido = new Desaparecido();
+			foto.setId_desaparecido(id);
+			desaparecido = desaparecidoS.findOne(id);
+			foto.setDesaparecido(desaparecido);
+			
+			try {
+				fotoS.save(foto);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
