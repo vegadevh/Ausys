@@ -122,9 +122,36 @@
         </div>
 
         <div class="card">
-            <p>FOTOS</p>
-            <div th:each="foto : ${fotos}">
-                <img th:src="@{${'/imagedata/' + foto.filename}}" width="500" height="500">
+            <div class="card-body">
+                <p>Caracteristicas especiales:</p>
+                <div>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Caracteristica especial</th>
+                                <th scope="col">Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="especial : ${especiales}">
+                                <td th:text="${especial.especial}"></td>
+                                <td th:text="${especial.descripcion}"></td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <p>FOTOS</p>
+                <div th:each="foto : ${fotos}">
+                    <img th:src="@{${'/imagedata/' + foto.filename}}" width="500" height="500">
+                </div>
             </div>
         </div>
 

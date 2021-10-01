@@ -34,6 +34,7 @@ import com.digitalatmosphere.ausys.domains.Foto;
 import com.digitalatmosphere.ausys.domains.Municipio;
 import com.digitalatmosphere.ausys.domains.Peritaje;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
+import com.digitalatmosphere.ausys.dto.EspecialDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
 import com.digitalatmosphere.ausys.dto.RegistroDTO;
 import com.digitalatmosphere.ausys.dto.fotografiaDTO;
@@ -741,7 +742,9 @@ public class MainController {
 		ModelAndView mav = new ModelAndView();
 		
 		List<RegistroDTO> registro = null;
+		List<EspecialDTO> especiales = null;
 		try {
+			especiales = especialS.especialPeritaje(id_peritaje);
 			registro = desaPeriS.verRegistroPeritaje(id_peritaje, id_desaperi);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -749,6 +752,7 @@ public class MainController {
 		if(registro != null && registro.size() !=0 ) {
 			mav.addObject("titulo", "Registro: ".concat(id_peritaje));
 			mav.addObject("registro", registro);
+			mav.addObject("especiales", especiales);
 			
 			mav.addObject("val", "Peritaje");
 			mav.setViewName("verRegistro");
@@ -766,7 +770,9 @@ public class MainController {
 		
 		List<RegistroDTO> registro = null;
 		List<fotografiaDTO> fotos = null;
+		List<EspecialDTO> especiales = null;
 		try {
+			especiales = especialS.especialDesaparecido(id_desaparecido);
 			fotos = fotoS.fotosDesaparecido(id_desaparecido);
 			registro = desaPeriS.verRegistroDesaparecido(id_desaparecido, id_desaperi);
 		}catch (Exception e) {
@@ -776,6 +782,7 @@ public class MainController {
 			mav.addObject("titulo", "Registro: ".concat(id_desaparecido));
 			mav.addObject("registro", registro);
 			mav.addObject("fotos", fotos);
+			mav.addObject("especiales", especiales);
 			mav.addObject("val", "Desaparecido");
 			mav.setViewName("verRegistro");
 		}else {
