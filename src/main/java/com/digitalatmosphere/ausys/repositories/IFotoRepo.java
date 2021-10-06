@@ -15,5 +15,10 @@ public interface IFotoRepo extends JpaRepository<Foto, Integer> {
 			+ "FROM public.fotos INNER JOIN public.desaparecidos ON fotos.id_desaparecido = desaparecidos.id_desaparecido\r\n"
 			+ "WHERE desaparecidos.id_desaparecido = :id ;")
 	public List<Object[]> fotosDesaparecido(String id) throws DataAccessException;
+	
+	@Query(nativeQuery=true, value="SELECT fotos.foto\r\n"
+			+ "FROM public.fotos INNER JOIN public.peritajes ON fotos.id_peritaje = peritajes.id_peritaje\r\n"
+			+ "WHERE peritajes.id_peritaje = :id ;")
+	public List<Object[]> fotosPeritaje(String id) throws DataAccessException;
 
 }

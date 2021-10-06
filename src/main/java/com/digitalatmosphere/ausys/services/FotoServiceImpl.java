@@ -33,4 +33,14 @@ public class FotoServiceImpl implements IFotoService {
 		return fotos;
 	}
 
+	@Override
+	public List<fotografiaDTO> fotosPeritaje(String id) throws DataAccessException {
+		List<fotografiaDTO> fotos = fotoRepo.fotosPeritaje(id).stream().map(obj -> {
+			fotografiaDTO f = new fotografiaDTO();
+			f.setFilename(obj[0].toString());
+			return f;
+		}).collect(Collectors.toList());
+		return fotos;
+	}
+
 }

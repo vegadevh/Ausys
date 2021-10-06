@@ -121,7 +121,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" th:if="${not #lists.isEmpty(especiales)}">
             <div class="card-body">
                 <p>Caracteristicas especiales:</p>
                 <div>
@@ -146,9 +146,9 @@
 
         </div>
 
-        <div class="card">
+        <div class="card" th:if="${not #lists.isEmpty(fotos)}">
             <div class="card-body">
-                <p>FOTOS</p>
+                <p>Fotografías registradas:</p>
                 <div th:each="foto : ${fotos}">
                     <img th:src="@{${'/imagedata/' + foto.filename}}" width="500" height="500">
                 </div>

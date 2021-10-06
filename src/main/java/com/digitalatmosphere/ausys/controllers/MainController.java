@@ -767,13 +767,15 @@ public class MainController {
 	//VER REGISTTRO INDIVIDUAL
 	
 	@RequestMapping("/verRegistro/{id_peritaje}/{id_desaperi}")
-	public ModelAndView verRegistroPeritaje(@RequestParam(value="id_peritaje") String id_peritaje, @RequestParam(value="id_desaperi") String id_desaperi) {
+	public ModelAndView verRegistroPeritaje(@PathVariable(value="id_peritaje") String id_peritaje, @PathVariable(value="id_desaperi") String id_desaperi) {
 		ModelAndView mav = new ModelAndView();
 		
 		List<RegistroDTO> registro = null;
+		List<fotografiaDTO> fotos = null;
 		List<EspecialDTO> especiales = null;
 		try {
 			especiales = especialS.especialPeritaje(id_peritaje);
+			fotos = fotoS.fotosPeritaje(id_peritaje);
 			registro = desaPeriS.verRegistroPeritaje(id_peritaje, id_desaperi);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -782,7 +784,7 @@ public class MainController {
 			mav.addObject("titulo", "Registro: ".concat(id_peritaje));
 			mav.addObject("registro", registro);
 			mav.addObject("especiales", especiales);
-			
+			mav.addObject("fotos", fotos);
 			mav.addObject("val", "Peritaje");
 			mav.setViewName("verRegistro");
 		}else {
@@ -794,7 +796,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("/verRegistroD/{id_desaparecido}/{id_desaperi}")
-	public ModelAndView verRegistroDesaparecido(@RequestParam(value="id_desaparecido") String id_desaparecido, @RequestParam(value="id_desaperi") String id_desaperi) {
+	public ModelAndView verRegistroDesaparecido(@PathVariable(value="id_desaparecido") String id_desaparecido, @PathVariable(value="id_desaperi") String id_desaperi) {
 		ModelAndView mav = new ModelAndView();
 		
 		List<RegistroDTO> registro = null;
@@ -815,7 +817,7 @@ public class MainController {
 			mav.addObject("val", "Desaparecido");
 			mav.setViewName("verRegistro");
 		}else {
-			mav.addObject("titulo", "Lista de Registros");
+			mav.addObject("titulo", "Lista de Desaparecidos");
 			mav.setViewName("listaDesaparecidos");
 		}
 		
@@ -920,6 +922,19 @@ public class MainController {
 		return mav;
 	}
 	
+	@RequestMapping("/fotografia/P/{id_registro}/{id_desaperi}")
+	public ModelAndView addFotoPeritaje(@RequestParam(value="id") String id) {
+		ModelAndView mav = new ModelAndView();
+		Foto foto = new Foto();
+		
+		mav.addObject("titulo", "Ingresar Foto");
+		mav.addObject("foto", foto);
+		mav.addObject("id", id);
+		mav.addObject("val", "Peritaje");
+		mav.setViewName("ingresarFoto");
+		return mav;
+	}
+	
 	@RequestMapping("/subir/D/{id_registro}")
 	@ResponseBody
 	public ModelAndView subirFoto(@Valid @ModelAttribute Foto foto, BindingResult result, @PathVariable(value="id_registro") String id, @RequestParam(value="img") MultipartFile file) {
@@ -971,6 +986,63 @@ public class MainController {
 				mav.addObject("id", id);
 				mav.addObject("alert", alert);
 				mav.addObject("val", "Desaparecido");
+				mav.setViewName("ingresarFoto");
+			}
+		}
+		return mav;
+	}
+	
+	@RequestMapping("/subir/P/{id_registro}")
+	@ResponseBody
+	public ModelAndView subirFotoP(@Valid @ModelAttribute Foto foto, BindingResult result, @PathVariable(value="id_registro") String id, @RequestParam(value="img") MultipartFile file) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(result.hasErrors()) {
+			
+			mav.addObject("titulo", "Ingresar Foto");
+			mav.addObject("foto", foto);
+			String alert = "El campo no puede ser vacio. Ingrese una foto.";
+			mav.addObject("id", id);
+			mav.addObject("alert", alert);
+			mav.addObject("val", "Peritaje");
+			mav.setViewName("ingresarFoto");
+		}else {
+			StringBuilder fileName = new StringBuilder();
+			
+			Date date = Calendar.getInstance().getTime();  
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+			String strDate = dateFormat.format(date);
+			String myDate = strDate.replaceAll(":","");
+			
+			try {
+				String filename = myDate.concat(id.concat(file.getOriginalFilename().substring(file.getOriginalFilename().length()-4)));
+				Path fileNameAndPath = Paths.get(DirectorioArchivos, filename);
+				
+				try {
+					Files.write(fileNameAndPath, file.getBytes());
+				}catch (IOException e) {
+					e.printStackTrace();
+				}
+				foto.setFoto(filename);
+				
+				Peritaje peritaje= new Peritaje();
+				foto.setId_peritaje(id);
+				peritaje = peritajeS.findOne(id);
+				foto.setPeritaje(peritaje);
+				
+				try {
+					fotoS.save(foto);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+				mav.setViewName("redirect:/listaPeritajes");
+			}catch(StringIndexOutOfBoundsException e) {
+				String alert = "El campo no puede ser vacio. Ingrese una foto.";
+				mav.addObject("titulo", "Ingresar Foto");
+				mav.addObject("foto", foto);
+				mav.addObject("id", id);
+				mav.addObject("alert", alert);
+				mav.addObject("val", "Peritaje");
 				mav.setViewName("ingresarFoto");
 			}
 		}

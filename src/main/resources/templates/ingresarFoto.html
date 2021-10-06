@@ -37,6 +37,17 @@
                 <input type="submit" value="Siguiente" class="btn btn-primary">
 
             </form>
+            <form th:if="${val} == 'Peritaje'" th:action="@{/subir/P/} + ${id}" th:object="${foto}" enctype="multipart/form-data" method="POST">
+				<br>
+                
+                <th:block th:replace="components/form-foto :: foto"></th:block>
+                <!-- <input type="text" th:name="id" th:field="*{id_peritaje}"> -->
+                <div th:if="${alert}" th:text="${alert}"
+                    class="alert alert-danger" role="alert"></div>
+                <br>
+                <input type="submit" value="Siguiente" class="btn btn-primary">
+
+            </form>
         </div>
     </div>
 
