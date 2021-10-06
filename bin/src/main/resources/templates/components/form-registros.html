@@ -3,12 +3,7 @@
     <div>
         <textarea type="text" rows="5" cols="50" id="direccion" th:field="*{direccion}"></textarea>
     </div>
-    <br>
-    <label for="tipo_de_caso">Tipo de caso: </label>
-    <input type="text" id="tipo_de_caso" th:field="*{tipo_de_caso}">
-    <div th:if="${#fields.hasErrors('tipo_de_caso')}" th:errors="*{tipo_de_caso}" class="alert alert-danger"
-        role="alert"></div>
-    <br>
+	<br>
     <label for="nombre">Nombre: </label>
     <input type="text" id="nombre" th:field="*{nombre}">
     <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="alert alert-danger" role="alert"></div>
@@ -41,6 +36,6 @@
     <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="alert alert-danger" role="alert">
     </div>
     <br>
-    <input type="text" th:field="*{fecha_registro}">
+    <input type="hidden" th:field="*{fecha_registro}">
 
 </section>

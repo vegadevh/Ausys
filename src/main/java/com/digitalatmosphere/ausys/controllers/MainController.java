@@ -371,7 +371,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("/listaRegistros")
-	public ModelAndView listaRegistros(String keyword, String type, String sexo) {
+	public ModelAndView listaRegistros(String keyword, String type, String sexo, String fechaI, String fechaF) {
 		ModelAndView mav = new ModelAndView();
 		
 		List<DesaPeri> desaPeriL = null;
@@ -384,7 +384,7 @@ public class MainController {
 		}else {
 			sexo = "";
 		}
-		System.out.println("sexo:"+sexo);
+		//System.out.println("sexo:"+sexo);
 		try {
 			if(type != null && !type.equals(newType)) {
 				keyword = keyword.toLowerCase();
@@ -393,12 +393,16 @@ public class MainController {
 			}else if(keyword != null) {
 				keyword = keyword.toLowerCase();
 				desaPeriL = desaPeriS.findByKeyword(keyword,sexo);
+			}else if (!fechaI.equals("") && !fechaF.equals("")){
+				desaPeriL = desaPeriS.findByDateBetweenAndAbove(keyword, newType, sexo, fechaI, fechaF);
 			}else {
 				desaPeriL = desaPeriS.findAll();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		//System.out.println("Fecha inicial: "+ fechaI);
 
 		mav.addObject("titulo", "Lista de registros");
 		mav.addObject("desaPeriL", desaPeriL);

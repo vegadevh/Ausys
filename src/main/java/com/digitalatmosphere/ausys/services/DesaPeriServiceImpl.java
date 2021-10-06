@@ -210,4 +210,10 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	public List<DesaPeri> findByKeywordAndtipe(String keyword, String tipo, String sexo) throws DataAccessException {
 		return desaPeriRepo.findByKeywordAndtipe(keyword.toLowerCase(), tipo, sexo.toLowerCase());
 	}
+
+	@Override
+	public List<DesaPeri> findByDateBetweenAndAbove(String keyword, String type, String sexo, String fechaI,
+			String fechaF) throws DataAccessException {
+		return desaPeriRepo.findByDateBetweendAndAbove(keyword, type, sexo, fechaI, fechaF);
+	}
 }

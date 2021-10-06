@@ -41,4 +41,6 @@ public List<DesaPeri> findALL() throws DataAccessException;
 	public List<DesaPeri> findByKeyword(String keyword, String sexo) throws DataAccessException;
 	
 	public List<DesaPeri> findByKeywordAndtipe(String keyword, String type, String sexo) throws DataAccessException;
+	
+	public List<DesaPeri> findByDateBetweenAndAbove(String keyword, String type, String sexo, String fechaI, String fechaF) throws DataAccessException;
 }
