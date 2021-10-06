@@ -79,7 +79,7 @@ public class ReportController {
 			if(type != null && !type.equals(newType)) {
 				keyword = keyword.toLowerCase();
 				
-				JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(desaPeriS.findByKeywordAndtipe(keyword, newType, sexo));
+				JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(desaPeriS.findByKeywordAndtipe(keyword,type, sexo));
 				JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/findAllFilter.jrxml"));
 				
 				HashMap<String, Object> map = new HashMap<>();
@@ -89,7 +89,6 @@ public class ReportController {
 				
 				headers = new org.springframework.http.HttpHeaders();
 				headers.set(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "inline.filename=elfiltro.pdf");
-				
 				response = ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
 				
 			}else if(keyword != null) {
