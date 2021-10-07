@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.digitalatmosphere.ausys.domains.DesaPeri;
 import com.digitalatmosphere.ausys.dto.CantidadCasosDTO;
+import com.digitalatmosphere.ausys.dto.CasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
 import com.digitalatmosphere.ausys.dto.HombresMujeresRangoFechaDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
@@ -243,12 +244,15 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	}
 
 	@Override
-	public List<CantidadCasosDTO> cantidadCasos() throws DataAccessException {
-		List<CantidadCasosDTO> registro = desaPeriRepo.cantidadCasos().stream().map(obj->{
-			CantidadCasosDTO r = new CantidadCasosDTO();
-			r.setTipo_de_caso(obj[0].toString());
-			r.setCantidad(obj[1].toString());
-			return r;
+	public List<CasosDTO> cantidadPorCasos() throws DataAccessException {
+		List<CasosDTO> registro = desaPeriRepo.cantidadPorCasos().stream().map(obj->{
+			CasosDTO c = new CasosDTO();
+			c.setCaso1(obj[0].toString());
+			c.setCaso2(obj[1].toString());
+			c.setCaso3(obj[2].toString());
+			c.setCaso4(obj[3].toString());
+			c.setCaso5(obj[4].toString());
+			return c;
 		}).collect(Collectors.toList());
 		return registro;
 	}

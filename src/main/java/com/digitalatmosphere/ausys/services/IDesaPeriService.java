@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.digitalatmosphere.ausys.domains.DesaPeri;
 import com.digitalatmosphere.ausys.dto.CantidadCasosDTO;
+import com.digitalatmosphere.ausys.dto.CasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
 import com.digitalatmosphere.ausys.dto.HombresMujeresRangoFechaDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
@@ -48,5 +49,5 @@ public List<DesaPeri> findALL() throws DataAccessException;
 	
 	public List<HombresMujeresRangoFechaDTO> HombresMujeresPorFecha(String inicio, String fin) throws DataAccessException;
 	
-	public List<CantidadCasosDTO> cantidadCasos() throws DataAccessException;
+	public List<CasosDTO> cantidadPorCasos() throws DataAccessException;
 }

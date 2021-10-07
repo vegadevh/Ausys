@@ -35,7 +35,7 @@
 	        <select id="selection" class="form-control">
 	            <option value="0" selected>--- Seleccione una opción ---</option>
 	            <option value="1">Cantidad de hombres y mujeres por rango de tiempo</option>
-	            <option value="2">--</option>
+	            <option value="2">Cantidad de casos por tipo de caso</option>
 	        </select>
 	        <br>
 	        <form th:action="@{/graficar/HombresMujeresRangoFechas}" method="get" id="HombresMujeresRango">
@@ -50,6 +50,9 @@
                 <br>
 		        <input type="submit" value="Graficar" class="btn btn-primary">
 	        </form>
+	        <div id="cantidadPorCasos">
+	        	<a type="button" class="btn btn-primary" th:href="@{/graficar/CantidadPorCasos}">Graficar</a>
+	        </div>
         
         </div>
     </div>
@@ -61,17 +64,17 @@
                 switch (valor) {
                     case "0":
                         $("#HombresMujeresRango").hide();
-                        $("#generarpdf").hide();
+                        $("#cantidadPorCasos").hide();
                         break;
 
                     case "1":
                         $("#HombresMujeresRango").show();
-                        $("#generarpdf").hide();
+                        $("#cantidadPorCasos").hide();
                         break;
 
                     case "2":
                         $("#HombresMujeresRango").hide();
-                        $("#generarpdf").show();
+                        $("#cantidadPorCasos").show();
                         break;
                 }
             }).change();

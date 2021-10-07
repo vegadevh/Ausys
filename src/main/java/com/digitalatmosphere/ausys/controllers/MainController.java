@@ -34,6 +34,7 @@ import com.digitalatmosphere.ausys.domains.Foto;
 import com.digitalatmosphere.ausys.domains.Municipio;
 import com.digitalatmosphere.ausys.domains.Peritaje;
 import com.digitalatmosphere.ausys.dto.CantidadCasosDTO;
+import com.digitalatmosphere.ausys.dto.CasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
 import com.digitalatmosphere.ausys.dto.EspecialDTO;
 import com.digitalatmosphere.ausys.dto.HombresMujeresRangoFechaDTO;
@@ -1086,20 +1087,20 @@ public class MainController {
 		return mav;
 	}
 	
-	@RequestMapping("/graficar/CantidadDeCasos")
-	public ModelAndView graficarCantidadDeCasos() {
+	@RequestMapping("/graficar/CantidadPorCasos")
+	public ModelAndView graficarCantidadPorCasos() {
 		ModelAndView mav = new ModelAndView();
 		
-			List<CantidadCasosDTO> cantidadCasos = null;
+			List<CasosDTO> cantidadPorCasos = null;
 			
 			try {
-				cantidadCasos = desaPeriS.cantidadCasos();
+				cantidadPorCasos = desaPeriS.cantidadPorCasos();
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
 			
 			mav.addObject("titulo", "Gráfico");
-			mav.addObject("cantidadCasos", cantidadCasos);
+			mav.addObject("cantidadPorCasos", cantidadPorCasos);
 			mav.setViewName("charts");
 		
 		return mav;

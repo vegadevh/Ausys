@@ -68,6 +68,12 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 			+ "FROM public.desa_peri WHERE fecha_registro BETWEEN :inicio AND :fin")
 	public List<Object[]> HombresMujeresPorFecha(Date inicio, Date fin) throws DataAccessException;
 	
-	@Query(nativeQuery=true, value="SELECT DISTINCT tipo_de_caso, COUNT(tipo_de_caso) FROM public.desa_peri GROUP BY tipo_de_caso")
-	public List<Object[]> cantidadCasos() throws DataAccessException;
+	@Query(nativeQuery=true, value="SELECT SUM(CASE WHEN tipo_de_caso = 'Análisis toxicólogico' then 1 else 0 end) as caso1,\r\n"
+			+ "SUM(CASE WHEN tipo_de_caso = 'Análisis toxicólogico Medio ambientales' then 1 else 0 end) as caso2,\r\n"
+			+ "SUM(CASE WHEN tipo_de_caso = 'Asistencia a vistas públicas' then 1 else 0 end) as caso3,\r\n"
+			+ "SUM(CASE WHEN tipo_de_caso = 'Examenes odontológicos' then 1 else 0 end) as caso4,\r\n"
+			+ "SUM(CASE WHEN tipo_de_caso = 'Desaparecido' then 1 else 0 end) as caso5\r\n"
+			+ "FROM public.desa_peri")
+	public List<Object[]> cantidadPorCasos() throws DataAccessException;
+	
 }
