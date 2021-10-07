@@ -102,7 +102,7 @@ public class MainController {
 	}
 	@ModelAttribute("listaCasos2")
 	public List<String> listaCasos_2(){
-		return Arrays.asList("Selecciona una opción","Análisis toxicólogico", "Análisis toxicólogico Medio ambientales", 
+		return Arrays.asList("Análisis toxicólogico", "Análisis toxicólogico Medio ambientales", 
 				"Asistencia a vistas públicas", "Examenes odontológicos", "Desaparecido");
 	}
 	//
@@ -1131,7 +1131,11 @@ public class MainController {
 	@RequestMapping("/graficar/HombresMujeresPorCaso")
 	public ModelAndView graficarHombresMujeresPorCaso(@RequestParam(value="type") String type) {
 		ModelAndView mav = new ModelAndView();
-		
+		if(type.equals("col")){
+			mav.addObject("titulo", "Graficar");
+			mav.addObject("alert", "Es necesario completar los campos presentes.");
+			mav.setViewName("selectChart");
+		}else {
 			List<HombresMujeresDTO> HombresMujeres = null;
 			
 			try {
@@ -1143,7 +1147,31 @@ public class MainController {
 			mav.addObject("titulo", "Hombres y mujeres por tipo de caso");
 			mav.addObject("HombresMujeres", HombresMujeres);
 			mav.setViewName("charts");
+		}
 		
+		return mav;
+	}
+	
+	@RequestMapping("/graficar/HombresMujeresPorCasoYRango")
+	public ModelAndView graficarHombresMujeresPorCasoYRango(@RequestParam(value="type") String type, @RequestParam(value="inicio") String inicio, @RequestParam(value="fin") String fin) {
+		ModelAndView mav = new ModelAndView();
+		if(type.equals("col") || inicio == "" || fin == ""){
+			mav.addObject("titulo", "Graficar");
+			mav.addObject("alert", "Es necesario completar los campos presentes.");
+			mav.setViewName("selectChart");
+		}else {
+			List<HombresMujeresDTO> HombresMujeres = null;
+			
+			try {
+				HombresMujeres = desaPeriS.HombresMujeresPorCasoYRango(type, inicio, fin);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			mav.addObject("titulo", "Hombres y mujeres por tipo de caso (Rango de tiempo)");
+			mav.addObject("HombresMujeres", HombresMujeres);
+			mav.setViewName("charts");
+		}
 		
 		return mav;
 	}

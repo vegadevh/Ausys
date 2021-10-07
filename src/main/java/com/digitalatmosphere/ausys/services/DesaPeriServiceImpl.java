@@ -293,4 +293,28 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		}).collect(Collectors.toList());
 		return rangoFechas;
 	}
+
+	@Override
+	public List<HombresMujeresDTO> HombresMujeresPorCasoYRango(String caso, String inicio, String fin)
+			throws DataAccessException {
+		Date date1 = null;
+		Date date2 = null;
+		try {
+			date1 = new SimpleDateFormat("yyyy-MM-dd").parse(inicio);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		try {
+			date2 = new SimpleDateFormat("yyyy-MM-dd").parse(fin);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		List<HombresMujeresDTO> rangoFechas = desaPeriRepo.HombresMujeresPorCasoYRango(caso, date1, date2).stream().map(obj -> {
+			HombresMujeresDTO mh = new HombresMujeresDTO();
+			mh.setMujer(obj[0].toString());
+			mh.setHombre(obj[1].toString());
+			return mh;
+		}).collect(Collectors.toList());
+		return rangoFechas;
+	}
 }

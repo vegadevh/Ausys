@@ -38,6 +38,7 @@
 	            <option value="2">Cantidad de casos por tipo de caso</option>
 	            <option value="3">Cantidad de casos por rango de tiempo</option>
 	            <option value="4">Cantidad de hombres y mujeres por tipo de caso</option>
+	            <option value="5">Cantidad de hombres y mujeres por tipo de caso (Rango de tiempo)</option>
 	        </select>
 	        <br>
 	        
@@ -77,6 +78,29 @@
 	        <form th:action="@{/graficar/HombresMujeresPorCaso}" method="get" id="HombresMujeresPorCaso">
 	        	<label for="tipo_de_caso">Tipo de caso: </label>
 	            <select class="form-control" th:name="type">
+	            	<option th:value="col">Selecciona una opci&oacute;n</option>
+	                <option th:each="caso : ${listaCasos2}" th:value="${caso}" th:text="${caso}">
+	                </option>
+	            </select>
+                <div th:if="${alert}" th:text="${alert}"
+                    class="alert alert-danger" role="alert"></div>
+                <br>
+		        <input type="submit" value="Graficar" class="btn btn-primary">
+	        </form>
+	        
+	        <form th:action="@{/graficar/HombresMujeresPorCasoYRango}" method="get" id="HombresMujeresPorCasoYRango">
+	        	<label>Desde: </label>
+                <input type="text" id="datepicker" th:name="inicio">
+                <br>
+                <label>Hasta: </label>
+                <input type="text" id="datepicker2" th:name="fin">
+                <br>
+                <div th:if="${alert}" th:text="${alert}"
+                    class="alert alert-danger" role="alert"></div>
+                <br>
+	        	<label for="tipo_de_caso">Tipo de caso: </label>
+	            <select class="form-control" th:name="type">
+	            	<option th:value="col">Selecciona una opci&oacute;n</option>
 	                <option th:each="caso : ${listaCasos2}" th:value="${caso}" th:text="${caso}">
 	                </option>
 	            </select>
@@ -99,6 +123,7 @@
                         $("#cantidadPorCasos").hide();
                         $("#CantidadPorCasosRango").hide();
                         $("#HombresMujeresPorCaso").hide();
+                        $("#HombresMujeresPorCasoYRango").hide();
                         break;
 
                     case "1":
@@ -106,6 +131,7 @@
                         $("#cantidadPorCasos").hide();
                         $("#CantidadPorCasosRango").hide();
                         $("#HombresMujeresPorCaso").hide();
+                        $("#HombresMujeresPorCasoYRango").hide();
                         break;
 
                     case "2":
@@ -113,18 +139,28 @@
                         $("#cantidadPorCasos").show();
                         $("#CantidadPorCasosRango").hide();
                         $("#HombresMujeresPorCaso").hide();
+                        $("#HombresMujeresPorCasoYRango").hide();
                         break;
                     case "3":
                         $("#HombresMujeresRango").hide();
                         $("#cantidadPorCasos").hide();
                         $("#CantidadPorCasosRango").show();
                         $("#HombresMujeresPorCaso").hide();
+                        $("#HombresMujeresPorCasoYRango").hide();
                         break;
                     case "4":
                         $("#HombresMujeresRango").hide();
                         $("#cantidadPorCasos").hide();
                         $("#CantidadPorCasosRango").hide();
                         $("#HombresMujeresPorCaso").show();
+                        $("#HombresMujeresPorCasoYRango").hide();
+                        break;
+                    case "5":
+                        $("#HombresMujeresRango").hide();
+                        $("#cantidadPorCasos").hide();
+                        $("#CantidadPorCasosRango").hide();
+                        $("#HombresMujeresPorCaso").hide();
+                        $("#HombresMujeresPorCasoYRango").show();
                         break;
                 }
             }).change();
