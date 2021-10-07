@@ -51,11 +51,12 @@
 				</div>
 				<br>
 				<label>Buscar entre fechas: </label>
+				<br>
 				<label for="fechaI">Fecha de inicial: </label>
 				<input type="text" id="datepicker" name="fechaI">
 				
 				<label for="fechaF">Fecha final: </label>
-				<input type="text" id="datepicker" name="fechaF">
+				<input type="text" id="datepicker2" name="fechaF">
 				<br>
 				<!--
 				<div th:if="${#fields.hasErrors('fecha_nacimiento')}" th:errors="*{fecha_nacimiento}"
@@ -91,6 +92,12 @@
 	<script>
         $(function () {
             $('#datepicker').datepicker({
+                format: 'dd/mm/yyyy'
+            });
+        });
+        
+        $(function () {
+            $('#datepicker2').datepicker({
                 format: 'dd/mm/yyyy'
             });
         });

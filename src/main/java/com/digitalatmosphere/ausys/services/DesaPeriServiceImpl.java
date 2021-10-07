@@ -1,5 +1,8 @@
 package com.digitalatmosphere.ausys.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -214,6 +217,16 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	@Override
 	public List<DesaPeri> findByDateBetweenAndAbove(String keyword, String type, String sexo, String fechaI,
 			String fechaF) throws DataAccessException {
-		return desaPeriRepo.findByDateBetweendAndAbove(keyword, type, sexo, fechaI, fechaF);
+		SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");
+		Date date1 = new java.util.Date(), date2 = new java.util.Date();
+		try {
+			date1 = formatter1.parse(fechaI);
+			date2 = formatter1.parse(fechaF);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(fechaI + " - " + fechaF);
+		return desaPeriRepo.findByDateBetweendAndAbove(keyword, type, sexo, date1, date2);
 	}
 }

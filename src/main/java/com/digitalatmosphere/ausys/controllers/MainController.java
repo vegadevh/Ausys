@@ -384,17 +384,22 @@ public class MainController {
 		}else {
 			sexo = "";
 		}
+		
+		if (fechaI == null && fechaF == null){
+			fechaI = fechaF = "";
+		} 
+		
 		//System.out.println("sexo:"+sexo);
 		try {
-			if(type != null && !type.equals(newType)) {
+			if (!fechaI.equals("") && !fechaF.equals("")){
+				desaPeriL = desaPeriS.findByDateBetweenAndAbove(keyword, newType, sexo, fechaI, fechaF);
+			}else if(type != null && !type.equals(newType)) {
 				keyword = keyword.toLowerCase();
 				desaPeriL = desaPeriS.findByKeywordAndtipe(keyword,type, sexo);
 				
 			}else if(keyword != null) {
 				keyword = keyword.toLowerCase();
 				desaPeriL = desaPeriS.findByKeyword(keyword,sexo);
-			}else if (!fechaI.equals("") && !fechaF.equals("")){
-				desaPeriL = desaPeriS.findByDateBetweenAndAbove(keyword, newType, sexo, fechaI, fechaF);
 			}else {
 				desaPeriL = desaPeriS.findAll();
 			}

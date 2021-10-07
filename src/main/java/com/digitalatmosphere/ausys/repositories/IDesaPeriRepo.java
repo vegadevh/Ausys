@@ -1,5 +1,6 @@
 package com.digitalatmosphere.ausys.repositories;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -60,5 +61,5 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 	public  List<DesaPeri> findByKeywordAndtipe(@Param("keyword") String keyword,@Param("type") String type, String sexo);
 	
 	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%) and (lower(dp.sexo) like %:sexo%) and (dp.tipo_de_caso = :type) and (dp.fecha_registro between :fechaI and :fechaF);", nativeQuery=true)
-	public  List<DesaPeri> findByDateBetweendAndAbove(@Param("keyword") String keyword,@Param("type") String type, String sexo, String fechaI, String fechaF);
+	public  List<DesaPeri> findByDateBetweendAndAbove(@Param("keyword") String keyword,@Param("type") String type, String sexo, Date fechaI, Date fechaF);
 }
