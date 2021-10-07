@@ -33,7 +33,6 @@ import com.digitalatmosphere.ausys.domains.Especial;
 import com.digitalatmosphere.ausys.domains.Foto;
 import com.digitalatmosphere.ausys.domains.Municipio;
 import com.digitalatmosphere.ausys.domains.Peritaje;
-import com.digitalatmosphere.ausys.dto.CantidadCasosDTO;
 import com.digitalatmosphere.ausys.dto.CasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
 import com.digitalatmosphere.ausys.dto.EspecialDTO;
@@ -100,9 +99,15 @@ public class MainController {
 	public List<String> listaMarcas(){
 		return Arrays.asList("Cicatriz", "Desperfectos", "Tatuaje");
 	}
+	@ModelAttribute("listaCasos3")
+	public List<String> listaCasos_3(){
+		return Arrays.asList("Análisis toxicólogico", "Análisis toxicólogico Medio ambientales", 
+				"Asistencia a vistas públicas", "Examenes odontológicos", "Desaparecido");
+	}
+	
 	@ModelAttribute("listaCasos2")
 	public List<String> listaCasos_2(){
-		return Arrays.asList("Análisis toxicólogico", "Análisis toxicólogico Medio ambientales", 
+		return Arrays.asList("Selecciona una opción","Análisis toxicólogico", "Análisis toxicólogico Medio ambientales", 
 				"Asistencia a vistas públicas", "Examenes odontológicos", "Desaparecido");
 	}
 	//

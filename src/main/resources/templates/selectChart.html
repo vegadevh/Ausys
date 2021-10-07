@@ -79,7 +79,7 @@
 	        	<label for="tipo_de_caso">Tipo de caso: </label>
 	            <select class="form-control" th:name="type">
 	            	<option th:value="col">Selecciona una opci&oacute;n</option>
-	                <option th:each="caso : ${listaCasos2}" th:value="${caso}" th:text="${caso}">
+	                <option th:each="caso : ${listaCasos3}" th:value="${caso}" th:text="${caso}">
 	                </option>
 	            </select>
                 <div th:if="${alert}" th:text="${alert}"
@@ -101,7 +101,7 @@
 	        	<label for="tipo_de_caso">Tipo de caso: </label>
 	            <select class="form-control" th:name="type">
 	            	<option th:value="col">Selecciona una opci&oacute;n</option>
-	                <option th:each="caso : ${listaCasos2}" th:value="${caso}" th:text="${caso}">
+	                <option th:each="caso : ${listaCasos3}" th:value="${caso}" th:text="${caso}">
 	                </option>
 	            </select>
                 <div th:if="${alert}" th:text="${alert}"
