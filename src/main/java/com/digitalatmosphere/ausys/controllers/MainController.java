@@ -1078,7 +1078,7 @@ public class MainController {
 				e.printStackTrace();
 			}
 			
-			mav.addObject("titulo", "Gráfico");
+			mav.addObject("titulo", "Hombres y mujeres por rango de fechas");
 			mav.addObject("HombresMujeres", HombresMujeres);
 			mav.setViewName("charts");
 		}
@@ -1098,7 +1098,7 @@ public class MainController {
 				e.printStackTrace();
 			}
 			
-			mav.addObject("titulo", "Gráfico");
+			mav.addObject("titulo", "Casos por tipo de caso");
 			mav.addObject("cantidadPorCasos", cantidadPorCasos);
 			mav.setViewName("charts");
 		
@@ -1121,7 +1121,7 @@ public class MainController {
 				e.printStackTrace();
 			}
 			
-			mav.addObject("titulo", "Gráfico");
+			mav.addObject("titulo", "Cantidad de casos por rango de tiempo");
 			mav.addObject("cantidadPorCasos", cantidadPorCasos);
 			mav.setViewName("charts");
 		}
@@ -1140,7 +1140,7 @@ public class MainController {
 				e.printStackTrace();
 			}
 			
-			mav.addObject("titulo", "Gráfico");
+			mav.addObject("titulo", "Hombres y mujeres por tipo de caso");
 			mav.addObject("HombresMujeres", HombresMujeres);
 			mav.setViewName("charts");
 		
