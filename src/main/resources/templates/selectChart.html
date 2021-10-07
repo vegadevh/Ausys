@@ -37,6 +37,7 @@
 	            <option value="1">Cantidad de hombres y mujeres por rango de tiempo</option>
 	            <option value="2">Cantidad de casos por tipo de caso</option>
 	            <option value="3">Cantidad de casos por rango de tiempo</option>
+	            <option value="4">Cantidad de hombres y mujeres por tipo de caso</option>
 	        </select>
 	        <br>
 	        
@@ -72,6 +73,18 @@
                 <br>
 		        <input type="submit" value="Graficar" class="btn btn-primary">
 	        </form>
+	        
+	        <form th:action="@{/graficar/HombresMujeresPorCaso}" method="get" id="HombresMujeresPorCaso">
+	        	<label for="tipo_de_caso">Tipo de caso: </label>
+	            <select class="form-control" th:name="type">
+	                <option th:each="caso : ${listaCasos2}" th:value="${caso}" th:text="${caso}">
+	                </option>
+	            </select>
+                <div th:if="${alert}" th:text="${alert}"
+                    class="alert alert-danger" role="alert"></div>
+                <br>
+		        <input type="submit" value="Graficar" class="btn btn-primary">
+	        </form>
         
         </div>
     </div>
@@ -85,23 +98,33 @@
                         $("#HombresMujeresRango").hide();
                         $("#cantidadPorCasos").hide();
                         $("#CantidadPorCasosRango").hide();
+                        $("#HombresMujeresPorCaso").hide();
                         break;
 
                     case "1":
                         $("#HombresMujeresRango").show();
                         $("#cantidadPorCasos").hide();
                         $("#CantidadPorCasosRango").hide();
+                        $("#HombresMujeresPorCaso").hide();
                         break;
 
                     case "2":
                         $("#HombresMujeresRango").hide();
                         $("#cantidadPorCasos").show();
                         $("#CantidadPorCasosRango").hide();
+                        $("#HombresMujeresPorCaso").hide();
                         break;
                     case "3":
                         $("#HombresMujeresRango").hide();
                         $("#cantidadPorCasos").hide();
                         $("#CantidadPorCasosRango").show();
+                        $("#HombresMujeresPorCaso").hide();
+                        break;
+                    case "4":
+                        $("#HombresMujeresRango").hide();
+                        $("#cantidadPorCasos").hide();
+                        $("#CantidadPorCasosRango").hide();
+                        $("#HombresMujeresPorCaso").show();
                         break;
                 }
             }).change();

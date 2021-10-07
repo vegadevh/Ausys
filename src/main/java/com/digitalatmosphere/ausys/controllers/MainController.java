@@ -37,7 +37,7 @@ import com.digitalatmosphere.ausys.dto.CantidadCasosDTO;
 import com.digitalatmosphere.ausys.dto.CasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
 import com.digitalatmosphere.ausys.dto.EspecialDTO;
-import com.digitalatmosphere.ausys.dto.HombresMujeresRangoFechaDTO;
+import com.digitalatmosphere.ausys.dto.HombresMujeresDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
 import com.digitalatmosphere.ausys.dto.RegistroDTO;
 import com.digitalatmosphere.ausys.dto.fotografiaDTO;
@@ -1056,7 +1056,7 @@ public class MainController {
 	@RequestMapping("/graficar")
 	public ModelAndView graficar() {
 		ModelAndView mav = new ModelAndView();
-		
+				
 		mav.addObject("titulo", "Graficar");
 		mav.setViewName("selectChart");
 		return mav;
@@ -1070,16 +1070,16 @@ public class MainController {
 			mav.addObject("alert", "Es necesario completar los campos presentes.");
 			mav.setViewName("selectChart");
 		}else {
-			List<HombresMujeresRangoFechaDTO> HombresMujeresRangoFechas = null;
+			List<HombresMujeresDTO> HombresMujeres = null;
 			
 			try {
-				HombresMujeresRangoFechas = desaPeriS.HombresMujeresPorFecha(inicio, fin);
+				HombresMujeres = desaPeriS.HombresMujeresPorFecha(inicio, fin);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
 			
 			mav.addObject("titulo", "Gráfico");
-			mav.addObject("HombresMujeresRangoFechas", HombresMujeresRangoFechas);
+			mav.addObject("HombresMujeres", HombresMujeres);
 			mav.setViewName("charts");
 		}
 		
@@ -1125,6 +1125,26 @@ public class MainController {
 			mav.addObject("cantidadPorCasos", cantidadPorCasos);
 			mav.setViewName("charts");
 		}
+		return mav;
+	}
+	
+	@RequestMapping("/graficar/HombresMujeresPorCaso")
+	public ModelAndView graficarHombresMujeresPorCaso(@RequestParam(value="type") String type) {
+		ModelAndView mav = new ModelAndView();
+		
+			List<HombresMujeresDTO> HombresMujeres = null;
+			
+			try {
+				HombresMujeres = desaPeriS.HombresMujeresPorCaso(type);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			mav.addObject("titulo", "Gráfico");
+			mav.addObject("HombresMujeres", HombresMujeres);
+			mav.setViewName("charts");
+		
+		
 		return mav;
 	}
 }

@@ -10,7 +10,7 @@ import com.digitalatmosphere.ausys.domains.DesaPeri;
 import com.digitalatmosphere.ausys.dto.CantidadCasosDTO;
 import com.digitalatmosphere.ausys.dto.CasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
-import com.digitalatmosphere.ausys.dto.HombresMujeresRangoFechaDTO;
+import com.digitalatmosphere.ausys.dto.HombresMujeresDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
 import com.digitalatmosphere.ausys.dto.RegistroDTO;
 
@@ -47,9 +47,11 @@ public List<DesaPeri> findALL() throws DataAccessException;
 	
 	public List<DesaPeri> findByKeywordAndtipe(String keyword, String type, String sexo) throws DataAccessException;
 	
-	public List<HombresMujeresRangoFechaDTO> HombresMujeresPorFecha(String inicio, String fin) throws DataAccessException;
+	public List<HombresMujeresDTO> HombresMujeresPorFecha(String inicio, String fin) throws DataAccessException;
 	
 	public List<CasosDTO> cantidadPorCasos() throws DataAccessException;
 	
 	public List<CasosDTO> cantidadPorCasosRango(String inicio, String fin) throws DataAccessException;
+	
+	public List<HombresMujeresDTO> HombresMujeresPorCaso(String caso) throws DataAccessException;
 }

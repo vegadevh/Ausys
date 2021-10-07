@@ -1,6 +1,6 @@
 package com.digitalatmosphere.ausys.dto;
 
-public class HombresMujeresRangoFechaDTO {
+public class HombresMujeresDTO {
 	
 	private String hombre;
 	private String mujer;

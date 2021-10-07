@@ -18,7 +18,7 @@ import com.digitalatmosphere.ausys.domains.DesaPeri;
 import com.digitalatmosphere.ausys.dto.CantidadCasosDTO;
 import com.digitalatmosphere.ausys.dto.CasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
-import com.digitalatmosphere.ausys.dto.HombresMujeresRangoFechaDTO;
+import com.digitalatmosphere.ausys.dto.HombresMujeresDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
 import com.digitalatmosphere.ausys.dto.RegistroDTO;
 import com.digitalatmosphere.ausys.repositories.IDesaPeriRepo;
@@ -219,7 +219,7 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	}
 
 	@Override
-	public List<HombresMujeresRangoFechaDTO> HombresMujeresPorFecha(String inicio, String fin) throws DataAccessException {
+	public List<HombresMujeresDTO> HombresMujeresPorFecha(String inicio, String fin) throws DataAccessException {
 		Date date1 = null;
 		Date date2 = null;
 		try {
@@ -234,8 +234,8 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		}
 		System.out.println(date1);
 		System.out.println(date2);
-		List<HombresMujeresRangoFechaDTO> rangoFechas = desaPeriRepo.HombresMujeresPorFecha(date1, date2).stream().map(obj -> {
-			HombresMujeresRangoFechaDTO mh = new HombresMujeresRangoFechaDTO();
+		List<HombresMujeresDTO> rangoFechas = desaPeriRepo.HombresMujeresPorFecha(date1, date2).stream().map(obj -> {
+			HombresMujeresDTO mh = new HombresMujeresDTO();
 			mh.setMujer(obj[0].toString());
 			mh.setHombre(obj[1].toString());
 			return mh;
@@ -281,5 +281,16 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 			return c;
 		}).collect(Collectors.toList());
 		return registro;
+	}
+
+	@Override
+	public List<HombresMujeresDTO> HombresMujeresPorCaso(String caso) throws DataAccessException {
+		List<HombresMujeresDTO> rangoFechas = desaPeriRepo.HombresMujeresPorCaso(caso).stream().map(obj -> {
+			HombresMujeresDTO mh = new HombresMujeresDTO();
+			mh.setMujer(obj[0].toString());
+			mh.setHombre(obj[1].toString());
+			return mh;
+		}).collect(Collectors.toList());
+		return rangoFechas;
 	}
 }

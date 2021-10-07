@@ -85,4 +85,9 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 			+ "WHERE fecha_registro BETWEEN :inicio AND :fin")
 	public List<Object[]> cantidadPorCasosRango(Date inicio, Date fin) throws DataAccessException;
 	
+	@Query(nativeQuery=true, value="SELECT SUM(CASE WHEN sexo = 'Mujer' then 1 else 0 end) as mujer,\r\n"
+			+ "SUM(CASE WHEN sexo = 'Hombre' then 1 else 0 end) as hombre\r\n"
+			+ "FROM public.desa_peri WHERE tipo_de_caso = :caso")
+	public List<Object[]> HombresMujeresPorCaso(String caso) throws DataAccessException;
+	
 }

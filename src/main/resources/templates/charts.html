@@ -28,7 +28,7 @@
         <h1 th:text="${titulo}"></h1>
         <br>
         <!-- Sexos por rango de fechas -->
-        <div th:if="${HombresMujeresRangoFechas}">
+        <div th:if="${HombresMujeres}">
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each=" hm: ${HombresMujeresRangoFechas}">
+                    <tr th:each=" hm: ${HombresMujeres}">
                         <td id='mujer' th:text="${hm.mujer}"></td>
                         <td id='hombre' th:text="${hm.hombre}"></td>
 
@@ -85,7 +85,7 @@
 
     </div>
 
-    <script th:src="@{/charts-HombresMujeresRangoFechas.js}"></script>
+    <script th:src="@{/charts-HombresMujeres.js}"></script>
     <script th:src="@{/charts-CantidadPorCasos.js}"></script>
 </body>
 
