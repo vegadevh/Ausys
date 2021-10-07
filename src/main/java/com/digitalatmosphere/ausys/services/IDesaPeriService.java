@@ -1,11 +1,15 @@
 package com.digitalatmosphere.ausys.services;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
 import com.digitalatmosphere.ausys.domains.DesaPeri;
+import com.digitalatmosphere.ausys.dto.CantidadCasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
+import com.digitalatmosphere.ausys.dto.HombresMujeresRangoFechaDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
 import com.digitalatmosphere.ausys.dto.RegistroDTO;
 
@@ -41,4 +45,8 @@ public List<DesaPeri> findALL() throws DataAccessException;
 	public List<DesaPeri> findByKeyword(String keyword, String sexo) throws DataAccessException;
 	
 	public List<DesaPeri> findByKeywordAndtipe(String keyword, String type, String sexo) throws DataAccessException;
+	
+	public List<HombresMujeresRangoFechaDTO> HombresMujeresPorFecha(String inicio, String fin) throws DataAccessException;
+	
+	public List<CantidadCasosDTO> cantidadCasos() throws DataAccessException;
 }

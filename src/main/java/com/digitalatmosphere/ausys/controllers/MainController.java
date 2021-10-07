@@ -33,8 +33,10 @@ import com.digitalatmosphere.ausys.domains.Especial;
 import com.digitalatmosphere.ausys.domains.Foto;
 import com.digitalatmosphere.ausys.domains.Municipio;
 import com.digitalatmosphere.ausys.domains.Peritaje;
+import com.digitalatmosphere.ausys.dto.CantidadCasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
 import com.digitalatmosphere.ausys.dto.EspecialDTO;
+import com.digitalatmosphere.ausys.dto.HombresMujeresRangoFechaDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
 import com.digitalatmosphere.ausys.dto.RegistroDTO;
 import com.digitalatmosphere.ausys.dto.fotografiaDTO;
@@ -1046,6 +1048,60 @@ public class MainController {
 				mav.setViewName("ingresarFoto");
 			}
 		}
+		return mav;
+	}
+	
+	//Charts
+	@RequestMapping("/graficar")
+	public ModelAndView graficar() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("titulo", "Graficar");
+		mav.setViewName("selectChart");
+		return mav;
+	}
+	
+	@RequestMapping("/graficar/HombresMujeresRangoFechas")
+	public ModelAndView graficarHombresMujeresRangoFechas(@RequestParam(value="inicio") String inicio, @RequestParam(value="fin") String fin) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(inicio.concat("ALV"));
+		if(inicio == "" || fin == ""){
+			mav.addObject("titulo", "Graficar");
+			mav.addObject("alert", "Es necesario completar los campos presentes.");
+			mav.setViewName("selectChart");
+		}else {
+			List<HombresMujeresRangoFechaDTO> HombresMujeresRangoFechas = null;
+			
+			try {
+				HombresMujeresRangoFechas = desaPeriS.HombresMujeresPorFecha(inicio, fin);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			mav.addObject("titulo", "Gráfico");
+			mav.addObject("HombresMujeresRangoFechas", HombresMujeresRangoFechas);
+			mav.setViewName("charts");
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping("/graficar/CantidadDeCasos")
+	public ModelAndView graficarCantidadDeCasos() {
+		ModelAndView mav = new ModelAndView();
+		
+			List<CantidadCasosDTO> cantidadCasos = null;
+			
+			try {
+				cantidadCasos = desaPeriS.cantidadCasos();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			mav.addObject("titulo", "Gráfico");
+			mav.addObject("cantidadCasos", cantidadCasos);
+			mav.setViewName("charts");
+		
 		return mav;
 	}
 }

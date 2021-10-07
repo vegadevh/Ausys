@@ -1,6 +1,8 @@
 package com.digitalatmosphere.ausys.repositories;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -53,9 +55,19 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 			+ "WHERE desaparecidos.id_desaparecido = :id_desaparecido AND desa_peri.id_desaperi = :id_desaperi ;")
 	public List<Object[]> verRegistroDesaparecido(String id_desaparecido, Integer id_desaperi) throws DataAccessException;
 	
+	//FILTROS
 	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%) and lower(dp.sexo) like %:sexo%", nativeQuery=true)
 	public  List<DesaPeri> findByKeyword(@Param("keyword") String keyword,  String sexo);
 	
 	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%) and ( lower(dp.sexo) like %:sexo%) and (dp.tipo_de_caso = :type) ;", nativeQuery=true)
 	public  List<DesaPeri> findByKeywordAndtipe(@Param("keyword") String keyword,@Param("type") String type, String sexo);
+	
+	//CHARTS
+	@Query(nativeQuery=true, value="SELECT SUM(CASE WHEN sexo = 'Mujer' then 1 else 0 end) as mujer,\r\n"
+			+ "SUM(CASE WHEN sexo = 'Hombre' then 1 else 0 end) as hombre\r\n"
+			+ "FROM public.desa_peri WHERE fecha_registro BETWEEN :inicio AND :fin")
+	public List<Object[]> HombresMujeresPorFecha(Date inicio, Date fin) throws DataAccessException;
+	
+	@Query(nativeQuery=true, value="SELECT DISTINCT tipo_de_caso, COUNT(tipo_de_caso) FROM public.desa_peri GROUP BY tipo_de_caso")
+	public List<Object[]> cantidadCasos() throws DataAccessException;
 }

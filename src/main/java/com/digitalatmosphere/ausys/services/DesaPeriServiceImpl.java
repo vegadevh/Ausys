@@ -1,6 +1,10 @@
 package com.digitalatmosphere.ausys.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -11,7 +15,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.digitalatmosphere.ausys.domains.DesaPeri;
+import com.digitalatmosphere.ausys.dto.CantidadCasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
+import com.digitalatmosphere.ausys.dto.HombresMujeresRangoFechaDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
 import com.digitalatmosphere.ausys.dto.RegistroDTO;
 import com.digitalatmosphere.ausys.repositories.IDesaPeriRepo;
@@ -209,5 +215,41 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	@Override
 	public List<DesaPeri> findByKeywordAndtipe(String keyword, String tipo, String sexo) throws DataAccessException {
 		return desaPeriRepo.findByKeywordAndtipe(keyword.toLowerCase(), tipo, sexo.toLowerCase());
+	}
+
+	@Override
+	public List<HombresMujeresRangoFechaDTO> HombresMujeresPorFecha(String inicio, String fin) throws DataAccessException {
+		Date date1 = null;
+		Date date2 = null;
+		try {
+			date1 = new SimpleDateFormat("yyyy-MM-dd").parse(inicio);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		try {
+			date2 = new SimpleDateFormat("yyyy-MM-dd").parse(fin);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println(date1);
+		System.out.println(date2);
+		List<HombresMujeresRangoFechaDTO> rangoFechas = desaPeriRepo.HombresMujeresPorFecha(date1, date2).stream().map(obj -> {
+			HombresMujeresRangoFechaDTO mh = new HombresMujeresRangoFechaDTO();
+			mh.setMujer(obj[0].toString());
+			mh.setHombre(obj[1].toString());
+			return mh;
+		}).collect(Collectors.toList());
+		return rangoFechas;
+	}
+
+	@Override
+	public List<CantidadCasosDTO> cantidadCasos() throws DataAccessException {
+		List<CantidadCasosDTO> registro = desaPeriRepo.cantidadCasos().stream().map(obj->{
+			CantidadCasosDTO r = new CantidadCasosDTO();
+			r.setTipo_de_caso(obj[0].toString());
+			r.setCantidad(obj[1].toString());
+			return r;
+		}).collect(Collectors.toList());
+		return registro;
 	}
 }
