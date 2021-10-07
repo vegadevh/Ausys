@@ -50,4 +50,6 @@ public List<DesaPeri> findALL() throws DataAccessException;
 	public List<HombresMujeresRangoFechaDTO> HombresMujeresPorFecha(String inicio, String fin) throws DataAccessException;
 	
 	public List<CasosDTO> cantidadPorCasos() throws DataAccessException;
+	
+	public List<CasosDTO> cantidadPorCasosRango(String inicio, String fin) throws DataAccessException;
 }

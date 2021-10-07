@@ -1065,7 +1065,6 @@ public class MainController {
 	@RequestMapping("/graficar/HombresMujeresRangoFechas")
 	public ModelAndView graficarHombresMujeresRangoFechas(@RequestParam(value="inicio") String inicio, @RequestParam(value="fin") String fin) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(inicio.concat("ALV"));
 		if(inicio == "" || fin == ""){
 			mav.addObject("titulo", "Graficar");
 			mav.addObject("alert", "Es necesario completar los campos presentes.");
@@ -1103,6 +1102,29 @@ public class MainController {
 			mav.addObject("cantidadPorCasos", cantidadPorCasos);
 			mav.setViewName("charts");
 		
+		return mav;
+	}
+	
+	@RequestMapping("/graficar/CantidadPorCasosRango")
+	public ModelAndView graficarCantidadPorCasosRango(@RequestParam(value="inicio") String inicio, @RequestParam(value="fin") String fin) {
+		ModelAndView mav = new ModelAndView();
+		if(inicio == "" || fin == ""){
+			mav.addObject("titulo", "Graficar");
+			mav.addObject("alert", "Es necesario completar los campos presentes.");
+			mav.setViewName("selectChart");
+		}else {
+			List<CasosDTO> cantidadPorCasos = null;
+			
+			try {
+				cantidadPorCasos = desaPeriS.cantidadPorCasosRango(inicio, fin);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			mav.addObject("titulo", "Gráfico");
+			mav.addObject("cantidadPorCasos", cantidadPorCasos);
+			mav.setViewName("charts");
+		}
 		return mav;
 	}
 }
