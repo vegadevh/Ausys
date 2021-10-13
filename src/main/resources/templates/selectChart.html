@@ -22,11 +22,12 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" th:href="@{/styles.css}">
     <title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
 <body>
-
+    <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <br>

@@ -18,11 +18,12 @@
         integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/99b5aa301b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/styles.css}">
     <title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
 <body>
-
+    <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <br>
@@ -46,7 +47,7 @@
                     <td th:text="${desaPeri.fecha_registro}"></td>
                     <td>
                         <div class="d-flex">
-                        	<form class="p-1"
+                            <form class="p-1"
                                 th:action="@{/verRegistroD/} + ${desaPeri.id_desaparecido} + '/' + ${desaPeri.id_desaperi}"
                                 method="GET">
                                 <input th:name="id_desaparecido" type="hidden" th:value=${desaPeri.id_desaparecido}>
@@ -60,7 +61,9 @@
                                 <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
                                 <input type="submit" class="btn btn-success" value="Editar">
                             </form>
-                            <form class="p-1" th:action="@{/eliminar/desaparecido/} + ${desaPeri.id_desaparecido} + '/' + ${desaPeri.id_desaperi}" method="GET">
+                            <form class="p-1"
+                                th:action="@{/eliminar/desaparecido/} + ${desaPeri.id_desaparecido} + '/' + ${desaPeri.id_desaperi}"
+                                method="GET">
                                 <input th:name="id_desaparecido" type="hidden" th:value=${desaPeri.id_desaparecido}>
                                 <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
                                 <input type="submit" class="btn btn-danger" value="Eliminar"

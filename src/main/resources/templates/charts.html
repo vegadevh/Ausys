@@ -19,11 +19,12 @@
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/99b5aa301b.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" th:href="@{/styles.css}">
     <title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
 <body>
-
+    <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
         <p style="display: none;" id="titulo" th:text="${titulo}"></p>
         <br>

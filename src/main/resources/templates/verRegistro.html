@@ -18,12 +18,12 @@
         integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/99b5aa301b.js" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" th:href="@{/styles.css}">
     <title th:text="'Ausys'"></title>
 </head>
 
 <body>
-
+    <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
         <div class="card">
             <div th:each="registro: ${registro}" class="card-body">
@@ -136,7 +136,7 @@
                             <tr th:each="especial : ${especiales}">
                                 <td th:text="${especial.especial}"></td>
                                 <td th:text="${especial.descripcion}"></td>
-                                
+
                             </tr>
                         </tbody>
                     </table>
