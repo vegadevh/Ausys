@@ -1180,4 +1180,23 @@ public class MainController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/graficar/CantidadPorCasosSexo")
+	public ModelAndView graficarCantidadPorCasosSexo(@RequestParam(value="sexo") String sexo) {
+		ModelAndView mav = new ModelAndView();
+		
+			List<CasosDTO> cantidadPorCasos = null;
+			
+			try {
+				cantidadPorCasos = desaPeriS.cantidadPorCasosSexo(sexo);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			mav.addObject("titulo", "Casos por tipo de caso - ".concat(sexo));
+			mav.addObject("cantidadPorCasos", cantidadPorCasos);
+			mav.setViewName("charts");
+		
+		return mav;
+	}
 }
