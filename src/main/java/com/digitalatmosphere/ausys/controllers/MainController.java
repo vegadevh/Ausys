@@ -391,12 +391,11 @@ public class MainController {
 		
 		//System.out.println("sexo:"+sexo);
 		try {
-			if (!fechaI.equals("") && !fechaF.equals("")){
+			if (!fechaI.equals("") || !fechaF.equals("") ){
 				desaPeriL = desaPeriS.findByDateBetweenAndAbove(keyword, newType, sexo, fechaI, fechaF);
 			}else if(type != null && !type.equals(newType)) {
 				keyword = keyword.toLowerCase();
 				desaPeriL = desaPeriS.findByKeywordAndtipe(keyword,type, sexo);
-				
 			}else if(keyword != null) {
 				keyword = keyword.toLowerCase();
 				desaPeriL = desaPeriS.findByKeyword(keyword,sexo);
