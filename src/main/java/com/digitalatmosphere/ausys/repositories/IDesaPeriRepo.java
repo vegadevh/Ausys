@@ -114,5 +114,5 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower( dp.apellido ) like %:keyword% ) "
 			+ "and (lower( dp.sexo ) like %:sexo% ) AND (dp.tipo_de_caso LIKE %:type% ) "
 			+ "and (dp.fecha_registro between :fechaI and :fechaF );", nativeQuery=true)
-	public  List<DesaPeri> findByDateBetweendAndAbove(@Param("keyword") String keyword,@Param("type") String type, String sexo, Date fechaI, Date fechaF);
+	public  List<DesaPeri> findByDateBetweenAndAbove(@Param("keyword") String keyword,@Param("type") String type, String sexo, Date fechaI, Date fechaF);
 }

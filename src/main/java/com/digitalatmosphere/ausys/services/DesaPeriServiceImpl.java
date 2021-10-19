@@ -233,7 +233,7 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		}
 		System.out.println("SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like".concat(keyword).concat("or lower( dp.apellido ) like").concat(keyword).concat(") and (lower( dp.sexo ) like").concat(sexo).concat(") and (dp.tipo_de_caso =").concat(type).concat(") and (dp.fecha_registro between").concat(fechaI).concat("and").concat(fechaF));
 		
-		return desaPeriRepo.findByDateBetweendAndAbove(keyword.toLowerCase(), type, sexo.toLowerCase(), date1, date2);
+		return desaPeriRepo.findByDateBetweenAndAbove(keyword.toLowerCase(), type, sexo.toLowerCase(), date1, date2);
 	}
 	
 	@Override

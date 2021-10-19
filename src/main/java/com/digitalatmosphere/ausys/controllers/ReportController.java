@@ -82,7 +82,6 @@ public class ReportController {
 			if (!fechaI.equals("") && !fechaF.equals("") ){
 				keyword = keyword.toLowerCase();
 				if(type != null && !type.equals(newType)) {
-//					desaPeriL = desaPeriS.findByDateBetweenAndAbove(keyword, type, sexo, fechaI, fechaF);
 					JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(desaPeriS.findByDateBetweenAndAbove(keyword, type, sexo, fechaI, fechaF));
 					JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/findAllFilter.jrxml"));
 					
@@ -135,7 +134,7 @@ public class ReportController {
 				data = JasperExportManager.exportReportToPdf(report);
 				
 				headers = new org.springframework.http.HttpHeaders();
-				headers.set(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "inline.filename=elfiltro.pdf");
+				headers.set(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "inline.filename=find.pdf");
 				response = ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
 				
 			}else {
