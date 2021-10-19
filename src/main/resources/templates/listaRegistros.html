@@ -74,9 +74,81 @@
                     <input type="radio" th:value="${sexo}" name="sexo" th:id="${sexo}">
                     <label th:for="${sexo}" th:text="${sexo}"></label>
                 </div>
+                <br>
+                <label>Buscar entre fechas: </label>
+                <br>
+                <label for="fechaI">Fecha de inicial: </label>
+                <input type="text" id="datepicker" th:name="fechaI">
+
+                <label for="fechaF">Fecha final: </label>
+                <input type="text" id="datepicker2" th:name="fechaF">
+                <br>
                 <input type="submit" value="Generar" class="btn btn-warning">
             </form>
 
+            <!-- <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+		integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+		integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+	<script src="https://kit.fontawesome.com/99b5aa301b.js" crossorigin="anonymous"></script>
+	<title th:text="'Ausys - '+ ${titulo}"></title>
+</head>
+
+<body>
+
+	<div class="container">
+		<h1 th:text="${titulo}"></h1>
+		<br>
+		<div>
+			<form th:action="@{/listaRegistros}" method="get">
+				<label for="filtro">Nombre o apellido: </label>
+				<input type="text" id="filtro" name="keyword">
+				<br>
+				<label for="tipo_de_caso">Tipo de caso: </label>
+				<select class="form-control" id="casoSelect" name="type">
+					<option th:each="caso : ${listaCasos2}" th:id="${tipo_de_caso}" th:value="${caso}"
+						th:text="${caso}">
+					</option>
+				</select>
+				<br>
+				<label>Sexo: </label>
+				<input type="radio" th:value="Ambos" name="sexo" th:id="Ambos" checked>
+				<label th:for="Ambos" th:text="Ambos"></label>
+				<div th:each="sexo : ${listaSexo}">
+					<input type="radio" th:value="${sexo}" name="sexo" th:id="${sexo}">
+					<label th:for="${sexo}" th:text="${sexo}"></label>
+				</div>
+				<br>
+				<label>Buscar entre fechas: </label>
+				<br>
+				<label for="fechaI">Fecha de inicial: </label>
+				<input type="text" id="datepicker" th:name="fechaI">
+				
+				<label for="fechaF">Fecha final: </label>
+				<input type="text" id="datepicker2" th:name="fechaF">
+				<br>
+				<!--
+				<div th:if="${#fields.hasErrors('fecha_nacimiento')}" th:errors="*{fecha_nacimiento}"
+                    class="alert alert-danger" role="alert"></div>
+                <br>
+                -->
+            <!-- <input type="submit" value="Buscar" class="btn btn-primary">
+        </form>  -->
         </div>
         <br>
         <table class="table" id="TablaRegistro">
@@ -122,6 +194,17 @@
                         break;
                 }
             }).change();
+        });
+        $(function () {
+            $('#datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+
+        $(function () {
+            $('#datepicker2').datepicker({
+                format: 'yyyy-mm-dd'
+            });
         });
     </script>
 

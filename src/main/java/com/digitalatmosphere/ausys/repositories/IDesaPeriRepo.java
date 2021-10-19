@@ -65,7 +65,9 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%) and lower(dp.sexo) like %:sexo%", nativeQuery=true)
 	public  List<DesaPeri> findByKeyword(@Param("keyword") String keyword,  String sexo);
 	
-	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%) and ( lower(dp.sexo) like %:sexo%) and (dp.tipo_de_caso = :type) ;", nativeQuery=true)
+	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%) "
+			+ "and ( lower(dp.sexo) like %:sexo%) "
+			+ "and (dp.tipo_de_caso = :type) ;", nativeQuery=true)
 	public  List<DesaPeri> findByKeywordAndtipe(@Param("keyword") String keyword,@Param("type") String type, String sexo);
 	
 	//CHARTS
@@ -109,4 +111,8 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 			+ "FROM public.desa_peri WHERE sexo = :sexo")
 	public List<Object[]> cantidadPorCasosSexo(String sexo) throws DataAccessException;
 	
+	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower( dp.apellido ) like %:keyword% ) "
+			+ "and (lower( dp.sexo ) like %:sexo% ) AND (dp.tipo_de_caso LIKE %:type% ) "
+			+ "and (dp.fecha_registro between :fechaI and :fechaF );", nativeQuery=true)
+	public  List<DesaPeri> findByDateBetweendAndAbove(@Param("keyword") String keyword,@Param("type") String type, String sexo, Date fechaI, Date fechaF);
 }

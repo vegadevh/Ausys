@@ -210,14 +210,32 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 
 	@Override
 	public List<DesaPeri> findByKeyword(String keyword, String sexo) throws DataAccessException {
+		System.out.println("SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like".concat(keyword).concat("or lower( dp.apellido ) like").concat(keyword).concat(") and (lower( dp.sexo ) like").concat(sexo));
 		return desaPeriRepo.findByKeyword(keyword.toLowerCase(), sexo.toLowerCase());
 	}
 	
 	@Override
 	public List<DesaPeri> findByKeywordAndtipe(String keyword, String tipo, String sexo) throws DataAccessException {
+		System.out.println("SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like".concat(keyword).concat("or lower( dp.apellido ) like").concat(keyword).concat(") and (lower( dp.sexo ) like").concat(sexo).concat(") and (dp.tipo_de_caso =").concat(tipo));
 		return desaPeriRepo.findByKeywordAndtipe(keyword.toLowerCase(), tipo, sexo.toLowerCase());
 	}
 
+	@Override
+	public List<DesaPeri> findByDateBetweenAndAbove(String keyword, String type, String sexo, String fechaI,
+			String fechaF) throws DataAccessException {
+		Date date1 = null;
+		Date date2 = null;
+		try {
+			date1 = new SimpleDateFormat("yyyy-MM-dd").parse(fechaI);
+			date2 = new SimpleDateFormat("yyyy-MM-dd").parse(fechaF);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println("SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like".concat(keyword).concat("or lower( dp.apellido ) like").concat(keyword).concat(") and (lower( dp.sexo ) like").concat(sexo).concat(") and (dp.tipo_de_caso =").concat(type).concat(") and (dp.fecha_registro between").concat(fechaI).concat("and").concat(fechaF));
+		
+		return desaPeriRepo.findByDateBetweendAndAbove(keyword.toLowerCase(), type, sexo.toLowerCase(), date1, date2);
+	}
+	
 	@Override
 	public List<HombresMujeresDTO> HombresMujeresPorFecha(String inicio, String fin) throws DataAccessException {
 		Date date1 = null;
