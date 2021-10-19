@@ -409,7 +409,7 @@ public class MainController {
 				}
 			}else if(type != null && !type.equals(newType)) {
 				keyword = keyword.toLowerCase();
-				desaPeriL = desaPeriS.findByKeywordAndtipe(keyword,"", sexo);
+				desaPeriL = desaPeriS.findByKeywordAndtipe(keyword,type, sexo);
 			}else if(keyword != null) {
 				keyword = keyword.toLowerCase();
 				desaPeriL = desaPeriS.findByKeyword(keyword,sexo);
