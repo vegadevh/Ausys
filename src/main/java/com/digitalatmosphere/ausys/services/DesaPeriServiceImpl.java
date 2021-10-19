@@ -331,4 +331,19 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		}).collect(Collectors.toList());
 		return registro;
 	}
+
+	@Override
+	public List<DesaparecidoDTO> PeritajesXDesaparecidos(String nombre, String apellido) throws DataAccessException {
+		List<DesaparecidoDTO> relacion = desaPeriRepo.PeritajesXDesaparecidos(nombre, apellido).stream().map(obj -> {
+			DesaparecidoDTO d = new DesaparecidoDTO();
+			d.setId_desaparecido(obj[0].toString());
+			d.setTipo_de_caso(obj[1].toString());
+			d.setNombre(obj[2].toString());
+			d.setApellido(obj[3].toString());
+			d.setFecha_registro(obj[4].toString());
+			d.setId_desaperi(obj[5].toString());
+			return d;
+		}).collect(Collectors.toList());
+		return relacion;
+	}
 }

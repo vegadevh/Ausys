@@ -775,21 +775,25 @@ public class MainController {
 	//VER REGISTTRO INDIVIDUAL
 	
 	@RequestMapping("/verRegistro/{id_peritaje}/{id_desaperi}")
-	public ModelAndView verRegistroPeritaje(@PathVariable(value="id_peritaje") String id_peritaje, @PathVariable(value="id_desaperi") String id_desaperi) {
+	public ModelAndView verRegistroPeritaje(@PathVariable(value="id_peritaje") String id_peritaje, @PathVariable(value="id_desaperi") String id_desaperi, @RequestParam(value="peritajeName") String peritajeName, @RequestParam(value="peritajeLastname") String peritajeLastname) {
 		ModelAndView mav = new ModelAndView();
 		
 		List<RegistroDTO> registro = null;
 		List<fotografiaDTO> fotos = null;
 		List<EspecialDTO> especiales = null;
+		List<DesaparecidoDTO> relacion = null;
 		try {
 			especiales = especialS.especialPeritaje(id_peritaje);
 			fotos = fotoS.fotosPeritaje(id_peritaje);
 			registro = desaPeriS.verRegistroPeritaje(id_peritaje, id_desaperi);
+			relacion = desaPeriS.PeritajesXDesaparecidos(peritajeName, peritajeLastname);
+			System.out.println(registro);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		if(registro != null && registro.size() !=0 ) {
 			mav.addObject("titulo", "Registro: ".concat(id_peritaje));
+			mav.addObject("relacion", relacion);
 			mav.addObject("registro", registro);
 			mav.addObject("especiales", especiales);
 			mav.addObject("fotos", fotos);

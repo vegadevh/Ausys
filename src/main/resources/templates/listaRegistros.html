@@ -28,53 +28,55 @@
         <h1 th:text="${titulo}"></h1>
         <br>
         <div>
-        	<label>Buscar registro por: </label>
-	        <select id="selection" class="form-control">
-	            <option value="0" selected>--- Seleccione una opción ---</option>
-	            <option value="1">Generar busqueda mediante filtro</option>
-	            <option value="2">Generar PDF en base a filtro</option>
-	        </select>
-	        <br>
-	        <form th:action="@{/listaRegistros}" method="get" id="filtrar">
-	        	<label for="filtro">Nombre o apellido: </label>
-		        <input type="text" id="filtro" name="keyword">
-		        <br>
-		        <label for="tipo_de_caso">Tipo de caso: </label>
-	            <select class="form-control" id="casoSelect" name="type">
-	                <option th:each="caso : ${listaCasos2}" th:id="${tipo_de_caso}" th:value="${caso}" th:text="${caso}">
-	                </option>
-	            </select>
-	            <br>
-	             <label>Sexo: </label>
-	             <input type="radio" th:value="Ambos" name="sexo" th:id="Ambos" checked>
-			     <label th:for="Ambos" th:text="Ambos"></label> 
-			    <div th:each="sexo : ${listaSexo}">
-			        <input type="radio" th:value="${sexo}" name="sexo" th:id="${sexo}">
-			        <label th:for="${sexo}" th:text="${sexo}"></label> 
-			    </div>
-		        <input type="submit" value="Buscar" class="btn btn-primary">
-	        </form>
-	        
-	        <form th:action="@{/pdf/filtro}" method="get" id="generarpdf">
-	        	<label for="filtro">Nombre o apellido: </label>
-		        <input type="text" id="filtro" name="keyword">
-		        <br>
-		        <label for="tipo_de_caso">Tipo de caso: </label>
-	            <select class="form-control" id="casoSelect" name="type">
-	                <option th:each="caso : ${listaCasos2}" th:id="${tipo_de_caso}" th:value="${caso}" th:text="${caso}">
-	                </option>
-	            </select>
-	            <br>
-	             <label>Sexo: </label>
-	             <input type="radio" th:value="Ambos" name="sexo" th:id="Ambos" checked>
-			     <label th:for="Ambos" th:text="Ambos"></label> 
-			    <div th:each="sexo : ${listaSexo}">
-			        <input type="radio" th:value="${sexo}" name="sexo" th:id="${sexo}">
-			        <label th:for="${sexo}" th:text="${sexo}"></label> 
-			    </div>
-		        <input type="submit" value="Generar" class="btn btn-warning">
-	        </form>
-        
+            <label>Buscar registro por: </label>
+            <select id="selection" class="form-control">
+                <option value="0" selected>--- Seleccione una opción ---</option>
+                <option value="1">Generar busqueda mediante filtro</option>
+                <option value="2">Generar PDF en base a filtro</option>
+            </select>
+            <br>
+            <form th:action="@{/listaRegistros}" method="get" id="filtrar">
+                <label for="filtro">Nombre o apellido: </label>
+                <input type="text" id="filtro" name="keyword">
+                <br>
+                <label for="tipo_de_caso">Tipo de caso: </label>
+                <select class="form-control" id="casoSelect" name="type">
+                    <option th:each="caso : ${listaCasos2}" th:id="${tipo_de_caso}" th:value="${caso}"
+                        th:text="${caso}">
+                    </option>
+                </select>
+                <br>
+                <label>Sexo: </label>
+                <input type="radio" th:value="Ambos" name="sexo" th:id="Ambos" checked>
+                <label th:for="Ambos" th:text="Ambos"></label>
+                <div th:each="sexo : ${listaSexo}">
+                    <input type="radio" th:value="${sexo}" name="sexo" th:id="${sexo}">
+                    <label th:for="${sexo}" th:text="${sexo}"></label>
+                </div>
+                <input type="submit" value="Buscar" class="btn btn-primary">
+            </form>
+
+            <form th:action="@{/pdf/filtro}" method="get" id="generarpdf">
+                <label for="filtro">Nombre o apellido: </label>
+                <input type="text" id="filtro" name="keyword">
+                <br>
+                <label for="tipo_de_caso">Tipo de caso: </label>
+                <select class="form-control" id="casoSelect" name="type">
+                    <option th:each="caso : ${listaCasos2}" th:id="${tipo_de_caso}" th:value="${caso}"
+                        th:text="${caso}">
+                    </option>
+                </select>
+                <br>
+                <label>Sexo: </label>
+                <input type="radio" th:value="Ambos" name="sexo" th:id="Ambos" checked>
+                <label th:for="Ambos" th:text="Ambos"></label>
+                <div th:each="sexo : ${listaSexo}">
+                    <input type="radio" th:value="${sexo}" name="sexo" th:id="${sexo}">
+                    <label th:for="${sexo}" th:text="${sexo}"></label>
+                </div>
+                <input type="submit" value="Generar" class="btn btn-warning">
+            </form>
+
         </div>
         <br>
         <table class="table" id="TablaRegistro">
@@ -98,7 +100,7 @@
             </tbody>
         </table>
     </div>
-    
+
     <script>
         $(function () {
             $("#selection").on('change', function () {
@@ -122,7 +124,7 @@
             }).change();
         });
     </script>
-	
+
 </body>
 
 </html>

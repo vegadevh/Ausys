@@ -55,6 +55,12 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 			+ "WHERE desaparecidos.id_desaparecido = :id_desaparecido AND desa_peri.id_desaperi = :id_desaperi ;")
 	public List<Object[]> verRegistroDesaparecido(String id_desaparecido, Integer id_desaperi) throws DataAccessException;
 	
+	@Query(nativeQuery=true, value="SELECT desaparecidos.id_desaparecido, desa_peri.tipo_de_caso, desa_peri.nombre, desa_peri.apellido, desa_peri.fecha_registro, desa_peri.id_desaperi\r\n"
+			+ "FROM public.desaparecidos \r\n"
+			+ "INNER JOIN public.desa_peri ON desaparecidos.id_desaparecido = desa_peri.id_desaparecido\r\n"
+			+ "WHERE desa_peri.nombre LIKE %:nombre% OR desa_peri.apellido LIKE %:apellido% ")
+	public List<Object[]> PeritajesXDesaparecidos(String nombre, String apellido) throws DataAccessException;
+	
 	//FILTROS
 	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%) and lower(dp.sexo) like %:sexo%", nativeQuery=true)
 	public  List<DesaPeri> findByKeyword(@Param("keyword") String keyword,  String sexo);

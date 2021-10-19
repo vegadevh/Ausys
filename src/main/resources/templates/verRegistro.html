@@ -121,6 +121,37 @@
             </div>
         </div>
 
+        <div class="card" th:if="${not #lists.isEmpty(relacion)}">
+            <div th:each="relacion: ${relacion}" class="card-body">
+
+                <div th:if="${relacion.id_desaparecido}">
+                    <b class="d-inline">Persona identificada: </b>
+                    <p class="d-inline" th:text="${relacion.id_desaparecido}"></p>
+                </div>
+                <div th:if="${relacion.tipo_de_caso}">
+                    <b class="d-inline">Fecha de nacimiento: </b>
+                    <p class="d-inline" th:text="${relacion.tipo_de_caso}"></p>
+                </div>
+                <div th:if="${relacion.nombre}">
+                    <b class="d-inline">Nombre de familiar: </b>
+                    <p class="d-inline" th:text="${relacion.nombre}"></p>
+                </div>
+                <div th:if="${relacion.apellido}">
+                    <b class="d-inline">Contacto del familiar: </b>
+                    <p class="d-inline" th:text="${relacion.apellido}"></p>
+                </div>
+                <div th:if="${relacion.fecha_registro}">
+                    <b class="d-inline">Edad estimada: </b>
+                    <p class="d-inline" th:text="${relacion.fecha_registro}"></p>
+                </div>
+                <div th:if="${relacion.id_desaperi}">
+                    <b class="d-inline">Edad estimada: </b>
+                    <p class="d-inline" th:text="${relacion.id_desaperi}"></p>
+                </div>
+
+            </div>
+        </div>
+
         <div class="card" th:if="${not #lists.isEmpty(especiales)}">
             <div class="card-body">
                 <p>Caracteristicas especiales:</p>
