@@ -53,6 +53,15 @@
                     <input type="radio" th:value="${sexo}" name="sexo" th:id="${sexo}">
                     <label th:for="${sexo}" th:text="${sexo}"></label>
                 </div>
+                <br>
+                <label>Buscar entre fechas: </label>
+                <br>
+                <label for="fechaI">Fecha de inicial: </label>
+                <input type="text" id="datepicker" th:name="fechaI">
+
+                <label for="fechaF">Fecha final: </label>
+                <input type="text" id="datepicker2" th:name="fechaF">
+                <br>
                 <input type="submit" value="Buscar" class="btn btn-primary">
             </form>
 
@@ -83,7 +92,7 @@
                 <label for="fechaF">Fecha final: </label>
                 <input type="text" id="datepicker2" th:name="fechaF">
                 <br>
-                <input type="submit" value="Generar" class="btn btn-warning">
+                <a type="submit" value="Generar" target="_blank" th:href="@{/pdf/filtro}" class="btn btn-warning">Generar</a>
             </form>
 
             <!-- <meta charset="UTF-8">

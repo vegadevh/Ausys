@@ -61,7 +61,7 @@ public class ReportController {
 	}
 	
 	@GetMapping("/filtro")
-	public ResponseEntity<byte[]> listaRegistrosPDF(String keyword, String type, String sexo) throws Exception, JRException{
+	public ResponseEntity<byte[]> listaRegistrosPDF(String keyword, String type, String sexo, String fechaI, String fechaF) throws Exception, JRException{
 		byte[] data = null;
 		org.springframework.http.HttpHeaders headers = null;
 		ResponseEntity<byte[]> response = null;
@@ -74,9 +74,41 @@ public class ReportController {
 		}else {
 			sexo = "";
 		}
+		if (fechaI == null || fechaF == null){
+			fechaI = fechaF = "";
+		}
 		System.out.println("sexo:"+sexo);
 		try {
-			if(type != null && !type.equals(newType)) {
+			if (!fechaI.equals("") && !fechaF.equals("") ){
+				keyword = keyword.toLowerCase();
+				if(type != null && !type.equals(newType)) {
+//					desaPeriL = desaPeriS.findByDateBetweenAndAbove(keyword, type, sexo, fechaI, fechaF);
+					JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(desaPeriS.findByDateBetweenAndAbove(keyword, type, sexo, fechaI, fechaF));
+					JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/findAllFilter.jrxml"));
+					
+					HashMap<String, Object> map = new HashMap<>();
+					JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+					
+					data = JasperExportManager.exportReportToPdf(report);
+					
+					headers = new org.springframework.http.HttpHeaders();
+					headers.set(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "inline.filename=filtrarPorfechas.pdf");
+					response = ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
+				}
+				else{
+					JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(desaPeriS.findByDateBetweenAndAbove(keyword, "", sexo, fechaI, fechaF));
+					JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/findAllFilter.jrxml"));
+					
+					HashMap<String, Object> map = new HashMap<>();
+					JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+					
+					data = JasperExportManager.exportReportToPdf(report);
+					
+					headers = new org.springframework.http.HttpHeaders();
+					headers.set(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "inline.filename=filtrarPorfechas.pdf");
+					response = ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
+				}
+			}else if(type != null && !type.equals(newType)) {
 				keyword = keyword.toLowerCase();
 				
 				JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(desaPeriS.findByKeywordAndtipe(keyword,type, sexo));
