@@ -66,10 +66,10 @@
 
             <form th:action="@{/graficar/CantidadPorCasosRango}" method="get" id="CantidadPorCasosRango">
                 <label>Desde: </label>
-                <input type="text" id="datepicker" th:name="inicio">
+                <input type="text" id="datepicker3" th:name="inicio">
                 <br>
                 <label>Hasta: </label>
-                <input type="text" id="datepicker2" th:name="fin">
+                <input type="text" id="datepicker4" th:name="fin">
                 <br>
                 <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
                 <br>
@@ -90,10 +90,10 @@
 
             <form th:action="@{/graficar/HombresMujeresPorCasoYRango}" method="get" id="HombresMujeresPorCasoYRango">
                 <label>Desde: </label>
-                <input type="text" id="datepicker" th:name="inicio">
+                <input type="text" id="datepicker5" th:name="inicio">
                 <br>
                 <label>Hasta: </label>
-                <input type="text" id="datepicker2" th:name="fin">
+                <input type="text" id="datepicker6" th:name="fin">
                 <br>
                 <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
                 <br>
@@ -130,10 +130,10 @@
 
                 <br>
                 <label>Desde: </label>
-                <input type="text" id="datepicker3" th:name="inicio">
+                <input type="text" id="datepicker7" th:name="inicio">
                 <br>
                 <label>Hasta: </label>
-                <input type="text" id="datepicker4" th:name="fin">
+                <input type="text" id="datepicker8" th:name="fin">
                 <br>
                 <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
                 <br>
@@ -246,6 +246,30 @@
 
         $(function () {
             $('#datepicker4').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+
+        $(function () {
+            $('#datepicker5').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+
+        $(function () {
+            $('#datepicker6').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+
+        $(function () {
+            $('#datepicker7').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+
+        $(function () {
+            $('#datepicker8').datepicker({
                 format: 'yyyy-mm-dd'
             });
         });

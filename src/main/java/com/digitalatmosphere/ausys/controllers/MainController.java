@@ -1227,10 +1227,13 @@ public class MainController {
 			mav.setViewName("selectChart");
 		}else {
 			List<CasosDTO> cantidadPorCasos = null;
-			
+
 			try {
 				cantidadPorCasos = desaPeriS.cantidadPorCasosSexoRango(sexo,inicio, fin);
-			
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+
 			mav.addObject("titulo", "Cantidad de casos por tipo (Rango de tiempo)".concat(sexo));
 			mav.addObject("cantidadPorCasos", cantidadPorCasos);
 			mav.setViewName("charts");
