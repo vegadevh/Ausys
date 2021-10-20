@@ -61,4 +61,8 @@ public List<DesaPeri> findALL() throws DataAccessException;
 	
 	public List<DesaparecidoDTO> PeritajesXDesaparecidos(String nombre, String apellido) throws DataAccessException;
 	public List<DesaPeri> findByDateBetweenAndAbove(String keyword, String type, String sexo, String fechaI, String fechaF) throws DataAccessException;
+	//Cantidad de casos por sexo (Rango Tiempo)
+	public List<CasosDTO> cantidadPorCasosSexoRango(String sexo, String inicio, String fin) throws DataAccessException;
+
+
 }

@@ -1217,4 +1217,24 @@ public class MainController {
 		
 		return mav;
 	}
+	//Cantidad de casos por sexo (Rango Tiempo)
+	@RequestMapping("/graficar/CantidadPorCasosSexoRango")
+	public ModelAndView graficarCantidadPorCasosSexoRango(@RequestParam(value="sexo") String sexo,@RequestParam(value="inicio") String inicio, @RequestParam(value="fin") String fin) {
+		ModelAndView mav = new ModelAndView();
+		if(inicio == "" || fin == ""){
+			mav.addObject("titulo", "Graficar");
+			mav.addObject("alert", "Es necesario completar los campos presentes.");
+			mav.setViewName("selectChart");
+		}else {
+			List<CasosDTO> cantidadPorCasos = null;
+			
+			try {
+				cantidadPorCasos = desaPeriS.cantidadPorCasosSexoRango(sexo,inicio, fin);
+			
+			mav.addObject("titulo", "Cantidad de casos por tipo (Rango de tiempo)".concat(sexo));
+			mav.addObject("cantidadPorCasos", cantidadPorCasos);
+			mav.setViewName("charts");
+		}
+		return mav;
+	}
 }

@@ -41,6 +41,7 @@
                 <option value="4">Cantidad de hombres y mujeres por tipo de caso</option>
                 <option value="5">Cantidad de hombres y mujeres por tipo de caso (Rango de tiempo)</option>
                 <option value="6">Cantidad de casos por sexo</option>
+                <option value="7">Cantidad de casos por Sexo y rango de tiempo</option>
             </select>
             <br>
 
@@ -119,6 +120,26 @@
                 <input type="submit" value="Graficar" class="btn btn-primary">
             </form>
 
+            <form th:action="@{/graficar/CantidadPorCasosSexoRango}" method="get" id="CantidadPorCasosSexoRango">
+                <label>Sexo: </label>
+                <select class="form-control" th:name="sexo">
+                    <option th:value="col">Selecciona una opci&oacute;n</option>
+                    <option th:each="sexo : ${listaSexo}" th:value="${sexo}" th:text="${sexo}">
+                    </option>
+                </select>
+
+                <br>
+                <label>Desde: </label>
+                <input type="text" id="datepicker3" th:name="inicio">
+                <br>
+                <label>Hasta: </label>
+                <input type="text" id="datepicker4" th:name="fin">
+                <br>
+                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
+                <br>
+                <input type="submit" value="Graficar" class="btn btn-primary">
+            </form>
+
         </div>
     </div>
 
@@ -134,6 +155,7 @@
                         $("#HombresMujeresPorCaso").hide();
                         $("#HombresMujeresPorCasoYRango").hide();
                         $("#CantidadPorCasosSexo").hide();
+                        $("#CantidadPorCasosSexoRango").hide();
                         break;
 
                     case "1":
@@ -143,6 +165,7 @@
                         $("#HombresMujeresPorCaso").hide();
                         $("#HombresMujeresPorCasoYRango").hide();
                         $("#CantidadPorCasosSexo").hide();
+                        $("#CantidadPorCasosSexoRango").hide();
                         break;
 
                     case "2":
@@ -152,6 +175,7 @@
                         $("#HombresMujeresPorCaso").hide();
                         $("#HombresMujeresPorCasoYRango").hide();
                         $("#CantidadPorCasosSexo").hide();
+                        $("#CantidadPorCasosSexoRango").hide();
                         break;
                     case "3":
                         $("#HombresMujeresRango").hide();
@@ -160,6 +184,7 @@
                         $("#HombresMujeresPorCaso").hide();
                         $("#HombresMujeresPorCasoYRango").hide();
                         $("#CantidadPorCasosSexo").hide();
+                        $("#CantidadPorCasosSexoRango").hide();
                         break;
                     case "4":
                         $("#HombresMujeresRango").hide();
@@ -168,6 +193,7 @@
                         $("#HombresMujeresPorCaso").show();
                         $("#HombresMujeresPorCasoYRango").hide();
                         $("#CantidadPorCasosSexo").hide();
+                        $("#CantidadPorCasosSexoRango").hide();
                         break;
                     case "5":
                         $("#HombresMujeresRango").hide();
@@ -176,6 +202,7 @@
                         $("#HombresMujeresPorCaso").hide();
                         $("#HombresMujeresPorCasoYRango").show();
                         $("#CantidadPorCasosSexo").hide();
+                        $("#CantidadPorCasosSexoRango").hide();
                         break;
                     case "6":
                         $("#HombresMujeresRango").hide();
@@ -184,6 +211,16 @@
                         $("#HombresMujeresPorCaso").hide();
                         $("#HombresMujeresPorCasoYRango").hide();
                         $("#CantidadPorCasosSexo").show();
+                        $("#CantidadPorCasosSexoRango").hide();
+                        break;
+                    case "7":
+                        $("#HombresMujeresRango").hide();
+                        $("#cantidadPorCasos").hide();
+                        $("#CantidadPorCasosRango").hide();
+                        $("#HombresMujeresPorCaso").hide();
+                        $("#HombresMujeresPorCasoYRango").hide();
+                        $("#CantidadPorCasosSexo").hide();
+                        $("#CantidadPorCasosSexoRango").show();
                         break;
                 }
             }).change();
@@ -197,6 +234,18 @@
 
         $(function () {
             $('#datepicker2').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+
+        $(function () {
+            $('#datepicker3').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+
+        $(function () {
+            $('#datepicker4').datepicker({
                 format: 'yyyy-mm-dd'
             });
         });
