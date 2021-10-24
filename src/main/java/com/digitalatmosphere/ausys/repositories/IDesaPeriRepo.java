@@ -24,8 +24,8 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 	//PERITAJES
 	@Query(nativeQuery=true, value="SELECT peritajes.id_peritaje, desa_peri.tipo_de_caso, desa_peri.nombre, desa_peri.apellido, desa_peri.fecha_registro, desa_peri.id_desaperi\r\n"
 			+ "FROM public.peritajes INNER JOIN public.desa_peri ON peritajes.id_peritaje = desa_peri.id_peritaje\r\n"
-			+ "WHERE desa_peri.nombre = :nombre ;")
-	public List<Object[]> buscarNombrePeritaje(String nombre) throws DataAccessException;
+			+ "WHERE (lower(desa_peri.nombre) LIKE %:nombre% or lower(desa_peri.apellido) LIKE %:nombre%)  and (desa_peri.tipo_de_caso LIKE %:type%) and ( lower(desa_peri.sexo) like %:sexo%);")
+	public List<Object[]> buscarNombrePeritaje(String nombre, String sexo, String type) throws DataAccessException;
 	
 	@Query(nativeQuery=true, value="SELECT peritajes.id_peritaje, desa_peri.tipo_de_caso, desa_peri.nombre, desa_peri.apellido, desa_peri.fecha_registro, desa_peri.id_desaperi\r\n"
 			+ "FROM public.peritajes INNER JOIN public.desa_peri ON peritajes.id_peritaje = desa_peri.id_peritaje\r\n"
@@ -41,8 +41,8 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 	//DESAPARECIDOS
 	@Query(nativeQuery=true, value="SELECT desaparecidos.id_desaparecido, desa_peri.tipo_de_caso, desa_peri.nombre, desa_peri.apellido, desa_peri.fecha_registro, desa_peri.id_desaperi\r\n"
 			+ "FROM public.desaparecidos INNER JOIN public.desa_peri ON desaparecidos.id_desaparecido = desa_peri.id_desaparecido\r\n"
-			+ "WHERE desa_peri.nombre = :nombre ;")
-	public List<Object[]> buscarNombreDesaparecido(String nombre) throws DataAccessException;
+			+ "WHERE (lower(desa_peri.nombre) LIKE %:nombre% or lower(desa_peri.apellido) LIKE %:nombre% ) and ( lower(desa_peri.sexo) like %:sexo%);")
+	public List<Object[]> buscarNombreDesaparecido(String nombre, String sexo) throws DataAccessException;
 	
 	@Query(nativeQuery=true, value="SELECT desaparecidos.id_desaparecido, desa_peri.tipo_de_caso, desa_peri.nombre, desa_peri.apellido, desa_peri.fecha_registro, desa_peri.id_desaperi\r\n"
 			+ "FROM public.desaparecidos INNER JOIN public.desa_peri ON desaparecidos.id_desaparecido = desa_peri.id_desaparecido\r\n"

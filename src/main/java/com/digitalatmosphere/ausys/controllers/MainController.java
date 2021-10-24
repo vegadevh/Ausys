@@ -676,11 +676,22 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/busquedaPeritajes", params="action=buscarnombre")
-	public ModelAndView BuscarNombre(@RequestParam(value="nombre_registro") String nombre) {
+	public ModelAndView BuscarNombre(@RequestParam(value="nombre_registro") String nombre, @RequestParam(value="sexo_registro") String sexo,@RequestParam(value="type_registro") String type) {
 		ModelAndView mav = new ModelAndView();
 		List<PeritajeDTO> desaPeriL = null;
+		String newType = "Selecciona una opción";
+		if(type.equals(newType)) {
+			type = "";
+		}
+		if(sexo != null) {
+			if(sexo.equals("Ambos")) {
+				sexo = "";
+			}
+		}else {
+			sexo = "";
+		}
 		try {
-			desaPeriL = desaPeriS.buscarNombrePeritaje(nombre);
+			desaPeriL = desaPeriS.buscarNombrePeritaje(nombre.toLowerCase(), sexo.toLowerCase(), type);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -701,6 +712,7 @@ public class MainController {
 	public ModelAndView BuscarIdentificador(@RequestParam(value="id_registro") String id) {
 		ModelAndView mav = new ModelAndView();
 		List<PeritajeDTO> desaPeriL = null;
+		
 		try {
 			desaPeriL = desaPeriS.buscarIdPeritaje(id);
 		}catch(Exception e) {
@@ -729,11 +741,18 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/busquedaDesaparecidos", params="action=buscarnombre")
-	public ModelAndView BuscarNombreD(@RequestParam(value="nombre_registro") String nombre) {
+	public ModelAndView BuscarNombreD(@RequestParam(value="nombre_registro") String nombre, @RequestParam(value="sexo_registro") String sexo) {
 		ModelAndView mav = new ModelAndView();
 		List<DesaparecidoDTO> desaPeriL = null;
+		if(sexo != null) {
+			if(sexo.equals("Ambos")) {
+				sexo = "";
+			}
+		}else {
+			sexo = "";
+		}
 		try {
-			desaPeriL = desaPeriS.buscarNombreDesaparecido(nombre);
+			desaPeriL = desaPeriS.buscarNombreDesaparecido(nombre.toLowerCase(), sexo.toLowerCase());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -744,7 +763,7 @@ public class MainController {
 			
 		}else {
 			mav.addObject("titulo", "Busqueda de Registros");
-			mav.addObject("mensaje", "No se ha encontrado un registro con el nombre: ".concat(nombre));
+			mav.addObject("mensaje", "No se ha encontrado un registro con los datos proporcionados");
 			mav.setViewName("busquedaD");
 		}
 		return mav;
