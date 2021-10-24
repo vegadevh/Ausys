@@ -15,6 +15,7 @@
 	<description>Sistema de gestión de peritajes</description>
 	<properties>
 		<java.version>16</java.version>
+		<start-class>com.digitalatmosphere.ausys.AusysApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>

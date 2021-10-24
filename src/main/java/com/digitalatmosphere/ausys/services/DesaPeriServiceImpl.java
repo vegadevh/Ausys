@@ -101,8 +101,8 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	}
 
 	@Override
-	public List<PeritajeDTO> buscarNombrePeritaje(String nombre) throws DataAccessException {
-		List<PeritajeDTO> peritajes = desaPeriRepo.buscarNombrePeritaje(nombre).stream().map(obj -> {
+	public List<PeritajeDTO> buscarNombrePeritaje(String nombre, String sexo, String type) throws DataAccessException {
+		List<PeritajeDTO> peritajes = desaPeriRepo.buscarNombrePeritaje(nombre, sexo, type).stream().map(obj -> {
 			PeritajeDTO p = new PeritajeDTO();
 			p.setId_peritaje(obj[0].toString());
 			p.setTipo_de_caso(obj[1].toString());
@@ -131,8 +131,8 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	}
 
 	@Override
-	public List<DesaparecidoDTO> buscarNombreDesaparecido(String nombre) throws DataAccessException {
-		List<DesaparecidoDTO> peritajes = desaPeriRepo.buscarNombreDesaparecido(nombre).stream().map(obj -> {
+	public List<DesaparecidoDTO> buscarNombreDesaparecido(String nombre, String sexo) throws DataAccessException {
+		List<DesaparecidoDTO> peritajes = desaPeriRepo.buscarNombreDesaparecido(nombre, sexo).stream().map(obj -> {
 			DesaparecidoDTO d = new DesaparecidoDTO();
 			d.setId_desaparecido(obj[0].toString());
 			d.setTipo_de_caso(obj[1].toString());

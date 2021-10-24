@@ -32,17 +32,18 @@ public List<DesaPeri> findALL() throws DataAccessException;
 	
 	public List<DesaparecidoDTO> findAllDesaparecidos() throws DataAccessException;
 	
-	public List<PeritajeDTO> buscarNombrePeritaje(String nombre) throws DataAccessException;
+	public List<PeritajeDTO> buscarNombrePeritaje(String nombre, String sexo, String type) throws DataAccessException;
 
 	public List<PeritajeDTO> buscarIdPeritaje(String id) throws DataAccessException;
 	
-	public List<DesaparecidoDTO> buscarNombreDesaparecido(String nombre) throws DataAccessException;
+	public List<DesaparecidoDTO> buscarNombreDesaparecido(String nombre, String sexo) throws DataAccessException;
 	
 	public List<DesaparecidoDTO> buscarIdDesaparecido(String id) throws DataAccessException;
 	
 	public List<RegistroDTO> verRegistroPeritaje(String id_peritaje, String id_desaperi) throws DataAccessException;
 	
 	public List<RegistroDTO> verRegistroDesaparecido(String id_desaparecido, String id_desaperi) throws DataAccessException;
+	//Filtros
 	public List<DesaPeri> findByKeyword(String keyword, String sexo) throws DataAccessException;
 	
 	public List<DesaPeri> findByKeywordAndtipe(String keyword, String type, String sexo) throws DataAccessException;
