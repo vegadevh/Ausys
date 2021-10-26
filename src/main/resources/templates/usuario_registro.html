@@ -16,56 +16,66 @@
         <div>
             <h1>Registro de Usuario </h1>
         </div>
-        <form th:action="@{/}" th:object="${usuario}" method="post" style="max-width: 600px; margin: 0 auto;">
+        <form th:action="@{/validar_usuario}" th:object="${usuario}" method="post" style="max-width: 600px; margin: 0 auto;">
             <div class="m-3">
+
+                
+
 
                 <div class="form-group row">
                     <label class="col-4 col-form-label">Usuario: </label>
                     <div class="col-8">
-                        <input type="email" th:field="*{username}" class="form-control" required />
-                        
+                        <input type="text" th:field="*{username}" class="form-control" required />
+
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-4 col-form-label">Contraseña: </label>
                     <div class="col-8">
-                        <input type="password" th:field="*{password}" class="form-control"
-                            required minlength="6" maxlength="10"/>
-                       
+                        <input type="password" th:field="*{password}" class="form-control" required minlength="6" maxlength="20" />
+
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-4 col-form-label">Nombre: </label>
                     <div class="col-8">
-                        <input type="text" th:field="*{nombre}" class="form-control"
-                            required minlength="2" maxlength="20"/>
-                        
-                </div>
+                        <input type="text" th:field="*{nombre}" class="form-control" required minlength="2"
+                            maxlength="20" />
 
-                <div class="form-group row">
-                    <label class="col-4 col-form-label">Apellido: </label>
-                    <div class="col-8">
-                        <input type="text" th:field="*{apellido}" class="form-control"
-                            required minlength="2" maxlength="20" />
-                        
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Apellido: </label>
+                        <div class="col-8">
+                            <input type="text" th:field="*{apellido}" class="form-control" required minlength="2"
+                                maxlength="20" />
+
+                        </div>
+                    </div>
+                    
+                    
+                    <select hidden class="form-control" name="enabled_u" id="estado" th:field="${usuario.enabled_u}">
+                        <option th:value="${true}">Activa</option>
+                    </select>       
+
+
+                    <label class="col-form-label">Roles: </label>
+                    <select class="form-control" id="divisionSelect" th:field="*{rol.id_rol}">
+                        <option value="col2">Selecciona una opci&oacute;n</option>
+                        <option th:each="rol : ${roles}"
+                        th:id="${rol.id_rol}" th:value="${rol.id_rol}"
+                        th:text="${rol.rol}"></option>
+                    </select>
+
+
+
+
+                    <div>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
                 </div>
-
-                <div class="form-group row">
-                    <label class="col-4 col-form-label">Roles: </label>
-                    <div class="col-8">
-                        <input type="text" th:field="*{id_rol}" class="form-control"
-                            required minlength="2" maxlength="20" />
-                        
-                    </div>
-                </div>
-
-                <div>
-                    <button type="submit" class="btn btn-primary">Sign Up</button>
-                </div>
-            </div>
         </form>
     </div>
 </body>
