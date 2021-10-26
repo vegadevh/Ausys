@@ -1,0 +1,19 @@
+<section th:fragment="especiales">
+    <label class="col-form-label">Tipo de caracteristica especial:</label>
+    
+    
+    <div th:each="marca : ${listaMarcas}">
+        <input type="radio" th:field="*{nombre_especial}" th:value="${marca}">
+        <label th:for="${#ids.prev('nombre_especial')}" th:text="${marca}"></label>
+    </div>
+    <div th:if="${#fields.hasErrors('nombre_especial')}" th:errors="*{nombre_especial}" class="alert alert-danger" role="alert">
+    </div>
+    <br>
+    <label for="informacion_adicional">Ubique la marca seleccionada: </label>
+    <div>
+        <textarea type="text" rows="5" cols="50" th:field="*{descripcion}"></textarea>
+    </div>
+    <div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="alert alert-danger" role="alert">
+    </div>
+
+</section>

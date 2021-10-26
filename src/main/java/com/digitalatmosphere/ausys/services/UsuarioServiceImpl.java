@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import com.digitalatmosphere.ausys.domains.Usuario;
 import com.digitalatmosphere.ausys.repositories.IUsuarioRepo;
 
+
+@Service
 public class UsuarioServiceImpl implements IUsuarioService{
 	
 	@Autowired
