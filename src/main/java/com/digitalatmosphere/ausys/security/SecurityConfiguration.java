@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -40,19 +41,37 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return authProvider;
 	}
 	
-	 @Override
-	    protected void configure(HttpSecurity http) throws Exception {
-	        http.authorizeRequests()
-	            .antMatchers("/users").authenticated()
-	            .anyRequest().permitAll()
-	            .and()
-	            .formLogin()
-	                .usernameParameter("username")
-	                .defaultSuccessUrl("/")
-	                .permitAll()
-	            .and()
-	            .logout().logoutSuccessUrl("/").permitAll();
-	    }
-	     
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		// http.authorizeRequests()
+		// 	.antMatchers("/users").authenticated()
+	    //         .anyRequest().permitAll()
+	    //         .and()
+	    //         .formLogin()
+	    //             .usernameParameter("username")
+	    //             .defaultSuccessUrl("/")
+	    //             .permitAll()
+	    //         .and()
+	    //         .logout().logoutSuccessUrl("/").permitAll();
+		http.sessionManagement().maximumSessions(1);
+		http.authorizeRequests()
+			.antMatchers(resources).permitAll()
+			.antMatchers("/admin/**").hasAnyRole("ADMIN")
+			.antMatchers("/pdf/**").hasRole("SECRETARY")
+			.antMatchers("/show/**").hasRole("SECRETARY")
+			.antMatchers("/").permitAll()
+			.and()
+			.formLogin()
+			.loginPage("/login")
+			.permitAll()
+			.defaultSuccessUrl("/")
+			.usernameParameter("username")
+			.passwordParameter("password")
+			.and()
+			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.logoutSuccessUrl("/")
+			.and()
+			.exceptionHandling().accessDeniedPage("/403");
+	}
 
 }

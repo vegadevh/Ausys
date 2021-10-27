@@ -18,11 +18,9 @@ import com.digitalatmosphere.ausys.domains.Usuario;
 import com.digitalatmosphere.ausys.services.IRolService;
 import com.digitalatmosphere.ausys.services.IUsuarioService;
 
-
-
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
-	
 	
 	@Autowired
 	private IRolService rolS;

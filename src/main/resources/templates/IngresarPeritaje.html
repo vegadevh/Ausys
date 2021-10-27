@@ -26,7 +26,7 @@
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <div>
-            <form th:action="@{/validarPeritaje}" th:object="${peritaje}" method="GET">
+            <form th:action="@{/write/validarPeritaje}" th:object="${peritaje}" method="GET">
 
                 <label for="id_peritaje">Identficador del registro: </label>
                 <input type="text" id="id_peritaje" th:field="*{id_peritaje}">

@@ -26,8 +26,22 @@
     <div class="container">
         <h3><span th:text="${idDesaPeri}"></span></h3>
         <h3><span th:text="${mensaje}"></span></h3>
+        <ul>
+            <p>SOLO ADMIN</p>
+            <li><a th:href="@{/admin/usuario_registro}">Registrar Usuarios</a></li>
+            <p>SOLO ESTADISTICA</p>
+            <li><a th:href="@{/write/ingresarPeritaje}">Ingresar Peritaje</a></li>
+            <li><a th:href="@{/write/ingresarDesaparecido}">Ingresar Desaparecido</a></li>
+            <p>Estadistica y Secretaria</p>
+            <li><a th:href="@{/listaPeritajes}">Lista Peritajes</a></li>
+            <li><a th:href="@{/listaDesaparecidos}">Lista Desaparecidos</a></li>
+            <p>Solo secretaria</p>
+            <li><a th:href="@{/listaRegistros}">Lista Registros</a></li>
+            <li><a th:href="@{/graficar}">Graficar</a></li>
+            <li><a th:href="@{/buscarPeritajes}">Buscar Peritajes</a></li>
+            <li><a th:href="@{/buscarDesaparecidos}">Buscar Desaparecidos</a></li>
+        </ul>
     </div>
-
 </body>
 
 </html>

@@ -30,7 +30,7 @@
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <div>
-            <form th:action="@{/validarDesaparecido}" th:object="${desaparecido}" method="GET">
+            <form th:action="@{/write/validarDesaparecido}" th:object="${desaparecido}" method="GET">
 
 
                 <label for="id_desaparecido">Identficador del registro: </label>

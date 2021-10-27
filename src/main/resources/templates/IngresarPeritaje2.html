@@ -26,7 +26,7 @@
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <div>
-            <form th:action="@{/validarPeritaje2}" th:object="${desaPeri}" method="POST">
+            <form th:action="@{/write/validarPeritaje2}" th:object="${desaPeri}" method="POST">
                 <label for="tipo_de_caso">Tipo de caso: </label>
                 <select class="form-control" id="casoSelect" th:field="*{tipo_de_caso}">
                     <option value="col2">Selecciona una opci&oacute;n</option>

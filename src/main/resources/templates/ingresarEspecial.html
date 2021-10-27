@@ -26,15 +26,15 @@
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <div>
-            <form th:if="${val} == 'Desaparecido'" th:action="@{/validarEspecialD/} + ${id}" th:object="${especial}"
-                method="POST">
+            <form th:if="${val} == 'Desaparecido'" th:action="@{/write/validarEspecialD/} + ${id}"
+                th:object="${especial}" method="POST">
 
                 <th:block th:replace="components/form-especial :: especiales"></th:block>
                 <!-- <input type="text" th:name="id" th:field="*{id_peritaje}"> -->
                 <input type="submit" value="Siguiente" class="btn btn-primary">
 
             </form>
-            <form th:if="${val} == 'Peritaje'" th:action="@{/validarEspecial/} + ${id}" th:object="${especial}"
+            <form th:if="${val} == 'Peritaje'" th:action="@{/write/validarEspecial/} + ${id}" th:object="${especial}"
                 method="POST">
 
                 <th:block th:replace="components/form-especial :: especiales"></th:block>

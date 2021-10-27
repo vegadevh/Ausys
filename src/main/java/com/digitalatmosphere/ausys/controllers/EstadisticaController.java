@@ -1,6 +1,14 @@
 package com.digitalatmosphere.ausys.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -9,25 +17,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.digitalatmosphere.ausys.domains.Departamento;
 import com.digitalatmosphere.ausys.domains.DesaPeri;
 import com.digitalatmosphere.ausys.domains.Desaparecido;
 import com.digitalatmosphere.ausys.domains.Division;
+import com.digitalatmosphere.ausys.domains.Especial;
+import com.digitalatmosphere.ausys.domains.Foto;
 import com.digitalatmosphere.ausys.domains.Municipio;
 import com.digitalatmosphere.ausys.domains.Peritaje;
 import com.digitalatmosphere.ausys.services.IDepartamentoService;
 import com.digitalatmosphere.ausys.services.IDesaPeriService;
 import com.digitalatmosphere.ausys.services.IDesaparecidoService;
 import com.digitalatmosphere.ausys.services.IDivisionService;
+import com.digitalatmosphere.ausys.services.IEspecialService;
+import com.digitalatmosphere.ausys.services.IFotoService;
 import com.digitalatmosphere.ausys.services.IMunicipioService;
 import com.digitalatmosphere.ausys.services.IPeritajeService;
 
 @Controller
+@RequestMapping("/write")
 public class EstadisticaController {
 
 	@Autowired
@@ -47,6 +63,14 @@ public class EstadisticaController {
 
 	@Autowired
 	private IDepartamentoService departamentoS;
+	
+	@Autowired
+	private IEspecialService especialS;
+
+	@Autowired
+	private IFotoService fotoS;
+	
+	public static String DirectorioArchivos = System.getProperty("user.dir") + "/src/main/webapp/imagedata";
 
 	// Listas
 	@ModelAttribute("listaSexo")
@@ -537,4 +561,233 @@ public class EstadisticaController {
 			}
 			return mav;
 		}
+
+		// AGREGAR ESPECIAL
+	@RequestMapping("/especial/{id}/{id_registro}")
+	public ModelAndView agregarEspecial(@RequestParam(value = "id") String id) {
+		ModelAndView mav = new ModelAndView();
+		Especial especial = new Especial();
+
+		mav.addObject("titulo", "Ingresar marca especial");
+		mav.addObject("especial", especial);
+		mav.addObject("id", id);
+		mav.addObject("val", "Peritaje");
+		mav.setViewName("ingresarEspecial");
+		return mav;
+	}
+
+	@RequestMapping("/validarEspecial/{id}")
+	public ModelAndView validarEspecial(@Valid @ModelAttribute Especial especial, BindingResult result,
+			@PathVariable("id") String id) {
+		ModelAndView mav = new ModelAndView();
+
+		if (result.hasErrors()) {
+
+			mav.addObject("titulo", "Ingresar marca especial");
+			mav.addObject("especial", especial);
+			mav.addObject("id", id);
+			mav.addObject("val", "Peritaje");
+			mav.setViewName("ingresarEspecial");
+		} else {
+			Peritaje peritaje = new Peritaje();
+			especial.setId_peritaje(id);
+			peritaje = peritajeS.findOne(id);
+			especial.setPeritaje(peritaje);
+
+			try {
+				especialS.save(especial);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			mav.setViewName("redirect:/listaPeritajes");
+		}
+		return mav;
+	}
+
+	@RequestMapping("/especialD/{id}/{id_registro}")
+	public ModelAndView agregarEspecialD(@RequestParam(value = "id") String id) {
+		ModelAndView mav = new ModelAndView();
+		Especial especial = new Especial();
+
+		mav.addObject("titulo", "Ingresar marca especial");
+		mav.addObject("especial", especial);
+		mav.addObject("id", id);
+		mav.addObject("val", "Desaparecido");
+		mav.setViewName("ingresarEspecial");
+		return mav;
+	}
+
+	@RequestMapping("/validarEspecialD/{id}")
+	public ModelAndView validarEspecialD(@Valid @ModelAttribute Especial especial, BindingResult result,
+			@PathVariable("id") String id) {
+		ModelAndView mav = new ModelAndView();
+
+		if (result.hasErrors()) {
+
+			// CAMBIAR LOGICA
+			mav.addObject("titulo", "Ingresar marca especial");
+			mav.addObject("especial", especial);
+			mav.addObject("id", id);
+			mav.addObject("val", "Desaparecido");
+			mav.setViewName("ingresarEspecial");
+		} else {
+			Desaparecido desaparecido = new Desaparecido();
+			especial.setId_desaparecido(id);
+			desaparecido = desaparecidoS.findOne(id);
+			especial.setDesaparecido(desaparecido);
+
+			try {
+				especialS.save(especial);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			mav.setViewName("redirect:/listaDesaparecidos");
+		}
+		return mav;
+	}
+
+	// AGREGAR FOTOS
+	@RequestMapping("/fotografia/D/{id_registro}/{id_desaperi}")
+	public ModelAndView addFotoDesaparecido(@RequestParam(value = "id") String id) {
+		ModelAndView mav = new ModelAndView();
+		Foto foto = new Foto();
+
+		mav.addObject("titulo", "Ingresar Foto");
+		mav.addObject("foto", foto);
+		mav.addObject("id", id);
+		mav.addObject("val", "Desaparecido");
+		mav.setViewName("ingresarFoto");
+		return mav;
+	}
+
+	@RequestMapping("/fotografia/P/{id_registro}/{id_desaperi}")
+	public ModelAndView addFotoPeritaje(@RequestParam(value = "id") String id) {
+		ModelAndView mav = new ModelAndView();
+		Foto foto = new Foto();
+
+		mav.addObject("titulo", "Ingresar Foto");
+		mav.addObject("foto", foto);
+		mav.addObject("id", id);
+		mav.addObject("val", "Peritaje");
+		mav.setViewName("ingresarFoto");
+		return mav;
+	}
+
+	@RequestMapping("/subir/D/{id_registro}")
+	@ResponseBody
+	public ModelAndView subirFoto(@Valid @ModelAttribute Foto foto, BindingResult result,
+			@PathVariable(value = "id_registro") String id, @RequestParam(value = "img") MultipartFile file) {
+		ModelAndView mav = new ModelAndView();
+
+		if (result.hasErrors()) {
+
+			mav.addObject("titulo", "Ingresar Foto");
+			mav.addObject("foto", foto);
+			String alert = "El campo no puede ser vacio. Ingrese una foto.";
+			mav.addObject("id", id);
+			mav.addObject("alert", alert);
+			mav.addObject("val", "Desaparecido");
+			mav.setViewName("ingresarFoto");
+		} else {
+			StringBuilder fileName = new StringBuilder();
+
+			Date date = Calendar.getInstance().getTime();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+			String strDate = dateFormat.format(date);
+			String myDate = strDate.replaceAll(":", "");
+
+			try {
+				String filename = myDate.concat(
+						id.concat(file.getOriginalFilename().substring(file.getOriginalFilename().length() - 4)));
+				Path fileNameAndPath = Paths.get(DirectorioArchivos, filename);
+
+				try {
+					Files.write(fileNameAndPath, file.getBytes());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				foto.setFoto(filename);
+
+				Desaparecido desaparecido = new Desaparecido();
+				foto.setId_desaparecido(id);
+				desaparecido = desaparecidoS.findOne(id);
+				foto.setDesaparecido(desaparecido);
+
+				try {
+					fotoS.save(foto);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				mav.setViewName("redirect:/listaDesaparecidos");
+			} catch (StringIndexOutOfBoundsException e) {
+				String alert = "El campo no puede ser vacio. Ingrese una foto.";
+				mav.addObject("titulo", "Ingresar Foto");
+				mav.addObject("foto", foto);
+				mav.addObject("id", id);
+				mav.addObject("alert", alert);
+				mav.addObject("val", "Desaparecido");
+				mav.setViewName("ingresarFoto");
+			}
+		}
+		return mav;
+	}
+
+	@RequestMapping("/subir/P/{id_registro}")
+	@ResponseBody
+	public ModelAndView subirFotoP(@Valid @ModelAttribute Foto foto, BindingResult result,
+			@PathVariable(value = "id_registro") String id, @RequestParam(value = "img") MultipartFile file) {
+		ModelAndView mav = new ModelAndView();
+
+		if (result.hasErrors()) {
+
+			mav.addObject("titulo", "Ingresar Foto");
+			mav.addObject("foto", foto);
+			String alert = "El campo no puede ser vacio. Ingrese una foto.";
+			mav.addObject("id", id);
+			mav.addObject("alert", alert);
+			mav.addObject("val", "Peritaje");
+			mav.setViewName("ingresarFoto");
+		} else {
+			StringBuilder fileName = new StringBuilder();
+
+			Date date = Calendar.getInstance().getTime();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+			String strDate = dateFormat.format(date);
+			String myDate = strDate.replaceAll(":", "");
+
+			try {
+				String filename = myDate.concat(
+						id.concat(file.getOriginalFilename().substring(file.getOriginalFilename().length() - 4)));
+				Path fileNameAndPath = Paths.get(DirectorioArchivos, filename);
+
+				try {
+					Files.write(fileNameAndPath, file.getBytes());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				foto.setFoto(filename);
+
+				Peritaje peritaje = new Peritaje();
+				foto.setId_peritaje(id);
+				peritaje = peritajeS.findOne(id);
+				foto.setPeritaje(peritaje);
+
+				try {
+					fotoS.save(foto);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				mav.setViewName("redirect:/listaPeritajes");
+			} catch (StringIndexOutOfBoundsException e) {
+				String alert = "El campo no puede ser vacio. Ingrese una foto.";
+				mav.addObject("titulo", "Ingresar Foto");
+				mav.addObject("foto", foto);
+				mav.addObject("id", id);
+				mav.addObject("alert", alert);
+				mav.addObject("val", "Peritaje");
+				mav.setViewName("ingresarFoto");
+			}
+		}
+		return mav;
+	}
 }

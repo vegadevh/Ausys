@@ -88,7 +88,7 @@
                 </div>
                 <br>
                 <form th:if="${val} == 'Desaparecido'" class="p-1"
-                    th:action="@{/especialD/} + ${registro.id} + '/' + ${registro.id_registro}" method="GET">
+                    th:action="@{/write/especialD/} + ${registro.id} + '/' + ${registro.id_registro}" method="GET">
                     <input th:name="id" type="hidden" th:value=${registro.id}>
                     <input th:name="id_registro" type="hidden" th:value=${registro.id_registro}>
                     <button type="submit" class="btn btn-success">
@@ -96,7 +96,7 @@
                 </form>
 
                 <form th:if="${val} == 'Peritaje'" class="p-1"
-                    th:action="@{/especial/} + ${registro.id} + '/' + ${registro.id_registro}" method="GET">
+                    th:action="@{/write/especial/} + ${registro.id} + '/' + ${registro.id_registro}" method="GET">
                     <input th:name="id" type="hidden" th:value=${registro.id}>
                     <input th:name="id_registro" type="hidden" th:value=${registro.id_registro}>
                     <button type="submit" class="btn btn-success">
@@ -104,7 +104,7 @@
                 </form>
                 <!-- Ingresar imagenes -->
                 <form th:if="${val} == 'Desaparecido'" class="p-1"
-                    th:action="@{/fotografia/D/} + ${registro.id} + '/' + ${registro.id_registro}" method="GET">
+                    th:action="@{/write/fotografia/D/} + ${registro.id} + '/' + ${registro.id_registro}" method="GET">
                     <input th:name="id" type="hidden" th:value=${registro.id}>
                     <input th:name="id_registro" type="hidden" th:value=${registro.id_registro}>
                     <button type="submit" class="btn btn-warning">
@@ -112,7 +112,7 @@
                 </form>
 
                 <form th:if="${val} == 'Peritaje'" class="p-1"
-                    th:action="@{/fotografia/P/} + ${registro.id} + '/' + ${registro.id_registro}" method="GET">
+                    th:action="@{/write/fotografia/P/} + ${registro.id} + '/' + ${registro.id_registro}" method="GET">
                     <input th:name="id" type="hidden" th:value=${registro.id}>
                     <input th:name="id_registro" type="hidden" th:value=${registro.id_registro}>
                     <button type="submit" class="btn btn-warning">

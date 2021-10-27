@@ -12,12 +12,12 @@
 						<a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item"
-						th:classappend="${#httpServletRequest.getRequestURI() == '/ingresarPeritaje' ? 'active':''}">
-						<a class="nav-link" href="/ingresarPeritaje">Ingresar Peritaje</a>
+						th:classappend="${#httpServletRequest.getRequestURI() == '/write/ingresarPeritaje' ? 'active':''}">
+						<a class="nav-link" href="/write/ingresarPeritaje">Ingresar Peritaje</a>
 					</li>
 					<li class="nav-item"
-						th:classappend="${#httpServletRequest.getRequestURI() == '/ingresarDesaparecido' ? 'active':''}">
-						<a class="nav-link" href="/ingresarDesaparecido">Ingresar Desaparecido</a>
+						th:classappend="${#httpServletRequest.getRequestURI() == '/write/ingresarDesaparecido' ? 'active':''}">
+						<a class="nav-link" href="/write/ingresarDesaparecido">Ingresar Desaparecido</a>
 					</li>
 				</ul>
 			</div>
@@ -28,15 +28,15 @@
 					</li>
 					<li class="nav-item"
 						th:classappend="${#httpServletRequest.getRequestURI() == '/listaPeritajes' ? 'active':''}">
-						<a class="nav-link" href="/listaPeritajes">Ver Peritajes</a>
+						<a class="nav-link" href="//listaPeritajes">Ver Peritajes</a>
 					</li>
 					<li class="nav-item"
 						th:classappend="${#httpServletRequest.getRequestURI() == '/listaDesaparecidos' ? 'active':''}">
-						<a class="nav-link" href="/listaDesaparecidos">Ver Desaparecidos</a>
+						<a class="nav-link" href="//listaDesaparecidos">Ver Desaparecidos</a>
 					</li>
 					<li class="nav-item"
 						th:classappend="${#httpServletRequest.getRequestURI() == '/listaRegistros' ? 'active':''}">
-						<a class="nav-link" href="/listaRegistros">Ver Registros</a>
+						<a class="nav-link" href="/show/listaRegistros">Ver Registros</a>
 					</li>
 				</ul>
 			</div>
@@ -47,14 +47,15 @@
 					</li>
 					<li class="nav-item"
 						th:classappend="${#httpServletRequest.getRequestURI() == '/registrarUsuario' ? 'active':''}">
-						<a class="nav-link" th:href="@{/usuario_registro}">Crear usuario</a>
+						<a class="nav-link" th:href="@{/admin/usuario_registro}">Crear usuario</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 
 		<div>
-			<div style="display: flex; align-items: center" class="text-white userOptions" sec:authorize="isAuthenticated()">
+			<div style="display: flex; align-items: center" class="text-white userOptions"
+				sec:authorize="isAuthenticated()">
 				<div>
 					<i>Bienvenido</i> <b><span class="text-white" sec:authentication="name">Username</span></b>
 					&nbsp;
