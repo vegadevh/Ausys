@@ -1,61 +1,69 @@
 <section th:fragment="navbar">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand mb-0 h1" href="/">Ausys</a>
-        <div class="text-white" sec:authorize="isAnonymous()">
-            <a class="text-white" href="/login">Iniciar Sesion</a>
-        </div>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand mb-0 h1" href="/">Ausys</a>
+		<div class="text-white" sec:authorize="isAnonymous()">
+			<a class="text-white" href="/login">Iniciar Sesion</a>
+		</div>
 
-        <div class="collapse navbar-collapse">
-            <div sec:authorize="hasRole('ESTADISTICA')">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
-                        <a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/ingresarPeritaje' ? 'active':''}">
-                        <a class="nav-link" href="/ingresarPeritaje">Ingresar Peritaje</a>
-                    </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/ingresarDesaparecido' ? 'active':''}">
-                        <a class="nav-link" href="/ingresarDesaparecido">Ingresar Desaparecido</a>
-                    </li>
-                </ul>
-            </div>
-            <div sec:authorize="hasRole('SECRETARIA')">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
-                        <a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/listaPeritajes' ? 'active':''}">
-                        <a class="nav-link" href="/listaPeritajes">Ver Peritajes</a>
-                    </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/listaDesaparecidos' ? 'active':''}">
-                        <a class="nav-link" href="/listaDesaparecidos">Ver Desaparecidos</a>
-                    </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/listaRegistros' ? 'active':''}">
-                        <a class="nav-link" href="/listaRegistros">Ver Registros</a>
-                    </li>
-                </ul>
-            </div>
-            <div sec:authorize="hasRole('ADMIN')">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
-                        <a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/registrarUsuario' ? 'active':''}">
-                        <a class="nav-link" href="/registrarUsuario">Crear usuario</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+		<div class="collapse navbar-collapse">
+			<div sec:authorize="hasRole('ROLE_STATISTICS')">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
+						<a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/ingresarPeritaje' ? 'active':''}">
+						<a class="nav-link" href="/ingresarPeritaje">Ingresar Peritaje</a>
+					</li>
+					<li class="nav-item"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/ingresarDesaparecido' ? 'active':''}">
+						<a class="nav-link" href="/ingresarDesaparecido">Ingresar Desaparecido</a>
+					</li>
+				</ul>
+			</div>
+			<div sec:authorize="hasRole('ROLE_SECRETARY')">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
+						<a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/listaPeritajes' ? 'active':''}">
+						<a class="nav-link" href="/listaPeritajes">Ver Peritajes</a>
+					</li>
+					<li class="nav-item"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/listaDesaparecidos' ? 'active':''}">
+						<a class="nav-link" href="/listaDesaparecidos">Ver Desaparecidos</a>
+					</li>
+					<li class="nav-item"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/listaRegistros' ? 'active':''}">
+						<a class="nav-link" href="/listaRegistros">Ver Registros</a>
+					</li>
+				</ul>
+			</div>
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
+						<a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/registrarUsuario' ? 'active':''}">
+						<a class="nav-link" th:href="@{/usuario_registro}">Crear usuario</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 
-        <div>
-            <div class="text-white userOptions" sec:authorize="isAuthenticated()">
-                <i>Bienvenido</i> <b><span class="text-white" sec:authentication="name">Username</span></b>
-                &nbsp;
-                <i><span class="text-white" sec:authentication="principal.authorities">Roles</span></i>
-                <form th:action="@{/logout}" method="post">
-                    <input type="submit" value="Logout" class="btn btn-primary bEdit" />
-                </form>
-            </div>
-        </div>
-    </nav>
+		<div>
+			<div style="display: flex; align-items: center" class="text-white userOptions" sec:authorize="isAuthenticated()">
+				<div>
+					<i>Bienvenido</i> <b><span class="text-white" sec:authentication="name">Username</span></b>
+					&nbsp;
+					<i><span class="text-white" sec:authentication="principal.authorities">Roles</span></i>&nbsp;
+				</div>
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" value="Logout" class="btn btn-primary bEdit" />
+				</form>
+			</div>
+		</div>
+	</nav>
 </section>
