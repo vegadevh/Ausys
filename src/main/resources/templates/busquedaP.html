@@ -35,7 +35,7 @@
         </select>
         <br>
         <!--Nombre-->
-        <form th:action="@{/busquedaPeritajes}" method="post" id="nombresid">
+        <form th:action="@{/show/busquedaPeritajes}" method="post" id="nombresid">
             <label>Valor de b&uacute;squeda: </label>
             <input type="text" placeholder="Nombre" th:name="nombre_registro" class="form-control" required>
             <br>
@@ -58,7 +58,7 @@
                     class="fa fa-search"></i>Buscar</button>
         </form>
         <!--Identificador-->
-        <form th:action="@{/busquedaPeritajes}" method="post" class="vis" id="identificadorid">
+        <form th:action="@{/show/busquedaPeritajes}" method="post" class="vis" id="identificadorid">
             <label>Valor de b&uacute;squeda: </label>
             <input type="text" placeholder="Identificador" th:name="id_registro" class="form-control" required>
             <br>

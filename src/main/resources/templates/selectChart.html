@@ -46,7 +46,7 @@
             <br>
 
 
-            <form th:action="@{/graficar/HombresMujeresRangoFechas}" method="get" id="HombresMujeresRango">
+            <form th:action="@{/show/graficar/HombresMujeresRangoFechas}" method="get" id="HombresMujeresRango">
                 <label>Desde: </label>
                 <input type="text" id="datepicker" th:name="inicio">
                 <br>
@@ -60,11 +60,11 @@
 
 
             <div id="cantidadPorCasos">
-                <a type="button" class="btn btn-primary" th:href="@{/graficar/CantidadPorCasos}">Graficar</a>
+                <a type="button" class="btn btn-primary" th:href="@{/show/graficar/CantidadPorCasos}">Graficar</a>
             </div>
 
 
-            <form th:action="@{/graficar/CantidadPorCasosRango}" method="get" id="CantidadPorCasosRango">
+            <form th:action="@{/show/graficar/CantidadPorCasosRango}" method="get" id="CantidadPorCasosRango">
                 <label>Desde: </label>
                 <input type="text" id="datepicker3" th:name="inicio">
                 <br>
@@ -76,7 +76,7 @@
                 <input type="submit" value="Graficar" class="btn btn-primary">
             </form>
 
-            <form th:action="@{/graficar/HombresMujeresPorCaso}" method="get" id="HombresMujeresPorCaso">
+            <form th:action="@{/show/graficar/HombresMujeresPorCaso}" method="get" id="HombresMujeresPorCaso">
                 <label for="tipo_de_caso">Tipo de caso: </label>
                 <select class="form-control" th:name="type">
                     <option th:value="col">Selecciona una opci&oacute;n</option>
@@ -88,7 +88,7 @@
                 <input type="submit" value="Graficar" class="btn btn-primary">
             </form>
 
-            <form th:action="@{/graficar/HombresMujeresPorCasoYRango}" method="get" id="HombresMujeresPorCasoYRango">
+            <form th:action="@{/show/graficar/HombresMujeresPorCasoYRango}" method="get" id="HombresMujeresPorCasoYRango">
                 <label>Desde: </label>
                 <input type="text" id="datepicker5" th:name="inicio">
                 <br>
@@ -108,7 +108,7 @@
                 <input type="submit" value="Graficar" class="btn btn-primary">
             </form>
 
-            <form th:action="@{/graficar/CantidadPorCasosSexo}" method="get" id="CantidadPorCasosSexo">
+            <form th:action="@{/show/graficar/CantidadPorCasosSexo}" method="get" id="CantidadPorCasosSexo">
                 <label>Sexo: </label>
                 <select class="form-control" th:name="sexo">
                     <option th:value="col">Selecciona una opci&oacute;n</option>
@@ -120,7 +120,7 @@
                 <input type="submit" value="Graficar" class="btn btn-primary">
             </form>
 
-            <form th:action="@{/graficar/CantidadPorCasosSexoRango}" method="get" id="CantidadPorCasosSexoRango">
+            <form th:action="@{/show/graficar/CantidadPorCasosSexoRango}" method="get" id="CantidadPorCasosSexoRango">
                 <label>Sexo: </label>
                 <select class="form-control" th:name="sexo">
                     <option th:value="col">Selecciona una opci&oacute;n</option>

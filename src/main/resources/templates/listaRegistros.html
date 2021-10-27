@@ -35,7 +35,7 @@
                 <option value="2">Generar PDF en base a filtro</option>
             </select>
             <br>
-            <form th:action="@{/listaRegistros}" method="get" id="filtrar">
+            <form th:action="@{/show/listaRegistros}" method="get" id="filtrar">
                 <label for="filtro">Nombre o apellido: </label>
                 <input type="text" id="filtro" name="keyword">
                 <br>

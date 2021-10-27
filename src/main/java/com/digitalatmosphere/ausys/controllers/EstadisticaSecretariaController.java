@@ -21,6 +21,7 @@ import com.digitalatmosphere.ausys.services.IEspecialService;
 import com.digitalatmosphere.ausys.services.IFotoService;
 
 @Controller
+@RequestMapping("/read")
 public class EstadisticaSecretariaController {
 	
 	@Autowired

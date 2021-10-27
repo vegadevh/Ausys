@@ -27,15 +27,15 @@
 						<a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item"
-						th:classappend="${#httpServletRequest.getRequestURI() == '/listaPeritajes' ? 'active':''}">
-						<a class="nav-link" href="//listaPeritajes">Ver Peritajes</a>
+						th:classappend="${#httpServletRequest.getRequestURI() == '/read/listaPeritajes' ? 'active':''}">
+						<a class="nav-link" href="/read/listaPeritajes">Ver Peritajes</a>
 					</li>
 					<li class="nav-item"
-						th:classappend="${#httpServletRequest.getRequestURI() == '/listaDesaparecidos' ? 'active':''}">
-						<a class="nav-link" href="//listaDesaparecidos">Ver Desaparecidos</a>
+						th:classappend="${#httpServletRequest.getRequestURI() == '/read/listaDesaparecidos' ? 'active':''}">
+						<a class="nav-link" href="/read/listaDesaparecidos">Ver Desaparecidos</a>
 					</li>
 					<li class="nav-item"
-						th:classappend="${#httpServletRequest.getRequestURI() == '/listaRegistros' ? 'active':''}">
+						th:classappend="${#httpServletRequest.getRequestURI() == '/show/listaRegistros' ? 'active':''}">
 						<a class="nav-link" href="/show/listaRegistros">Ver Registros</a>
 					</li>
 				</ul>
@@ -46,7 +46,7 @@
 						<a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item"
-						th:classappend="${#httpServletRequest.getRequestURI() == '/registrarUsuario' ? 'active':''}">
+						th:classappend="${#httpServletRequest.getRequestURI() == '/admin/usuario_registro' ? 'active':''}">
 						<a class="nav-link" th:href="@{/admin/usuario_registro}">Crear usuario</a>
 					</li>
 				</ul>

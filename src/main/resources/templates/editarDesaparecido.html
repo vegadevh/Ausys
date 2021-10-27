@@ -30,7 +30,7 @@
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <div>
-            <form th:action="@{/editar/desaparecido2/} + ${id_desaparecidoParam} + '/' + ${id_desaperiParam}"
+            <form th:action="@{/write/editar/desaparecido2/} + ${id_desaparecidoParam} + '/' + ${id_desaperiParam}"
                 th:object="${desaparecido}" method="GET">
 
                 <input th:name="id_desaperi" type="hidden" th:value=${id_desaperiParam}>

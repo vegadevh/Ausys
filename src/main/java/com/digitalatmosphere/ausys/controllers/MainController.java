@@ -15,6 +15,7 @@ import com.digitalatmosphere.ausys.services.IDesaparecidoService;
 import com.digitalatmosphere.ausys.services.IPeritajeService;
 
 @Controller
+@RequestMapping("/main")
 public class MainController {
 	
 	@Autowired
