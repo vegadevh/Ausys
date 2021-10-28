@@ -48,7 +48,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		 	.antMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/write/**").hasAnyRole("STATISTICS", "ADMIN")
 			.antMatchers("/read/**").hasAnyRole("SECRETARY", "STATISTICS","ADMIN")
-			.antMatchers("/main/**").hasRole("ADMIN")
 			.antMatchers("/pdf/**").hasAnyRole("SECRETARY", "ADMIN")
 			.antMatchers("/show/**").hasAnyRole("SECRETARY", "ADMIN")
 	             .anyRequest().permitAll()
@@ -58,7 +57,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	                 .defaultSuccessUrl("/")
 	                 .permitAll()
 	             .and()
-	             .logout().logoutSuccessUrl("/").permitAll();
+	             .logout().logoutSuccessUrl("/").permitAll()
+	             .and()
+	 			.exceptionHandling().accessDeniedPage("/403");
 		
 		
 //		http.sessionManagement().maximumSessions(1);
