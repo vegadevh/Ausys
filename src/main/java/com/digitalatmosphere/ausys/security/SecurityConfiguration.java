@@ -43,38 +43,46 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// http.authorizeRequests()
-		// 	.antMatchers("/users").authenticated()
-	    //         .anyRequest().permitAll()
-	    //         .and()
-	    //         .formLogin()
-	    //             .usernameParameter("username")
-	    //             .defaultSuccessUrl("/")
-	    //             .permitAll()
-	    //         .and()
-	    //         .logout().logoutSuccessUrl("/").permitAll();
-		http.sessionManagement().maximumSessions(1);
-		http.authorizeRequests()
-			.antMatchers(resources).permitAll()
-			.antMatchers("/admin/**").hasRole("ADMIN")
+		 http.authorizeRequests()
+		 	.antMatchers("/users").authenticated()
+		 	.antMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/write/**").hasAnyRole("STATISTICS", "ADMIN")
 			.antMatchers("/read/**").hasAnyRole("SECRETARY", "STATISTICS","ADMIN")
 			.antMatchers("/main/**").hasRole("ADMIN")
 			.antMatchers("/pdf/**").hasAnyRole("SECRETARY", "ADMIN")
 			.antMatchers("/show/**").hasAnyRole("SECRETARY", "ADMIN")
-			.antMatchers("/").permitAll()
-			.and()
-			.formLogin()
-			.loginPage("/login")
-			.permitAll()
-			.defaultSuccessUrl("/")
-			.usernameParameter("username")
-			.passwordParameter("password")
-			.and()
-			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/")
-			.and()
-			.exceptionHandling().accessDeniedPage("/403");
+	             .anyRequest().permitAll()
+	             .and()
+	             .formLogin()
+	                 .usernameParameter("username")
+	                 .defaultSuccessUrl("/")
+	                 .permitAll()
+	             .and()
+	             .logout().logoutSuccessUrl("/").permitAll();
+		
+		
+//		http.sessionManagement().maximumSessions(1);
+//		http.authorizeRequests()
+//			.antMatchers(resources).permitAll()
+//			.antMatchers("/admin/**").hasRole("ADMIN")
+//			.antMatchers("/write/**").hasAnyRole("STATISTICS", "ADMIN")
+//			.antMatchers("/read/**").hasAnyRole("SECRETARY", "STATISTICS","ADMIN")
+//			.antMatchers("/main/**").hasRole("ADMIN")
+//			.antMatchers("/pdf/**").hasAnyRole("SECRETARY", "ADMIN")
+//			.antMatchers("/show/**").hasAnyRole("SECRETARY", "ADMIN")
+//			.antMatchers("/").permitAll()
+//			.and()
+//			.formLogin()
+//			.loginPage("/login")
+//			.permitAll()
+//			.defaultSuccessUrl("/")
+//			.usernameParameter("username")
+//			.passwordParameter("password")
+//			.and()
+//			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//			.logoutSuccessUrl("/")
+//			.and()
+//			.exceptionHandling().accessDeniedPage("/403");
 	}
 
 }
