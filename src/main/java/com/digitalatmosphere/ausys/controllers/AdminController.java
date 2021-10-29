@@ -152,7 +152,7 @@ public class AdminController {
 			peritajeS.delete(id_peritaje);
 			
 		}
-		mav.setViewName("redirect:/listaPeritajes");
+		mav.setViewName("redirect:/read/listaPeritajes");
 		
 		return mav;
 	}
@@ -165,7 +165,7 @@ public class AdminController {
 			desaparecidoS.delete(id_desaparecido);
 			
 		}
-		mav.setViewName("redirect:/listaDesaparecidos");
+		mav.setViewName("redirect:/read/listaDesaparecidos");
 		
 		return mav;
 	}
