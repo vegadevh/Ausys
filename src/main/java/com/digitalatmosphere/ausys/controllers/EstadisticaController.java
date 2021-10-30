@@ -599,7 +599,7 @@ public class EstadisticaController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			mav.setViewName("redirect:/listaPeritajes");
+			mav.setViewName("redirect:/read/listaPeritajes");
 		}
 		return mav;
 	}
@@ -641,7 +641,7 @@ public class EstadisticaController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			mav.setViewName("redirect:/listaDesaparecidos");
+			mav.setViewName("redirect:/read/listaDesaparecidos");
 		}
 		return mav;
 	}
@@ -718,7 +718,7 @@ public class EstadisticaController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				mav.setViewName("redirect:/listaDesaparecidos");
+				mav.setViewName("redirect:/read/listaDesaparecidos");
 			} catch (StringIndexOutOfBoundsException e) {
 				String alert = "El campo no puede ser vacio. Ingrese una foto.";
 				mav.addObject("titulo", "Ingresar Foto");
@@ -777,7 +777,7 @@ public class EstadisticaController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				mav.setViewName("redirect:/listaPeritajes");
+				mav.setViewName("redirect:/read/listaPeritajes");
 			} catch (StringIndexOutOfBoundsException e) {
 				String alert = "El campo no puede ser vacio. Ingrese una foto.";
 				mav.addObject("titulo", "Ingresar Foto");
