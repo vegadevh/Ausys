@@ -63,13 +63,13 @@ public class EstadisticaController {
 
 	@Autowired
 	private IDepartamentoService departamentoS;
-	
+
 	@Autowired
 	private IEspecialService especialS;
 
 	@Autowired
 	private IFotoService fotoS;
-	
+
 	public static String DirectorioArchivos = System.getProperty("user.dir") + "/src/main/webapp/imagedata";
 
 	// Listas
@@ -340,229 +340,241 @@ public class EstadisticaController {
 		}
 		return mav;
 	}
-	
-	//EDITAR DESAPARECIDO
-	
-		@RequestMapping("/editar/desaparecido/{id_desaparecido}/{id_desaperi}")
-		public ModelAndView editarDesaparecido(@RequestParam(value="id_desaparecido") String id_desaparecido, @RequestParam(value="id_desaperi") String id_desaperi) {
-			ModelAndView mav = new ModelAndView();
-			
-			if(id_desaparecido != null) {
-				Desaparecido desaparecido = desaparecidoS.findOne(id_desaparecido);
-				
-				List<Departamento> departamentos = null;
-				List<Municipio> municipios = null;
-				List<Division> divisiones = null;
-				
-				try {
-					departamentos = departamentoS.findAll();
-					municipios = municipioS.findAll();
-					divisiones = divisionS.findAll();
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				
-				mav.addObject("titulo", "Editar Desaparecido");
-				
-				mav.addObject("departamentos", departamentos);
-				mav.addObject("municipios", municipios);
-				mav.addObject("divisiones", divisiones);
-				
-				mav.addObject("desaparecido", desaparecido);
-				mav.addObject("id_desaparecidoParam", id_desaparecido);
-				mav.addObject("id_desaperiParam", id_desaperi);
-				mav.setViewName("editarDesaparecido");
-			}else {
-				mav.setViewName("listaDesaparecidos");
+
+	// EDITAR DESAPARECIDO
+
+	@RequestMapping("/editar/desaparecido/{id_desaparecido}/{id_desaperi}")
+	public ModelAndView editarDesaparecido(@RequestParam(value = "id_desaparecido") String id_desaparecido,
+			@RequestParam(value = "id_desaperi") String id_desaperi) {
+		ModelAndView mav = new ModelAndView();
+
+		if (id_desaparecido != null) {
+			Desaparecido desaparecido = desaparecidoS.findOne(id_desaparecido);
+
+			List<Departamento> departamentos = null;
+			List<Municipio> municipios = null;
+			List<Division> divisiones = null;
+
+			try {
+				departamentos = departamentoS.findAll();
+				municipios = municipioS.findAll();
+				divisiones = divisionS.findAll();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			
-			return mav;
+
+			mav.addObject("titulo", "Editar Desaparecido");
+
+			mav.addObject("departamentos", departamentos);
+			mav.addObject("municipios", municipios);
+			mav.addObject("divisiones", divisiones);
+
+			mav.addObject("desaparecido", desaparecido);
+			mav.addObject("id_desaparecidoParam", id_desaparecido);
+			mav.addObject("id_desaperiParam", id_desaperi);
+			mav.setViewName("editarDesaparecido");
+		} else {
+			mav.setViewName("listaDesaparecidos");
 		}
-		
-		@RequestMapping("/editar/desaparecido2/{id_desaparecido}/{id_desaperi}")
-		public ModelAndView editarDesaparecido2(@Valid @ModelAttribute Desaparecido desaparecido, BindingResult result, @RequestParam(value="id_desaperi") String id_desaperi, @RequestParam(value="id_desaparecido") String id_desaparecido) {
-			ModelAndView mav = new ModelAndView();
-			
-			if(result.hasErrors()) {
-				List<Departamento> departamentos = null;
-				List<Municipio> municipios = null;
-				List<Division> divisiones = null;
-				
-				try {
-					departamentos = departamentoS.findAll();
-					municipios = municipioS.findAll();
-					divisiones = divisionS.findAll();
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				
-				mav.addObject("titulo", "Editar Desaparecido");
-				
-				mav.addObject("departamentos", departamentos);
-				mav.addObject("municipios", municipios);
-				mav.addObject("divisiones", divisiones);
-				
-				mav.addObject("desaparecido", desaparecido);
-				mav.addObject("id_desaparecidoParam", id_desaparecido);
-				mav.addObject("id_desaperiParam", id_desaperi);
-				mav.setViewName("editarDesaparecido");
-			}else {
-				try {
-					desaparecidoS.save(desaparecido);
-				}catch(Exception e){
-					e.getStackTrace();
-				}
-				
-				if(id_desaperi != null) {
-					DesaPeri desaPeri = desaPeriS.findOne(Integer.parseInt(id_desaperi));
-					
-					mav.addObject("titulo", "Editar Desaparecido p2");
-					mav.addObject("desaPeri", desaPeri);
-					
-					mav.addObject("id_desaparecidoParam", id_desaparecido);
-					mav.addObject("id_desaperiParam", id_desaperi);
-					mav.setViewName("editarDesaparecido2");
-					
-				}
-				
+
+		return mav;
+	}
+
+	@RequestMapping("/editar/desaparecido2/{id_desaparecido}/{id_desaperi}")
+	public ModelAndView editarDesaparecido2(@Valid @ModelAttribute Desaparecido desaparecido, BindingResult result,
+			@RequestParam(value = "id_desaperi") String id_desaperi,
+			@RequestParam(value = "id_desaparecido") String id_desaparecido) {
+		ModelAndView mav = new ModelAndView();
+
+		if (result.hasErrors()) {
+			List<Departamento> departamentos = null;
+			List<Municipio> municipios = null;
+			List<Division> divisiones = null;
+
+			try {
+				departamentos = departamentoS.findAll();
+				municipios = municipioS.findAll();
+				divisiones = divisionS.findAll();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			
-			return mav;
-		}
-		
-		@RequestMapping("/validarEdicion/desaparecido2/{id_desaparecido}/{id_desaperi}")
-		public ModelAndView validarEdicionDesaparecido2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result, @Valid @ModelAttribute Desaparecido desaparecido, BindingResult result2, @RequestParam(value="id_desaperi") String id_desaperi, @RequestParam(value="id_desaparecido") String id_desaparecido) {
-			ModelAndView mav = new ModelAndView();
-			
-			if(result.hasErrors()) {
-				
+
+			mav.addObject("titulo", "Editar Desaparecido");
+
+			mav.addObject("departamentos", departamentos);
+			mav.addObject("municipios", municipios);
+			mav.addObject("divisiones", divisiones);
+
+			mav.addObject("desaparecido", desaparecido);
+			mav.addObject("id_desaparecidoParam", id_desaparecido);
+			mav.addObject("id_desaperiParam", id_desaperi);
+			mav.setViewName("editarDesaparecido");
+		} else {
+			try {
+				desaparecidoS.save(desaparecido);
+			} catch (Exception e) {
+				e.getStackTrace();
+			}
+
+			if (id_desaperi != null) {
+				DesaPeri desaPeri = desaPeriS.findOne(Integer.parseInt(id_desaperi));
+
 				mav.addObject("titulo", "Editar Desaparecido p2");
-				mav.addObject("desaPeri",desaPeri);
+				mav.addObject("desaPeri", desaPeri);
+
 				mav.addObject("id_desaparecidoParam", id_desaparecido);
 				mav.addObject("id_desaperiParam", id_desaperi);
 				mav.setViewName("editarDesaparecido2");
-			}else {
-				Desaparecido desaparecido2 = new Desaparecido();
-				desaPeri.setId_desaparecido(id_desaparecido);
-				try {
-					desaparecido2 = desaparecidoS.findOne(id_desaparecido);
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				desaPeri.setDesaparecido(desaparecido2);
-				try {
-					desaPeriS.save(desaPeri);
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				desaPeri.setId_desaperi(Integer.parseInt(id_desaperi));
-				
-				mav.addObject("desaPeri", desaPeri);
-				mav.addObject("desaparecido", desaparecido);
-				mav.addObject("id_desaparecidoParam", id_desaparecido);
-				mav.addObject("id_desaperiParam", id_desaperi);
-				mav.addObject("mensaje", "Desaparecido editado con exito");
-				mav.setViewName("verDesaparecido");
+
 			}
-			return mav;
+
 		}
-		
-		//EDITAR PERITAJE
-		
-		@RequestMapping("/editar/peritaje/{id_peritaje}/{id_desaperi}")
-		public ModelAndView editarPeritaje(@RequestParam(value="id_peritaje") String id_peritaje, @RequestParam(value="id_desaperi") String id_desaperi) {
-			ModelAndView mav = new ModelAndView();
-			
-			if(id_peritaje != null) {
-				Peritaje peritaje = peritajeS.findOne(id_peritaje);
-				
-				mav.addObject("titulo", "Editar Peritaje");
-				
-				mav.addObject("peritaje", peritaje);
-				mav.addObject("id_peritajeParam", id_peritaje);
-				mav.addObject("id_desaperiParam", id_desaperi);
-				mav.setViewName("editarPeritaje");
-			}else {
-				mav.setViewName("listaPeritajes");
+
+		return mav;
+	}
+
+	@RequestMapping("/validarEdicion/desaparecido2/{id_desaparecido}/{id_desaperi}")
+	public ModelAndView validarEdicionDesaparecido2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result,
+			@Valid @ModelAttribute Desaparecido desaparecido, BindingResult result2,
+			@RequestParam(value = "id_desaperi") String id_desaperi,
+			@RequestParam(value = "id_desaparecido") String id_desaparecido) {
+		ModelAndView mav = new ModelAndView();
+
+		if (result.hasErrors()) {
+
+			mav.addObject("titulo", "Editar Desaparecido p2");
+			mav.addObject("desaPeri", desaPeri);
+			mav.addObject("id_desaparecidoParam", id_desaparecido);
+			mav.addObject("id_desaperiParam", id_desaperi);
+			mav.setViewName("editarDesaparecido2");
+		} else {
+			Desaparecido desaparecido2 = new Desaparecido();
+			desaPeri.setId_desaparecido(id_desaparecido);
+			try {
+				desaparecido2 = desaparecidoS.findOne(id_desaparecido);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			
-			return mav;
-		}
-		
-		@RequestMapping("/editar/peritaje2/{id_peritaje}/{id_desaperi}")
-		public ModelAndView editarDesaparecido2(@Valid @ModelAttribute Peritaje peritaje, BindingResult result, @RequestParam(value="id_desaperi") String id_desaperi, @RequestParam(value="id_peritaje") String id_peritaje) {
-			ModelAndView mav = new ModelAndView();
-			
-			if(result.hasErrors()) {
-				
-				mav.addObject("titulo", "Editar Peritaje");
-				
-				mav.addObject("peritaje", peritaje);
-				mav.addObject("id_peritajeParam", id_peritaje);
-				mav.addObject("id_desaperiParam", id_desaperi);
-				mav.setViewName("editarPeritaje");
-			}else {
-				try {
-					peritajeS.save(peritaje);
-				}catch(Exception e){
-					e.getStackTrace();
-				}
-				
-				if(id_desaperi != null) {
-					DesaPeri desaPeri = desaPeriS.findOne(Integer.parseInt(id_desaperi));
-					
-					mav.addObject("titulo", "Editar Peritaje p2");
-					mav.addObject("desaPeri", desaPeri);
-					
-					mav.addObject("id_peritajeParam", id_peritaje);
-					mav.addObject("id_desaperiParam", id_desaperi);
-					mav.setViewName("editarPeritaje2");
-					
-				}
-				
+			desaPeri.setDesaparecido(desaparecido2);
+			try {
+				desaPeriS.save(desaPeri);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			
-			return mav;
+			desaPeri.setId_desaperi(Integer.parseInt(id_desaperi));
+
+			mav.addObject("desaPeri", desaPeri);
+			mav.addObject("desaparecido", desaparecido);
+			mav.addObject("id_desaparecidoParam", id_desaparecido);
+			mav.addObject("id_desaperiParam", id_desaperi);
+			mav.addObject("mensaje", "Desaparecido editado con exito");
+			mav.setViewName("verDesaparecido");
 		}
-		
-		@RequestMapping("/validarEdicion/peritaje2/{id_peritaje}/{id_desaperi}")
-		public ModelAndView validarEdicionPeritaje2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result, @Valid @ModelAttribute Peritaje peritaje, BindingResult result2, @RequestParam(value="id_desaperi") String id_desaperi, @RequestParam(value="id_peritaje") String id_peritaje) {
-			ModelAndView mav = new ModelAndView();
-			
-			if(result.hasErrors()) {
-				
+		return mav;
+	}
+
+	// EDITAR PERITAJE
+
+	@RequestMapping("/editar/peritaje/{id_peritaje}/{id_desaperi}")
+	public ModelAndView editarPeritaje(@RequestParam(value = "id_peritaje") String id_peritaje,
+			@RequestParam(value = "id_desaperi") String id_desaperi) {
+		ModelAndView mav = new ModelAndView();
+
+		if (id_peritaje != null) {
+			Peritaje peritaje = peritajeS.findOne(id_peritaje);
+
+			mav.addObject("titulo", "Editar Peritaje");
+
+			mav.addObject("peritaje", peritaje);
+			mav.addObject("id_peritajeParam", id_peritaje);
+			mav.addObject("id_desaperiParam", id_desaperi);
+			mav.setViewName("editarPeritaje");
+		} else {
+			mav.setViewName("listaPeritajes");
+		}
+
+		return mav;
+	}
+
+	@RequestMapping("/editar/peritaje2/{id_peritaje}/{id_desaperi}")
+	public ModelAndView editarDesaparecido2(@Valid @ModelAttribute Peritaje peritaje, BindingResult result,
+			@RequestParam(value = "id_desaperi") String id_desaperi,
+			@RequestParam(value = "id_peritaje") String id_peritaje) {
+		ModelAndView mav = new ModelAndView();
+
+		if (result.hasErrors()) {
+
+			mav.addObject("titulo", "Editar Peritaje");
+
+			mav.addObject("peritaje", peritaje);
+			mav.addObject("id_peritajeParam", id_peritaje);
+			mav.addObject("id_desaperiParam", id_desaperi);
+			mav.setViewName("editarPeritaje");
+		} else {
+			try {
+				peritajeS.save(peritaje);
+			} catch (Exception e) {
+				e.getStackTrace();
+			}
+
+			if (id_desaperi != null) {
+				DesaPeri desaPeri = desaPeriS.findOne(Integer.parseInt(id_desaperi));
+
 				mav.addObject("titulo", "Editar Peritaje p2");
-				mav.addObject("desaPeri",desaPeri);
+				mav.addObject("desaPeri", desaPeri);
+
 				mav.addObject("id_peritajeParam", id_peritaje);
 				mav.addObject("id_desaperiParam", id_desaperi);
 				mav.setViewName("editarPeritaje2");
-			}else {
-				Peritaje peritaje2 = new Peritaje();
-				desaPeri.setId_peritaje(id_peritaje);
-				try {
-					peritaje2 = peritajeS.findOne(id_peritaje);
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				desaPeri.setPeritaje(peritaje2);
-				try {
-					desaPeriS.save(desaPeri);
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				desaPeri.setId_desaperi(Integer.parseInt(id_desaperi));
-				
-				mav.addObject("desaPeri", desaPeri);
-				mav.addObject("peritaje", peritaje);
-				mav.addObject("id_peritajeParam", id_peritaje);
-				mav.addObject("id_desaperiParam", id_desaperi);
-				mav.addObject("mensaje", "Peritaje editado con exito");
-				mav.setViewName("verPeritaje");
+
 			}
-			return mav;
+
 		}
 
-		// AGREGAR ESPECIAL
+		return mav;
+	}
+
+	@RequestMapping("/validarEdicion/peritaje2/{id_peritaje}/{id_desaperi}")
+	public ModelAndView validarEdicionPeritaje2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result,
+			@Valid @ModelAttribute Peritaje peritaje, BindingResult result2,
+			@RequestParam(value = "id_desaperi") String id_desaperi,
+			@RequestParam(value = "id_peritaje") String id_peritaje) {
+		ModelAndView mav = new ModelAndView();
+
+		if (result.hasErrors()) {
+
+			mav.addObject("titulo", "Editar Peritaje p2");
+			mav.addObject("desaPeri", desaPeri);
+			mav.addObject("id_peritajeParam", id_peritaje);
+			mav.addObject("id_desaperiParam", id_desaperi);
+			mav.setViewName("editarPeritaje2");
+		} else {
+			Peritaje peritaje2 = new Peritaje();
+			desaPeri.setId_peritaje(id_peritaje);
+			try {
+				peritaje2 = peritajeS.findOne(id_peritaje);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			desaPeri.setPeritaje(peritaje2);
+			try {
+				desaPeriS.save(desaPeri);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			desaPeri.setId_desaperi(Integer.parseInt(id_desaperi));
+
+			mav.addObject("desaPeri", desaPeri);
+			mav.addObject("peritaje", peritaje);
+			mav.addObject("id_peritajeParam", id_peritaje);
+			mav.addObject("id_desaperiParam", id_desaperi);
+			mav.addObject("mensaje", "Peritaje editado con exito");
+			mav.setViewName("verPeritaje");
+		}
+		return mav;
+	}
+
+	// AGREGAR ESPECIAL
 	@RequestMapping("/especial/{id}/{id_registro}")
 	public ModelAndView agregarEspecial(@RequestParam(value = "id") String id) {
 		ModelAndView mav = new ModelAndView();
@@ -676,7 +688,7 @@ public class EstadisticaController {
 	@RequestMapping("/subir/D/{id_registro}")
 	@ResponseBody
 	public ModelAndView subirFoto(@Valid @ModelAttribute Foto foto, BindingResult result,
-			@PathVariable(value = "id_registro") String id, @RequestParam(value = "img") MultipartFile file) {
+			@PathVariable(value = "id_registro") String id, @RequestParam(value = "img") MultipartFile file){
 		ModelAndView mav = new ModelAndView();
 
 		if (result.hasErrors()) {
@@ -689,6 +701,7 @@ public class EstadisticaController {
 			mav.addObject("val", "Desaparecido");
 			mav.setViewName("ingresarFoto");
 		} else {
+
 			StringBuilder fileName = new StringBuilder();
 
 			Date date = Calendar.getInstance().getTime();
