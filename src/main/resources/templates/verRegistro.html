@@ -64,7 +64,8 @@
                 </div>
                 <div>
                     <b class="d-inline">Nombre: </b>
-                    <p class="d-inline" th:text="${registro.nombre}"></p>
+                    <p class="d-inline" th:if="${registro.edad_estimada} < 18">Menor</p>
+                    <p class="d-inline" th:unless="${registro.edad_estimada} < 18" th:text="${registro.nombre}"></p>
                 </div>
                 <div>
                     <b class="d-inline">Apellido: </b>
@@ -130,22 +131,22 @@
                     </div>
                     <div class="card-body">
                         <div th:if="${relacion.tipo_de_caso}">
-                            <b class="d-inline">Fecha de nacimiento: </b>
+                            <b class="d-inline">Tipo de caso: </b>
                             <p class="d-inline" th:text="${relacion.tipo_de_caso}"></p>
                         </div>
                         <div th:if="${relacion.nombre}">
-                            <b class="d-inline">Nombre de familiar: </b>
+                            <b class="d-inline">Nombre: </b>
                             <p class="d-inline" th:text="${relacion.nombre}"></p>
                         </div>
                         <div th:if="${relacion.apellido}">
-                            <b class="d-inline">Contacto del familiar: </b>
+                            <b class="d-inline">Apellido: </b>
                             <p class="d-inline" th:text="${relacion.apellido}"></p>
                         </div>
                         <div th:if="${relacion.fecha_registro}">
-                            <b class="d-inline">Edad estimada: </b>
+                            <b class="d-inline">Fecha de registro: </b>
                             <p class="d-inline" th:text="${relacion.fecha_registro}"></p>
                         </div>
-                        <div th:if="${relacion.id_desaperi}">
+                        <div style="display: none;" th:if="${relacion.id_desaperi}">
                             <b class="d-inline">Edad estimada: </b>
                             <p class="d-inline" th:text="${relacion.id_desaperi}"></p>
                         </div>

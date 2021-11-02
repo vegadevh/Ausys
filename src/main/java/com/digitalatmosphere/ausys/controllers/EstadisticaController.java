@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -700,7 +701,8 @@ public class EstadisticaController {
 			mav.addObject("alert", alert);
 			mav.addObject("val", "Desaparecido");
 			mav.setViewName("ingresarFoto");
-		} else {
+		}
+		else {
 
 			StringBuilder fileName = new StringBuilder();
 
@@ -750,7 +752,7 @@ public class EstadisticaController {
 	public ModelAndView subirFotoP(@Valid @ModelAttribute Foto foto, BindingResult result,
 			@PathVariable(value = "id_registro") String id, @RequestParam(value = "img") MultipartFile file) {
 		ModelAndView mav = new ModelAndView();
-
+		
 		if (result.hasErrors()) {
 
 			mav.addObject("titulo", "Ingresar Foto");
@@ -760,7 +762,8 @@ public class EstadisticaController {
 			mav.addObject("alert", alert);
 			mav.addObject("val", "Peritaje");
 			mav.setViewName("ingresarFoto");
-		} else {
+		}
+		else {
 			StringBuilder fileName = new StringBuilder();
 
 			Date date = Calendar.getInstance().getTime();
