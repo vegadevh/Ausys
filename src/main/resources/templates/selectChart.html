@@ -48,10 +48,10 @@
 
             <form th:action="@{/show/graficar/HombresMujeresRangoFechas}" method="get" id="HombresMujeresRango">
                 <label>Desde: </label>
-                <input type="text" id="datepicker" th:name="inicio">
+                <input type="text" id="datepicker" th:name="inicio" required>
                 <br>
                 <label>Hasta: </label>
-                <input type="text" id="datepicker2" th:name="fin">
+                <input type="text" id="datepicker2" th:name="fin" required>
                 <br>
                 <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
                 <br>
@@ -88,7 +88,8 @@
                 <input type="submit" value="Graficar" class="btn btn-primary">
             </form>
 
-            <form th:action="@{/show/graficar/HombresMujeresPorCasoYRango}" method="get" id="HombresMujeresPorCasoYRango">
+            <form th:action="@{/show/graficar/HombresMujeresPorCasoYRango}" method="get"
+                id="HombresMujeresPorCasoYRango">
                 <label>Desde: </label>
                 <input type="text" id="datepicker5" th:name="inicio">
                 <br>
