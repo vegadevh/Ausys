@@ -73,6 +73,7 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 			p.setApellido(obj[3].toString());
 			p.setFecha_registro(obj[4].toString());
 			p.setId_desaperi(obj[5].toString());
+			p.setEdad_estimada(obj[6].toString());
 			return p;
 		}).collect(Collectors.toList());
 		return peritajes;
