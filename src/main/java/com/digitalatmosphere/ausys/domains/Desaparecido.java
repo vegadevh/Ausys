@@ -13,6 +13,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,6 +24,7 @@ public class Desaparecido {
 	@Id
 	@Column(name="id_desaparecido")
 	@NotEmpty
+	@Size(message="El campo debe tener como maximo 15 caracteres",max=15)
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id_desaparecido;
 	

@@ -13,7 +13,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -76,7 +75,7 @@ public class EstadisticaController {
 	// Listas
 	@ModelAttribute("listaSexo")
 	public List<String> listaSexo() {
-		return Arrays.asList("Hombre", "Mujer");
+		return Arrays.asList("Masculino", "Femenino");
 	}
 
 	@ModelAttribute("listaSexo2")
@@ -184,13 +183,14 @@ public class EstadisticaController {
 
 	@PostMapping("/validarPeritaje2")
 	public ModelAndView validarPeritaje2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result,
-			@ModelAttribute Peritaje peritaje, BindingResult result2, @RequestParam(value = "id_peritaje") String id) {
+			@ModelAttribute Peritaje peritaje, BindingResult result2, @RequestParam(value = "id_peritaje") String id, @RequestParam(value = "tipo_de_caso") String tipo_de_caso) {
 
 		ModelAndView mav = new ModelAndView();
 
-		if (result.hasErrors()) {
+		if (result.hasErrors() || tipo_de_caso.equals("col2")) {
 			desaPeri.setFecha_registro(new java.util.Date());
 
+			mav.addObject("alert", "Debe seleccionar una de las opciones de Tipo de Caso.");
 			mav.addObject("titulo", "Ingresar Peritajes p2");
 			mav.addObject("desaPeri", desaPeri);
 			mav.setViewName("ingresarPeritaje2");

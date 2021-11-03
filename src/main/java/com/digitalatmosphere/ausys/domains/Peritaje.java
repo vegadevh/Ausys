@@ -17,6 +17,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(schema="public", name="PERITAJES")
@@ -25,6 +26,7 @@ public class Peritaje {
 	@Id
 	@Column(name="id_peritaje")
 	@NotEmpty
+	@Size(message="El campo debe tener como maximo 15 caracteres",max=15)
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id_peritaje;
 	

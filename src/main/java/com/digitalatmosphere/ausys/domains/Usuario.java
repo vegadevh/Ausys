@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(schema="public", name="USUARIOS")
@@ -20,18 +21,23 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_usuario;
 	
+	@NotEmpty
 	@Column(name="username")
 	private String username;
 	
+	@NotEmpty
 	@Column(name="password")
 	private String password;
 	
+	@NotEmpty
 	@Column(name="enabled_u")
 	private Boolean enabled_u;
 	
+	@NotEmpty
 	@Column(name="nombre")
 	private String nombre;
 	
+	@NotEmpty
 	@Column(name="apellido")
 	private String apellido;
 	

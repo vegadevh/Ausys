@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,15 +27,18 @@ public class DesaPeri {
 	private Integer id_desaperi;
 	
 	@NotEmpty
+	@Size(message="El campo debe tener como maximo 80 caracteres",max=80)
 	@Column(name="tipo_de_caso")
 	private String tipo_de_caso;
 	
 	@NotEmpty
 	@Column(name="nombre")
+	@Size(message="El campo debe tener como maximo 30 caracteres",max=30)
 	private String nombre;
 	
 	@NotEmpty
 	@Column(name="apellido")
+	@Size(message="El campo debe tener como maximo 30 caracteres",max=30)
 	private String apellido;
 	
 	@NotEmpty
@@ -49,7 +53,9 @@ public class DesaPeri {
 	@Column(name="informacion_adicional")
 	private String informacion_adicional;
 	
+	@NotEmpty
 	@Column(name="DUI")
+	@Size(message="El campo debe tener 10 caracteres.",min=10, max=10)
 	private String Dui;
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy")
