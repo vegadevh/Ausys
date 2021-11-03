@@ -8,6 +8,7 @@ public class PeritajeDTO {
 	private String apellido;
 	private String fecha_registro;
 	private String id_desaperi;
+	private String edad_estimada;
 	
 	public String getId_peritaje() {
 		return id_peritaje;
@@ -44,6 +45,12 @@ public class PeritajeDTO {
 	}
 	public void setId_desaperi(String id_desaperi) {
 		this.id_desaperi = id_desaperi;
+	}
+	public String getEdad_estimada() {
+		return edad_estimada;
+	}
+	public void setEdad_estimada(String edad_estimada) {
+		this.edad_estimada = edad_estimada;
 	}
 	
 	

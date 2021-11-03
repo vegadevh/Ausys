@@ -42,8 +42,14 @@
                 <tr th:each=" desaPeri: ${desaPeriL}">
                     <th scope="row" th:text="${desaPeri.id_peritaje}"></th>
                     <td th:text="${desaPeri.tipo_de_caso}"></td>
-                    <td th:name="peritajeName" th:text="${desaPeri.nombre}"></td>
-                    <td th:name="peritajeLastname" th:text="${desaPeri.apellido}"></td>
+                    <td th:if="${desaPeri.edad_estimada} < 18"
+                        th:text="${#strings.substring(desaPeri.nombre, 0,1) + '...'}"></td>
+                    <td th:name="peritajeName" th:unless="${desaPeri.edad_estimada} < 18" th:text="${desaPeri.nombre}">
+                    </td>
+                    <td th:if="${desaPeri.edad_estimada} < 18"
+                        th:text="${#strings.substring(desaPeri.apellido, 0,1) + '...'}"></td>
+                    <td th:name="peritajeLastname" th:unless="${desaPeri.edad_estimada} < 18"
+                        th:text="${desaPeri.apellido}"></td>
                     <td th:text="${desaPeri.fecha_registro}"></td>
                     <td>
                         <div class="d-flex">
