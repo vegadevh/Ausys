@@ -116,6 +116,12 @@ public class Usuario {
 		this.id_rol = id_rol;
 	}
 	
-	
+	public String getEstadoDelegate() {
+		if(this.enabled_u == null) return "Valor invalido";
+		else {
+			return enabled_u == true ? "Disponible": "No Disponible";
+		}
+		
+	}
 	
 }

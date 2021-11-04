@@ -34,18 +34,17 @@
                     <th scope="col">Estado</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
-                    <!-- <th scope="col">Acción</th> -->
                 </tr>
             </thead>
             <tbody>
                 <tr th:each=" user: ${users}">
                     <th scope="row" th:text="${user.username}"></th>
-                    <td th:text="${user.enabled_u}"></td>
+                    <td th:text="${user.getEstadoDelegate}"></td>
                     <td th:text="${user.nombre}"></td>
                     <td th:text="${user.apellido}">
                     </td>
-                    <!-- <td>
-                        <div class="d-flex">
+                    <td>
+                       <!-- <div class="d-flex">
                             <form class="p-1"
                                 th:action="@{/read/verRegistro/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
                                 method="GET">
@@ -55,23 +54,24 @@
                                 <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
                                 <input type="submit" class="btn btn-primary" value="Ver">
                             </form>
+                                -->
+                            
                             <form class="p-1"
-                                th:action="@{/write/editar/peritaje/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
+                                th:action="@{/editar/usuario/{id_usuario}} + ${user.id_usuario} "
                                 method="GET">
-                                <input th:name="id_peritaje" type="hidden" th:value=${desaPeri.id_peritaje}>
-                                <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
-                                <input type="submit" class="btn btn-success" value="Editar">
+                                <input th:name="user.id_usuario" type="hidden" th:value=${user.id_usuario}>
+                                <input type="submit" class="btn btn-success" value="Desabilitar">
+                                
                             </form>
                             <form class="p-1"
-                                th:action="@{/admin/eliminar/peritaje/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
+                                th:action="@{/eliminar/usuario/} + ${user.id_usuario}"
                                 method="GET">
-                                <input th:name="id_peritaje" type="hidden" th:value=${desaPeri.id_peritaje}>
-                                <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
-                                <input type="submit" class="btn btn-danger" value="Eliminar"
-                                    onclick="return confirm('¿Estás seguro que deseas eliminar el peritaje?');">
+                                <input th:name="id_usuario" hidden th:value=${user.id_usuario}>
+                             	<input type="submit" class="btn btn-danger" value="Eliminar"
+                                    onclick="return confirm('¿Estás seguro que deseas eliminar el usuario?');">
                             </form>
                         </div>
-                    </td> -->
+                    </td> 
                 </tr>
             </tbody>
         </table>

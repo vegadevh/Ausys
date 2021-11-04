@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -159,6 +160,28 @@ public class AdminController {
 		mav.addObject("users", users);
 		mav.setViewName("listaUsuario");
 
+		return mav;
+	}
+	
+	@RequestMapping("/eliminar/usuario/{id_usuario}")
+	public ModelAndView eliminarUsuario(@RequestParam(value="id_usuario") String id_usuario) {
+		ModelAndView mav = new ModelAndView();
+		if(id_usuario != null) {
+			usuarioS.delete(Integer.parseInt(id_usuario));
+		}
+		
+		mav.setViewName("redirect:/admin/listaUsuarios");
+		return mav;
+	}
+	
+	@RequestMapping("/editar/usuario/{id_usuario}")
+	public ModelAndView editarUsuario(@PathVariable("id_usuario") String id_usuario) {
+		ModelAndView mav = new ModelAndView();
+		if(id_usuario != null) {
+			usuarioS.delete(Integer.parseInt(id_usuario));
+		}
+		
+		mav.setViewName("redirect:/listaUsuarios");
 		return mav;
 	}
 	
