@@ -60,7 +60,7 @@
                             <form class="p-1" th:action="@{/admin/editar/usuario/} + ${user.id_usuario} " method="GET">
                                 <input th:name="id_usuario" hidden th:value=${user.id_usuario}>
                                 <input th:if="${user.enabled_u} == true" type="submit" class="btn btn-success"
-                                    value="Desabilitar">
+                                    value="Deshabilitar">
                                 <input th:unless="${user.enabled_u} == true" type="submit" class="btn btn-success"
                                     value="Habilitar">
                             </form>
