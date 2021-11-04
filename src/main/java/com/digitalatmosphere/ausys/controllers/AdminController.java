@@ -175,13 +175,26 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/editar/usuario/{id_usuario}")
-	public ModelAndView editarUsuario(@PathVariable("id_usuario") String id_usuario) {
+	public ModelAndView editarUsuario(@RequestParam(value="id_usuario") String id_usuario) {
 		ModelAndView mav = new ModelAndView();
+		Usuario usuario = new Usuario();
+		
+		
 		if(id_usuario != null) {
-			usuarioS.delete(Integer.parseInt(id_usuario));
+			usuario = usuarioS.findOne(Integer.parseInt(id_usuario));
+			if(usuario.getEnabled_u() == true) {
+				usuario.setEnabled_u(false);
+				
+			}else {
+				usuario.setEnabled_u(true);
+			}
+			
+			usuarioS.save(usuario);
+			
 		}
 		
-		mav.setViewName("redirect:/listaUsuarios");
+		
+		mav.setViewName("redirect:/admin/listaUsuarios");
 		return mav;
 	}
 	
