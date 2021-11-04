@@ -34,6 +34,7 @@
                     <th scope="col">Estado</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
+                    <th scope="col">Acción</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,7 +45,7 @@
                     <td th:text="${user.apellido}">
                     </td>
                     <td>
-                       <!-- <div class="d-flex">
+                        <!-- <div class="d-flex">
                             <form class="p-1"
                                 th:action="@{/read/verRegistro/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
                                 method="GET">
@@ -55,26 +56,25 @@
                                 <input type="submit" class="btn btn-primary" value="Ver">
                             </form>
                                 -->
-                            
-                            <form class="p-1"
-                                th:action="@{/admin/editar/usuario/} + ${user.id_usuario} "
-                                method="GET">
+                        <div class="d-flex">
+                            <form class="p-1" th:action="@{/admin/editar/usuario/} + ${user.id_usuario} " method="GET">
                                 <input th:name="id_usuario" hidden th:value=${user.id_usuario}>
-                                <input th:if="${user.enabled_u} == true" type="submit" class="btn btn-success" value="Desabilitar">
-                                <input th:unless="${user.enabled_u} == true" type="submit" class="btn btn-success" value="Habilitar">
+                                <input th:if="${user.enabled_u} == true" type="submit" class="btn btn-success"
+                                    value="Desabilitar">
+                                <input th:unless="${user.enabled_u} == true" type="submit" class="btn btn-success"
+                                    value="Habilitar">
                             </form>
-                            <form class="p-1"
-                                th:action="@{/admin/eliminar/usuario/} + ${user.id_usuario}"
-                                method="GET">
+                            <form class="p-1" th:action="@{/admin/eliminar/usuario/} + ${user.id_usuario}" method="GET">
                                 <input th:name="id_usuario" hidden th:value=${user.id_usuario}>
-                             	<input type="submit" class="btn btn-danger" value="Eliminar"
+                                <input type="submit" class="btn btn-danger" value="Eliminar"
                                     onclick="return confirm('¿Estás seguro que deseas eliminar el usuario?');">
                             </form>
                         </div>
-                    </td> 
-                </tr>
-            </tbody>
-        </table>
+    </div>
+    </td>
+    </tr>
+    </tbody>
+    </table>
     </div>
 
 </body>

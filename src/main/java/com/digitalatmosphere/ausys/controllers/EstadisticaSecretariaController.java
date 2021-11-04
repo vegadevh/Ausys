@@ -136,7 +136,7 @@ public class EstadisticaSecretariaController {
 			mav.addObject("val", "Peritaje");
 			mav.setViewName("verRegistro");
 		} else {
-			mav.addObject("titulo", "Lista de Registros");
+			mav.addObject("titulo", "Lista de Peritajes");
 			mav.setViewName("listaPeritajes");
 		}
 
