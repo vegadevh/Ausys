@@ -36,12 +36,12 @@ public class EstadisticaSecretariaController {
 	// Listas
 	@ModelAttribute("listaSexo")
 	public List<String> listaSexo() {
-		return Arrays.asList("Hombre", "Mujer");
+		return Arrays.asList("Masculino", "Femenino");
 	}
 
 	@ModelAttribute("listaSexo2")
 	public List<String> listaSexo2() {
-		return Arrays.asList("Ambos", "Hombre", "Mujer");
+		return Arrays.asList("Ambos", "Masculino", "Femenino");
 	}
 
 	@ModelAttribute("listaCasos")

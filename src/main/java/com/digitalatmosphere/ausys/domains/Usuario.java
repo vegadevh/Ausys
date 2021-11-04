@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(schema="public", name="USUARIOS")
@@ -23,6 +24,7 @@ public class Usuario {
 	
 	@NotEmpty
 	@Column(name="username")
+	@Size(message="Como maximo puede ingresar 50 caracteres.", max=50)
 	private String username;
 	
 	@NotEmpty
@@ -35,10 +37,12 @@ public class Usuario {
 	
 	@NotEmpty
 	@Column(name="nombre")
+	@Size(message="Como maximo puede ingresar 50 caracteres.", max=50)
 	private String nombre;
 	
 	@NotEmpty
 	@Column(name="apellido")
+	@Size(message="Como maximo puede ingresar 50 caracteres.", max=50)
 	private String apellido;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

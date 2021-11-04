@@ -45,12 +45,12 @@ public class AdminController {
 	//Listas
 	@ModelAttribute("listaSexo")
 	public List<String> listaSexo(){
-		return Arrays.asList("Hombre", "Mujer");
+		return Arrays.asList("Masculino", "Femenino");
 	}
 	
 		@ModelAttribute("listaSexo2")
 		public List<String> listaSexo2(){
-			return Arrays.asList("Ambos","Hombre", "Mujer");
+			return Arrays.asList("Ambos","Masculino", "Femenino");
 		}
 	
 	@ModelAttribute("listaCasos")
@@ -141,6 +141,27 @@ public class AdminController {
 		
 		return mav;
 	}
+	
+	//LISTA DE USUARIOS
+	
+	@RequestMapping("/listaUsuarios")
+	public ModelAndView listaPeritajes() {
+		ModelAndView mav = new ModelAndView();
+
+		List<Usuario> users = null;
+		try {
+			users = usuarioS.findALL();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		mav.addObject("titulo", "Lista de usuarios");
+		mav.addObject("users", users);
+		mav.setViewName("listaUsuario");
+
+		return mav;
+	}
+	
 
 	//ELIMINAR
 	

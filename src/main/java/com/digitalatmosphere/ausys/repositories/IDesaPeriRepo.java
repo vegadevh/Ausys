@@ -71,8 +71,8 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 	public  List<DesaPeri> findByKeywordAndtipe(@Param("keyword") String keyword,@Param("type") String type, String sexo);
 	
 	//CHARTS
-	@Query(nativeQuery=true, value="SELECT SUM(CASE WHEN sexo = 'Mujer' then 1 else 0 end) as mujer,\r\n"
-			+ "SUM(CASE WHEN sexo = 'Hombre' then 1 else 0 end) as hombre\r\n"
+	@Query(nativeQuery=true, value="SELECT SUM(CASE WHEN sexo = 'Femenino' then 1 else 0 end) as mujer,\r\n"
+			+ "SUM(CASE WHEN sexo = 'Masculino' then 1 else 0 end) as hombre\r\n"
 			+ "FROM public.desa_peri WHERE fecha_registro BETWEEN :inicio AND :fin")
 	public List<Object[]> HombresMujeresPorFecha(Date inicio, Date fin) throws DataAccessException;
 	
@@ -93,13 +93,13 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 			+ "WHERE fecha_registro BETWEEN :inicio AND :fin")
 	public List<Object[]> cantidadPorCasosRango(Date inicio, Date fin) throws DataAccessException;
 	
-	@Query(nativeQuery=true, value="SELECT SUM(CASE WHEN sexo = 'Mujer' then 1 else 0 end) as mujer,\r\n"
-			+ "SUM(CASE WHEN sexo = 'Hombre' then 1 else 0 end) as hombre\r\n"
+	@Query(nativeQuery=true, value="SELECT SUM(CASE WHEN sexo = 'Femenino' then 1 else 0 end) as mujer,\r\n"
+			+ "SUM(CASE WHEN sexo = 'Masculino' then 1 else 0 end) as hombre\r\n"
 			+ "FROM public.desa_peri WHERE tipo_de_caso = :caso")
 	public List<Object[]> HombresMujeresPorCaso(String caso) throws DataAccessException;
 	
-	@Query(nativeQuery=true, value="SELECT COALESCE(SUM(CASE WHEN sexo = 'Mujer' then 1 else 0 end), 0) as mujer,\r\n"
-			+ "COALESCE (SUM(CASE WHEN sexo = 'Hombre' then 1 else 0 end),0) as hombre\r\n"
+	@Query(nativeQuery=true, value="SELECT COALESCE(SUM(CASE WHEN sexo = 'Femenino' then 1 else 0 end), 0) as mujer,\r\n"
+			+ "COALESCE (SUM(CASE WHEN sexo = 'Masculino' then 1 else 0 end),0) as hombre\r\n"
 			+ "FROM public.desa_peri WHERE tipo_de_caso = :caso AND fecha_registro BETWEEN :inicio AND :fin")
 	public List<Object[]> HombresMujeresPorCasoYRango(String caso, Date inicio, Date fin) throws DataAccessException;
 	

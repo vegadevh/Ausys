@@ -1,13 +1,10 @@
 package com.digitalatmosphere.ausys.services;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
 import com.digitalatmosphere.ausys.domains.DesaPeri;
-import com.digitalatmosphere.ausys.dto.CantidadCasosDTO;
 import com.digitalatmosphere.ausys.dto.CasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
 import com.digitalatmosphere.ausys.dto.HombresMujeresDTO;

@@ -49,6 +49,10 @@
 						th:classappend="${#httpServletRequest.getRequestURI() == '/admin/usuario_registro' ? 'active':''}">
 						<a class="nav-link" th:href="@{/admin/usuario_registro}">Crear usuario</a>
 					</li>
+					<li class="nav-item"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/admin/listaUsuarios' ? 'active':''}">
+						<a class="nav-link" th:href="@{/admin/listaUsuarios}">Lista de usuarios</a>
+					</li>
 				</ul>
 			</div>
 		</div>

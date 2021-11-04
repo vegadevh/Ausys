@@ -80,7 +80,7 @@ public class EstadisticaController {
 
 	@ModelAttribute("listaSexo2")
 	public List<String> listaSexo2() {
-		return Arrays.asList("Ambos", "Hombre", "Mujer");
+		return Arrays.asList("Ambos", "Masculino", "Femenino");
 	}
 
 	@ModelAttribute("listaCasos")

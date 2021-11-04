@@ -62,7 +62,7 @@
 					this.reportValidity();
 				}
 				else if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-					this.setCustomValidity("Solo se permiten archivos de tipo:" + fileExtension.join(','));
+					this.setCustomValidity("Solo se permiten archivos de tipo: " + fileExtension.join(','));
 					this.reportValidity();
 				}
 				else {

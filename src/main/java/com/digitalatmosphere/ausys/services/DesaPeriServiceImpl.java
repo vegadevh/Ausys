@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -15,7 +14,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.digitalatmosphere.ausys.domains.DesaPeri;
-import com.digitalatmosphere.ausys.dto.CantidadCasosDTO;
 import com.digitalatmosphere.ausys.dto.CasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
 import com.digitalatmosphere.ausys.dto.HombresMujeresDTO;

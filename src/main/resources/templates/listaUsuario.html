@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/99b5aa301b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <title th:text="'Ausys - '+ ${titulo}"></title>
+</head>
+
+<body>
+    <th:block th:replace="components/navbar :: navbar"></th:block>
+    <div class="container">
+        <h1 th:text="${titulo}"></h1>
+        <br>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <!-- <th scope="col">Acción</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each=" user: ${users}">
+                    <th scope="row" th:text="${user.username}"></th>
+                    <td th:text="${user.enabled_u}"></td>
+                    <td th:text="${user.nombre}"></td>
+                    <td th:text="${user.apellido}">
+                    </td>
+                    <!-- <td>
+                        <div class="d-flex">
+                            <form class="p-1"
+                                th:action="@{/read/verRegistro/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
+                                method="GET">
+                                <input th:name="peritajeName" type="hidden" th:value="${desaPeri.nombre}">
+                                <input th:name="peritajeLastname" type="hidden" th:value="${desaPeri.apellido}">
+                                <input th:name="id_peritaje" type="hidden" th:value=${desaPeri.id_peritaje}>
+                                <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
+                                <input type="submit" class="btn btn-primary" value="Ver">
+                            </form>
+                            <form class="p-1"
+                                th:action="@{/write/editar/peritaje/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
+                                method="GET">
+                                <input th:name="id_peritaje" type="hidden" th:value=${desaPeri.id_peritaje}>
+                                <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
+                                <input type="submit" class="btn btn-success" value="Editar">
+                            </form>
+                            <form class="p-1"
+                                th:action="@{/admin/eliminar/peritaje/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
+                                method="GET">
+                                <input th:name="id_peritaje" type="hidden" th:value=${desaPeri.id_peritaje}>
+                                <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
+                                <input type="submit" class="btn btn-danger" value="Eliminar"
+                                    onclick="return confirm('¿Estás seguro que deseas eliminar el peritaje?');">
+                            </form>
+                        </div>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
