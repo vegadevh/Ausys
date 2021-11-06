@@ -68,7 +68,7 @@
                     <b class="d-inline">Informaci&oacute;n adicional: </b>
                     <p class="d-inline" th:text="${desaPeri.informacion_adicional}"></p>
                 </div>
-                <div>
+                <div th:if="${desaPeri.peritaje.edad_estimada} >=18">
                     <b class="d-inline">DUI: </b>
                     <p class="d-inline" th:text="${desaPeri.Dui}"></p>
                 </div>

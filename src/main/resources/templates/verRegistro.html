@@ -62,14 +62,16 @@
                     <b class="d-inline">Tipo de caso: </b>
                     <p class="d-inline" th:text="${registro.tipo_de_caso}"></p>
                 </div>
-                <div>
+                <div th:if="${registro.edad_estimada}">
                     <b class="d-inline">Nombre: </b>
-                    <p class="d-inline" th:if="${registro.edad_estimada} < 18" th:text="${#strings.substring(registro.nombre, 0,1) + '...'}"></p>
+                    <p class="d-inline" th:if="${registro.edad_estimada} < 18"
+                        th:text="${#strings.substring(registro.nombre, 0,1) + '...'}"></p>
                     <p class="d-inline" th:unless="${registro.edad_estimada} < 18" th:text="${registro.nombre}"></p>
                 </div>
-                <div>
+                <div th:if="${registro.edad_estimada}">
                     <b class="d-inline">Apellido: </b>
-                    <p class="d-inline" th:if="${registro.edad_estimada} < 18" th:text="${#strings.substring(registro.apellido, 0,1) + '...'}"></p>
+                    <p class="d-inline" th:if="${registro.edad_estimada} < 18"
+                        th:text="${#strings.substring(registro.apellido, 0,1) + '...'}"></p>
                     <p class="d-inline" th:unless="${registro.edad_estimada} < 18" th:text="${registro.apellido}"></p>
                 </div>
                 <div>

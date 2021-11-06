@@ -3,7 +3,9 @@
     <div>
         <textarea type="text" rows="5" cols="50" id="direccion" th:field="*{direccion}"></textarea>
     </div>
-	<br>
+    <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="alert alert-danger" role="alert">
+    </div>
+    <br>
     <label for="nombre">Nombre: </label>
     <input type="text" id="nombre" th:field="*{nombre}">
     <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="alert alert-danger" role="alert"></div>
@@ -28,12 +30,12 @@
     <div th:if="${#fields.hasErrors('informacion_adicional')}" th:errors="*{informacion_adicional}"
         class="alert alert-danger" role="alert"></div>
     <br>
-    <label for="DUI">DUI: </label>
-    <input type="text" id="DUI" th:field="*{Dui}">
-    <div th:if="${#fields.hasErrors('Dui')}" th:errors="*{Dui}" class="alert alert-danger" role="alert">
-    </div>
-    <br>
-    <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="alert alert-danger" role="alert">
+    <div th:if="${age} >= 18">
+        <label for="DUI">DUI: </label>
+        <input type="text" id="DUI" th:field="*{Dui}" pattern="[0-9]{8}-[0-9]{1}"
+            th:required="${age} >= 18 ? 'required' : null">
+        <div th:if="${#fields.hasErrors('Dui')}" th:errors="*{Dui}" class="alert alert-danger" role="alert">
+        </div>
     </div>
     <br>
     <input type="hidden" th:field="*{fecha_registro}">

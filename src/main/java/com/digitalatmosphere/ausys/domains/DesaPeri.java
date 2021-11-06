@@ -53,9 +53,7 @@ public class DesaPeri {
 	@Column(name="informacion_adicional")
 	private String informacion_adicional;
 	
-	@NotEmpty
 	@Column(name="DUI")
-	@Size(message="El campo debe tener 10 caracteres.",min=10, max=10)
 	private String Dui;
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy")

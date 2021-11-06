@@ -138,7 +138,7 @@ public class EstadisticaController {
 	}
 
 	@RequestMapping("/validarPeritaje")
-	public ModelAndView validarPeritaje(@Valid @ModelAttribute Peritaje peritaje, BindingResult result) {
+	public ModelAndView validarPeritaje(@Valid @ModelAttribute Peritaje peritaje, BindingResult result, @RequestParam(value="edad_estimada") String edad_estimada) {
 
 		ModelAndView mav = new ModelAndView();
 
@@ -173,6 +173,8 @@ public class EstadisticaController {
 			desaPeri.setFecha_registro(new java.util.Date());
 
 			String id_peritaje = peritajeS.findOne(peritaje.getId_peritaje()).getId_peritaje();
+			Integer age = Integer.parseInt(edad_estimada);
+			mav.addObject("age",age);
 			mav.addObject("id_peritaje", id_peritaje);
 			mav.addObject("titulo", "Ingresar Peritajes p2");
 			mav.addObject("desaPeri", desaPeri);
@@ -183,14 +185,29 @@ public class EstadisticaController {
 
 	@PostMapping("/validarPeritaje2")
 	public ModelAndView validarPeritaje2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result,
-			@ModelAttribute Peritaje peritaje, BindingResult result2, @RequestParam(value = "id_peritaje") String id, @RequestParam(value = "tipo_de_caso") String tipo_de_caso) {
+			@ModelAttribute Peritaje peritaje, BindingResult result2, @RequestParam(value = "id_peritaje") String id, @RequestParam(value = "tipo_de_caso") String tipo_de_caso, @RequestParam(value="edad_estimada") String edad_estimada) {
 
 		ModelAndView mav = new ModelAndView();
-
-		if (result.hasErrors() || tipo_de_caso.equals("col2")) {
+		
+		if (tipo_de_caso.equals("col2")) {
+			System.out.println(tipo_de_caso);
 			desaPeri.setFecha_registro(new java.util.Date());
-
+			Integer age = Integer.parseInt(edad_estimada);
+			mav.addObject("age",age);
 			mav.addObject("alert", "Debe seleccionar una de las opciones de Tipo de Caso.");
+			mav.addObject("titulo", "Ingresar Peritajes p2");
+			mav.addObject("desaPeri", desaPeri);
+			mav.setViewName("ingresarPeritaje2");
+		}
+		if (result.hasErrors()) {
+			System.out.println(tipo_de_caso);
+			if(tipo_de_caso.equals("col2")) {
+				
+				mav.addObject("alert", "Debe seleccionar una de las opciones de Tipo de Caso.");
+			}
+			desaPeri.setFecha_registro(new java.util.Date());
+			Integer age = Integer.parseInt(edad_estimada);
+			mav.addObject("age",age);
 			mav.addObject("titulo", "Ingresar Peritajes p2");
 			mav.addObject("desaPeri", desaPeri);
 			mav.setViewName("ingresarPeritaje2");
