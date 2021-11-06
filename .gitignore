@@ -33,3 +33,4 @@ build/
 .vscode/
 ### Ocultar binarios
 /src/main/webapp/imagedata/
+/src/main/java/com/digitalatmosphere/ausys/JPAConfiguration.java
