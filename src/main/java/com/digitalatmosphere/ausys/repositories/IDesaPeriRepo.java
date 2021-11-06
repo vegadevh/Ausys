@@ -2,7 +2,6 @@ package com.digitalatmosphere.ausys.repositories;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -60,30 +58,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	             .logout().logoutSuccessUrl("/").permitAll()
 	             .and()
 	 			.exceptionHandling().accessDeniedPage("/403");
-		
-		
-//		http.sessionManagement().maximumSessions(1);
-//		http.authorizeRequests()
-//			.antMatchers(resources).permitAll()
-//			.antMatchers("/admin/**").hasRole("ADMIN")
-//			.antMatchers("/write/**").hasAnyRole("STATISTICS", "ADMIN")
-//			.antMatchers("/read/**").hasAnyRole("SECRETARY", "STATISTICS","ADMIN")
-//			.antMatchers("/main/**").hasRole("ADMIN")
-//			.antMatchers("/pdf/**").hasAnyRole("SECRETARY", "ADMIN")
-//			.antMatchers("/show/**").hasAnyRole("SECRETARY", "ADMIN")
-//			.antMatchers("/").permitAll()
-//			.and()
-//			.formLogin()
-//			.loginPage("/login")
-//			.permitAll()
-//			.defaultSuccessUrl("/")
-//			.usernameParameter("username")
-//			.passwordParameter("password")
-//			.and()
-//			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//			.logoutSuccessUrl("/")
-//			.and()
-//			.exceptionHandling().accessDeniedPage("/403");
 	}
 
 }
