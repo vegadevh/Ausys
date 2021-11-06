@@ -51,7 +51,7 @@
                     class="alert alert-danger" role="alert"></div>
                 <br>
                 <label for="fecha_nacimiento">Fecha de nacimiento: </label>
-                <input type="text" id="datepicker" th:field="*{fecha_nacimiento}">
+                <input type="text" id="datepicker" th:name="fecha_nacimiento" th:field="*{fecha_nacimiento}">
                 <div th:if="${#fields.hasErrors('fecha_nacimiento')}" th:errors="*{fecha_nacimiento}"
                     class="alert alert-danger" role="alert"></div>
                 <br>

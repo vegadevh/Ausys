@@ -30,11 +30,17 @@
     <div th:if="${#fields.hasErrors('informacion_adicional')}" th:errors="*{informacion_adicional}"
         class="alert alert-danger" role="alert"></div>
     <br>
-    <div th:if="${age} >= 18">
-        <label for="DUI">DUI: </label>
-        <input type="text" id="DUI" th:field="*{Dui}" pattern="[0-9]{8}-[0-9]{1}"
-            th:required="${age} >= 18 ? 'required' : null">
-        <div th:if="${#fields.hasErrors('Dui')}" th:errors="*{Dui}" class="alert alert-danger" role="alert">
+    <div th:if=${age}>
+        <div th:if="${age} >= 18">
+            <label for="DUI">DUI: </label>
+            <input type="text" id="DUI" th:field="*{Dui}" pattern="[0-9]{8}-[0-9]{1}"
+                th:required="${age} >= 18 ? 'required' : null">
+            <div th:if="${#fields.hasErrors('Dui')}" th:errors="*{Dui}" class="alert alert-danger" role="alert">
+            </div>
+        </div>
+        <div th:unless="${age} >= 18">
+            <input type="hidden" id="DUI" th:field="*{Dui}"
+                th:required="${age} >= 18 ? 'required' : null">
         </div>
     </div>
     <br>

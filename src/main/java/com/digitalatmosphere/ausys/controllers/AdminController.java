@@ -198,7 +198,6 @@ public class AdminController {
 		return mav;
 	}
 	
-
 	//ELIMINAR
 	
 	@RequestMapping("/eliminar/peritaje/{id_peritaje}/{id_desaperi}")

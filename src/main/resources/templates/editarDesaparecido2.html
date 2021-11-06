@@ -26,7 +26,8 @@
     <div class="container">
         <h1 th:text="${titulo}"></h1>
         <div>
-            <form th:action="@{/write/validarEdicion/desaparecido2/} + ${id_desaparecidoParam} + '/' + ${id_desaperiParam}"
+            <form
+                th:action="@{/write/validarEdicion/desaparecido2/} + ${id_desaparecidoParam} + '/' + ${id_desaperiParam}"
                 th:object="${desaPeri}" method="POST">
 
                 <input th:name="id_desaperi" type="hidden" th:value=${id_desaperiParam}>
@@ -36,7 +37,7 @@
                 <br>
                 <th:block th:replace="components/form-registros :: registros"></th:block>
                 <input type="hidden" th:field="*{desaparecido.id_desaparecido}">
-
+                <input type="text" th:value="${age}" id="age" th:name="age">
                 <input type="submit" value="Terminar edición" class="btn btn-primary">
 
             </form>
