@@ -33,5 +33,3 @@ build/
 .vscode/
 ### Ocultar binarios
 /src/main/webapp/imagedata/
-### Configuracion- conexion de base de datos###
-src/main/java/com/digitalatmosphere/ausys/JPAConfiguration.java
