@@ -57,8 +57,9 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 	@Query(nativeQuery=true, value="SELECT desaparecidos.id_desaparecido, desa_peri.tipo_de_caso, desa_peri.nombre, desa_peri.apellido, desa_peri.fecha_registro, desa_peri.id_desaperi\r\n"
 			+ "FROM public.desaparecidos \r\n"
 			+ "INNER JOIN public.desa_peri ON desaparecidos.id_desaparecido = desa_peri.id_desaparecido\r\n"
-			+ "WHERE desa_peri.nombre LIKE %:nombre% OR desa_peri.apellido LIKE %:apellido% ")
-	public List<Object[]> PeritajesXDesaparecidos(String nombre, String apellido) throws DataAccessException;
+			+ "WHERE desa_peri.nombre LIKE :nombre AND EXTRACT(YEAR FROM AGE(CURRENT_DATE, desaparecidos.fecha_nacimiento)) = :edad_estimada\r\n"
+			+ "OR desa_peri.apellido LIKE :apellido AND EXTRACT(YEAR FROM AGE(CURRENT_DATE, desaparecidos.fecha_nacimiento)) = :edad_estimada")
+	public List<Object[]> PeritajesXDesaparecidos(String nombre, String apellido, Integer edad_estimada) throws DataAccessException;
 	
 	//FILTROS
 	@Query(value="SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like %:keyword% or lower(dp.apellido) like %:keyword%) and lower(dp.sexo) like %:sexo%", nativeQuery=true)

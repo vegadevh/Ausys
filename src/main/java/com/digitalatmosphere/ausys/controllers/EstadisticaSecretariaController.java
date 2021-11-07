@@ -111,7 +111,8 @@ public class EstadisticaSecretariaController {
 	public ModelAndView verRegistroPeritaje(@PathVariable(value = "id_peritaje") String id_peritaje,
 			@PathVariable(value = "id_desaperi") String id_desaperi,
 			@RequestParam(value = "peritajeName") String peritajeName,
-			@RequestParam(value = "peritajeLastname") String peritajeLastname) {
+			@RequestParam(value = "peritajeLastname") String peritajeLastname,
+			@RequestParam(value = "edad_estimada") String edad_estimada) {
 		ModelAndView mav = new ModelAndView();
 
 		List<RegistroDTO> registro = null;
@@ -122,7 +123,8 @@ public class EstadisticaSecretariaController {
 			especiales = especialS.especialPeritaje(id_peritaje);
 			fotos = fotoS.fotosPeritaje(id_peritaje);
 			registro = desaPeriS.verRegistroPeritaje(id_peritaje, id_desaperi);
-			relacion = desaPeriS.PeritajesXDesaparecidos(peritajeName, peritajeLastname);
+			Integer edad = Integer.parseInt(edad_estimada);
+			relacion = desaPeriS.PeritajesXDesaparecidos(peritajeName, peritajeLastname, edad);
 			System.out.println(registro);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -350,8 +350,8 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	}
 
 	@Override
-	public List<DesaparecidoDTO> PeritajesXDesaparecidos(String nombre, String apellido) throws DataAccessException {
-		List<DesaparecidoDTO> relacion = desaPeriRepo.PeritajesXDesaparecidos(nombre, apellido).stream().map(obj -> {
+	public List<DesaparecidoDTO> PeritajesXDesaparecidos(String nombre, String apellido, Integer edad_estimada) throws DataAccessException {
+		List<DesaparecidoDTO> relacion = desaPeriRepo.PeritajesXDesaparecidos(nombre, apellido, edad_estimada).stream().map(obj -> {
 			DesaparecidoDTO d = new DesaparecidoDTO();
 			d.setId_desaparecido(obj[0].toString());
 			d.setTipo_de_caso(obj[1].toString());
