@@ -28,6 +28,7 @@
         <h1 th:text="${titulo}"></h1>
         <br>
         <div>
+        	<div th:if="${alert}" class="alert alert-danger" th:text="${alert}" role="alert"></div>
             <label>Buscar registro por: </label>
             <select id="selection" class="form-control">
                 <option value="0" selected>--- Seleccione una opción ---</option>

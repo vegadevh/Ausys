@@ -63,7 +63,7 @@ public class SecretariaController {
 	@RequestMapping("/listaRegistros")
 	public ModelAndView listaRegistros(String keyword, String type, String sexo, String fechaI, String fechaF) {
 		ModelAndView mav = new ModelAndView();
-
+		Boolean alertActivated = false;
 		List<DesaPeri> desaPeriL = null;
 
 		String newType = "Selecciona una opción";
@@ -74,29 +74,48 @@ public class SecretariaController {
 		} else {
 			sexo = "";
 		}
-
-		if (fechaI == null || fechaF == null) {
+		
+		System.out.println("fecha I: " + fechaI);
+		System.out.println("fecha F: " + fechaF);
+		if((fechaI == null && fechaF != null) || (fechaI != null && fechaF == null) ) {
+			mav.addObject("alert", "Al buscar por fecha, ingresar los campos Fecha Inicial y Fecha Final.");
+			alertActivated = true;
+			mav.addObject("titulo", "Lista de registros");
+			mav.addObject("desaPeriL", desaPeriL);
+			mav.setViewName("listaRegistros");
+			return mav;
+		}else if(fechaI == null && fechaF == null) {
 			fechaI = fechaF = "";
+		}else if((fechaI.equals("") && !fechaF.equals("")) || (!fechaI.equals("") && fechaF.equals("")) ) {
+			mav.addObject("alert", "Al buscar por fecha, ingresar los campos Fecha Inicial y Fecha Final.");
+			alertActivated = true;
+			mav.addObject("titulo", "Lista de registros");
+			mav.addObject("desaPeriL", desaPeriL);
+			mav.setViewName("listaRegistros");
+			return mav;
 		}
 
 		// System.out.println("sexo:"+sexo);
 		try {
-			if (!fechaI.equals("") && !fechaF.equals("")) {
-				keyword = keyword.toLowerCase();
-				if (type != null && !type.equals(newType)) {
-					desaPeriL = desaPeriS.findByDateBetweenAndAbove(keyword, type, sexo, fechaI, fechaF);
+			if(alertActivated == false) {
+				if (!fechaI.equals("") && !fechaF.equals("")) {
+					keyword = keyword.toLowerCase();
+					if (type != null && !type.equals(newType)) {
+						desaPeriL = desaPeriS.findByDateBetweenAndAbove(keyword, type, sexo, fechaI, fechaF);
+					} else {
+						desaPeriL = desaPeriS.findByDateBetweenAndAbove(keyword, "", sexo, fechaI, fechaF);
+					}
+				} else if (type != null && !type.equals(newType)) {
+					keyword = keyword.toLowerCase();
+					desaPeriL = desaPeriS.findByKeywordAndtipe(keyword, type, sexo);
+				} else if (keyword != null) {
+					keyword = keyword.toLowerCase();
+					desaPeriL = desaPeriS.findByKeyword(keyword, sexo);
 				} else {
-					desaPeriL = desaPeriS.findByDateBetweenAndAbove(keyword, "", sexo, fechaI, fechaF);
+					desaPeriL = desaPeriS.findAll();
 				}
-			} else if (type != null && !type.equals(newType)) {
-				keyword = keyword.toLowerCase();
-				desaPeriL = desaPeriS.findByKeywordAndtipe(keyword, type, sexo);
-			} else if (keyword != null) {
-				keyword = keyword.toLowerCase();
-				desaPeriL = desaPeriS.findByKeyword(keyword, sexo);
-			} else {
-				desaPeriL = desaPeriS.findAll();
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
