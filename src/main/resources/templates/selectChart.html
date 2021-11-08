@@ -44,7 +44,8 @@
                 <option value="7">Cantidad de casos por Sexo y rango de tiempo</option>
             </select>
             <br>
-
+			
+			 <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
 
             <form th:action="@{/show/graficar/HombresMujeresRangoFechas}" method="get" id="HombresMujeresRango">
                 <label>Desde: </label>
@@ -52,8 +53,6 @@
                 <br>
                 <label>Hasta: </label>
                 <input type="text" id="datepicker2" th:name="fin" required>
-                <br>
-                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
                 <br>
                 <input type="submit" value="Graficar" class="btn btn-primary">
             </form>
@@ -66,13 +65,12 @@
 
             <form th:action="@{/show/graficar/CantidadPorCasosRango}" method="get" id="CantidadPorCasosRango">
                 <label>Desde: </label>
-                <input type="text" id="datepicker3" th:name="inicio">
+                <input type="text" id="datepicker3" th:name="inicio" required>
                 <br>
                 <label>Hasta: </label>
-                <input type="text" id="datepicker4" th:name="fin">
+                <input type="text" id="datepicker4" th:name="fin" required>
                 <br>
-                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
-                <br>
+               <br>
                 <input type="submit" value="Graficar" class="btn btn-primary">
             </form>
 
@@ -91,12 +89,12 @@
             <form th:action="@{/show/graficar/HombresMujeresPorCasoYRango}" method="get"
                 id="HombresMujeresPorCasoYRango">
                 <label>Desde: </label>
-                <input type="text" id="datepicker5" th:name="inicio">
+                <input type="text" id="datepicker5" th:name="inicio" required>
                 <br>
                 <label>Hasta: </label>
-                <input type="text" id="datepicker6" th:name="fin">
+                <input type="text" id="datepicker6" th:name="fin" required>
                 <br>
-                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
+                
                 <br>
                 <label for="tipo_de_caso">Tipo de caso: </label>
                 <select class="form-control" th:name="type">
@@ -104,7 +102,7 @@
                     <option th:each="caso : ${listaCasos3}" th:value="${caso}" th:text="${caso}">
                     </option>
                 </select>
-                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
+                
                 <br>
                 <input type="submit" value="Graficar" class="btn btn-primary">
             </form>
@@ -131,12 +129,12 @@
 
                 <br>
                 <label>Desde: </label>
-                <input type="text" id="datepicker7" th:name="inicio">
+                <input type="text" id="datepicker7" th:name="inicio" required>
                 <br>
                 <label>Hasta: </label>
-                <input type="text" id="datepicker8" th:name="fin">
+                <input type="text" id="datepicker8" th:name="fin" required>
                 <br>
-                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
+                
                 <br>
                 <input type="submit" value="Graficar" class="btn btn-primary">
             </form>

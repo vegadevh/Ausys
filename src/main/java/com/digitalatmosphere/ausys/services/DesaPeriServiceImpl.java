@@ -253,10 +253,18 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		System.out.println(date2);
 		List<HombresMujeresDTO> rangoFechas = desaPeriRepo.HombresMujeresPorFecha(date1, date2).stream().map(obj -> {
 			HombresMujeresDTO mh = new HombresMujeresDTO();
+			if(obj[0] == null && obj[1] == null) {
+				obj[0] = 0;
+				obj[1] = 0;
+			}
+			
+			
 			mh.setMujer(obj[0].toString());
 			mh.setHombre(obj[1].toString());
 			return mh;
 		}).collect(Collectors.toList());
+		
+		System.out.println(rangoFechas);
 		return rangoFechas;
 	}
 

@@ -1,6 +1,9 @@
 package com.digitalatmosphere.ausys.controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,11 +146,35 @@ public class SecretariaController {
 	public ModelAndView graficarHombresMujeresRangoFechas(@RequestParam(value = "inicio") String inicio,
 			@RequestParam(value = "fin") String fin) {
 		ModelAndView mav = new ModelAndView();
+		
+		Date fechaactual = new Date(System.currentTimeMillis());
+		String fechaInicio1 = inicio;
+		String fechaFin1 = fin;
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		Date fechaInicioDate = null;
+		Date fechaFinDate = null;
+		
+		try {
+			fechaInicioDate = date.parse(fechaInicio1);
+			fechaFinDate = date.parse(fechaFin1);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+
 		if (inicio == "" || fin == "") {
 			mav.addObject("titulo", "Graficar");
 			mav.addObject("alert", "Es necesario completar los campos presentes.");
 			mav.setViewName("selectChart");
-		} else {
+		} else if (fechaInicioDate.after(fechaactual)) {
+			mav.addObject("titulo", "Graficar");
+			mav.addObject("alert", "Fecha inicio no puede ser mayor a la actual");
+			mav.setViewName("selectChart");
+		}else if (fechaFinDate.after(fechaactual)) {
+			mav.addObject("titulo", "Graficar");
+			mav.addObject("alert", "Fecha Final no puede ser mayor a la actual");
+			mav.setViewName("selectChart");
+			
+		}else {
 			List<HombresMujeresDTO> HombresMujeres = null;
 
 			try {
@@ -187,11 +214,35 @@ public class SecretariaController {
 	public ModelAndView graficarCantidadPorCasosRango(@RequestParam(value = "inicio") String inicio,
 			@RequestParam(value = "fin") String fin) {
 		ModelAndView mav = new ModelAndView();
+		
+		Date fechaactual = new Date(System.currentTimeMillis());
+		String fechaInicio2 = inicio;
+		String fechaFin2 = fin;
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		Date fechaInicioDate = null;
+		Date fechaFinDate = null;
+		
+		try {
+			fechaInicioDate = date.parse(fechaInicio2);
+			fechaFinDate = date.parse(fechaFin2);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		
+		
 		if (inicio == "" || fin == "") {
 			mav.addObject("titulo", "Graficar");
 			mav.addObject("alert", "Es necesario completar los campos presentes.");
 			mav.setViewName("selectChart");
-		} else {
+		}else if (fechaInicioDate.after(fechaactual)){
+			mav.addObject("titulo", "Graficar");
+			mav.addObject("alert", "Fecha inicio no puede ser mayor a la actual");
+			mav.setViewName("selectChart");
+		}else if (fechaFinDate.after(fechaactual)){
+			mav.addObject("titulo", "Graficar");
+			mav.addObject("alert", "Fecha Final no puede ser mayor a la actual");
+			mav.setViewName("selectChart");
+		}else {
 			List<CasosDTO> cantidadPorCasos = null;
 
 			try {
@@ -235,11 +286,34 @@ public class SecretariaController {
 	public ModelAndView graficarHombresMujeresPorCasoYRango(@RequestParam(value = "type") String type,
 			@RequestParam(value = "inicio") String inicio, @RequestParam(value = "fin") String fin) {
 		ModelAndView mav = new ModelAndView();
+		
+		Date fechaactual = new Date(System.currentTimeMillis());
+		String fechaInicio3 = inicio;
+		String fechaFin3 = fin;
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		Date fechaInicioDate = null;
+		Date fechaFinDate = null;
+		
+		try {
+			fechaInicioDate = date.parse(fechaInicio3);
+			fechaFinDate = date.parse(fechaFin3);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		
 		if (type.equals("col") || inicio == "" || fin == "") {
 			mav.addObject("titulo", "Graficar");
 			mav.addObject("alert", "Es necesario completar los campos presentes.");
 			mav.setViewName("selectChart");
-		} else {
+		} else if (fechaInicioDate.after(fechaactual)){
+			mav.addObject("titulo", "Graficar");
+			mav.addObject("alert", "Fecha inicio no puede ser mayor a la actual");
+			mav.setViewName("selectChart");
+		}else if (fechaFinDate.after(fechaactual)){
+			mav.addObject("titulo", "Graficar");
+			mav.addObject("alert", "Fecha Final no puede ser mayor a la actual");
+			mav.setViewName("selectChart");
+		}else {
 			List<HombresMujeresDTO> HombresMujeres = null;
 
 			try {
@@ -280,11 +354,36 @@ public class SecretariaController {
 	public ModelAndView graficarCantidadPorCasosSexoRango(@RequestParam(value = "sexo") String sexo,
 			@RequestParam(value = "inicio") String inicio, @RequestParam(value = "fin") String fin) {
 		ModelAndView mav = new ModelAndView();
+		
+		Date fechaactual = new Date(System.currentTimeMillis());
+		String fechaInicio4 = inicio;
+		String fechaFin4 = fin;
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		Date fechaInicioDate = null;
+		Date fechaFinDate = null;
+		
+		try {
+			fechaInicioDate = date.parse(fechaInicio4);
+			fechaFinDate = date.parse(fechaFin4);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		
+		
+		
 		if (inicio == "" || fin == "") {
 			mav.addObject("titulo", "Graficar");
 			mav.addObject("alert", "Es necesario completar los campos presentes.");
 			mav.setViewName("selectChart");
-		} else {
+		} else if (fechaInicioDate.after(fechaactual)) {
+			mav.addObject("titulo", "Graficar");
+			mav.addObject("alert", "Fecha inicio no puede ser mayor a la actual");
+			mav.setViewName("selectChart");
+		}else if (fechaFinDate.after(fechaactual)){
+			mav.addObject("titulo", "Graficar");
+			mav.addObject("alert", "Fecha Final no puede ser mayor a la actual");
+			mav.setViewName("selectChart");
+		}else{
 			List<CasosDTO> cantidadPorCasos = null;
 
 			try {
