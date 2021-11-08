@@ -27,7 +27,6 @@
     <div class="container">
         <div class="card">
             <div th:each="registro: ${registro}" class="card-body">
-
                 <b class="d-inline">Identficador del registro: </b>
                 <p class="d-inline" th:text="${registro.id}"></p>
                 <div th:if="${registro.identificado}">
@@ -78,9 +77,17 @@
                     <b class="d-inline">Informaci&oacute;n adicional: </b>
                     <p class="d-inline" th:text="${registro.informacion_adicional}"></p>
                 </div>
-                <div>
-                    <b class="d-inline">DUI: </b>
-                    <p class="d-inline" th:text="${registro.dui}"></p>
+                <div th:if="${registro.edad_estimada}">
+                    <div th:if="${registro.edad_estimada} >= 18">
+                        <b class="d-inline">DUI: </b>
+                        <p class="d-inline" th:text="${registro.dui}"></p>
+                    </div>
+                </div>
+                <div th:if="${age}">
+                    <div th:if="${age} >= 18">
+                        <b class="d-inline">DUI: </b>
+                        <p class="d-inline" th:text="${registro.dui}"></p>
+                    </div>
                 </div>
                 <div>
                     <b class="d-inline">Fecha de registro:</b>

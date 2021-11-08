@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
+import com.digitalatmosphere.ausys.dto.DesaparecidoDTOAge;
 import com.digitalatmosphere.ausys.dto.EspecialDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
 import com.digitalatmosphere.ausys.dto.RegistroDTO;
@@ -91,7 +92,7 @@ public class EstadisticaSecretariaController {
 	public ModelAndView listaDesaparecidos() {
 		ModelAndView mav = new ModelAndView();
 
-		List<DesaparecidoDTO> desaPeriL = null;
+		List<DesaparecidoDTOAge> desaPeriL = null;
 		try {
 			desaPeriL = desaPeriS.findAllDesaparecidos();
 		} catch (Exception e) {
@@ -147,7 +148,8 @@ public class EstadisticaSecretariaController {
 
 	@RequestMapping("/verRegistroD/{id_desaparecido}/{id_desaperi}")
 	public ModelAndView verRegistroDesaparecido(@PathVariable(value = "id_desaparecido") String id_desaparecido,
-			@PathVariable(value = "id_desaperi") String id_desaperi) {
+			@PathVariable(value = "id_desaperi") String id_desaperi,
+			@RequestParam(value="age") Integer age) {
 		ModelAndView mav = new ModelAndView();
 
 		List<RegistroDTO> registro = null;
@@ -166,6 +168,7 @@ public class EstadisticaSecretariaController {
 			mav.addObject("fotos", fotos);
 			mav.addObject("especiales", especiales);
 			mav.addObject("val", "Desaparecido");
+			mav.addObject("age", age);
 			mav.setViewName("verRegistro");
 		} else {
 			mav.addObject("titulo", "Lista de Desaparecidos");

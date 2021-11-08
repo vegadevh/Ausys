@@ -5,7 +5,7 @@ public class RegistroDTO {
 	private String id_registro;
 	private String identificado;
 	private String edad_estimada;
-	private String division;
+	private String municipio;
 	private String direccion;
 	private String tipo_de_caso;
 	private String nombre;
@@ -64,11 +64,12 @@ public class RegistroDTO {
 	public void setEdad_estimada(String edad_estimada) {
 		this.edad_estimada = edad_estimada;
 	}
-	public String getDivision() {
-		return division;
+	
+	public String getMunicipio() {
+		return municipio;
 	}
-	public void setDivision(String division) {
-		this.division = division;
+	public void setMunicipio(String municipio) {
+		this.municipio = municipio;
 	}
 	public String getDireccion() {
 		return direccion;

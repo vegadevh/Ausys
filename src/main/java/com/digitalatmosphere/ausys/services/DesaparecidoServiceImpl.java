@@ -28,7 +28,7 @@ public class DesaparecidoServiceImpl implements IDesaparecidoService {
 
 	@Override
 	public Desaparecido findOne(String id_desaparecido) throws DataAccessException {
-		return desaparecidoRepo.getById(id_desaparecido);
+		return desaparecidoRepo.findById(id_desaparecido).orElse(null);
 	}
 
 	@Override

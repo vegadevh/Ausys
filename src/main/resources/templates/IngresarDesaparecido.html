@@ -34,9 +34,10 @@
 
 
                 <label for="id_desaparecido">Identficador del registro: </label>
-                <input type="text" id="id_desaparecido" th:field="*{id_desaparecido}">
+                <input type="text" id="id_desaparecido" th:name="id_desaparecido" th:field="*{id_desaparecido}">
                 <div th:if="${#fields.hasErrors('id_desaparecido')}" th:errors="*{id_desaparecido}"
                     class="alert alert-danger" role="alert"></div>
+                <div th:if="${iderror}" th:text="${iderror}" class="alert alert-danger" role="alert"></div>
                 <br>
 
                 <label for="nombre_familiar">Nombre de quien denuncia: </label>

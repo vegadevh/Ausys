@@ -16,7 +16,9 @@ public interface IDesaPeriRepo extends JpaRepository<DesaPeri, Integer>{
 			+ "FROM public.peritajes INNER JOIN public.desa_peri ON peritajes.id_peritaje = desa_peri.id_peritaje;")
 	public List<Object[]> findAllPeritajes() throws DataAccessException;
 	
-	@Query(nativeQuery=true, value="SELECT desaparecidos.id_desaparecido, desa_peri.tipo_de_caso, desa_peri.nombre, desa_peri.apellido, desa_peri.fecha_registro, desa_peri.id_desaperi \r\n"
+	@Query(nativeQuery=true, value="SELECT desaparecidos.id_desaparecido, desa_peri.tipo_de_caso, \r\n"
+			+ "desa_peri.nombre, desa_peri.apellido, desa_peri.fecha_registro, \r\n"
+			+ "desa_peri.id_desaperi, CAST(EXTRACT(YEAR FROM AGE(CURRENT_DATE, desaparecidos.fecha_nacimiento)) AS INTEGER)\r\n"
 			+ "FROM public.desaparecidos INNER JOIN public.desa_peri ON desaparecidos.id_desaparecido = desa_peri.id_desaparecido;")
 	public List<Object[]> findAllDesaparecidos() throws DataAccessException;
 	

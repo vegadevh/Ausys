@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.digitalatmosphere.ausys.domains.DesaPeri;
 import com.digitalatmosphere.ausys.dto.CasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
+import com.digitalatmosphere.ausys.dto.DesaparecidoDTOAge;
 import com.digitalatmosphere.ausys.dto.HombresMujeresDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
 import com.digitalatmosphere.ausys.dto.RegistroDTO;
@@ -78,15 +79,16 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	}
 
 	@Override
-	public List<DesaparecidoDTO> findAllDesaparecidos() throws DataAccessException {
-		List<DesaparecidoDTO> desaparecidos = desaPeriRepo.findAllDesaparecidos().stream().map(obj -> {
-			DesaparecidoDTO d = new DesaparecidoDTO();
+	public List<DesaparecidoDTOAge> findAllDesaparecidos() throws DataAccessException {
+		List<DesaparecidoDTOAge> desaparecidos = desaPeriRepo.findAllDesaparecidos().stream().map(obj -> {
+			DesaparecidoDTOAge d = new DesaparecidoDTOAge();
 			d.setId_desaparecido(obj[0].toString());
 			d.setTipo_de_caso(obj[1].toString());
 			d.setNombre(obj[2].toString());
 			d.setApellido(obj[3].toString());
 			d.setFecha_registro(obj[4].toString());
 			d.setId_desaperi(obj[5].toString());
+			d.setAge(obj[6].toString());
 			return d;
 		}).collect(Collectors.toList());
 		return desaparecidos;
@@ -167,7 +169,7 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 			r.setId(obj[0].toString());
 			r.setIdentificado(obj[1].toString());
 			r.setEdad_estimada(obj[2].toString());
-			r.setDivision(obj[3].toString());
+			r.setMunicipio(obj[3].toString());
 			r.setDireccion(obj[4].toString());
 			r.setTipo_de_caso(obj[5].toString());
 			r.setNombre(obj[6].toString());
@@ -192,7 +194,7 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 			r.setFecha_nacimiento(obj[1].toString());
 			r.setNombre_familiar(obj[2].toString());
 			r.setContacto_familiar(obj[3].toString());
-			r.setDivision(obj[4].toString());
+			r.setMunicipio(obj[4].toString());
 			r.setDireccion(obj[5].toString());
 			r.setTipo_de_caso(obj[6].toString());
 			r.setNombre(obj[7].toString());

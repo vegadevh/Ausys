@@ -142,6 +142,7 @@ public class EstadisticaController {
 		ModelAndView mav = new ModelAndView();
 		Peritaje idperi = null;
 		idperi = peritajeS.findOne(identificador);
+		System.out.println(idperi);
 
 		if (deptoSelect.equals("0") || municipioSelect.equals("0")) {
 			List<Departamento> departamentos = null;
@@ -315,10 +316,15 @@ public class EstadisticaController {
 	@RequestMapping("/validarDesaparecido")
 	public ModelAndView validarDesaparecido(@Valid @ModelAttribute Desaparecido desaparecido, BindingResult result,
 			@RequestParam(value = "deptoSelect") String deptoSelect,
+			@RequestParam(value = "id_desaparecido") String identificador,
 			@RequestParam(value = "municipio.id_municipio") String municipioSelect,
 			@RequestParam(value = "fecha_nacimiento") String fecha_nacimiento) throws ParseException {
 
 		ModelAndView mav = new ModelAndView();
+		
+		Desaparecido iddesa = null;
+		iddesa = desaparecidoS.findOne(identificador);
+		
 		if (deptoSelect.equals("0") || municipioSelect.equals("0")) {
 			List<Departamento> departamentos = null;
 			List<Municipio> municipios = null;
@@ -337,6 +343,28 @@ public class EstadisticaController {
 			mav.addObject("deptoalert", "Por favor, seleccione alguna de las opciones.");
 			mav.addObject("municipioalert",
 					"Por favor, seleccione alguna de las opciones de departamento y posteriormente un municipio.");
+			mav.addObject("departamentos", departamentos);
+			mav.addObject("municipios", municipios);
+
+			mav.addObject("desaparecido", desaparecido);
+			mav.setViewName("IngresarDesaparecido");
+		}
+		else if (iddesa != null) {
+			List<Departamento> departamentos = null;
+			List<Municipio> municipios = null;
+
+			System.out.println(deptoSelect);
+			System.out.println(municipioSelect);
+
+			try {
+				departamentos = departamentoS.findAll();
+				municipios = municipioS.findAll();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			mav.addObject("titulo", "Ingresar Peritajes");
+			mav.addObject("iderror", "El identificador ya esta en uso.");
 			mav.addObject("departamentos", departamentos);
 			mav.addObject("municipios", municipios);
 
