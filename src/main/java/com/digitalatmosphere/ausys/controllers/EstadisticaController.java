@@ -135,15 +135,41 @@ public class EstadisticaController {
 	@RequestMapping("/validarPeritaje")
 	public ModelAndView validarPeritaje(@Valid @ModelAttribute Peritaje peritaje, BindingResult result,
 			@RequestParam(value = "edad_estimada") String edad_estimada,
-			@RequestParam(value = "id_peritaje") String identificador) {
+			@RequestParam(value = "id_peritaje") String identificador,
+			@RequestParam(value = "deptoSelect") String deptoSelect,
+			@RequestParam(value = "municipio.id_municipio") String municipioSelect) {
 
 		ModelAndView mav = new ModelAndView();
-		
 		Peritaje idperi = null;
 		idperi = peritajeS.findOne(identificador);
-		
-		if(idperi != null) {
-			
+
+		if (deptoSelect.equals("0") || municipioSelect.equals("0")) {
+			List<Departamento> departamentos = null;
+			List<Municipio> municipios = null;
+
+			System.out.println(deptoSelect);
+			System.out.println(municipioSelect);
+
+			try {
+				departamentos = departamentoS.findAll();
+				municipios = municipioS.findAll();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			mav.addObject("titulo", "Ingresar Peritajes");
+			mav.addObject("deptoalert", "Por favor, seleccione alguna de las opciones.");
+			mav.addObject("municipioalert",
+					"Por favor, seleccione alguna de las opciones de departamento y posteriormente un municipio.");
+			mav.addObject("departamentos", departamentos);
+			mav.addObject("municipios", municipios);
+
+			mav.addObject("peritaje", peritaje);
+			mav.setViewName("IngresarPeritaje");
+		}
+
+		else if (idperi != null) {
+
 			List<Departamento> departamentos = null;
 			List<Municipio> municipios = null;
 
@@ -161,11 +187,7 @@ public class EstadisticaController {
 
 			mav.addObject("peritaje", peritaje);
 			mav.setViewName("IngresarPeritaje");
-		}
-		else if (result.hasErrors()) {
-//			if(idperi != null) {
-//				mav.addObject("iderror", "El identificador ya esta en uso.");
-//			}
+		} else if (result.hasErrors()) {
 			List<Departamento> departamentos = null;
 			List<Municipio> municipios = null;
 
@@ -176,7 +198,7 @@ public class EstadisticaController {
 				e.printStackTrace();
 			}
 
-			mav.addObject("titulo", "Ingresar Peritajes");
+			mav.addObject("titulo", "Ingresar Peritajes ERROR");
 
 			mav.addObject("departamentos", departamentos);
 			mav.addObject("municipios", municipios);
@@ -184,6 +206,7 @@ public class EstadisticaController {
 			mav.addObject("peritaje", peritaje);
 			mav.setViewName("IngresarPeritaje");
 		} else {
+			System.out.println("Fredy");
 			try {
 				peritajeS.save(peritaje);
 			} catch (Exception e) {
@@ -291,6 +314,8 @@ public class EstadisticaController {
 
 	@RequestMapping("/validarDesaparecido")
 	public ModelAndView validarDesaparecido(@Valid @ModelAttribute Desaparecido desaparecido, BindingResult result,
+			@RequestParam(value = "deptoSelect") String deptoSelect,
+			@RequestParam(value = "municipio.id_municipio") String municipioSelect,
 			@RequestParam(value = "fecha_nacimiento") String fecha_nacimiento) throws ParseException {
 
 		ModelAndView mav = new ModelAndView();
@@ -333,12 +358,12 @@ public class EstadisticaController {
 			int year = c.get(Calendar.YEAR);
 			int month = c.get(Calendar.MONTH) + 1;
 			int date = c.get(Calendar.DATE);
-			
+
 			LocalDate l1 = LocalDate.of(year, month, date);
 			LocalDate now1 = LocalDate.now();
 			Period diff1 = Period.between(l1, now1);
 			Integer age = diff1.getYears();
-			
+
 			mav.addObject("age", age);
 			String id_desaparecido = desaparecidoS.findOne(desaparecido.getId_desaparecido()).getId_desaparecido();
 			mav.addObject("id_desaparecido", id_desaparecido);
@@ -352,8 +377,7 @@ public class EstadisticaController {
 	@PostMapping("/validarDesaparecido2")
 	public ModelAndView validarDesaparecido2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result,
 			@ModelAttribute Desaparecido desaparecido, BindingResult result2,
-			@RequestParam(value = "id_desaparecido") String id,
-			@RequestParam(value = "age") String age) {
+			@RequestParam(value = "id_desaparecido") String id, @RequestParam(value = "age") String age) {
 
 		ModelAndView mav = new ModelAndView();
 
@@ -369,7 +393,7 @@ public class EstadisticaController {
 		} else {
 			Desaparecido desaparecido2 = new Desaparecido();
 
-//				desaPeri.setId_peritaje(id);
+			// desaPeri.setId_peritaje(id);
 			desaPeri.setId_desaparecido(id);
 			try {
 				desaparecido2 = desaparecidoS.findOne(id);
@@ -418,7 +442,6 @@ public class EstadisticaController {
 
 			mav.addObject("departamentos", departamentos);
 			mav.addObject("municipios", municipios);
-			
 
 			mav.addObject("desaparecido", desaparecido);
 			mav.addObject("id_desaparecidoParam", id_desaparecido);
@@ -435,7 +458,7 @@ public class EstadisticaController {
 	public ModelAndView editarDesaparecido2(@Valid @ModelAttribute Desaparecido desaparecido, BindingResult result,
 			@RequestParam(value = "id_desaperi") String id_desaperi,
 			@RequestParam(value = "id_desaparecido") String id_desaparecido,
-			@RequestParam(value = "fecha_nacimiento") String fecha_nacimiento) throws ParseException{
+			@RequestParam(value = "fecha_nacimiento") String fecha_nacimiento) throws ParseException {
 		ModelAndView mav = new ModelAndView();
 
 		if (result.hasErrors()) {
@@ -468,7 +491,6 @@ public class EstadisticaController {
 			if (id_desaperi != null) {
 				DesaPeri desaPeri = desaPeriS.findOne(Integer.parseInt(id_desaperi));
 
-				
 				// Edad
 				String s = fecha_nacimiento;
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -478,16 +500,16 @@ public class EstadisticaController {
 				int year = c.get(Calendar.YEAR);
 				int month = c.get(Calendar.MONTH) + 1;
 				int date = c.get(Calendar.DATE);
-				
+
 				LocalDate l1 = LocalDate.of(year, month, date);
 				LocalDate now1 = LocalDate.now();
 				Period diff1 = Period.between(l1, now1);
 				Integer age = diff1.getYears();
-				
-				if(age < 18) {
+
+				if (age < 18) {
 					desaPeri.setDui(null);
 				}
-				
+
 				mav.addObject("titulo", "Editar Desaparecido");
 				mav.addObject("desaPeri", desaPeri);
 				mav.addObject("age", age);
@@ -507,15 +529,14 @@ public class EstadisticaController {
 	public ModelAndView validarEdicionDesaparecido2(@Valid @ModelAttribute DesaPeri desaPeri, BindingResult result,
 			@Valid @ModelAttribute Desaparecido desaparecido, BindingResult result2,
 			@RequestParam(value = "id_desaperi") String id_desaperi,
-			@RequestParam(value = "id_desaparecido") String id_desaparecido,
-			@RequestParam(value = "age") String age) {
+			@RequestParam(value = "id_desaparecido") String id_desaparecido, @RequestParam(value = "age") String age) {
 		ModelAndView mav = new ModelAndView();
 
 		if (result.hasErrors()) {
 
 			mav.addObject("titulo", "Editar Desaparecido");
 			mav.addObject("age", age);
-			if(Integer.parseInt(age) < 18) {
+			if (Integer.parseInt(age) < 18) {
 				desaPeri.setDui(null);
 			}
 			mav.addObject("desaPeri", desaPeri);

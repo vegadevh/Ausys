@@ -31,7 +31,7 @@
 
                 <input th:name="id_desaperi" type="hidden" th:value=${id_desaperiParam}>
 
-                <input type="hidden" id="id_peritaje" th:field="*{id_peritaje}">
+                <input th:name="id_peritaje" type="hidden" id="id_peritaje" th:field="*{id_peritaje}">
 
 
                 <label for="identificado">Persona identificada: </label>
@@ -43,7 +43,7 @@
                 <div th:if="${#fields.hasErrors('edad_estimada')}" th:errors="*{edad_estimada}"
                     class="alert alert-danger" role="alert"></div>
                 <br>
-                <!--<input type="hidden" th:field="*{division.id_division}">-->
+                <input type="hidden" th:field="*{municipio.id_municipio}">
 
 
                 <input type="submit" value="Siguiente" class="btn btn-primary">

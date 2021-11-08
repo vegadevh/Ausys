@@ -41,6 +41,10 @@
                     <p class="d-inline" th:text="${desaPeri.peritaje.edad_estimada}"></p>
                 </div>
                 <div>
+                    <b class="d-inline">Municipio: </b>
+                    <p class="d-inline" th:text="${desaPeri.peritaje.municipio.id_municipio}"></p>
+                </div>
+                <div>
                     <b class="d-inline">Direcci&oacute;n: </b>
                     <p class="d-inline" th:text="${desaPeri.direccion}"></p>
                 </div>
@@ -52,15 +56,17 @@
                     <b class="d-inline">Nombre: </b>
                     <p class="d-inline" th:if="${desaPeri.peritaje.edad_estimada} < 18"
                         th:text="${#strings.substring(desaPeri.nombre, 0,1) + '...'}"></p>
-                    <p class="d-inline" th:unless="${desaPeri.peritaje.edad_estimada} < 18" th:text="${desaPeri.nombre}"></p>
-                    
+                    <p class="d-inline" th:unless="${desaPeri.peritaje.edad_estimada} < 18"
+                        th:text="${desaPeri.nombre}"></p>
+
                 </div>
                 <div>
                     <b class="d-inline">Apellido: </b>
-                    
+
                     <p class="d-inline" th:if="${desaPeri.peritaje.edad_estimada} < 18"
                         th:text="${#strings.substring(desaPeri.apellido, 0,1) + '...'}"></p>
-                    <p class="d-inline" th:unless="${desaPeri.peritaje.edad_estimada} < 18" th:text="${desaPeri.apellido}"></p>
+                    <p class="d-inline" th:unless="${desaPeri.peritaje.edad_estimada} < 18"
+                        th:text="${desaPeri.apellido}"></p>
                 </div>
                 <div>
                     <b class="d-inline">Sexo: </b>
