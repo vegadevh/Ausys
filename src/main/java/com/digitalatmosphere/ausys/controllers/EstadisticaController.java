@@ -319,8 +319,31 @@ public class EstadisticaController {
 			@RequestParam(value = "fecha_nacimiento") String fecha_nacimiento) throws ParseException {
 
 		ModelAndView mav = new ModelAndView();
+		if (deptoSelect.equals("0") || municipioSelect.equals("0")) {
+			List<Departamento> departamentos = null;
+			List<Municipio> municipios = null;
 
-		if (result.hasErrors()) {
+			System.out.println(deptoSelect);
+			System.out.println(municipioSelect);
+
+			try {
+				departamentos = departamentoS.findAll();
+				municipios = municipioS.findAll();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			mav.addObject("titulo", "Ingresar Peritajes");
+			mav.addObject("deptoalert", "Por favor, seleccione alguna de las opciones.");
+			mav.addObject("municipioalert",
+					"Por favor, seleccione alguna de las opciones de departamento y posteriormente un municipio.");
+			mav.addObject("departamentos", departamentos);
+			mav.addObject("municipios", municipios);
+
+			mav.addObject("desaparecido", desaparecido);
+			mav.setViewName("IngresarDesaparecido");
+		}
+		else if (result.hasErrors()) {
 			List<Departamento> departamentos = null;
 			List<Municipio> municipios = null;
 

@@ -37,7 +37,7 @@
                 <br>
                 <th:block th:replace="components/form-registros :: registros"></th:block>
                 <input type="hidden" th:field="*{desaparecido.id_desaparecido}">
-                <input type="text" th:value="${age}" id="age" th:name="age">
+                <input type="hidden" th:value="${age}" id="age" th:name="age">
                 <input type="submit" value="Terminar edición" class="btn btn-primary">
 
             </form>

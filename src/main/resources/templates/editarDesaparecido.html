@@ -54,7 +54,7 @@
                 <div th:if="${#fields.hasErrors('fecha_nacimiento')}" th:errors="*{fecha_nacimiento}"
                     class="alert alert-danger" role="alert"></div>
                 <br>
-                <!--<input type="hidden" th:field="*{division.id_division}" >-->
+                <input type="hidden" th:field="*{municipio.id_municipio}">
                 <br>
                 <input type="submit" value="Siguiente" class="btn btn-primary">
             </form>
