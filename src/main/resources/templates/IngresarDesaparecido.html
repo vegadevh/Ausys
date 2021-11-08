@@ -39,18 +39,18 @@
                     class="alert alert-danger" role="alert"></div>
                 <br>
 
-                <label for="nombre_familiar">Nombre de familiar: </label>
+                <label for="nombre_familiar">Nombre de quien denuncia: </label>
                 <input type="text" id="nombre_familiar" th:field="*{nombre_familiar}">
                 <div th:if="${#fields.hasErrors('nombre_familiar')}" th:errors="*{nombre_familiar}"
                     class="alert alert-danger" role="alert"></div>
                 <br>
 
-                <label for="contacto_familiar">Contacto de familiar: </label>
+                <label for="contacto_familiar">Contacto de quien denuncia: </label>
                 <input type="text" id="contacto_familiar" th:field="*{contacto_familiar}">
                 <div th:if="${#fields.hasErrors('contacto_familiar')}" th:errors="*{contacto_familiar}"
                     class="alert alert-danger" role="alert"></div>
                 <br>
-                <label for="fecha_nacimiento">Fecha de nacimiento: </label>
+                <label for="fecha_nacimiento">Fecha de nacimiento (Del afectado): </label>
                 <input type="text" id="datepicker" th:name="fecha_nacimiento" th:field="*{fecha_nacimiento}">
                 <div th:if="${#fields.hasErrors('fecha_nacimiento')}" th:errors="*{fecha_nacimiento}"
                     class="alert alert-danger" role="alert"></div>
@@ -66,21 +66,12 @@
                 <br>
 
                 <label class="col-form-label">Municipio:</label>
-                <select class="form-control" id="municipioSelect">
+                <select class="form-control" id="municipioSelect" th:field="*{municipio.id_municipio}">
                     <option value="col1">Selecciona una opci&oacute;n</option>
                     <option th:each="municipio : ${municipios}" th:id="${municipio.departamento.id_departamento}"
                         th:value="${municipio.id_municipio}" th:text="${municipio.municipio}"></option>
                 </select>
                 <br>
-
-                <label class="col-form-label">Division pol&iacute;tica:</label>
-                <select class="form-control" id="divisionSelect" th:field="*{division.id_division}">
-                    <option value="col2">Selecciona una opci&oacute;n</option>
-                    <option th:each="division : ${divisiones}"
-                        th:id="${division.municipio.id_municipio}" 
-                        th:value="${division.id_division}"
-                        th:text="${division.division}"></option>
-                </select>
 
                 <input type="submit" value="Siguiente" class="btn btn-primary">
 
@@ -94,14 +85,6 @@
             $("#deptoSelect").change(function () {
                 $("#municipioSelect").children('option').hide();
                 $("#municipioSelect").children("option[id=" + $("#deptoSelect").val() + "]").show()
-            })
-        });
-        
-        $(document).ready(function () {
-            $("#divisionSelect").children('option:gt(0)').hide();
-            $("#municipioSelect").change(function () {
-                $("#divisionSelect").children('option').hide();
-                $("#divisionSelect").children("option[id=" + $("#municipioSelect").val() + "]").show()
             })
         });
 

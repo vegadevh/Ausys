@@ -40,11 +40,11 @@ public class Peritaje {
 	private Integer edad_estimada;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_division")
-	private Division division;
+	@JoinColumn(name="id_municipio")
+	private Municipio municipio;
 	
 	@Transient
-	private Integer id_division;
+	private Integer id_municipio;
 
 	public String getId_peritaje() {
 		return id_peritaje;
@@ -69,23 +69,23 @@ public class Peritaje {
 	public void setEdad_estimada(Integer edad_estimada) {
 		this.edad_estimada = edad_estimada;
 	}
-
-	public Division getDivision() {
-		return division;
-	}
-
-	public void setDivision(Division division) {
-		this.division = division;
-	}
-
-	public Integer getId_division() {
-		return id_division;
-	}
-
-	public void setId_division(Integer id_division) {
-		this.id_division = id_division;
-	}
 	
+	public Municipio getMunicipio() {
+		return municipio;
+	}
+
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
+	}
+
+	public Integer getId_municipio() {
+		return id_municipio;
+	}
+
+	public void setId_municipio(Integer id_municipio) {
+		this.id_municipio = id_municipio;
+	}
+
 	public String getEstadoDelegate() {
 		if(this.identificado == null) return "";
 		else {

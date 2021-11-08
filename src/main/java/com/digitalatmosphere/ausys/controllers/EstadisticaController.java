@@ -31,7 +31,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.digitalatmosphere.ausys.domains.Departamento;
 import com.digitalatmosphere.ausys.domains.DesaPeri;
 import com.digitalatmosphere.ausys.domains.Desaparecido;
-import com.digitalatmosphere.ausys.domains.Division;
 import com.digitalatmosphere.ausys.domains.Especial;
 import com.digitalatmosphere.ausys.domains.Foto;
 import com.digitalatmosphere.ausys.domains.Municipio;
@@ -39,7 +38,6 @@ import com.digitalatmosphere.ausys.domains.Peritaje;
 import com.digitalatmosphere.ausys.services.IDepartamentoService;
 import com.digitalatmosphere.ausys.services.IDesaPeriService;
 import com.digitalatmosphere.ausys.services.IDesaparecidoService;
-import com.digitalatmosphere.ausys.services.IDivisionService;
 import com.digitalatmosphere.ausys.services.IEspecialService;
 import com.digitalatmosphere.ausys.services.IFotoService;
 import com.digitalatmosphere.ausys.services.IMunicipioService;
@@ -57,9 +55,6 @@ public class EstadisticaController {
 
 	@Autowired
 	private IDesaparecidoService desaparecidoS;
-
-	@Autowired
-	private IDivisionService divisionS;
 
 	@Autowired
 	private IMunicipioService municipioS;
@@ -119,12 +114,10 @@ public class EstadisticaController {
 
 		List<Departamento> departamentos = null;
 		List<Municipio> municipios = null;
-		List<Division> divisiones = null;
 
 		try {
 			departamentos = departamentoS.findAll();
 			municipios = municipioS.findAll();
-			divisiones = divisionS.findAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -133,7 +126,6 @@ public class EstadisticaController {
 
 		mav.addObject("departamentos", departamentos);
 		mav.addObject("municipios", municipios);
-		mav.addObject("divisiones", divisiones);
 
 		mav.addObject("peritaje", peritaje);
 		mav.setViewName("IngresarPeritaje");
@@ -154,12 +146,10 @@ public class EstadisticaController {
 			
 			List<Departamento> departamentos = null;
 			List<Municipio> municipios = null;
-			List<Division> divisiones = null;
 
 			try {
 				departamentos = departamentoS.findAll();
 				municipios = municipioS.findAll();
-				divisiones = divisionS.findAll();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -168,7 +158,6 @@ public class EstadisticaController {
 			mav.addObject("iderror", "El identificador ya esta en uso.");
 			mav.addObject("departamentos", departamentos);
 			mav.addObject("municipios", municipios);
-			mav.addObject("divisiones", divisiones);
 
 			mav.addObject("peritaje", peritaje);
 			mav.setViewName("IngresarPeritaje");
@@ -179,12 +168,10 @@ public class EstadisticaController {
 //			}
 			List<Departamento> departamentos = null;
 			List<Municipio> municipios = null;
-			List<Division> divisiones = null;
 
 			try {
 				departamentos = departamentoS.findAll();
 				municipios = municipioS.findAll();
-				divisiones = divisionS.findAll();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -193,7 +180,6 @@ public class EstadisticaController {
 
 			mav.addObject("departamentos", departamentos);
 			mav.addObject("municipios", municipios);
-			mav.addObject("divisiones", divisiones);
 
 			mav.addObject("peritaje", peritaje);
 			mav.setViewName("IngresarPeritaje");
@@ -283,12 +269,10 @@ public class EstadisticaController {
 
 		List<Departamento> departamentos = null;
 		List<Municipio> municipios = null;
-		List<Division> divisiones = null;
 
 		try {
 			departamentos = departamentoS.findAll();
 			municipios = municipioS.findAll();
-			divisiones = divisionS.findAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -297,7 +281,6 @@ public class EstadisticaController {
 
 		mav.addObject("departamentos", departamentos);
 		mav.addObject("municipios", municipios);
-		mav.addObject("divisiones", divisiones);
 
 		mav.addObject("desaparecido", desaparecido);
 
@@ -315,12 +298,10 @@ public class EstadisticaController {
 		if (result.hasErrors()) {
 			List<Departamento> departamentos = null;
 			List<Municipio> municipios = null;
-			List<Division> divisiones = null;
 
 			try {
 				departamentos = departamentoS.findAll();
 				municipios = municipioS.findAll();
-				divisiones = divisionS.findAll();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -329,7 +310,6 @@ public class EstadisticaController {
 
 			mav.addObject("departamentos", departamentos);
 			mav.addObject("municipios", municipios);
-			mav.addObject("divisiones", divisiones);
 
 			mav.addObject("desaparecido", desaparecido);
 			mav.setViewName("IngresarDesaparecido");
@@ -426,12 +406,10 @@ public class EstadisticaController {
 
 			List<Departamento> departamentos = null;
 			List<Municipio> municipios = null;
-			List<Division> divisiones = null;
 
 			try {
 				departamentos = departamentoS.findAll();
 				municipios = municipioS.findAll();
-				divisiones = divisionS.findAll();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -440,7 +418,6 @@ public class EstadisticaController {
 
 			mav.addObject("departamentos", departamentos);
 			mav.addObject("municipios", municipios);
-			mav.addObject("divisiones", divisiones);
 			
 
 			mav.addObject("desaparecido", desaparecido);
@@ -464,12 +441,10 @@ public class EstadisticaController {
 		if (result.hasErrors()) {
 			List<Departamento> departamentos = null;
 			List<Municipio> municipios = null;
-			List<Division> divisiones = null;
 
 			try {
 				departamentos = departamentoS.findAll();
 				municipios = municipioS.findAll();
-				divisiones = divisionS.findAll();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -478,7 +453,6 @@ public class EstadisticaController {
 
 			mav.addObject("departamentos", departamentos);
 			mav.addObject("municipios", municipios);
-			mav.addObject("divisiones", divisiones);
 
 			mav.addObject("desaparecido", desaparecido);
 			mav.addObject("id_desaparecidoParam", id_desaparecido);
