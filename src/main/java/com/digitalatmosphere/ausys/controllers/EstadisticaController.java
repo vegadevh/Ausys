@@ -142,11 +142,41 @@ public class EstadisticaController {
 
 	@RequestMapping("/validarPeritaje")
 	public ModelAndView validarPeritaje(@Valid @ModelAttribute Peritaje peritaje, BindingResult result,
-			@RequestParam(value = "edad_estimada") String edad_estimada) {
+			@RequestParam(value = "edad_estimada") String edad_estimada,
+			@RequestParam(value = "id_peritaje") String identificador) {
 
 		ModelAndView mav = new ModelAndView();
+		
+		Peritaje idperi = null;
+		idperi = peritajeS.findOne(identificador);
+		
+		if(idperi != null) {
+			
+			List<Departamento> departamentos = null;
+			List<Municipio> municipios = null;
+			List<Division> divisiones = null;
 
-		if (result.hasErrors()) {
+			try {
+				departamentos = departamentoS.findAll();
+				municipios = municipioS.findAll();
+				divisiones = divisionS.findAll();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			mav.addObject("titulo", "Ingresar Peritajes");
+			mav.addObject("iderror", "El identificador ya esta en uso.");
+			mav.addObject("departamentos", departamentos);
+			mav.addObject("municipios", municipios);
+			mav.addObject("divisiones", divisiones);
+
+			mav.addObject("peritaje", peritaje);
+			mav.setViewName("IngresarPeritaje");
+		}
+		else if (result.hasErrors()) {
+//			if(idperi != null) {
+//				mav.addObject("iderror", "El identificador ya esta en uso.");
+//			}
 			List<Departamento> departamentos = null;
 			List<Municipio> municipios = null;
 			List<Division> divisiones = null;

@@ -28,7 +28,7 @@ public class PeritajeServiceImpl implements IPeritajeService{
 
 	@Override
 	public Peritaje findOne(String id_peritaje) throws DataAccessException {
-		return peritajeRepo.getById(id_peritaje);
+		return peritajeRepo.findById(id_peritaje).orElse(null);
 	}
 
 	@Override
