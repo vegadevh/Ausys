@@ -34,7 +34,9 @@
         <div th:if="${age} >= 18">
             <label for="DUI">DUI: </label>
             <input type="text" id="DUI" th:field="*{Dui}" pattern="[0-9]{8}-[0-9]{1}"
-                th:required="${age} >= 18 ? 'required' : null">
+                th:required="${age} >= 18 ? 'required' : null"
+                oninvalid="setCustomValidity('Debes cumplir con el formato 8 numeros seguidos de \'-\' y luego un numero.')"
+                onchange="try{setCustomValidity('')}catch(e){}">
             <div th:if="${#fields.hasErrors('Dui')}" th:errors="*{Dui}" class="alert alert-danger" role="alert">
             </div>
         </div>

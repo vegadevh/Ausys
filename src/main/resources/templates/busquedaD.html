@@ -55,7 +55,9 @@
             <!--Identificador-->
             <form th:action="@{/show/busquedaDesaparecidos}" method="post" class="vis" id="identificadorid">
                 <label>Identificador: </label>
-                <input type="text" placeholder="Identificador" th:name="id_registro" class="form-control" required>
+                <input type="text" placeholder="Identificador" th:name="id_registro" class="form-control" required
+                    oninvalid="setCustomValidity('Debe ingresar el identificador para realizar la busqueda.')"
+                    onchange="try{setCustomValidity('')}catch(e){}">
                 <br>
                 <button type="submit" id="btnIdentificador" name="action" class="btn btn-primary"
                     value="buscaridentificador"><i class="fa fa-search"></i>Buscar</button>
