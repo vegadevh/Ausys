@@ -44,4 +44,18 @@ public class EspecialServiceImpl implements IEspecialService {
 		return especial;
 	}
 
+	@Override
+	public void eliminarEspecialDesaparecido(String id_desaparecido) throws DataAccessException {
+		especialRepo.eliminarEspecialDesaparecido(id_desaparecido);
+		return;
+	}
+
+	@Override
+	public void eliminarEspecialPeritaje(String id_peritaje) throws DataAccessException {
+		especialRepo.eliminarEspecialPeritaje(id_peritaje);
+		return;
+	}
+	
+	
+
 }

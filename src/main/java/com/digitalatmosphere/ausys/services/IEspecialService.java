@@ -14,4 +14,8 @@ public interface IEspecialService {
 	public List<EspecialDTO> especialDesaparecido(String id) throws DataAccessException;
 	
 	public List<EspecialDTO> especialPeritaje(String id) throws DataAccessException;
+	
+	public void eliminarEspecialDesaparecido(String id_desaparecido) throws DataAccessException;
+	
+	public void eliminarEspecialPeritaje(String id_peritaje) throws DataAccessException;
 }

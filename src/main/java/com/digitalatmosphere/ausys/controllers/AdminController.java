@@ -19,6 +19,8 @@ import com.digitalatmosphere.ausys.domains.Rol;
 import com.digitalatmosphere.ausys.domains.Usuario;
 import com.digitalatmosphere.ausys.services.IDesaPeriService;
 import com.digitalatmosphere.ausys.services.IDesaparecidoService;
+import com.digitalatmosphere.ausys.services.IEspecialService;
+import com.digitalatmosphere.ausys.services.IFotoService;
 import com.digitalatmosphere.ausys.services.IPeritajeService;
 import com.digitalatmosphere.ausys.services.IRolService;
 import com.digitalatmosphere.ausys.services.IUsuarioService;
@@ -31,6 +33,9 @@ public class AdminController {
 	private IRolService rolS;
 	
 	@Autowired
+	private IFotoService fotoS;
+	
+	@Autowired
 	private IUsuarioService usuarioS;
 	
 	@Autowired
@@ -41,6 +46,9 @@ public class AdminController {
 	
 	@Autowired
 	private IDesaparecidoService desaparecidoS;
+	
+	@Autowired
+	private IEspecialService especialS;
 	
 	//Listas
 	@ModelAttribute("listaSexo")
@@ -203,6 +211,8 @@ public class AdminController {
 	public ModelAndView eliminarPeritaje(@RequestParam(value="id_desaperi") String id_desaperi, @RequestParam(value="id_peritaje") String id_peritaje) {
 		ModelAndView mav = new ModelAndView();
 		if(id_desaperi !=null) {
+			fotoS.eliminarFotosPeritaje(id_peritaje);
+			especialS.eliminarEspecialPeritaje(id_peritaje);
 			desaPeriS.delete(Integer.parseInt(id_desaperi));
 			peritajeS.delete(id_peritaje);
 			
@@ -216,6 +226,8 @@ public class AdminController {
 	public ModelAndView eliminarDesaparecido(@RequestParam(value="id_desaperi") String id_desaperi, @RequestParam(value="id_desaparecido") String id_desaparecido) {
 		ModelAndView mav = new ModelAndView();
 		if(id_desaperi !=null) {
+			fotoS.eliminarFotosDesaparecido(id_desaparecido);
+			especialS.eliminarEspecialDesaparecido(id_desaparecido);
 			desaPeriS.delete(Integer.parseInt(id_desaperi));
 			desaparecidoS.delete(id_desaparecido);
 			

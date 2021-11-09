@@ -14,5 +14,9 @@ public interface IFotoService {
 	public List<fotografiaDTO> fotosDesaparecido(String id) throws DataAccessException;
 	
 	public List<fotografiaDTO> fotosPeritaje(String id) throws DataAccessException;
+	
+	public void eliminarFotosPeritaje(String id_peritaje) throws DataAccessException;
+	
+	public void eliminarFotosDesaparecido(String id_desaparecido) throws DataAccessException;
 
 }
