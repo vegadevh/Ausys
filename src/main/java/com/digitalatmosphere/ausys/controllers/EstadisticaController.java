@@ -278,7 +278,7 @@ public class EstadisticaController {
 
 			mav.addObject("desaPeri", desaPeri);
 			mav.addObject("peritaje", peritaje);
-			mav.addObject("mensaje", "Peritaje ingresado con exito");
+			mav.addObject("mensaje", "Peritaje ingresado con éxito");
 			mav.setViewName("verPeritaje");
 		}
 		return mav;
@@ -464,7 +464,7 @@ public class EstadisticaController {
 			mav.addObject("age", age);
 			mav.addObject("desaPeri", desaPeri);
 			mav.addObject("desaparecido", desaparecido);
-			mav.addObject("mensaje", "Desaparecido ingresado con exito");
+			mav.addObject("mensaje", "Desaparecido ingresado con éxito");
 			mav.setViewName("verDesaparecido");
 		}
 		return mav;
@@ -615,7 +615,7 @@ public class EstadisticaController {
 			mav.addObject("desaparecido", desaparecido);
 			mav.addObject("id_desaparecidoParam", id_desaparecido);
 			mav.addObject("id_desaperiParam", id_desaperi);
-			mav.addObject("mensaje", "Desaparecido editado con exito");
+			mav.addObject("mensaje", "Desaparecido editado con éxito");
 			mav.setViewName("verDesaparecido");
 		}
 		return mav;
@@ -723,7 +723,7 @@ public class EstadisticaController {
 			mav.addObject("peritaje", peritaje);
 			mav.addObject("id_peritajeParam", id_peritaje);
 			mav.addObject("id_desaperiParam", id_desaperi);
-			mav.addObject("mensaje", "Peritaje editado con exito");
+			mav.addObject("mensaje", "Peritaje editado con éxito");
 			mav.setViewName("verPeritaje");
 		}
 		return mav;

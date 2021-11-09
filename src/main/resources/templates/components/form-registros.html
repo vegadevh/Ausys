@@ -1,16 +1,16 @@
 <section th:fragment="registros">
-    <label for="direccion">Direcci&oacute;n: </label>
+    <label for="direccion">Direcci&oacute;n donde se desarrollo el caso: </label>
     <div>
         <textarea type="text" rows="5" cols="50" id="direccion" th:field="*{direccion}"></textarea>
     </div>
     <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="alert alert-danger" role="alert">
     </div>
     <br>
-    <label for="nombre">Nombre: </label>
+    <label for="nombre">Nombres: </label>
     <input type="text" id="nombre" th:field="*{nombre}">
     <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="alert alert-danger" role="alert"></div>
     <br>
-    <label for="apellido">Apellido: </label>
+    <label for="apellido">Apellidos: </label>
     <input type="text" id="apellido" th:field="*{apellido}">
     <div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="alert alert-danger" role="alert"></div>
     <br>
@@ -39,8 +39,7 @@
             </div>
         </div>
         <div th:unless="${age} >= 18">
-            <input type="hidden" id="DUI" th:field="*{Dui}"
-                th:required="${age} >= 18 ? 'required' : null">
+            <input type="hidden" id="DUI" th:field="*{Dui}" th:required="${age} >= 18 ? 'required' : null">
         </div>
     </div>
     <br>

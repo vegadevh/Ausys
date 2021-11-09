@@ -40,7 +40,7 @@
                     <input type="checkbox" id="identificado" th:field="*{identificado}">
                     <br>
 
-                    <label for="edad_estimada">Edad estimada: </label>
+                    <label for="edad_estimada">Edad/Edad estimada: </label>
                     <input type="number" id="edad_estimada" th:name="edad_estimada" th:field="*{edad_estimada}">
                     <div th:if="${#fields.hasErrors('edad_estimada')}" th:errors="*{edad_estimada}"
                         class="alert alert-danger" role="alert"></div>

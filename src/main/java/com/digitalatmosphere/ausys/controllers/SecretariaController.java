@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.digitalatmosphere.ausys.domains.DesaPeri;
 import com.digitalatmosphere.ausys.dto.CasosDTO;
 import com.digitalatmosphere.ausys.dto.DesaparecidoDTO;
+import com.digitalatmosphere.ausys.dto.DesaparecidoDTOAge;
 import com.digitalatmosphere.ausys.dto.HombresMujeresDTO;
 import com.digitalatmosphere.ausys.dto.PeritajeDTO;
 import com.digitalatmosphere.ausys.services.IDesaPeriService;
@@ -383,7 +384,7 @@ public class SecretariaController {
 	public ModelAndView BuscarNombreD(@RequestParam(value = "nombre_registro") String nombre,
 			@RequestParam(value = "sexo_registro") String sexo) {
 		ModelAndView mav = new ModelAndView();
-		List<DesaparecidoDTO> desaPeriL = null;
+		List<DesaparecidoDTOAge> desaPeriL = null;
 		if (sexo != null) {
 			if (sexo.equals("Ambos")) {
 				sexo = "";
@@ -413,7 +414,7 @@ public class SecretariaController {
 	@RequestMapping(value = "/busquedaDesaparecidos", params = "action=buscaridentificador")
 	public ModelAndView BuscarIdentificadorD(@RequestParam(value = "id_registro") String id) {
 		ModelAndView mav = new ModelAndView();
-		List<DesaparecidoDTO> desaPeriL = null;
+		List<DesaparecidoDTOAge> desaPeriL = null;
 		try {
 			desaPeriL = desaPeriS.buscarIdDesaparecido(id);
 		} catch (Exception e) {

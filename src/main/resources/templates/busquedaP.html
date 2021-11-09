@@ -38,8 +38,8 @@
             <br>
             <!--Nombre-->
             <form th:action="@{/show/busquedaPeritajes}" method="post" id="nombresid">
-                <label>Valor de b&uacute;squeda: </label>
-                <input type="text" placeholder="Nombre" th:name="nombre_registro" class="form-control" required>
+                <label>Nombre del afectado: </label>
+                <input type="text" placeholder="Nombre" th:name="nombre_registro" class="form-control">
                 <br>
                 <label for="tipo_de_caso">Tipo de caso: </label>
                 <select class="form-control" id="casoSelect" th:name="type_registro">
@@ -62,7 +62,7 @@
             </form>
             <!--Identificador-->
             <form th:action="@{/show/busquedaPeritajes}" method="post" class="vis" id="identificadorid">
-                <label>Valor de b&uacute;squeda: </label>
+                <label>Identfiicador: </label>
                 <input type="text" placeholder="Identificador" th:name="id_registro" class="form-control" required>
                 <br>
                 <button type="submit" id="btnIdentificador" name="action" class="btn btn-primary"
