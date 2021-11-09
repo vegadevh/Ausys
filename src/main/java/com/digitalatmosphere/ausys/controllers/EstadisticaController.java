@@ -461,6 +461,7 @@ public class EstadisticaController {
 			}
 			desaPeri.setId_desaperi(idDesaPeri);
 
+			mav.addObject("age", age);
 			mav.addObject("desaPeri", desaPeri);
 			mav.addObject("desaparecido", desaparecido);
 			mav.addObject("mensaje", "Desaparecido ingresado con exito");
