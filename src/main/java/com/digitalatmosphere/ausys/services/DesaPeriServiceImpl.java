@@ -111,6 +111,7 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 			p.setApellido(obj[3].toString());
 			p.setFecha_registro(obj[4].toString());
 			p.setId_desaperi(obj[5].toString());
+			p.setEdad_estimada(obj[6].toString());
 			return p;
 		}).collect(Collectors.toList());
 		return peritajes;
@@ -126,36 +127,39 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 			p.setApellido(obj[3].toString());
 			p.setFecha_registro(obj[4].toString());
 			p.setId_desaperi(obj[5].toString());
+			p.setEdad_estimada(obj[6].toString());
 			return p;
 		}).collect(Collectors.toList());
 		return peritajes;
 	}
 
 	@Override
-	public List<DesaparecidoDTO> buscarNombreDesaparecido(String nombre, String sexo) throws DataAccessException {
-		List<DesaparecidoDTO> peritajes = desaPeriRepo.buscarNombreDesaparecido(nombre, sexo).stream().map(obj -> {
-			DesaparecidoDTO d = new DesaparecidoDTO();
+	public List<DesaparecidoDTOAge> buscarNombreDesaparecido(String nombre, String sexo) throws DataAccessException {
+		List<DesaparecidoDTOAge> peritajes = desaPeriRepo.buscarNombreDesaparecido(nombre, sexo).stream().map(obj -> {
+			DesaparecidoDTOAge d = new DesaparecidoDTOAge();
 			d.setId_desaparecido(obj[0].toString());
 			d.setTipo_de_caso(obj[1].toString());
 			d.setNombre(obj[2].toString());
 			d.setApellido(obj[3].toString());
 			d.setFecha_registro(obj[4].toString());
 			d.setId_desaperi(obj[5].toString());
+			d.setAge(obj[6].toString());
 			return d;
 		}).collect(Collectors.toList());
 		return peritajes;
 	}
 
 	@Override
-	public List<DesaparecidoDTO> buscarIdDesaparecido(String id) throws DataAccessException {
-		List<DesaparecidoDTO> peritajes = desaPeriRepo.buscarIdDesaparecido(id).stream().map(obj -> {
-			DesaparecidoDTO d = new DesaparecidoDTO();
+	public List<DesaparecidoDTOAge> buscarIdDesaparecido(String id) throws DataAccessException {
+		List<DesaparecidoDTOAge> peritajes = desaPeriRepo.buscarIdDesaparecido(id).stream().map(obj -> {
+			DesaparecidoDTOAge d = new DesaparecidoDTOAge();
 			d.setId_desaparecido(obj[0].toString());
 			d.setTipo_de_caso(obj[1].toString());
 			d.setNombre(obj[2].toString());
 			d.setApellido(obj[3].toString());
 			d.setFecha_registro(obj[4].toString());
 			d.setId_desaperi(obj[5].toString());
+			d.setAge(obj[6].toString());
 			return d;
 		}).collect(Collectors.toList());
 		return peritajes;

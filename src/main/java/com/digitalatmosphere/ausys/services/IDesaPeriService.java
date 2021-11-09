@@ -34,9 +34,9 @@ public List<DesaPeri> findALL() throws DataAccessException;
 
 	public List<PeritajeDTO> buscarIdPeritaje(String id) throws DataAccessException;
 	
-	public List<DesaparecidoDTO> buscarNombreDesaparecido(String nombre, String sexo) throws DataAccessException;
+	public List<DesaparecidoDTOAge> buscarNombreDesaparecido(String nombre, String sexo) throws DataAccessException;
 	
-	public List<DesaparecidoDTO> buscarIdDesaparecido(String id) throws DataAccessException;
+	public List<DesaparecidoDTOAge> buscarIdDesaparecido(String id) throws DataAccessException;
 	
 	public List<RegistroDTO> verRegistroPeritaje(String id_peritaje, String id_desaperi) throws DataAccessException;
 	
