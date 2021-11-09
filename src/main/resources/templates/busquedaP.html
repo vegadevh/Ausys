@@ -22,49 +22,53 @@
     <title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
-<body>
+<body style="background-color: #b1b7b9;">
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
-        <h1 th:text="${titulo}"></h1>
-        <h5 th:if="${mensaje}" class="alert alert-danger" th:text="${mensaje}"></h5>
-        <label>Buscar registro por: </label>
-        <select id="selection" class="form-control">
-            <option value="0" selected>--- Seleccione una opción ---</option>
-            <option value="1">Generar busqueda mediante filtro</option>
-            <option value="2">Buscar por identificador</option>
-        </select>
-        <br>
-        <!--Nombre-->
-        <form th:action="@{/show/busquedaPeritajes}" method="post" id="nombresid">
-            <label>Valor de b&uacute;squeda: </label>
-            <input type="text" placeholder="Nombre" th:name="nombre_registro" class="form-control" required>
+        <div class="card" style="padding: 2em;">
+
+            <h1 th:text="${titulo}"></h1>
+            <h5 th:if="${mensaje}" class="alert alert-danger" th:text="${mensaje}"></h5>
+            <label>Buscar registro por: </label>
+            <select id="selection" class="form-control">
+                <option value="0" selected>--- Seleccione una opción ---</option>
+                <option value="1">Generar busqueda mediante filtro</option>
+                <option value="2">Buscar por identificador</option>
+            </select>
             <br>
-		        <label for="tipo_de_caso">Tipo de caso: </label>
-	            <select class="form-control" id="casoSelect" th:name="type_registro">
-	                <option th:each="caso : ${listaCasos2}" th:id="${tipo_de_caso}" th:value="${caso}" th:text="${caso}">
-	                </option>
-	            </select>
-            <br>
-            <!--Sexo-->
-             <label>Sexo: </label><br>
-             <input type="radio" th:value="Ambos" th:name="sexo_registro" th:id="Ambos" checked>
-		     <label th:for="Ambos" th:text="Ambos"></label> 
-		    <div th:each="sexo : ${listaSexo}">
-		        <input type="radio" th:value="${sexo}" th:name="sexo_registro" th:id="${sexo}">
-		        <label th:for="${sexo}" th:text="${sexo}"></label> 
-		    </div>
-		    <br>
-            <button type="submit" id="btnNombre" name="action" value="buscarnombre" class="btn btn-primary"><i
-                    class="fa fa-search"></i>Buscar</button>
-        </form>
-        <!--Identificador-->
-        <form th:action="@{/show/busquedaPeritajes}" method="post" class="vis" id="identificadorid">
-            <label>Valor de b&uacute;squeda: </label>
-            <input type="text" placeholder="Identificador" th:name="id_registro" class="form-control" required>
-            <br>
-            <button type="submit" id="btnIdentificador" name="action" class="btn btn-primary"
-                value="buscaridentificador"><i class="fa fa-search"></i>Buscar</button>
-        </form>
+            <!--Nombre-->
+            <form th:action="@{/show/busquedaPeritajes}" method="post" id="nombresid">
+                <label>Valor de b&uacute;squeda: </label>
+                <input type="text" placeholder="Nombre" th:name="nombre_registro" class="form-control" required>
+                <br>
+                <label for="tipo_de_caso">Tipo de caso: </label>
+                <select class="form-control" id="casoSelect" th:name="type_registro">
+                    <option th:each="caso : ${listaCasos2}" th:id="${tipo_de_caso}" th:value="${caso}"
+                        th:text="${caso}">
+                    </option>
+                </select>
+                <br>
+                <!--Sexo-->
+                <label>Sexo: </label><br>
+                <input type="radio" th:value="Ambos" th:name="sexo_registro" th:id="Ambos" checked>
+                <label th:for="Ambos" th:text="Ambos"></label>
+                <div th:each="sexo : ${listaSexo}">
+                    <input type="radio" th:value="${sexo}" th:name="sexo_registro" th:id="${sexo}">
+                    <label th:for="${sexo}" th:text="${sexo}"></label>
+                </div>
+                <br>
+                <button type="submit" id="btnNombre" name="action" value="buscarnombre" class="btn btn-primary"><i
+                        class="fa fa-search"></i>Buscar</button>
+            </form>
+            <!--Identificador-->
+            <form th:action="@{/show/busquedaPeritajes}" method="post" class="vis" id="identificadorid">
+                <label>Valor de b&uacute;squeda: </label>
+                <input type="text" placeholder="Identificador" th:name="id_registro" class="form-control" required>
+                <br>
+                <button type="submit" id="btnIdentificador" name="action" class="btn btn-primary"
+                    value="buscaridentificador"><i class="fa fa-search"></i>Buscar</button>
+            </form>
+        </div>
 
     </div>
 

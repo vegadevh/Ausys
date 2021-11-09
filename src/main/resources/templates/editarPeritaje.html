@@ -21,34 +21,36 @@
     <title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
-<body>
+<body style="background-color: #b1b7b9;">
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
-        <h1 th:text="${titulo}"></h1>
-        <div>
-            <form th:action="@{/write/editar/peritaje2/} + ${id_peritajeParam} + '/' + ${id_desaperiParam}"
-                th:object="${peritaje}" method="GET">
+        <div class="card" style="padding: 2em;">
 
-                <input th:name="id_desaperi" type="hidden" th:value=${id_desaperiParam}>
+            <h1 th:text="${titulo}"></h1>
+            <div>
+                <form th:action="@{/write/editar/peritaje2/} + ${id_peritajeParam} + '/' + ${id_desaperiParam}"
+                    th:object="${peritaje}" method="GET">
 
-                <input th:name="id_peritaje" type="hidden" id="id_peritaje" th:field="*{id_peritaje}">
+                    <input th:name="id_desaperi" type="hidden" th:value=${id_desaperiParam}>
 
-
-                <label for="identificado">Persona identificada: </label>
-                <input type="checkbox" id="identificado" th:field="*{identificado}">
-                <br>
-
-                <label for="edad_estimada">Edad estimada: </label>
-                <input type="number" id="edad_estimada" th:name="edad_estimada" th:field="*{edad_estimada}">
-                <div th:if="${#fields.hasErrors('edad_estimada')}" th:errors="*{edad_estimada}"
-                    class="alert alert-danger" role="alert"></div>
-                <br>
-                <input type="hidden" th:field="*{municipio.id_municipio}">
+                    <input th:name="id_peritaje" type="hidden" id="id_peritaje" th:field="*{id_peritaje}">
 
 
-                <input type="submit" value="Siguiente" class="btn btn-primary">
+                    <label for="identificado">Persona identificada: </label>
+                    <input type="checkbox" id="identificado" th:field="*{identificado}">
+                    <br>
 
-            </form>
+                    <label for="edad_estimada">Edad estimada: </label>
+                    <input type="number" id="edad_estimada" th:name="edad_estimada" th:field="*{edad_estimada}">
+                    <div th:if="${#fields.hasErrors('edad_estimada')}" th:errors="*{edad_estimada}"
+                        class="alert alert-danger" role="alert"></div>
+                    <br>
+                    <input type="hidden" th:field="*{municipio.id_municipio}">
+
+                    <input type="submit" value="Siguiente" class="btn btn-primary">
+
+                </form>
+            </div>
         </div>
     </div>
 

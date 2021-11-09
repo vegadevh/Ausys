@@ -22,101 +22,102 @@
     <title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
-<body>
+<body style="background-color: #b1b7b9;">
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
-        <h1 th:text="${titulo}"></h1>
-        <br>
-        <div>
-        	<div th:if="${alert}" class="alert alert-danger" th:text="${alert}" role="alert"></div>
-            <label>Buscar registro por: </label>
-            <select id="selection" class="form-control">
-                <option value="0" selected>--- Seleccione una opción ---</option>
-                <option value="1">Generar busqueda mediante filtro</option>
-                <option value="2">Generar PDF en base a filtro</option>
-            </select>
+        <div class="card" style="padding: 2em;">
+            <h1 th:text="${titulo}"></h1>
+            <div>
+                <div th:if="${alert}" class="alert alert-danger" th:text="${alert}" role="alert"></div>
+                <label>Buscar registro por: </label>
+                <select id="selection" class="form-control">
+                    <option value="0" selected>--- Seleccione una opción ---</option>
+                    <option value="1">Generar busqueda mediante filtro</option>
+                    <option value="2">Generar PDF en base a filtro</option>
+                </select>
+                <br>
+                <form th:action="@{/show/listaRegistros}" method="get" id="filtrar">
+                    <label for="filtro">Nombre o apellido: </label>
+                    <input type="text" id="filtro" name="keyword">
+                    <br>
+                    <label for="tipo_de_caso">Tipo de caso: </label>
+                    <select class="form-control" id="casoSelect" name="type">
+                        <option th:each="caso : ${listaCasos2}" th:id="${tipo_de_caso}" th:value="${caso}"
+                            th:text="${caso}">
+                        </option>
+                    </select>
+                    <br>
+                    <label>Sexo: </label>
+                    <input type="radio" th:value="Ambos" name="sexo" th:id="Ambos" checked>
+                    <label th:for="Ambos" th:text="Ambos"></label>
+                    <div th:each="sexo : ${listaSexo}">
+                        <input type="radio" th:value="${sexo}" name="sexo" th:id="${sexo}">
+                        <label th:for="${sexo}" th:text="${sexo}"></label>
+                    </div>
+                    <br>
+                    <label>Buscar entre fechas: </label>
+                    <br>
+                    <label for="fechaI">Fecha de inicial: </label>
+                    <input type="text" id="datepicker" th:name="fechaI">
+    
+                    <label for="fechaF">Fecha final: </label>
+                    <input type="text" id="datepicker2" th:name="fechaF">
+                    <br>
+                    <input type="submit" value="Buscar" class="btn btn-primary">
+                </form>
+    
+                <form th:action="@{/pdf/filtro}" method="get" id="generarpdf">
+                    <label for="filtro">Nombre o apellido: </label>
+                    <input type="text" id="filtro" name="keyword">
+                    <br>
+                    <label for="tipo_de_caso">Tipo de caso: </label>
+                    <select class="form-control" id="casoSelect" name="type">
+                        <option th:each="caso : ${listaCasos2}" th:id="${tipo_de_caso}" th:value="${caso}"
+                            th:text="${caso}">
+                        </option>
+                    </select>
+                    <br>
+                    <label>Sexo: </label>
+                    <input type="radio" th:value="Ambos" name="sexo" th:id="Ambos" checked>
+                    <label th:for="Ambos" th:text="Ambos"></label>
+                    <div th:each="sexo : ${listaSexo}">
+                        <input type="radio" th:value="${sexo}" name="sexo" th:id="${sexo}">
+                        <label th:for="${sexo}" th:text="${sexo}"></label>
+                    </div>
+                    <br>
+                    <label>Buscar entre fechas: </label>
+                    <br>
+                    <label for="fechaI">Fecha de inicial: </label>
+                    <input type="text" id="datepicker3" th:name="fechaI">
+    
+                    <label for="fechaF">Fecha final: </label>
+                    <input type="text" id="datepicker4" th:name="fechaF">
+                    <br>
+                    <input type="submit" value="Generar" class="btn btn-warning">
+                </form>
+            </div>
             <br>
-            <form th:action="@{/show/listaRegistros}" method="get" id="filtrar">
-                <label for="filtro">Nombre o apellido: </label>
-                <input type="text" id="filtro" name="keyword">
-                <br>
-                <label for="tipo_de_caso">Tipo de caso: </label>
-                <select class="form-control" id="casoSelect" name="type">
-                    <option th:each="caso : ${listaCasos2}" th:id="${tipo_de_caso}" th:value="${caso}"
-                        th:text="${caso}">
-                    </option>
-                </select>
-                <br>
-                <label>Sexo: </label>
-                <input type="radio" th:value="Ambos" name="sexo" th:id="Ambos" checked>
-                <label th:for="Ambos" th:text="Ambos"></label>
-                <div th:each="sexo : ${listaSexo}">
-                    <input type="radio" th:value="${sexo}" name="sexo" th:id="${sexo}">
-                    <label th:for="${sexo}" th:text="${sexo}"></label>
-                </div>
-                <br>
-                <label>Buscar entre fechas: </label>
-                <br>
-                <label for="fechaI">Fecha de inicial: </label>
-                <input type="text" id="datepicker" th:name="fechaI">
-
-                <label for="fechaF">Fecha final: </label>
-                <input type="text" id="datepicker2" th:name="fechaF">
-                <br>
-                <input type="submit" value="Buscar" class="btn btn-primary">
-            </form>
-
-            <form th:action="@{/pdf/filtro}" method="get" id="generarpdf">
-                <label for="filtro">Nombre o apellido: </label>
-                <input type="text" id="filtro" name="keyword">
-                <br>
-                <label for="tipo_de_caso">Tipo de caso: </label>
-                <select class="form-control" id="casoSelect" name="type">
-                    <option th:each="caso : ${listaCasos2}" th:id="${tipo_de_caso}" th:value="${caso}"
-                        th:text="${caso}">
-                    </option>
-                </select>
-                <br>
-                <label>Sexo: </label>
-                <input type="radio" th:value="Ambos" name="sexo" th:id="Ambos" checked>
-                <label th:for="Ambos" th:text="Ambos"></label>
-                <div th:each="sexo : ${listaSexo}">
-                    <input type="radio" th:value="${sexo}" name="sexo" th:id="${sexo}">
-                    <label th:for="${sexo}" th:text="${sexo}"></label>
-                </div>
-                <br>
-                <label>Buscar entre fechas: </label>
-                <br>
-                <label for="fechaI">Fecha de inicial: </label>
-                <input type="text" id="datepicker3" th:name="fechaI">
-
-                <label for="fechaF">Fecha final: </label>
-                <input type="text" id="datepicker4" th:name="fechaF">
-                <br>
-                <input type="submit" value="Generar" class="btn btn-warning">
-            </form>
+            <table class="table shadow-lg bg-white rounded" id="TablaRegistro">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Fecha Registro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each=" desaPeri: ${desaPeriL}">
+                        <th scope="row" th:text="${desaPeri.id_desaperi}"></th>
+                        <td th:text="${desaPeri.tipo_de_caso}"></td>
+                        <td th:text="${desaPeri.nombre}"></td>
+                        <td th:text="${desaPeri.apellido}"></td>
+                        <td th:text="${desaPeri.fecha_registro}"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <br>
-        <table class="table" id="TablaRegistro">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Fecha Registro</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each=" desaPeri: ${desaPeriL}">
-                    <th scope="row" th:text="${desaPeri.id_desaperi}"></th>
-                    <td th:text="${desaPeri.tipo_de_caso}"></td>
-                    <td th:text="${desaPeri.nombre}"></td>
-                    <td th:text="${desaPeri.apellido}"></td>
-                    <td th:text="${desaPeri.fecha_registro}"></td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 
     <script>

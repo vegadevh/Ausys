@@ -21,20 +21,22 @@
     <title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
-<body>
+<body style="background-color: #b1b7b9;">
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
-        <h1 th:text="${titulo}"></h1>
-        <div>
-            <form th:action="@{/write/validarDesaparecido2}" th:object="${desaPeri}" method="POST">
-                <input type="hidden" th:field="*{tipo_de_caso}">
-                <br>
-                <th:block th:replace="components/form-registros :: registros"></th:block>
-                <input type="hidden" th:field="${desaparecido.id_desaparecido}" th:value="id_desaparecido">
-                <input type="hidden" th:value="${age}" id="age" th:name="age">
-                <input type="submit" value="Ingresar Desaparecido" class="btn btn-primary">
+        <div class="card" style="padding: 2em;">
+            <h1 th:text="${titulo}"></h1>
+            <div>
+                <form th:action="@{/write/validarDesaparecido2}" th:object="${desaPeri}" method="POST">
+                    <input type="hidden" th:field="*{tipo_de_caso}">
+                    <br>
+                    <th:block th:replace="components/form-registros :: registros"></th:block>
+                    <input type="hidden" th:field="${desaparecido.id_desaparecido}" th:value="id_desaparecido">
+                    <input type="hidden" th:value="${age}" id="age" th:name="age">
+                    <input type="submit" value="Ingresar Desaparecido" class="btn btn-primary">
 
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 

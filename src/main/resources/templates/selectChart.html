@@ -26,121 +26,125 @@
     <title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
-<body>
+<body style="background-color: #b1b7b9;">
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
-        <h1 th:text="${titulo}"></h1>
-        <br>
-        <div>
-            <label>Buscar registro por: </label>
-            <select id="selection" class="form-control">
-                <option value="0" selected>--- Seleccione una opción ---</option>
-                <option value="1">Cantidad de hombres y mujeres por rango de tiempo</option>
-                <option value="2">Cantidad de casos por tipo de caso</option>
-                <option value="3">Cantidad de casos por rango de tiempo</option>
-                <option value="4">Cantidad de hombres y mujeres por tipo de caso</option>
-                <option value="5">Cantidad de hombres y mujeres por tipo de caso (Rango de tiempo)</option>
-                <option value="6">Cantidad de casos por sexo</option>
-                <option value="7">Cantidad de casos por Sexo y rango de tiempo</option>
-            </select>
+        <div class="card" style="padding: 2em;">
+
+            <h1 th:text="${titulo}"></h1>
             <br>
-
-
-            <form th:action="@{/show/graficar/HombresMujeresRangoFechas}" method="get" id="HombresMujeresRango">
-                <label>Desde: </label>
-                <input type="text" id="datepicker" th:name="inicio" required>
+            <div>
+                <label>Buscar registro por: </label>
+                <select id="selection" class="form-control">
+                    <option value="0" selected>--- Seleccione una opción ---</option>
+                    <option value="1">Cantidad de hombres y mujeres por rango de tiempo</option>
+                    <option value="2">Cantidad de casos por tipo de caso</option>
+                    <option value="3">Cantidad de casos por rango de tiempo</option>
+                    <option value="4">Cantidad de hombres y mujeres por tipo de caso</option>
+                    <option value="5">Cantidad de hombres y mujeres por tipo de caso (Rango de tiempo)</option>
+                    <option value="6">Cantidad de casos por sexo</option>
+                    <option value="7">Cantidad de casos por Sexo y rango de tiempo</option>
+                </select>
                 <br>
-                <label>Hasta: </label>
-                <input type="text" id="datepicker2" th:name="fin" required>
-                <br>
-                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
-                <br>
-                <input type="submit" value="Graficar" class="btn btn-primary">
-            </form>
 
 
-            <div id="cantidadPorCasos">
-                <a type="button" class="btn btn-primary" th:href="@{/show/graficar/CantidadPorCasos}">Graficar</a>
+                <form th:action="@{/show/graficar/HombresMujeresRangoFechas}" method="get" id="HombresMujeresRango">
+                    <label>Desde: </label>
+                    <input type="text" id="datepicker" th:name="inicio" required>
+                    <br>
+                    <label>Hasta: </label>
+                    <input type="text" id="datepicker2" th:name="fin" required>
+                    <br>
+                    <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
+                    <br>
+                    <input type="submit" value="Graficar" class="btn btn-primary">
+                </form>
+
+
+                <div id="cantidadPorCasos">
+                    <a type="button" class="btn btn-primary" th:href="@{/show/graficar/CantidadPorCasos}">Graficar</a>
+                </div>
+
+
+                <form th:action="@{/show/graficar/CantidadPorCasosRango}" method="get" id="CantidadPorCasosRango">
+                    <label>Desde: </label>
+                    <input type="text" id="datepicker3" th:name="inicio">
+                    <br>
+                    <label>Hasta: </label>
+                    <input type="text" id="datepicker4" th:name="fin">
+                    <br>
+                    <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
+                    <br>
+                    <input type="submit" value="Graficar" class="btn btn-primary">
+                </form>
+
+                <form th:action="@{/show/graficar/HombresMujeresPorCaso}" method="get" id="HombresMujeresPorCaso">
+                    <label for="tipo_de_caso">Tipo de caso: </label>
+                    <select class="form-control" th:name="type">
+                        <option th:value="col">Selecciona una opci&oacute;n</option>
+                        <option th:each="caso : ${listaCasos3}" th:value="${caso}" th:text="${caso}">
+                        </option>
+                    </select>
+                    <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
+                    <br>
+                    <input type="submit" value="Graficar" class="btn btn-primary">
+                </form>
+
+                <form th:action="@{/show/graficar/HombresMujeresPorCasoYRango}" method="get"
+                    id="HombresMujeresPorCasoYRango">
+                    <label>Desde: </label>
+                    <input type="text" id="datepicker5" th:name="inicio">
+                    <br>
+                    <label>Hasta: </label>
+                    <input type="text" id="datepicker6" th:name="fin">
+                    <br>
+                    <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
+                    <br>
+                    <label for="tipo_de_caso">Tipo de caso: </label>
+                    <select class="form-control" th:name="type">
+                        <option th:value="col">Selecciona una opci&oacute;n</option>
+                        <option th:each="caso : ${listaCasos3}" th:value="${caso}" th:text="${caso}">
+                        </option>
+                    </select>
+                    <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
+                    <br>
+                    <input type="submit" value="Graficar" class="btn btn-primary">
+                </form>
+
+                <form th:action="@{/show/graficar/CantidadPorCasosSexo}" method="get" id="CantidadPorCasosSexo">
+                    <label>Sexo: </label>
+                    <select class="form-control" th:name="sexo">
+                        <option th:value="col">Selecciona una opci&oacute;n</option>
+                        <option th:each="sexo : ${listaSexo}" th:value="${sexo}" th:text="${sexo}">
+                        </option>
+                    </select>
+                    <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
+                    <br>
+                    <input type="submit" value="Graficar" class="btn btn-primary">
+                </form>
+
+                <form th:action="@{/show/graficar/CantidadPorCasosSexoRango}" method="get"
+                    id="CantidadPorCasosSexoRango">
+                    <label>Sexo: </label>
+                    <select class="form-control" th:name="sexo">
+                        <option th:value="col">Selecciona una opci&oacute;n</option>
+                        <option th:each="sexo : ${listaSexo}" th:value="${sexo}" th:text="${sexo}">
+                        </option>
+                    </select>
+
+                    <br>
+                    <label>Desde: </label>
+                    <input type="text" id="datepicker7" th:name="inicio">
+                    <br>
+                    <label>Hasta: </label>
+                    <input type="text" id="datepicker8" th:name="fin">
+                    <br>
+                    <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
+                    <br>
+                    <input type="submit" value="Graficar" class="btn btn-primary">
+                </form>
+
             </div>
-
-
-            <form th:action="@{/show/graficar/CantidadPorCasosRango}" method="get" id="CantidadPorCasosRango">
-                <label>Desde: </label>
-                <input type="text" id="datepicker3" th:name="inicio">
-                <br>
-                <label>Hasta: </label>
-                <input type="text" id="datepicker4" th:name="fin">
-                <br>
-                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
-                <br>
-                <input type="submit" value="Graficar" class="btn btn-primary">
-            </form>
-
-            <form th:action="@{/show/graficar/HombresMujeresPorCaso}" method="get" id="HombresMujeresPorCaso">
-                <label for="tipo_de_caso">Tipo de caso: </label>
-                <select class="form-control" th:name="type">
-                    <option th:value="col">Selecciona una opci&oacute;n</option>
-                    <option th:each="caso : ${listaCasos3}" th:value="${caso}" th:text="${caso}">
-                    </option>
-                </select>
-                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
-                <br>
-                <input type="submit" value="Graficar" class="btn btn-primary">
-            </form>
-
-            <form th:action="@{/show/graficar/HombresMujeresPorCasoYRango}" method="get"
-                id="HombresMujeresPorCasoYRango">
-                <label>Desde: </label>
-                <input type="text" id="datepicker5" th:name="inicio">
-                <br>
-                <label>Hasta: </label>
-                <input type="text" id="datepicker6" th:name="fin">
-                <br>
-                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
-                <br>
-                <label for="tipo_de_caso">Tipo de caso: </label>
-                <select class="form-control" th:name="type">
-                    <option th:value="col">Selecciona una opci&oacute;n</option>
-                    <option th:each="caso : ${listaCasos3}" th:value="${caso}" th:text="${caso}">
-                    </option>
-                </select>
-                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
-                <br>
-                <input type="submit" value="Graficar" class="btn btn-primary">
-            </form>
-
-            <form th:action="@{/show/graficar/CantidadPorCasosSexo}" method="get" id="CantidadPorCasosSexo">
-                <label>Sexo: </label>
-                <select class="form-control" th:name="sexo">
-                    <option th:value="col">Selecciona una opci&oacute;n</option>
-                    <option th:each="sexo : ${listaSexo}" th:value="${sexo}" th:text="${sexo}">
-                    </option>
-                </select>
-                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
-                <br>
-                <input type="submit" value="Graficar" class="btn btn-primary">
-            </form>
-
-            <form th:action="@{/show/graficar/CantidadPorCasosSexoRango}" method="get" id="CantidadPorCasosSexoRango">
-                <label>Sexo: </label>
-                <select class="form-control" th:name="sexo">
-                    <option th:value="col">Selecciona una opci&oacute;n</option>
-                    <option th:each="sexo : ${listaSexo}" th:value="${sexo}" th:text="${sexo}">
-                    </option>
-                </select>
-
-                <br>
-                <label>Desde: </label>
-                <input type="text" id="datepicker7" th:name="inicio">
-                <br>
-                <label>Hasta: </label>
-                <input type="text" id="datepicker8" th:name="fin">
-                <br>
-                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
-                <br>
-                <input type="submit" value="Graficar" class="btn btn-primary">
-            </form>
-
         </div>
     </div>
 

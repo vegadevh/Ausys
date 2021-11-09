@@ -21,72 +21,74 @@
     <title th:text="'Ausys - Registro: '+ ${desaPeri.id_desaperi}"></title>
 </head>
 
-<body>
+<body style="background-color: #b1b7b9;">
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
-        <h5 class="alert alert-success" th:text="${mensaje}"></h5>
+        <div class="card" style="padding: 2em;">
 
-        <div class="card">
-            <div class="card-body">
-                <div>
-                    <b class="d-inline">Identficador del registro: </b>
-                    <p class="d-inline" th:text="${desaPeri.peritaje.id_peritaje}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Persona identificada: </b>
-                    <p class="d-inline" th:text="${desaPeri.peritaje.getEstadoDelegate}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Edad estimada: </b>
-                    <p class="d-inline" th:text="${desaPeri.peritaje.edad_estimada}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Municipio: </b>
-                    <p class="d-inline" th:text="${desaPeri.peritaje.municipio.id_municipio}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Direcci&oacute;n: </b>
-                    <p class="d-inline" th:text="${desaPeri.direccion}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Tipo de caso: </b>
-                    <p class="d-inline" th:text="${desaPeri.tipo_de_caso}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Nombre: </b>
-                    <p class="d-inline" th:if="${desaPeri.peritaje.edad_estimada} < 18"
-                        th:text="${#strings.substring(desaPeri.nombre, 0,1) + '...'}"></p>
-                    <p class="d-inline" th:unless="${desaPeri.peritaje.edad_estimada} < 18"
-                        th:text="${desaPeri.nombre}"></p>
+            <h5 class="alert alert-success" th:text="${mensaje}"></h5>
 
-                </div>
-                <div>
-                    <b class="d-inline">Apellido: </b>
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <b class="d-inline">Identficador del registro: </b>
+                        <p class="d-inline" th:text="${desaPeri.peritaje.id_peritaje}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Persona identificada: </b>
+                        <p class="d-inline" th:text="${desaPeri.peritaje.getEstadoDelegate}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Edad estimada: </b>
+                        <p class="d-inline" th:text="${desaPeri.peritaje.edad_estimada}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Municipio: </b>
+                        <p class="d-inline" th:text="${desaPeri.peritaje.municipio.id_municipio}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Direcci&oacute;n: </b>
+                        <p class="d-inline" th:text="${desaPeri.direccion}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Tipo de caso: </b>
+                        <p class="d-inline" th:text="${desaPeri.tipo_de_caso}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Nombre: </b>
+                        <p class="d-inline" th:if="${desaPeri.peritaje.edad_estimada} < 18"
+                            th:text="${#strings.substring(desaPeri.nombre, 0,1) + '...'}"></p>
+                        <p class="d-inline" th:unless="${desaPeri.peritaje.edad_estimada} < 18"
+                            th:text="${desaPeri.nombre}"></p>
 
-                    <p class="d-inline" th:if="${desaPeri.peritaje.edad_estimada} < 18"
-                        th:text="${#strings.substring(desaPeri.apellido, 0,1) + '...'}"></p>
-                    <p class="d-inline" th:unless="${desaPeri.peritaje.edad_estimada} < 18"
-                        th:text="${desaPeri.apellido}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Sexo: </b>
-                    <p class="d-inline" th:text="${desaPeri.sexo}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Informaci&oacute;n adicional: </b>
-                    <p class="d-inline" th:text="${desaPeri.informacion_adicional}"></p>
-                </div>
-                <div th:if="${desaPeri.peritaje.edad_estimada} >=18">
-                    <b class="d-inline">DUI: </b>
-                    <p class="d-inline" th:text="${desaPeri.Dui}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Fecha de registro:</b>
-                    <p class="d-inline" th:text="${desaPeri.fecha_registro}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Apellido: </b>
+
+                        <p class="d-inline" th:if="${desaPeri.peritaje.edad_estimada} < 18"
+                            th:text="${#strings.substring(desaPeri.apellido, 0,1) + '...'}"></p>
+                        <p class="d-inline" th:unless="${desaPeri.peritaje.edad_estimada} < 18"
+                            th:text="${desaPeri.apellido}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Sexo: </b>
+                        <p class="d-inline" th:text="${desaPeri.sexo}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Informaci&oacute;n adicional: </b>
+                        <p class="d-inline" th:text="${desaPeri.informacion_adicional}"></p>
+                    </div>
+                    <div th:if="${desaPeri.peritaje.edad_estimada} >=18">
+                        <b class="d-inline">DUI: </b>
+                        <p class="d-inline" th:text="${desaPeri.Dui}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Fecha de registro:</b>
+                        <p class="d-inline" th:text="${desaPeri.fecha_registro}"></p>
+                    </div>
                 </div>
             </div>
         </div>
-
 
     </div>
 

@@ -22,10 +22,11 @@
     <title th:text="'Ausys'"></title>
 </head>
 
-<body>
+<body style="background-color: #b1b7b9;">
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
-        <div class="card">
+        <div class="card" style="padding: 1em 1em;">
+
             <div th:each="registro: ${registro}" class="card-body">
                 <b class="d-inline">Identficador del registro: </b>
                 <p class="d-inline" th:text="${registro.id}"></p>
@@ -67,7 +68,8 @@
                     <b class="d-inline">Apellido: </b>
                     <p class="d-inline" th:if="${registro.edad_estimada} < 18"
                         th:text="${#strings.substring(registro.apellido, 0,1) + '...'}"></p>
-                    <p class="d-inline" th:unless="${registro.edad_estimada} < 18" th:text="${registro.apellido}"></p>
+                    <p class="d-inline" th:unless="${registro.edad_estimada} < 18" th:text="${registro.apellido}">
+                    </p>
                 </div>
                 <div>
                     <b class="d-inline">Sexo: </b>
@@ -99,7 +101,7 @@
                     <input th:name="id" type="hidden" th:value=${registro.id}>
                     <input th:name="id_registro" type="hidden" th:value=${registro.id_registro}>
                     <button type="submit" class="btn btn-success">
-                        <i class="fas fa-plus"></i> Agregar marca especialD</button>
+                        <i class="fas fa-plus"></i> Agregar marca especial</button>
                 </form>
 
                 <form th:if="${val} == 'Peritaje'" class="p-1"
@@ -107,7 +109,7 @@
                     <input th:name="id" type="hidden" th:value=${registro.id}>
                     <input th:name="id_registro" type="hidden" th:value=${registro.id_registro}>
                     <button type="submit" class="btn btn-success">
-                        <i class="fas fa-plus"></i> Agregar marca especialP</button>
+                        <i class="fas fa-plus"></i> Agregar marca especial</button>
                 </form>
                 <!-- Ingresar imagenes -->
                 <form th:if="${val} == 'Desaparecido'" class="p-1"
@@ -127,41 +129,42 @@
                 </form>
             </div>
         </div>
-
-        <div class="row d-flex" th:if="${not #lists.isEmpty(relacion)}">
-            <div class="col-4" th:each="relacion: ${relacion}" style="margin-top: 1.5em; margin-bottom: 1.5em;">
-                <div class="card">
-                    <div th:if="${relacion.id_desaparecido}" class="card-header">
-                        <b class="d-inline card-title" th:text="'ID: '+${relacion.id_desaparecido}"
-                            style="font-size: 1.5em;"></b>
-                    </div>
-                    <div class="card-body">
-                        <div th:if="${relacion.tipo_de_caso}">
-                            <b class="d-inline">Tipo de caso: </b>
-                            <p class="d-inline" th:text="${relacion.tipo_de_caso}"></p>
+        <div class="card" th:if="${not #lists.isEmpty(relacion)}" style="padding: 2em; margin: 1em 0em;">
+            <div class="row d-flex" th:if="${not #lists.isEmpty(relacion)}">
+                <div class="col-4" th:each="relacion: ${relacion}" style="margin-top: 1.5em; margin-bottom: 1.5em;">
+                    <div class="card shadow bg-white rounded">
+                        <div th:if="${relacion.id_desaparecido}" class="card-header">
+                            <b class="d-inline card-title" th:text="'ID: '+${relacion.id_desaparecido}"
+                                style="font-size: 1.5em;"></b>
                         </div>
-                        <div th:if="${relacion.nombre}">
-                            <b class="d-inline">Nombre: </b>
-                            <p class="d-inline" th:text="${relacion.nombre}"></p>
-                        </div>
-                        <div th:if="${relacion.apellido}">
-                            <b class="d-inline">Apellido: </b>
-                            <p class="d-inline" th:text="${relacion.apellido}"></p>
-                        </div>
-                        <div th:if="${relacion.fecha_registro}">
-                            <b class="d-inline">Fecha de registro: </b>
-                            <p class="d-inline" th:text="${relacion.fecha_registro}"></p>
-                        </div>
-                        <div style="display: none;" th:if="${relacion.id_desaperi}">
-                            <b class="d-inline">Edad estimada: </b>
-                            <p class="d-inline" th:text="${relacion.id_desaperi}"></p>
+                        <div class="card-body">
+                            <div th:if="${relacion.tipo_de_caso}">
+                                <b class="d-inline">Tipo de caso: </b>
+                                <p class="d-inline" th:text="${relacion.tipo_de_caso}"></p>
+                            </div>
+                            <div th:if="${relacion.nombre}">
+                                <b class="d-inline">Nombre: </b>
+                                <p class="d-inline" th:text="${relacion.nombre}"></p>
+                            </div>
+                            <div th:if="${relacion.apellido}">
+                                <b class="d-inline">Apellido: </b>
+                                <p class="d-inline" th:text="${relacion.apellido}"></p>
+                            </div>
+                            <div th:if="${relacion.fecha_registro}">
+                                <b class="d-inline">Fecha de registro: </b>
+                                <p class="d-inline" th:text="${relacion.fecha_registro}"></p>
+                            </div>
+                            <div style="display: none;" th:if="${relacion.id_desaperi}">
+                                <b class="d-inline">Edad estimada: </b>
+                                <p class="d-inline" th:text="${relacion.id_desaperi}"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card" th:if="${not #lists.isEmpty(especiales)}">
+        <div class="card" style="padding: 1em; margin: 1em 0em;" th:if="${not #lists.isEmpty(especiales)}">
             <div class="card-body">
                 <p>Caracteristicas especiales:</p>
                 <div>
@@ -185,8 +188,7 @@
             </div>
 
         </div>
-
-        <div class="card" th:if="${not #lists.isEmpty(fotos)}">
+        <div style="padding: 1em; margin: 1em 0em;" class="card" th:if="${not #lists.isEmpty(fotos)}">
             <div class="card-body">
                 <p>Fotografías registradas:</p>
                 <div th:each="foto : ${fotos}">

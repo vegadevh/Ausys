@@ -21,26 +21,28 @@
     <title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
-<body>
+<body style="background-color: #b1b7b9;">
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
-        <h1 th:text="${titulo}"></h1>
-        <div>
-            <form
-                th:action="@{/write/validarEdicion/desaparecido2/} + ${id_desaparecidoParam} + '/' + ${id_desaperiParam}"
-                th:object="${desaPeri}" method="POST">
+        <div class="card" style="padding: 2em;">
+            <h1 th:text="${titulo}"></h1>
+            <div>
+                <form
+                    th:action="@{/write/validarEdicion/desaparecido2/} + ${id_desaparecidoParam} + '/' + ${id_desaperiParam}"
+                    th:object="${desaPeri}" method="POST">
 
-                <input th:name="id_desaperi" type="hidden" th:value=${id_desaperiParam}>
-                <input th:name="id_desaparecido" type="hidden" th:value=${id_desaparecidoParam}>
+                    <input th:name="id_desaperi" type="hidden" th:value=${id_desaperiParam}>
+                    <input th:name="id_desaparecido" type="hidden" th:value=${id_desaparecidoParam}>
 
-                <input type="hidden" th:field="*{tipo_de_caso}">
-                <br>
-                <th:block th:replace="components/form-registros :: registros"></th:block>
-                <input type="hidden" th:field="*{desaparecido.id_desaparecido}">
-                <input type="hidden" th:value="${age}" id="age" th:name="age">
-                <input type="submit" value="Terminar edición" class="btn btn-primary">
+                    <input type="hidden" th:field="*{tipo_de_caso}">
+                    <br>
+                    <th:block th:replace="components/form-registros :: registros"></th:block>
+                    <input type="hidden" th:field="*{desaparecido.id_desaparecido}">
+                    <input type="hidden" th:value="${age}" id="age" th:name="age">
+                    <input type="submit" value="Terminar edición" class="btn btn-primary">
 
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 

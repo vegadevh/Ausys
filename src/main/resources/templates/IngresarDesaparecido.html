@@ -25,61 +25,62 @@
     <title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
-<body>
+<body style="background-color: #b1b7b9;">
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
-        <h1 th:text="${titulo}"></h1>
-        <div>
-            <form th:action="@{/write/validarDesaparecido}" th:object="${desaparecido}" method="GET">
+        <div class="card" style="padding: 2em;">
+            <h1 th:text="${titulo}"></h1>
+            <div>
+                <form th:action="@{/write/validarDesaparecido}" th:object="${desaparecido}" method="GET">
 
+                    <label for="id_desaparecido">Identficador del registro: </label>
+                    <input type="text" id="id_desaparecido" th:name="id_desaparecido" th:field="*{id_desaparecido}">
+                    <div th:if="${#fields.hasErrors('id_desaparecido')}" th:errors="*{id_desaparecido}"
+                        class="alert alert-danger" role="alert"></div>
+                    <div th:if="${iderror}" th:text="${iderror}" class="alert alert-danger" role="alert"></div>
+                    <br>
 
-                <label for="id_desaparecido">Identficador del registro: </label>
-                <input type="text" id="id_desaparecido" th:name="id_desaparecido" th:field="*{id_desaparecido}">
-                <div th:if="${#fields.hasErrors('id_desaparecido')}" th:errors="*{id_desaparecido}"
-                    class="alert alert-danger" role="alert"></div>
-                <div th:if="${iderror}" th:text="${iderror}" class="alert alert-danger" role="alert"></div>
-                <br>
+                    <label for="nombre_familiar">Nombre de quien denuncia: </label>
+                    <input type="text" id="nombre_familiar" th:field="*{nombre_familiar}">
+                    <div th:if="${#fields.hasErrors('nombre_familiar')}" th:errors="*{nombre_familiar}"
+                        class="alert alert-danger" role="alert"></div>
+                    <br>
 
-                <label for="nombre_familiar">Nombre de quien denuncia: </label>
-                <input type="text" id="nombre_familiar" th:field="*{nombre_familiar}">
-                <div th:if="${#fields.hasErrors('nombre_familiar')}" th:errors="*{nombre_familiar}"
-                    class="alert alert-danger" role="alert"></div>
-                <br>
+                    <label for="contacto_familiar">Contacto de quien denuncia: </label>
+                    <input type="text" id="contacto_familiar" th:field="*{contacto_familiar}">
+                    <div th:if="${#fields.hasErrors('contacto_familiar')}" th:errors="*{contacto_familiar}"
+                        class="alert alert-danger" role="alert"></div>
+                    <br>
+                    <label for="fecha_nacimiento">Fecha de nacimiento (Del afectado): </label>
+                    <input type="text" id="datepicker" th:name="fecha_nacimiento" th:field="*{fecha_nacimiento}">
+                    <div th:if="${#fields.hasErrors('fecha_nacimiento')}" th:errors="*{fecha_nacimiento}"
+                        class="alert alert-danger" role="alert"></div>
+                    <br>
+                    <label class="col-form-label">Departamento:</label>
+                    <select class="form-control" id="deptoSelect" th:name="deptoSelect">
+                        <option value="0">Selecciona una opci&oacute;n</option>
+                        <option th:each="departamento : ${departamentos}" th:value="${departamento.id_departamento}"
+                            th:id="${departamento.id_departamento}" th:text="${departamento.departamento}">
+                        </option>
+                    </select>
+                    <div th:if="${deptoalert}" th:text="${deptoalert}" class="alert alert-danger" role="alert"></div>
 
-                <label for="contacto_familiar">Contacto de quien denuncia: </label>
-                <input type="text" id="contacto_familiar" th:field="*{contacto_familiar}">
-                <div th:if="${#fields.hasErrors('contacto_familiar')}" th:errors="*{contacto_familiar}"
-                    class="alert alert-danger" role="alert"></div>
-                <br>
-                <label for="fecha_nacimiento">Fecha de nacimiento (Del afectado): </label>
-                <input type="text" id="datepicker" th:name="fecha_nacimiento" th:field="*{fecha_nacimiento}">
-                <div th:if="${#fields.hasErrors('fecha_nacimiento')}" th:errors="*{fecha_nacimiento}"
-                    class="alert alert-danger" role="alert"></div>
-                <br>
-                <label class="col-form-label">Departamento:</label>
-                <select class="form-control" id="deptoSelect" th:name="deptoSelect">
-                    <option value="0">Selecciona una opci&oacute;n</option>
-                    <option th:each="departamento : ${departamentos}" th:value="${departamento.id_departamento}"
-                        th:id="${departamento.id_departamento}" th:text="${departamento.departamento}">
-                    </option>
-                </select>
-                <div th:if="${deptoalert}" th:text="${deptoalert}" class="alert alert-danger" role="alert"></div>
+                    <br>
 
-                <br>
-
-                <label class="col-form-label">Municipio:</label>
-                <select class="form-control" id="municipioSelect" th:field="*{municipio.id_municipio}">
-                    <option value="0">Selecciona una opci&oacute;n</option>
-                    <option th:each="municipio : ${municipios}" th:id="${municipio.departamento.id_departamento}"
-                        th:value="${municipio.id_municipio}" th:text="${municipio.municipio}"></option>
-                </select>
-                <div th:if="${municipioalert}" th:text="${municipioalert}" class="alert alert-danger" role="alert">
+                    <label class="col-form-label">Municipio:</label>
+                    <select class="form-control" id="municipioSelect" th:field="*{municipio.id_municipio}">
+                        <option value="0">Selecciona una opci&oacute;n</option>
+                        <option th:each="municipio : ${municipios}" th:id="${municipio.departamento.id_departamento}"
+                            th:value="${municipio.id_municipio}" th:text="${municipio.municipio}"></option>
+                    </select>
+                    <div th:if="${municipioalert}" th:text="${municipioalert}" class="alert alert-danger" role="alert">
                     </div>
-                <br>
+                    <br>
 
-                <input type="submit" value="Siguiente" class="btn btn-primary">
+                    <input type="submit" value="Siguiente" class="btn btn-primary">
 
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -98,8 +99,6 @@
             });
         });
     </script>
-
-
 </body>
 
 </html>

@@ -22,67 +22,71 @@
     <title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
-<body>
+<body style="background-color: #b1b7b9;">
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
-        <h1 th:text="${titulo}"></h1>
-        <br>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Fecha Registro</th>
-                    <th scope="col">Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each=" desaPeri: ${desaPeriL}">
-                    <th scope="row" th:text="${desaPeri.id_peritaje}"></th>
-                    <td th:text="${desaPeri.tipo_de_caso}"></td>
-                    <td th:if="${desaPeri.edad_estimada} < 18"
-                        th:text="${#strings.substring(desaPeri.nombre, 0,1) + '...'}"></td>
-                    <td th:name="peritajeName" th:unless="${desaPeri.edad_estimada} < 18" th:text="${desaPeri.nombre}">
-                    </td>
-                    <td th:if="${desaPeri.edad_estimada} < 18"
-                        th:text="${#strings.substring(desaPeri.apellido, 0,1) + '...'}"></td>
-                    <td th:name="peritajeLastname" th:unless="${desaPeri.edad_estimada} < 18"
-                        th:text="${desaPeri.apellido}"></td>
-                    <td th:text="${desaPeri.fecha_registro}"></td>
-                    <td>
-                        <div class="d-flex">
-                            <form class="p-1"
-                                th:action="@{/read/verRegistro/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
-                                method="GET">
-                                <input th:name="peritajeName" type="hidden" th:value="${desaPeri.nombre}">
-                                <input th:name="peritajeLastname" type="hidden" th:value="${desaPeri.apellido}">
-                                <input th:name="id_peritaje" type="hidden" th:value=${desaPeri.id_peritaje}>
-                                <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
-                                <input th:name="edad_estimada" type="hidden" th:value="${desaPeri.edad_estimada}">
-                                <input type="submit" class="btn btn-primary" value="Ver">
-                            </form>
-                            <form class="p-1"
-                                th:action="@{/write/editar/peritaje/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
-                                method="GET">
-                                <input th:name="id_peritaje" type="hidden" th:value=${desaPeri.id_peritaje}>
-                                <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
-                                <input type="submit" class="btn btn-success" value="Editar">
-                            </form>
-                            <form class="p-1"
-                                th:action="@{/admin/eliminar/peritaje/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
-                                method="GET">
-                                <input th:name="id_peritaje" type="hidden" th:value=${desaPeri.id_peritaje}>
-                                <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
-                                <input type="submit" class="btn btn-danger" value="Eliminar"
-                                    onclick="return confirm('¿Estás seguro que deseas eliminar el peritaje?');">
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="card" style="padding: 2em;">
+
+            <h1 th:text="${titulo}"></h1>
+            <br>
+            <table class="table shadow-lg bg-white rounded">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Fecha Registro</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each=" desaPeri: ${desaPeriL}">
+                        <th scope="row" th:text="${desaPeri.id_peritaje}"></th>
+                        <td th:text="${desaPeri.tipo_de_caso}"></td>
+                        <td th:if="${desaPeri.edad_estimada} < 18"
+                            th:text="${#strings.substring(desaPeri.nombre, 0,1) + '...'}"></td>
+                        <td th:name="peritajeName" th:unless="${desaPeri.edad_estimada} < 18"
+                            th:text="${desaPeri.nombre}">
+                        </td>
+                        <td th:if="${desaPeri.edad_estimada} < 18"
+                            th:text="${#strings.substring(desaPeri.apellido, 0,1) + '...'}"></td>
+                        <td th:name="peritajeLastname" th:unless="${desaPeri.edad_estimada} < 18"
+                            th:text="${desaPeri.apellido}"></td>
+                        <td th:text="${desaPeri.fecha_registro}"></td>
+                        <td>
+                            <div class="d-flex">
+                                <form class="p-1"
+                                    th:action="@{/read/verRegistro/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
+                                    method="GET">
+                                    <input th:name="peritajeName" type="hidden" th:value="${desaPeri.nombre}">
+                                    <input th:name="peritajeLastname" type="hidden" th:value="${desaPeri.apellido}">
+                                    <input th:name="id_peritaje" type="hidden" th:value=${desaPeri.id_peritaje}>
+                                    <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
+                                    <input th:name="edad_estimada" type="hidden" th:value="${desaPeri.edad_estimada}">
+                                    <input type="submit" class="btn btn-primary" value="Ver">
+                                </form>
+                                <form class="p-1"
+                                    th:action="@{/write/editar/peritaje/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
+                                    method="GET">
+                                    <input th:name="id_peritaje" type="hidden" th:value=${desaPeri.id_peritaje}>
+                                    <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
+                                    <input type="submit" class="btn btn-success" value="Editar">
+                                </form>
+                                <form class="p-1"
+                                    th:action="@{/admin/eliminar/peritaje/} + ${desaPeri.id_peritaje} + '/' + ${desaPeri.id_desaperi}"
+                                    method="GET">
+                                    <input th:name="id_peritaje" type="hidden" th:value=${desaPeri.id_peritaje}>
+                                    <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
+                                    <input type="submit" class="btn btn-danger" value="Eliminar"
+                                        onclick="return confirm('¿Estás seguro que deseas eliminar el peritaje?');">
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </body>

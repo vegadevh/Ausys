@@ -23,64 +23,67 @@
     <title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
-<body>
+<body style="background-color: #b1b7b9;">
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
-        <p style="display: none;" id="titulo" th:text="${titulo}"></p>
-        <br>
-        <!-- Sexos por rango de fechas -->
-        <div th:if="${HombresMujeres}">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Cantidad de mujeres</th>
-                        <th scope="col">Cantidad de hombres</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each=" hm: ${HombresMujeres}">
-                        <td id='mujer' th:text="${hm.mujer}"></td>
-                        <td id='hombre' th:text="${hm.hombre}"></td>
+        <div class="card" style="padding: 2em;">
 
-                    </tr>
-                </tbody>
-            </table>
+            <p style="display: none;" id="titulo" th:text="${titulo}"></p>
             <br>
-            <div id="piechart" style="width: 75em; height: 400px; margin: auto;">
-                <div style="display: none;">${hm.mujer}</div>
-                <div style="display: none;">${hm.hombre}</div>
+            <!-- Sexos por rango de fechas -->
+            <div th:if="${HombresMujeres}">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Cantidad de mujeres</th>
+                            <th scope="col">Cantidad de hombres</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each=" hm: ${HombresMujeres}">
+                            <td id='mujer' th:text="${hm.mujer}"></td>
+                            <td id='hombre' th:text="${hm.hombre}"></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <div id="piechart" style="width: 75em; height: 400px; margin: auto;">
+                    <div style="display: none;">${hm.mujer}</div>
+                    <div style="display: none;">${hm.hombre}</div>
+                </div>
             </div>
-        </div>
-        <!-- cantidad totales de casos -->
-        <div th:if="${cantidadPorCasos}">
-            <table class="table" style="display: none">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Cantidad de mujeres</th>
-                        <th scope="col">Cantidad de hombres</th>
-                        <th scope="col">Cantidad de hombres</th>
-                        <th scope="col">Cantidad de hombres</th>
-                        <th scope="col">Cantidad de hombres</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="caso: ${cantidadPorCasos}">
-                        <td id='caso1' th:text="${caso.caso1}"></td>
-                        <td id='caso2' th:text="${caso.caso2}"></td>
-                        <td id='caso3' th:text="${caso.caso3}"></td>
-                        <td id='caso4' th:text="${caso.caso4}"></td>
-                        <td id='caso5' th:text="${caso.caso5}"></td>
+            <!-- cantidad totales de casos -->
+            <div th:if="${cantidadPorCasos}">
+                <table class="table" style="display: none">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Cantidad de mujeres</th>
+                            <th scope="col">Cantidad de hombres</th>
+                            <th scope="col">Cantidad de hombres</th>
+                            <th scope="col">Cantidad de hombres</th>
+                            <th scope="col">Cantidad de hombres</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="caso: ${cantidadPorCasos}">
+                            <td id='caso1' th:text="${caso.caso1}"></td>
+                            <td id='caso2' th:text="${caso.caso2}"></td>
+                            <td id='caso3' th:text="${caso.caso3}"></td>
+                            <td id='caso4' th:text="${caso.caso4}"></td>
+                            <td id='caso5' th:text="${caso.caso5}"></td>
 
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-            <div id="piechart-casos" style="width: 75em; height: 400px; margin: auto;">
-                <div style="display: none;">${caso.caso1}</div>
-                <div style="display: none;">${caso.caso2}</div>
-                <div style="display: none;">${caso.caso3}</div>
-                <div style="display: none;">${caso.caso4}</div>
-                <div style="display: none;">${caso.caso5}</div>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <div id="piechart-casos" style="width: 75em; height: 400px; margin: auto;">
+                    <div style="display: none;">${caso.caso1}</div>
+                    <div style="display: none;">${caso.caso2}</div>
+                    <div style="display: none;">${caso.caso3}</div>
+                    <div style="display: none;">${caso.caso4}</div>
+                    <div style="display: none;">${caso.caso5}</div>
+                </div>
             </div>
         </div>
 

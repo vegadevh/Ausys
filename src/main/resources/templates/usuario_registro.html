@@ -21,74 +21,73 @@
 	<title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
-<body>
+<body style="background-color: #b1b7b9;">
 	<th:block th:replace="components/navbar :: navbar"></th:block>
-	<div class="container text-center">
-		<div>
-			<h1>Registro de Usuario </h1>
-		</div>
-		<form th:action="@{/admin/validar_usuario}" th:object="${usuario}" method="post"
-			style="max-width: 600px; margin: 0 auto;">
-			<div class="m-3">
+	<div class="container">
+		<div class="card" style="padding: 2em;">
 
+			<h1 class="text-center">Registro de Usuario </h1>
+			<form th:action="@{/admin/validar_usuario}" th:object="${usuario}" method="post"
+				style="max-width: 600px; margin: 0 auto;">
+				<div class="m-3">
 
+					<div class="form-group row">
+						<label class="col-4 col-form-label">Usuario: </label>
+						<div class="col-8">
+							<input type="text" th:field="*{username}" class="form-control" required />
 
-
-				<div class="form-group row">
-					<label class="col-4 col-form-label">Usuario: </label>
-					<div class="col-8">
-						<input type="text" th:field="*{username}" class="form-control" required />
-
-					</div>
-				</div>
-
-				<div class="form-group row">
-					<label class="col-4 col-form-label">Contraseña: </label>
-					<div class="col-8">
-						<input type="password" th:field="*{password}" class="form-control" required minlength="6"
-							maxlength="20" />
-
-					</div>
-				</div>
-
-				<div class="form-group row">
-					<label class="col-4 col-form-label">Nombre: </label>
-					<div class="col-8">
-						<input type="text" th:field="*{nombre}" class="form-control" required minlength="2"
-							maxlength="20" />
-
+						</div>
 					</div>
 
 					<div class="form-group row">
-						<label class="col-4 col-form-label">Apellido: </label>
+						<label class="col-4 col-form-label">Contraseña: </label>
 						<div class="col-8">
-							<input type="text" th:field="*{apellido}" class="form-control" required minlength="2"
+							<input type="password" th:field="*{password}" class="form-control" required minlength="6"
 								maxlength="20" />
 
 						</div>
 					</div>
 
+					<div class="form-group row">
+						<label class="col-4 col-form-label">Nombre: </label>
+						<div class="col-8">
+							<input type="text" th:field="*{nombre}" class="form-control" required minlength="2"
+								maxlength="20" />
 
-					<select hidden class="form-control" name="enabled_u" id="estado" th:field="${usuario.enabled_u}">
-						<option th:value="${true}">Activa</option>
-					</select>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-4 col-form-label">Apellido: </label>
+							<div class="col-8">
+								<input type="text" th:field="*{apellido}" class="form-control" required minlength="2"
+									maxlength="20" />
+
+							</div>
+						</div>
 
 
-					<label class="col-form-label">Roles: </label>
-					<select class="form-control" id="divisionSelect" th:field="*{rol.id_rol}">
-						<option value="col2">Selecciona una opci&oacute;n</option>
-						<option th:each="rol : ${roles}" th:id="${rol.id_rol}" th:value="${rol.id_rol}"
-							th:text="${rol.rol}"></option>
-					</select>
+						<select hidden class="form-control" name="enabled_u" id="estado"
+							th:field="${usuario.enabled_u}">
+							<option th:value="${true}">Activa</option>
+						</select>
+
+
+						<label class="col-form-label">Roles: </label>
+						<select class="form-control" id="divisionSelect" th:field="*{rol.id_rol}">
+							<option value="col2">Selecciona una opci&oacute;n</option>
+							<option th:each="rol : ${roles}" th:id="${rol.id_rol}" th:value="${rol.id_rol}"
+								th:text="${rol.rol}"></option>
+						</select>
 
 
 
 
-					<div>
-						<button type="submit" class="btn btn-primary">Registrar</button>
+						<div>
+							<button type="submit" class="btn btn-primary">Registrar</button>
+						</div>
 					</div>
-				</div>
-		</form>
+			</form>
+		</div>
 	</div>
 </body>
 
