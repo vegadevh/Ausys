@@ -26,6 +26,7 @@
     <div class="container">
         <h3><span th:text="${idDesaPeri}"></span></h3>
         <h3><span th:text="${mensaje}"></span></h3>
+        <h5 th:if="${umensaje}" class="alert alert-success" th:text="${umensaje}"></h5>
         <ul>
             <p>SOLO ADMIN</p>
             <li><a th:href="@{/admin/usuario_registro}">Registrar Usuarios</a></li>

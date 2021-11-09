@@ -111,8 +111,6 @@ public class AdminController {
 	public ModelAndView validar_usuario(@Valid @ModelAttribute Usuario usuario, BindingResult result ) {
 		ModelAndView mav = new ModelAndView();
 		
-		
-		
 		if(result.hasErrors() ) {
 			List <Rol> roles = null;
 			
@@ -143,6 +141,7 @@ public class AdminController {
 				e.printStackTrace();
 			}
 			
+			mav.addObject("umensaje","El usuario ha sido creado con éxito.");
 			mav.setViewName("index");
 		}
 		
