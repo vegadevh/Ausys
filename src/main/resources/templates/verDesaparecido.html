@@ -21,69 +21,72 @@
     <title th:text="'Ausys - Registro: '+ ${desaPeri.id_desaperi}"></title>
 </head>
 
-<body>
+<body style="background-color: #b1b7b9;">
     <th:block th:replace="components/navbar :: navbar"></th:block>
     <div class="container">
-        <h5 class="alert alert-success" th:text="${mensaje}"></h5>
+        <div class="card" style="padding: 2em;">
 
-        <div class="card">
-            <div class="card-body">
-                <div>
-                    <b class="d-inline">Identficador del registro: </b>
-                    <p class="d-inline" th:text="${desaPeri.desaparecido.id_desaparecido}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Fecha de nacimiento: </b>
-                    <p class="d-inline" th:text="${desaPeri.desaparecido.fecha_nacimiento}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Nombre de familiar: </b>
-                    <p class="d-inline" th:text="${desaPeri.desaparecido.nombre_familiar}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Contacto familiar: </b>
-                    <p class="d-inline" th:text="${desaPeri.desaparecido.contacto_familiar}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Municipio: </b>
-                    <p class="d-inline" th:text="${desaPeri.desaparecido.municipio.id_municipio}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Direcci&oacute;n: </b>
-                    <p class="d-inline" th:text="${desaPeri.direccion}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Tipo de caso: </b>
-                    <p class="d-inline" th:text="${desaPeri.tipo_de_caso}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Nombre: </b>
-                    <p class="d-inline" th:text="${desaPeri.nombre}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Apellido: </b>
-                    <p class="d-inline" th:text="${desaPeri.apellido}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Sexo: </b>
-                    <p class="d-inline" th:text="${desaPeri.sexo}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Informaci&oacute;n adicional: </b>
-                    <p class="d-inline" th:text="${desaPeri.informacion_adicional}"></p>
-                </div>
-                <div th:if="${desaPeri.desaparecido.edad_estimada} >=18">
-                    <b class="d-inline">DUI: </b>
-                    <p class="d-inline" th:text="${desaPeri.Dui}"></p>
-                </div>
-                <div>
-                    <b class="d-inline">Fecha de registro:</b>
-                    <p class="d-inline" th:text="${desaPeri.fecha_registro}"></p>
+            <h5 class="alert alert-success" th:text="${mensaje}"></h5>
+
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <b class="d-inline">Identficador del registro: </b>
+                        <p class="d-inline" th:text="${desaPeri.desaparecido.id_desaparecido}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Fecha de nacimiento: </b>
+                        <p class="d-inline" th:text="${desaPeri.desaparecido.fecha_nacimiento}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Nombre de familiar: </b>
+                        <p class="d-inline" th:text="${desaPeri.desaparecido.nombre_familiar}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Contacto familiar: </b>
+                        <p class="d-inline" th:text="${desaPeri.desaparecido.contacto_familiar}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Municipio: </b>
+                        <p class="d-inline" th:text="${desaPeri.desaparecido.municipio.id_municipio}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Direcci&oacute;n: </b>
+                        <p class="d-inline" th:text="${desaPeri.direccion}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Tipo de caso: </b>
+                        <p class="d-inline" th:text="${desaPeri.tipo_de_caso}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Nombre: </b>
+                        <p class="d-inline" th:text="${desaPeri.nombre}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Apellido: </b>
+                        <p class="d-inline" th:text="${desaPeri.apellido}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Sexo: </b>
+                        <p class="d-inline" th:text="${desaPeri.sexo}"></p>
+                    </div>
+                    <div>
+                        <b class="d-inline">Informaci&oacute;n adicional: </b>
+                        <p class="d-inline" th:text="${desaPeri.informacion_adicional}"></p>
+                    </div>
+                    <div th:if="${age}">
+                        <div th:if="${age} >=18">
+                            <b class="d-inline">DUI: </b>
+                            <p class="d-inline" th:text="${desaPeri.Dui}"></p>
+                        </div>
+                    </div>
+                    <div>
+                        <b class="d-inline">Fecha de registro:</b>
+                        <p class="d-inline" th:text="${desaPeri.fecha_registro}"></p>
+                    </div>
                 </div>
             </div>
         </div>
-
-
     </div>
 
 </body>
