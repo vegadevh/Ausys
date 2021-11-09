@@ -58,14 +58,14 @@
                                 </form>
                                 <form class="p-1"
                                     th:action="@{/write/editar/desaparecido/} + ${desaPeri.id_desaparecido} + '/' + ${desaPeri.id_desaperi}"
-                                    method="GET">
+                                    sec:authorize="hasRole('ROLE_STATISTICS') or hasRole('ROLE_ADMIN')" method="GET">
                                     <input th:name="id_desaparecido" type="hidden" th:value=${desaPeri.id_desaparecido}>
                                     <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
                                     <input type="submit" class="btn btn-success" value="Editar">
                                 </form>
                                 <form class="p-1"
                                     th:action="@{/admin/eliminar/desaparecido/} + ${desaPeri.id_desaparecido} + '/' + ${desaPeri.id_desaperi}"
-                                    method="GET">
+                                    sec:authorize="hasRole('ROLE_ADMIN')" method="GET">
                                     <input th:name="id_desaparecido" type="hidden" th:value=${desaPeri.id_desaparecido}>
                                     <input th:name="id_desaperi" type="hidden" th:value=${desaPeri.id_desaperi}>
                                     <input type="submit" class="btn btn-danger" value="Eliminar"

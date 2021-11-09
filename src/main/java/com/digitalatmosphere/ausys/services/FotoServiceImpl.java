@@ -8,7 +8,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.digitalatmosphere.ausys.domains.Foto;
-import com.digitalatmosphere.ausys.domains.Peritaje;
 import com.digitalatmosphere.ausys.dto.fotografiaDTO;
 import com.digitalatmosphere.ausys.repositories.IFotoRepo;
 import com.digitalatmosphere.ausys.repositories.IPeritajeRepo;
