@@ -298,6 +298,14 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		}
 		List<CasosDTO> registro = desaPeriRepo.cantidadPorCasosRango(date1, date2).stream().map(obj->{
 			CasosDTO c = new CasosDTO();
+			if(obj[0] == null && obj[1] == null && obj[2] == null && obj[3] == null && obj[4] == null) {
+				obj[0] = 0;
+				obj[1] = 0;
+				obj[2] = 0;
+				obj[3] = 0;
+				obj[4] = 0;
+				
+			}
 			c.setCaso1(obj[0].toString());
 			c.setCaso2(obj[1].toString());
 			c.setCaso3(obj[2].toString());
@@ -336,6 +344,13 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		}
 		List<HombresMujeresDTO> rangoFechas = desaPeriRepo.HombresMujeresPorCasoYRango(caso, date1, date2).stream().map(obj -> {
 			HombresMujeresDTO mh = new HombresMujeresDTO();
+			
+			if(obj[0] == null && obj[1] == null) {
+				obj[0] = 0;
+				obj[1] = 0;
+				
+			}
+			
 			mh.setMujer(obj[0].toString());
 			mh.setHombre(obj[1].toString());
 			return mh;
@@ -347,6 +362,16 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	public List<CasosDTO> cantidadPorCasosSexo(String sexo) throws DataAccessException {
 		List<CasosDTO> registro = desaPeriRepo.cantidadPorCasosSexo(sexo).stream().map(obj->{
 			CasosDTO c = new CasosDTO();
+			
+			if(obj[0] == null && obj[1] == null && obj[2] == null && obj[3] == null && obj[4] == null) {
+				obj[0] = 0;
+				obj[1] = 0;
+				obj[2] = 0;
+				obj[3] = 0;
+				obj[4] = 0;
+				
+			}
+			
 			c.setCaso1(obj[0].toString());
 			c.setCaso2(obj[1].toString());
 			c.setCaso3(obj[2].toString());
@@ -388,6 +413,17 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		}
 		List<CasosDTO> registro = desaPeriRepo.cantidadPorCasosSexoRango(sexo,date1, date2).stream().map(obj->{
 			CasosDTO c = new CasosDTO();
+			
+			if(obj[0] == null && obj[1] == null && obj[2] == null && obj[3] == null && obj[4] == null) {
+				obj[0] = 0;
+				obj[1] = 0;
+				obj[2] = 0;
+				obj[3] = 0;
+				obj[4] = 0;
+				
+			}
+			
+			
 			c.setCaso1(obj[0].toString());
 			c.setCaso2(obj[1].toString());
 			c.setCaso3(obj[2].toString());
