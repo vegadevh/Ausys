@@ -108,10 +108,28 @@ public class AdminController {
 	}
 	
 	@PostMapping("/validar_usuario")
-	public ModelAndView validar_usuario(@Valid @ModelAttribute Usuario usuario, BindingResult result ) {
+	public ModelAndView validar_usuario(@Valid @ModelAttribute Usuario usuario, BindingResult result,
+			@RequestParam(value="rol.id_rol") String rolSelect) {
 		ModelAndView mav = new ModelAndView();
-		
-		if(result.hasErrors() ) {
+		System.out.println(rolSelect);
+		if(rolSelect.equals("col2")) {
+			List <Rol> roles = null;
+			
+			try {
+				
+				roles = rolS.findALL();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			mav.addObject("roles", roles);
+			mav.addObject("titulo", "Registro de usuario");
+			mav.addObject("usuario", usuario);
+			mav.addObject("alertRol","Debe seleccionar un rol para el usuario.");
+			mav.setViewName("usuario_registro");
+		}
+		else if(result.hasErrors() ) {
 			List <Rol> roles = null;
 			
 			try {

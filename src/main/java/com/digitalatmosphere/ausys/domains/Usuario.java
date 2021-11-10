@@ -37,12 +37,12 @@ public class Usuario {
 	
 	@NotEmpty
 	@Column(name="nombre")
-	@Size(message="Como maximo puede ingresar 50 caracteres.", max=50)
+	@Size(message="Como maximo puede ingresar 80 caracteres.", max=80)
 	private String nombre;
 	
 	@NotEmpty
 	@Column(name="apellido")
-	@Size(message="Como maximo puede ingresar 50 caracteres.", max=50)
+	@Size(message="Como maximo puede ingresar 80 caracteres.", max=80)
 	private String apellido;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
