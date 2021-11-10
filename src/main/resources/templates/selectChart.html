@@ -46,16 +46,18 @@
                     <option value="7">Cantidad de casos por Sexo y rango de tiempo</option>
                 </select>
                 <br>
-
+                <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
 
                 <form th:action="@{/show/graficar/HombresMujeresRangoFechas}" method="get" id="HombresMujeresRango">
                     <label>Desde: </label>
-                    <input type="text" id="datepicker" th:name="inicio" required>
+                    <input autocomplete="off" type="text" id="datepicker" th:name="inicio" required
+                        oninvalid="setCustomValidity('Debe ingresar la fecha para realizar la busqueda.')"
+                        onchange="try{setCustomValidity('')}catch(e){}">
                     <br>
                     <label>Hasta: </label>
-                    <input type="text" id="datepicker2" th:name="fin" required>
-                    <br>
-                    <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
+                    <input autocomplete="off" type="text" id="datepicker2" th:name="fin" required
+                        oninvalid="setCustomValidity('Debe ingresar la fecha para realizar la busqueda.')"
+                        onchange="try{setCustomValidity('')}catch(e){}">
                     <br>
                     <input type="submit" value="Graficar" class="btn btn-primary">
                 </form>
@@ -68,10 +70,14 @@
 
                 <form th:action="@{/show/graficar/CantidadPorCasosRango}" method="get" id="CantidadPorCasosRango">
                     <label>Desde: </label>
-                    <input type="text" id="datepicker3" th:name="inicio">
+                    <input autocomplete="off" type="text" id="datepicker3" th:name="inicio" required
+                        oninvalid="setCustomValidity('Debe ingresar la fecha para realizar la busqueda.')"
+                        onchange="try{setCustomValidity('')}catch(e){}">
                     <br>
                     <label>Hasta: </label>
-                    <input type="text" id="datepicker4" th:name="fin">
+                    <input autocomplete="off" type="text" id="datepicker4" th:name="fin" required
+                        oninvalid="setCustomValidity('Debe ingresar la fecha para realizar la busqueda.')"
+                        onchange="try{setCustomValidity('')}catch(e){}">
                     <br>
                     <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
                     <br>
@@ -93,10 +99,14 @@
                 <form th:action="@{/show/graficar/HombresMujeresPorCasoYRango}" method="get"
                     id="HombresMujeresPorCasoYRango">
                     <label>Desde: </label>
-                    <input type="text" id="datepicker5" th:name="inicio">
+                    <input autocomplete="off" type="text" id="datepicker5" th:name="inicio" required
+                        oninvalid="setCustomValidity('Debe ingresar la fecha para realizar la busqueda.')"
+                        onchange="try{setCustomValidity('')}catch(e){}">
                     <br>
                     <label>Hasta: </label>
-                    <input type="text" id="datepicker6" th:name="fin">
+                    <input autocomplete="off" type="text" id="datepicker6" th:name="fin" required
+                        oninvalid="setCustomValidity('Debe ingresar la fecha para realizar la busqueda.')"
+                        onchange="try{setCustomValidity('')}catch(e){}">
                     <br>
                     <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
                     <br>
@@ -134,10 +144,14 @@
 
                     <br>
                     <label>Desde: </label>
-                    <input type="text" id="datepicker7" th:name="inicio">
+                    <input autocomplete="off" type="text" id="datepicker7" th:name="inicio" required
+                        oninvalid="setCustomValidity('Debe ingresar la fecha para realizar la busqueda.')"
+                        onchange="try{setCustomValidity('')}catch(e){}">
                     <br>
                     <label>Hasta: </label>
-                    <input type="text" id="datepicker8" th:name="fin">
+                    <input autocomplete="off" type="text" id="datepicker8" th:name="fin" required
+                        oninvalid="setCustomValidity('Debe ingresar la fecha para realizar la busqueda.')"
+                        onchange="try{setCustomValidity('')}catch(e){}">
                     <br>
                     <div th:if="${alert}" th:text="${alert}" class="alert alert-danger" role="alert"></div>
                     <br>

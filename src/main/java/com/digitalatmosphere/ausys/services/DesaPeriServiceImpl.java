@@ -215,13 +215,11 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 
 	@Override
 	public List<DesaPeri> findByKeyword(String keyword, String sexo) throws DataAccessException {
-		System.out.println("SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like".concat(keyword).concat("or lower( dp.apellido ) like").concat(keyword).concat(") and (lower( dp.sexo ) like").concat(sexo));
 		return desaPeriRepo.findByKeyword(keyword.toLowerCase(), sexo.toLowerCase());
 	}
 	
 	@Override
 	public List<DesaPeri> findByKeywordAndtipe(String keyword, String tipo, String sexo) throws DataAccessException {
-		System.out.println("SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like".concat(keyword).concat("or lower( dp.apellido ) like").concat(keyword).concat(") and (lower( dp.sexo ) like").concat(sexo).concat(") and (dp.tipo_de_caso =").concat(tipo));
 		return desaPeriRepo.findByKeywordAndtipe(keyword.toLowerCase(), tipo, sexo.toLowerCase());
 	}
 
@@ -236,7 +234,6 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		System.out.println("SELECT * FROM desa_peri dp WHERE (lower(dp.nombre) like".concat(keyword).concat("or lower( dp.apellido ) like").concat(keyword).concat(") and (lower( dp.sexo ) like").concat(sexo).concat(") and (dp.tipo_de_caso =").concat(type).concat(") and (dp.fecha_registro between").concat(fechaI).concat("and").concat(fechaF));
 		
 		return desaPeriRepo.findByDateBetweenAndAbove(keyword.toLowerCase(), type, sexo.toLowerCase(), date1, date2);
 	}
@@ -255,14 +252,19 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		System.out.println(date1);
-		System.out.println(date2);
 		List<HombresMujeresDTO> rangoFechas = desaPeriRepo.HombresMujeresPorFecha(date1, date2).stream().map(obj -> {
 			HombresMujeresDTO mh = new HombresMujeresDTO();
+			if(obj[0] == null && obj[1] == null) {
+				obj[0] = 0;
+				obj[1] = 0;
+			}
+			
+			
 			mh.setMujer(obj[0].toString());
 			mh.setHombre(obj[1].toString());
 			return mh;
 		}).collect(Collectors.toList());
+		
 		return rangoFechas;
 	}
 
@@ -270,6 +272,23 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	public List<CasosDTO> cantidadPorCasos() throws DataAccessException {
 		List<CasosDTO> registro = desaPeriRepo.cantidadPorCasos().stream().map(obj->{
 			CasosDTO c = new CasosDTO();
+			System.out.println(obj[0]);
+			System.out.println(obj[1]);
+			System.out.println(obj[2]);
+			System.out.println(obj[3]);
+			System.out.println(obj[4]);
+			if(obj[0] == null && obj[1] == null && obj[2] == null && obj[3] == null && obj[4] == null) {
+				obj[0] = 0;
+				obj[1] = 0;
+				obj[2] = 0;
+				obj[3] = 0;
+				obj[4] = 0;
+			}
+			System.out.println(obj[0]);
+			System.out.println(obj[1]);
+			System.out.println(obj[2]);
+			System.out.println(obj[3]);
+			System.out.println(obj[4]);
 			c.setCaso1(obj[0].toString());
 			c.setCaso2(obj[1].toString());
 			c.setCaso3(obj[2].toString());
@@ -296,6 +315,13 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		}
 		List<CasosDTO> registro = desaPeriRepo.cantidadPorCasosRango(date1, date2).stream().map(obj->{
 			CasosDTO c = new CasosDTO();
+			if(obj[0] == null && obj[1] == null && obj[2] == null && obj[3] == null && obj[4] == null) {
+				obj[0] = 0;
+				obj[1] = 0;
+				obj[2] = 0;
+				obj[3] = 0;
+				obj[4] = 0;
+			}
 			c.setCaso1(obj[0].toString());
 			c.setCaso2(obj[1].toString());
 			c.setCaso3(obj[2].toString());
@@ -310,6 +336,10 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	public List<HombresMujeresDTO> HombresMujeresPorCaso(String caso) throws DataAccessException {
 		List<HombresMujeresDTO> rangoFechas = desaPeriRepo.HombresMujeresPorCaso(caso).stream().map(obj -> {
 			HombresMujeresDTO mh = new HombresMujeresDTO();
+			if(obj[0] == null && obj[1] == null) {
+				obj[0] = 0;
+				obj[1] = 0;
+			}
 			mh.setMujer(obj[0].toString());
 			mh.setHombre(obj[1].toString());
 			return mh;
@@ -334,6 +364,13 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		}
 		List<HombresMujeresDTO> rangoFechas = desaPeriRepo.HombresMujeresPorCasoYRango(caso, date1, date2).stream().map(obj -> {
 			HombresMujeresDTO mh = new HombresMujeresDTO();
+			
+			if(obj[0] == null && obj[1] == null) {
+				obj[0] = 0;
+				obj[1] = 0;
+				
+			}
+			
 			mh.setMujer(obj[0].toString());
 			mh.setHombre(obj[1].toString());
 			return mh;
@@ -345,6 +382,16 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 	public List<CasosDTO> cantidadPorCasosSexo(String sexo) throws DataAccessException {
 		List<CasosDTO> registro = desaPeriRepo.cantidadPorCasosSexo(sexo).stream().map(obj->{
 			CasosDTO c = new CasosDTO();
+			
+			if(obj[0] == null && obj[1] == null && obj[2] == null && obj[3] == null && obj[4] == null) {
+				obj[0] = 0;
+				obj[1] = 0;
+				obj[2] = 0;
+				obj[3] = 0;
+				obj[4] = 0;
+				
+			}
+			
 			c.setCaso1(obj[0].toString());
 			c.setCaso2(obj[1].toString());
 			c.setCaso3(obj[2].toString());
@@ -386,6 +433,16 @@ public class DesaPeriServiceImpl implements IDesaPeriService {
 		}
 		List<CasosDTO> registro = desaPeriRepo.cantidadPorCasosSexoRango(sexo,date1, date2).stream().map(obj->{
 			CasosDTO c = new CasosDTO();
+			
+			if(obj[0] == null && obj[1] == null && obj[2] == null && obj[3] == null && obj[4] == null) {
+				obj[0] = 0;
+				obj[1] = 0;
+				obj[2] = 0;
+				obj[3] = 0;
+				obj[4] = 0;
+				
+			}
+			
 			c.setCaso1(obj[0].toString());
 			c.setCaso2(obj[1].toString());
 			c.setCaso3(obj[2].toString());
