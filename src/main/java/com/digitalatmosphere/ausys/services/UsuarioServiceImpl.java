@@ -28,14 +28,14 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	}
 
 	@Override
-	public void delete(Integer id_usuario) throws DataAccessException {
-		Usuario usuario = usuarioRepo.getById(id_usuario);
-		usuarioRepo.delete(usuario);
+	public void delete(String usuario) throws DataAccessException {
+		Usuario user = usuarioRepo.getById(usuario);
+		usuarioRepo.delete(user);
 	}
 
 	@Override
-	public Usuario findOne(Integer id_usuario) throws DataAccessException {
-		return usuarioRepo.getById(id_usuario);
+	public Usuario findOne(String usuario) throws DataAccessException {
+		return usuarioRepo.findById(usuario).orElse(null);
 	}
 
 }

@@ -18,48 +18,47 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(schema="public", name="DESA_PERI")
+@Table(schema = "public", name = "DESA_PERI")
 public class DesaPeri {
 
 	@Id
-	@Column(name="id_desaperi")
+	@Column(name = "id_desaperi")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_desaperi;
-	
+
 	@NotEmpty
-	@Size(message="El campo debe tener como maximo 80 caracteres",max=80)
-	@Column(name="tipo_de_caso")
+	@Size(message = "El campo debe tener como maximo 80 caracteres", max = 80)
+	@Column(name = "tipo_de_caso")
 	private String tipo_de_caso;
-	
+
 	@NotEmpty
-	@Column(name="nombre")
-	@Size(message="El campo debe tener como maximo 30 caracteres",max=30)
+	@Column(name = "nombre")
+	@Size(message = "El campo debe tener como maximo 80 caracteres", max = 80)
 	private String nombre;
-	
+
 	@NotEmpty
-	@Column(name="apellido")
-	@Size(message="El campo debe tener como maximo 30 caracteres",max=30)
+	@Column(name = "apellido")
+	@Size(message = "El campo debe tener como maximo 80 caracteres", max = 80)
 	private String apellido;
-	
+
 	@NotEmpty
-	@Column(name="direccion")
+	@Column(name = "direccion")
 	private String direccion;
-	
+
 	@NotEmpty
-	@Column(name="sexo")
+	@Column(name = "sexo")
 	private String sexo;
-	
-	@NotEmpty
-	@Column(name="informacion_adicional")
+
+	@Column(name = "informacion_adicional")
 	private String informacion_adicional;
-	
-	@Column(name="DUI")
+
+	@Column(name = "DUI")
 	private String Dui;
-	
-	@DateTimeFormat(pattern="dd/MM/yyyy")
-	@Column(name="fecha_registro")
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(name = "fecha_registro")
 	private Date fecha_registro;
-	
+
 	public Date getFecha_registro() {
 		return fecha_registro;
 	}
@@ -68,17 +67,17 @@ public class DesaPeri {
 		this.fecha_registro = fecha_registro;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_desaparecido")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_desaparecido")
 	private Desaparecido desaparecido;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_peritaje")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_peritaje")
 	private Peritaje peritaje;
-	
+
 	@Transient
 	private String id_desaparecido;
-	
+
 	@Transient
 	private String id_peritaje;
 
@@ -180,7 +179,5 @@ public class DesaPeri {
 	public void setId_peritaje(String id_peritaje) {
 		this.id_peritaje = id_peritaje;
 	}
-	
-	
-	
+
 }

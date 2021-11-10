@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.digitalatmosphere.ausys.domains.Usuario;
 
-public interface IUsuarioRepo extends JpaRepository<Usuario, Integer> {
+public interface IUsuarioRepo extends JpaRepository<Usuario, String> {
 	
 	@Query(nativeQuery=true, value="Select * from public.usuarios where username = ?1")
 	Optional <Usuario> findyByUserName(String username);

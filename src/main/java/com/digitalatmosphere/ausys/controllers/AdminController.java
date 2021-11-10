@@ -109,10 +109,16 @@ public class AdminController {
 	
 	@PostMapping("/validar_usuario")
 	public ModelAndView validar_usuario(@Valid @ModelAttribute Usuario usuario, BindingResult result,
-			@RequestParam(value="rol.id_rol") String rolSelect) {
+			@RequestParam(value="rol.id_rol") String rolSelect,
+			@RequestParam(value="username") String id_usuario) {
+		
+		Usuario user = null;
+		user = usuarioS.findOne(id_usuario);
 		ModelAndView mav = new ModelAndView();
 		System.out.println(rolSelect);
-		if(rolSelect.equals("col2")) {
+		
+		
+		if(rolSelect.equals("0")) {
 			List <Rol> roles = null;
 			
 			try {
@@ -127,6 +133,22 @@ public class AdminController {
 			mav.addObject("titulo", "Registro de usuario");
 			mav.addObject("usuario", usuario);
 			mav.addObject("alertRol","Debe seleccionar un rol para el usuario.");
+			mav.setViewName("usuario_registro");
+		}else if(user != null) {
+			List <Rol> roles = null;
+			
+			try {
+				
+				roles = rolS.findALL();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			mav.addObject("roles", roles);
+			mav.addObject("iderror", "El identificador ya esta en uso.");
+			mav.addObject("titulo", "Registro de usuario");
+			mav.addObject("usuario", usuario);
 			mav.setViewName("usuario_registro");
 		}
 		else if(result.hasErrors() ) {
@@ -191,7 +213,7 @@ public class AdminController {
 	public ModelAndView eliminarUsuario(@RequestParam(value="id_usuario") String id_usuario) {
 		ModelAndView mav = new ModelAndView();
 		if(id_usuario != null) {
-			usuarioS.delete(Integer.parseInt(id_usuario));
+			usuarioS.delete(id_usuario);
 		}
 		
 		mav.setViewName("redirect:/admin/listaUsuarios");
@@ -205,7 +227,7 @@ public class AdminController {
 		
 		
 		if(id_usuario != null) {
-			usuario = usuarioS.findOne(Integer.parseInt(id_usuario));
+			usuario = usuarioS.findOne(id_usuario);
 			if(usuario.getEnabled_u() == true) {
 				usuario.setEnabled_u(false);
 				

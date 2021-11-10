@@ -36,6 +36,7 @@ public class Desaparecido {
 	
 	@NotEmpty
 	@Column(name="nombre_familiar")
+	@Size(message="Como maximo puede ingresar 160 caracteres.", max=160)
 	private String nombre_familiar;
 	
 	@NotEmpty

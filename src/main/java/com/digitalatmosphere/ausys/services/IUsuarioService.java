@@ -12,8 +12,8 @@ public interface IUsuarioService {
 	
 	public void save(Usuario usuario) throws DataAccessException;
 	
-	public void delete(Integer id_usuario) throws DataAccessException;
+	public void delete(String usuario) throws DataAccessException;
 	
-	public Usuario findOne(Integer id_usuario) throws DataAccessException;
+	public Usuario findOne(String usuario) throws DataAccessException;
 
 }
