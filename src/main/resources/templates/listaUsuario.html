@@ -46,7 +46,7 @@
                         <td th:text="${user.nombre}"></td>
                         <td th:text="${user.apellido}">
                         </td>
-                        <td>
+                        <td th:if="${user.username} != 'admin'">
 
                             <div class="d-flex">
                                 <form class="p-1" th:action="@{/admin/editar/usuario/} + ${user.id_usuario} "
