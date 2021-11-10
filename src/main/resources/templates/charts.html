@@ -2,95 +2,115 @@
 <html xmlns="http://www.thymeleaf.org" lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+		integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
-        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
-        crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/99b5aa301b.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <link rel="stylesheet" th:href="@{/styles.css}">
-    <title th:text="'Ausys - '+ ${titulo}"></title>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+		integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+		crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/99b5aa301b.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<link rel="stylesheet" th:href="@{/styles.css}" />
+	<title th:text="'Ausys - '+ ${titulo}"></title>
 </head>
 
 <body style="background-color: #b1b7b9;">
-    <th:block th:replace="components/navbar :: navbar"></th:block>
-    <div class="container">
-        <div class="card" style="padding: 2em;">
+	<th:block th:replace="components/navbar :: navbar"></th:block>
+	<div class="container">
+		<div class="card" style="padding: 2em;">
 
-            <p style="display: none;" id="titulo" th:text="${titulo}"></p>
-            <br>
-            <!-- Sexos por rango de fechas -->
-            <div th:if="${HombresMujeres}">
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Cantidad de mujeres</th>
-                            <th scope="col">Cantidad de hombres</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each=" hm: ${HombresMujeres}">
-                            <td id='mujer' th:text="${hm.mujer}"></td>
-                            <td id='hombre' th:text="${hm.hombre}"></td>
+			<p style="display: none;" id="titulo" th:text="${titulo}"></p>
+			<br>
+			<!-- Sexos por rango de fechas -->
+			<div th:if="${HombresMujeres}">
+				<div th:each=" hm: ${HombresMujeres}">
+					<table th:if="${hm.mujer} != 0 or ${hm.hombre} != 0" class="table">
 
-                        </tr>
-                    </tbody>
-                </table>
-                <br>
-                <div id="piechart" style="height: 400px; margin: auto;">
-                    <div style="display: none;">${hm.mujer}</div>
-                    <div style="display: none;">${hm.hombre}</div>
-                </div>
-            </div>
-            <!-- cantidad totales de casos -->
-            <div th:if="${cantidadPorCasos}">
-                <table class="table" style="display: none">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Cantidad de mujeres</th>
-                            <th scope="col">Cantidad de hombres</th>
-                            <th scope="col">Cantidad de hombres</th>
-                            <th scope="col">Cantidad de hombres</th>
-                            <th scope="col">Cantidad de hombres</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="caso: ${cantidadPorCasos}">
-                            <td id='caso1' th:text="${caso.caso1}"></td>
-                            <td id='caso2' th:text="${caso.caso2}"></td>
-                            <td id='caso3' th:text="${caso.caso3}"></td>
-                            <td id='caso4' th:text="${caso.caso4}"></td>
-                            <td id='caso5' th:text="${caso.caso5}"></td>
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">Cantidad de mujeres</th>
+								<th scope="col">Cantidad de hombres</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<div th:if="${hm.mujer} != 0 or ${hm.hombre} != 0">
+									<td id="mujer" th:text="${hm.mujer}"></td>
+									<td id="hombre" th:text="${hm.hombre}"></td>
+								</div>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<div th:if="${hm.mujer} != 0 or ${hm.hombre} != 0" id="piechart"
+						style="height: 400px; margin: auto">
+						<div style="display: none;">${hm.mujer}</div>
+						<div style="display: none;">${hm.hombre}</div>
+					</div>
+					<div th:if="${hm.mujer} == 0 and ${hm.hombre} == 0">
+						<div class="alert alert-danger" role="alert">No hay resultados para al busqueda realizada.
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- cantidad totales de casos -->
+			<div th:if="${cantidadPorCasos}">
+				<div th:each="caso: ${cantidadPorCasos}">
+					<div
+						th:if="${caso.caso1} != 0 or ${caso.caso2} != 0 or ${caso.caso3} != 0 or ${caso.caso4} != 0 or ${caso.caso5} != 0">
+						<table class="table">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">Cantidad de mujeres</th>
+									<th scope="col">Cantidad de hombres</th>
+									<th scope="col">Cantidad de hombres</th>
+									<th scope="col">Cantidad de hombres</th>
+									<th scope="col">Cantidad de hombres</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<div>
+										<td id='caso1' th:text="${caso.caso1}"></td>
+										<td id='caso2' th:text="${caso.caso2}"></td>
+										<td id='caso3' th:text="${caso.caso3}"></td>
+										<td id='caso4' th:text="${caso.caso4}"></td>
+										<td id='caso5' th:text="${caso.caso5}"></td>
+									</div>
 
-                        </tr>
-                    </tbody>
-                </table>
-                <br>
-                <div id="piechart-casos" style="height: 400px; margin: auto;">
-                    <div style="display: none;">${caso.caso1}</div>
-                    <div style="display: none;">${caso.caso2}</div>
-                    <div style="display: none;">${caso.caso3}</div>
-                    <div style="display: none;">${caso.caso4}</div>
-                    <div style="display: none;">${caso.caso5}</div>
-                </div>
-            </div>
-        </div>
+								</tr>
+							</tbody>
+						</table>
+						<br>
+						<div id="piechart-casos" style="height: 400px; margin: auto;">
+							<div style="display: none;">${caso.caso1}</div>
+							<div style="display: none;">${caso.caso2}</div>
+							<div style="display: none;">${caso.caso3}</div>
+							<div style="display: none;">${caso.caso4}</div>
+							<div style="display: none;">${caso.caso5}</div>
+						</div>
+					</div>
 
-    </div>
+					<div
+						th:if="${caso.caso1} == 0 and ${caso.caso2} == 0 and ${caso.caso3} == 0 and ${caso.caso4}  == 0 and ${caso.caso5} == 0">
+						<div class="alert alert-danger" role="alert">No hay resultados para al busqueda realizada.
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <script th:src="@{/charts-HombresMujeres.js}"></script>
-    <script th:src="@{/charts-CantidadPorCasos.js}"></script>
+		<script th:src="@{/charts-HombresMujeres.js}"></script>
+		<script th:src="@{/charts-CantidadPorCasos.js}"></script>
 </body>
 
 </html>
