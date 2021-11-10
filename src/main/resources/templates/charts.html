@@ -33,7 +33,7 @@
 			<!-- Sexos por rango de fechas -->
 			<div th:if="${HombresMujeres}">
 				<div th:each=" hm: ${HombresMujeres}">
-					<table th:if="${hm.mujer} and ${hm.hombre} != 0" class="table">
+					<table th:if="${hm.mujer} != 0 or ${hm.hombre} != 0" class="table">
 
 						<thead class="thead-dark">
 							<tr>
@@ -43,7 +43,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<div th:if="${hm.mujer} and ${hm.hombre} != 0">
+								<div th:if="${hm.mujer} != 0 or ${hm.hombre} != 0">
 									<td id="mujer" th:text="${hm.mujer}"></td>
 									<td id="hombre" th:text="${hm.hombre}"></td>
 								</div>
@@ -51,11 +51,12 @@
 						</tbody>
 					</table>
 					<br>
-					<div th:if="${hm.mujer} and ${hm.hombre} != 0" id="piechart" style="height: 400px; margin: auto">
+					<div th:if="${hm.mujer} != 0 or ${hm.hombre} != 0" id="piechart"
+						style="height: 400px; margin: auto">
 						<div style="display: none;">${hm.mujer}</div>
 						<div style="display: none;">${hm.hombre}</div>
 					</div>
-					<div th:unless="${hm.mujer} and ${hm.hombre} != 0">
+					<div th:if="${hm.mujer} == 0 and ${hm.hombre} == 0">
 						<div class="alert alert-danger" role="alert">No hay resultados para al busqueda realizada.
 						</div>
 					</div>
@@ -65,7 +66,7 @@
 			<div th:if="${cantidadPorCasos}">
 				<div th:each="caso: ${cantidadPorCasos}">
 					<div
-						th:if="${caso.caso1} and ${caso.caso2} and ${caso.caso3} and ${caso.caso4} and ${caso.caso5} != 0">
+						th:if="${caso.caso1} != 0 or ${caso.caso2} != 0 or ${caso.caso3} != 0 or ${caso.caso4} != 0 or ${caso.caso5} != 0">
 						<table class="table">
 							<thead class="thead-dark">
 								<tr>
@@ -100,7 +101,7 @@
 					</div>
 
 					<div
-						th:unless="${caso.caso1} and ${caso.caso2} and ${caso.caso3} and ${caso.caso4} and ${caso.caso5} != 0">
+						th:if="${caso.caso1} == 0 and ${caso.caso2} == 0 and ${caso.caso3} == 0 and ${caso.caso4}  == 0 and ${caso.caso5} == 0">
 						<div class="alert alert-danger" role="alert">No hay resultados para al busqueda realizada.
 						</div>
 					</div>
