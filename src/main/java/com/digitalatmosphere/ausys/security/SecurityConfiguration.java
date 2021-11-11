@@ -41,7 +41,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		 http.authorizeRequests()
+		http.sessionManagement().maximumSessions(1); 
+		http.authorizeRequests()
 		 	.antMatchers("/users").authenticated()
 		 	.antMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/write/**").hasAnyRole("STATISTICS", "ADMIN")
