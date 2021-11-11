@@ -222,7 +222,7 @@ public class EstadisticaController {
 			mav.addObject("id_peritaje", id_peritaje);
 			mav.addObject("titulo", "Ingresar Peritajes");
 			mav.addObject("desaPeri", desaPeri);
-			mav.setViewName("ingresarPeritaje2");
+			mav.setViewName("IngresarPeritaje2");
 		}
 		return mav;
 	}
