@@ -63,11 +63,17 @@
                                     <input type="submit" class="btn btn-danger" value="Eliminar"
                                         onclick="return confirm('¿Estás seguro que deseas eliminar el usuario?');">
                                 </form>
+                                
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <div class="text-center">
+				<form th:action="@{/}">
+					<input type="submit" class="btn btn-primary" value="Regresar">
+				</form>
+			</div>
         </div>
     </div>
 
