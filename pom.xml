@@ -15,8 +15,10 @@
 	<name>ausys</name>
 	<description>Sistema de gestión de peritajes</description>
 	<properties>
-		<java.version>16</java.version>
+		<java.version>1.8</java.version>
 		<start-class>com.digitalatmosphere.ausys.AusysApplication</start-class>
+		<maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 	<dependencies>
 		<dependency>
