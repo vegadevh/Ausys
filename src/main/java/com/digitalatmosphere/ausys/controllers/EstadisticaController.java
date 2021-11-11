@@ -243,7 +243,7 @@ public class EstadisticaController {
 			mav.addObject("alert", "Debe seleccionar una de las opciones de Tipo de Caso.");
 			mav.addObject("titulo", "Ingresar Peritajes");
 			mav.addObject("desaPeri", desaPeri);
-			mav.setViewName("ingresarPeritaje2");
+			mav.setViewName("IngresarPeritaje2");
 		}
 		if (result.hasErrors()) {
 			System.out.println(tipo_de_caso);
@@ -256,7 +256,7 @@ public class EstadisticaController {
 			mav.addObject("age", age);
 			mav.addObject("titulo", "Ingresar Peritajes");
 			mav.addObject("desaPeri", desaPeri);
-			mav.setViewName("ingresarPeritaje2");
+			mav.setViewName("IngresarPeritaje2");
 		} else {
 			Peritaje peritaje2 = new Peritaje();
 
@@ -308,7 +308,7 @@ public class EstadisticaController {
 
 		mav.addObject("desaparecido", desaparecido);
 
-		mav.setViewName("ingresarDesaparecido");
+		mav.setViewName("IngresarDesaparecido");
 
 		return mav;
 	}
@@ -420,7 +420,7 @@ public class EstadisticaController {
 			mav.addObject("id_desaparecido", id_desaparecido);
 			mav.addObject("titulo", "Ingresar Desaparecido");
 			mav.addObject("desaPeri", desaPeri);
-			mav.setViewName("ingresarDesaparecido2");
+			mav.setViewName("IngresarDesaparecido2");
 		}
 		return mav;
 	}
@@ -440,7 +440,7 @@ public class EstadisticaController {
 			mav.addObject("age", age);
 			mav.addObject("titulo", "Ingresar Desaparecido");
 			mav.addObject("desaPeri", desaPeri);
-			mav.setViewName("ingresarDesaparecido2");
+			mav.setViewName("IngresarDesaparecido2");
 		} else {
 			Desaparecido desaparecido2 = new Desaparecido();
 
