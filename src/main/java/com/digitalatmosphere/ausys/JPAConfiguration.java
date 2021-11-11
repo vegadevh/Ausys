@@ -38,7 +38,7 @@ public class JPAConfiguration {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql://rqskvhxjnxbsup:6b9ac6e3d02823de2cc2a50a98fd13c8838cb7954f169695a781221baca19219@ec2-44-199-40-188.compute-1.amazonaws.com:5432/df5gla92ke5s3o");
+		dataSource.setUrl("jdbc:postgres://rqskvhxjnxbsup:6b9ac6e3d02823de2cc2a50a98fd13c8838cb7954f169695a781221baca19219@ec2-44-199-40-188.compute-1.amazonaws.com:5432/df5gla92ke5s3o");
 		dataSource.setUsername("rqskvhxjnxbsup");
 		dataSource.setPassword("6b9ac6e3d02823de2cc2a50a98fd13c8838cb7954f169695a781221baca19219");
 		return dataSource;
