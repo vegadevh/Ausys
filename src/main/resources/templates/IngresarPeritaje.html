@@ -70,18 +70,24 @@
                     <div th:if="${municipioalert}" th:text="${municipioalert}" class="alert alert-danger" role="alert">
                     </div>
                     <div th:if="${#fields.hasErrors('municipio.id_municipio')}" th:errors="*{municipio.id_municipio}"
-                        class="alert alert-danger" role="alert"></div>
-            </div>
-            <br>
-            <input type="submit" value="Siguiente" class="btn btn-primary">
+                        class="alert alert-danger" role="alert">
+                    </div>
+                    <br>
 
-            </form>
-            <br>
-            <div class="text-center" >
-	            <form th:action="@{/}">
-	    			<input type="submit" class="btn btn-primary" value="Regresar" style="width: 100%;">
-				</form>
+                    <div class="row container">
+                        <div style="margin-right: 1em;">
+                            <form th:action="@{/}">
+                                <input type="submit" class="btn btn-secondary" value="Regresar">
+                            </form>
+                        </div>
+                        <div>
+                            <input type="submit" value="Siguiente" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>
             </div>
+
+            <br>
         </div>
     </div>
     </div>
