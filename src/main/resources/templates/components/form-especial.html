@@ -11,7 +11,7 @@
     <br>
     <label for="informacion_adicional">Ubique la marca seleccionada: </label>
     <div>
-        <textarea type="text" rows="5" cols="50" th:field="*{descripcion}"></textarea>
+        <textarea type="text" rows="5" cols="50" th:field="*{descripcion}" class="form-control"></textarea>
     </div>
     <div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="alert alert-danger" role="alert">
     </div>
