@@ -31,7 +31,8 @@
                 <form th:action="@{/write/validarPeritaje}" th:object="${peritaje}" method="GET">
 
                     <label for="id_peritaje">Identificador del registro: </label>
-                    <input type="text" id="id_peritaje" th:name="id_peritaje" th:field="*{id_peritaje}">
+                    <input type="text" id="id_peritaje" th:name="id_peritaje" th:field="*{id_peritaje}"
+                        class="form-control">
                     <div th:if="${#fields.hasErrors('id_peritaje')}" th:errors="*{id_peritaje}"
                         class="alert alert-danger" role="alert"></div>
                     <div th:if="${iderror}" th:text="${iderror}" class="alert alert-danger" role="alert"></div>
@@ -43,7 +44,8 @@
                     <br>
 
                     <label for="edad_estimada">Edad/Edad estimada: </label>
-                    <input type="number" id="edad_estimada" th:name="edad_estimada" th:field="*{edad_estimada}">
+                    <input type="number" id="edad_estimada" th:name="edad_estimada" th:field="*{edad_estimada}"
+                        class="form-control">
                     <div th:if="${#fields.hasErrors('edad_estimada')}" th:errors="*{edad_estimada}"
                         class="alert alert-danger" role="alert"></div>
                     <br>

@@ -1,17 +1,17 @@
 <section th:fragment="registros">
     <label for="direccion">Direcci&oacute;n donde se desarrollo el caso: </label>
     <div>
-        <textarea type="text" rows="5" cols="50" id="direccion" th:field="*{direccion}"></textarea>
+        <textarea type="text" rows="5" cols="50" id="direccion" th:field="*{direccion}" class="form-control"></textarea>
     </div>
     <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="alert alert-danger" role="alert">
     </div>
     <br>
     <label for="nombre">Nombres: </label>
-    <input type="text" id="nombre" th:field="*{nombre}">
+    <input type="text" id="nombre" th:field="*{nombre}" class="form-control">
     <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="alert alert-danger" role="alert"></div>
     <br>
     <label for="apellido">Apellidos: </label>
-    <input type="text" id="apellido" th:field="*{apellido}">
+    <input type="text" id="apellido" th:field="*{apellido}" class="form-control">
     <div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="alert alert-danger" role="alert"></div>
     <br>
     <label>Sexo: </label>
@@ -24,8 +24,8 @@
     <br>
     <label for="informacion_adicional">Informaci&oacute;n adicional: </label>
     <div>
-        <textarea type="text" rows="10" cols="50" id="informacion_adicional"
-            th:field="*{informacion_adicional}"></textarea>
+        <textarea type="text" rows="10" cols="50" id="informacion_adicional" th:field="*{informacion_adicional}"
+            class="form-control"></textarea>
     </div>
     <div th:if="${#fields.hasErrors('informacion_adicional')}" th:errors="*{informacion_adicional}"
         class="alert alert-danger" role="alert"></div>
@@ -36,7 +36,7 @@
             <input type="text" id="DUI" th:field="*{Dui}" pattern="[0-9]{8}-[0-9]{1}"
                 th:required="${age} >= 18 ? 'required' : null"
                 oninvalid="setCustomValidity('Debes cumplir con el formato 8 numeros seguidos de \'-\' y luego un numero.')"
-                onchange="try{setCustomValidity('')}catch(e){}">
+                onchange="try{setCustomValidity('')}catch(e){}" class="form-control">
             <div th:if="${#fields.hasErrors('Dui')}" th:errors="*{Dui}" class="alert alert-danger" role="alert">
             </div>
         </div>

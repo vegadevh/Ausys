@@ -41,18 +41,18 @@
                     
     
                     <label for="nombre_familiar">Nombre de familiar: </label>
-                    <input type="text" id="nombre_familiar" th:field="*{nombre_familiar}">
+                    <input type="text" id="nombre_familiar" th:field="*{nombre_familiar}" class="form-control">
                     <div th:if="${#fields.hasErrors('nombre_familiar')}" th:errors="*{nombre_familiar}"
                         class="alert alert-danger" role="alert"></div>
                     <br>
     
                     <label for="contacto_familiar">Contacto de familiar: </label>
-                    <input type="text" id="contacto_familiar" th:field="*{contacto_familiar}">
+                    <input type="text" id="contacto_familiar" th:field="*{contacto_familiar}" class="form-control">
                     <div th:if="${#fields.hasErrors('contacto_familiar')}" th:errors="*{contacto_familiar}"
                         class="alert alert-danger" role="alert"></div>
                     <br>
                     <label for="fecha_nacimiento">Fecha de nacimiento: </label>
-                    <input type="text" th:name="fecha_nacimiento" id="datepicker" th:field="*{fecha_nacimiento}">
+                    <input type="text" th:name="fecha_nacimiento" id="datepicker" th:field="*{fecha_nacimiento}" class="form-control">
                     <div th:if="${#fields.hasErrors('fecha_nacimiento')}" th:errors="*{fecha_nacimiento}"
                         class="alert alert-danger" role="alert"></div>
                     <br>
