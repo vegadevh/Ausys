@@ -285,7 +285,7 @@ public class EstadisticaController {
 	}
 	// ingresar desaparecido
 
-	@RequestMapping("/ingresarDesaparecido")
+	@RequestMapping("ingresarDesaparecido")
 	public ModelAndView ingresarDesaparecido() {
 		ModelAndView mav = new ModelAndView();
 
