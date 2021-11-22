@@ -33,7 +33,7 @@
             <div>
                 <form th:action="@{/write/validarDesaparecido}" th:object="${desaparecido}" method="GET">
                     <div class="form-group">
-                        <label for="id_desaparecido">Identficador del registro: </label>
+                        <label for="id_desaparecido">Identificador del registro: </label>
                         <input type="text" id="id_desaparecido" th:name="id_desaparecido" th:field="*{id_desaparecido}"
                             class="form-control">
                         <div th:if="${#fields.hasErrors('id_desaparecido')}" th:errors="*{id_desaparecido}"
@@ -53,7 +53,26 @@
                     <div th:if="${#fields.hasErrors('contacto_familiar')}" th:errors="*{contacto_familiar}"
                         class="alert alert-danger" role="alert"></div>
                     <br>
-                    <label for="fecha_nacimiento">Fecha de nacimiento (Del afectado): </label>
+                    <label>Relacion con el desaparecido (Parentesco): </label>
+                    <select class="form-control">
+                        <option value="0">Selecciona una opci&oacute;n</option>
+                        <option value="1">Cónyuge</option>
+                        <option value="2">Pareja doméstica</option>
+                        <option value="3">Padre/Madre</option>
+                        <option value="4">Padrastro/Madrastra</option>
+                        <option value="5">Hijo/Hija</option>
+                        <option value="6">Hijastro/hijastra</option>
+                        <option value="7">Hermano/hermana</option>
+                        <option value="8">Tío/tía</option>
+                        <option value="9">Sobrino/sobrina</option>
+                        <option value="10">Primo primero</option>
+                        <option value="11">Abuelo/abuela</option>
+                        <option value="12">Nieto/nieta</option>
+                        <option value="13">Otro</option>
+
+                    </select>
+                    <br>
+                    <label for="fecha_nacimiento">Fecha de nacimiento (Del desaparecido): </label>
                     <input type="text" id="datepicker" th:name="fecha_nacimiento" th:field="*{fecha_nacimiento}"
                         class="form-control">
                     <div th:if="${#fields.hasErrors('fecha_nacimiento')}" th:errors="*{fecha_nacimiento}"

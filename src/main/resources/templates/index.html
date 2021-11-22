@@ -2,47 +2,216 @@
 <html xmlns="http://www.thymeleaf.org" lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+		integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
-        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/styles.css}">
-    <title th:text="'Ausys - Inicio'"></title>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+		integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" th:href="@{/styles.css}">
+	<title th:text="'Ausys - Inicio'"></title>
 </head>
 
 <body>
-    <th:block th:replace="components/navbar :: navbar"></th:block>
-    <div class="container">
-        <h3><span th:text="${idDesaPeri}"></span></h3>
-        <h3><span th:text="${mensaje}"></span></h3>
-        <h5 th:if="${umensaje}" class="alert alert-success" th:text="${umensaje}"></h5>
-        <ul>
-            <p>SOLO ADMIN</p>
-            <li><a th:href="@{/admin/usuario_registro}">Registrar Usuarios</a></li>
-            <p>SOLO ESTADISTICA</p>
-            <li><a th:href="@{/write/ingresarPeritaje}">Ingresar Peritaje</a></li>
-            <li><a th:href="@{/write/ingresarDesaparecido}">Ingresar Desaparecido</a></li>
-            <p>Estadistica y Secretaria</p>
-            <li><a th:href="@{/read/listaPeritajes}">Lista Peritajes</a></li>
-            <li><a th:href="@{/read/listaDesaparecidos}">Lista Desaparecidos</a></li>
-            <p>Solo secretaria</p>
-            <li><a th:href="@{/show/listaRegistros}">Lista Registros</a></li>
-            <li><a th:href="@{/show/graficar}">Graficar</a></li>
-            <li><a th:href="@{/show/buscarPeritajes}">Buscar Peritajes</a></li>
-            <li><a th:href="@{/show/buscarDesaparecidos}">Buscar Desaparecidos</a></li>
-        </ul>
-    </div>
+	<th:block th:replace="components/navbar :: navbar"></th:block>
+	<div class="jumbotron jumbotron-fluid" style="height: 100vh;" sec:authorize="isAnonymous()">
+		<div class="container">
+			<h1 class="display-4">Bienvenido a Ausys!</h1>
+			<p class="lead">Sistema de almacenamiento y reporte de peritajes y desaparecidos.</p>
+			<hr class="my-4">
+			<p>Inicie sesión para comenzar a crear registros.</p>
+			<a class="btn btn-primary btn-lg" href="/login" role="button">Iniciar Sesión</a>
+		</div>
+	</div>
+	<div class="jumbotron jumbotron-fluid" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SECRETARY','ROLE_STATISTICS')">
+		<div class="container">
+			<h1 class="display-4">Bienvenido a Ausys!</h1>
+			<p class="lead">Sistema de almacenamiento y reporte de peritajes y desaparecidos.</p>
+		</div>
+	</div>
+	<div class="container">
+		<h3><span th:text="${idDesaPeri}"></span></h3>
+		<h3><span th:text="${mensaje}"></span></h3>
+		<h5 th:if="${umensaje}" class="alert alert-success" th:text="${umensaje}"></h5>
+
+		<!-- Admin -->
+		<div class="row" style="margin-bottom: 2em;" sec:authorize="hasRole('ROLE_ADMIN')">
+			<div class="col">
+				<div class="list-group shadow mb-5 bg-white rounded">
+					<a th:href="@{/write/ingresarPeritaje}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Ingresar Peritaje</h5>
+						</div>
+						<p class="mb-1">Almacenar registro de peritaje que ha sido realizado, en Ausys.</p>
+					</a>
+					<a th:href="@{/write/ingresarDesaparecido}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Ingresar Desaparecido</h5>
+						</div>
+						<p class="mb-1">Almacenar registro de desaparecido que ha sido reportado, en Ausys.</p>
+					</a>
+				</div>
+			</div>
+			<div class="col">
+				<div class="list-group shadow mb-5 bg-white rounded">
+					<a th:href="@{/read/listaPeritajes}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Lista de Peritajes</h5>
+						</div>
+						<p class="mb-1">Vista de todos los peritajes almacenados en Ausys.</p>
+					</a>
+					<a th:href="@{/read/listaDesaparecidos}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Lista de Desaparecidos</h5>
+						</div>
+						<p class="mb-1">Vista de todos los desaprecidos almacenados en Ausys.</p>
+					</a>
+					<a th:href="@{/show/listaRegistros}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Lista de Registros</h5>
+						</div>
+						<p class="mb-1">Vista de todos los registro almacenados en Ausys.</p>
+					</a>
+				</div>
+			</div>
+			<div class="col">
+				<div class="list-group shadow mb-5 bg-white rounded">
+					<a th:href="@{/show/graficar}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Generar graficas.</h5>
+						</div>
+						<p class="mb-1">Generar graficas con los datos almacenados en Ausys.</p>
+					</a>
+					<a th:href="@{/show/buscarPeritajes}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Busqueda de Peritajes</h5>
+						</div>
+						<p class="mb-1">Busqueda de peritajes por medio de nombre o identificador.</p>
+					</a>
+					<a th:href="@{/show/buscarDesaparecidos}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Busqueda de Desaparecidos</h5>
+						</div>
+						<p class="mb-1">Busqueda de desaparecidos por medio de nombre o identificador..</p>
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- STATISTICS -->
+		<div class="row" style="margin-bottom: 2em;" sec:authorize="hasRole('ROLE_STATISTICS')">
+			<div class="col">
+				<div class="list-group shadow mb-5 bg-white rounded">
+					<a th:href="@{/write/ingresarPeritaje}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Ingresar Peritaje</h5>
+						</div>
+						<p class="mb-1">Almacenar registro de peritaje que ha sido realizado, en Ausys.</p>
+					</a>
+					<a th:href="@{/write/ingresarDesaparecido}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Ingresar Desaparecido</h5>
+						</div>
+						<p class="mb-1">Almacenar registro de desaparecido que ha sido reportado, en Ausys.</p>
+					</a>
+				</div>
+			</div>
+			<div class="col">
+				<div class="list-group shadow mb-5 bg-white rounded">
+					<a th:href="@{/read/listaPeritajes}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Lista de Peritajes</h5>
+						</div>
+						<p class="mb-1">Vista de todos los peritajes almacenados en Ausys.</p>
+					</a>
+					<a th:href="@{/read/listaDesaparecidos}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Lista de Desaparecidos</h5>
+						</div>
+						<p class="mb-1">Vista de todos los desaprecidos almacenados en Ausys.</p>
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- SECRETARY -->
+		<div class="row" style="margin-bottom: 2em;" sec:authorize="hasRole('ROLE_SECRETARY')">
+			<div class="col">
+				<div class="list-group shadow mb-5 bg-white rounded">
+					<a th:href="@{/read/listaPeritajes}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Lista de Peritajes</h5>
+						</div>
+						<p class="mb-1">Vista de todos los peritajes almacenados en Ausys.</p>
+					</a>
+					<a th:href="@{/read/listaDesaparecidos}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Lista de Desaparecidos</h5>
+						</div>
+						<p class="mb-1">Vista de todos los desaprecidos almacenados en Ausys.</p>
+					</a>
+					<a th:href="@{/show/listaRegistros}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Lista de Registros</h5>
+						</div>
+						<p class="mb-1">Vista de todos los registro almacenados en Ausys.</p>
+					</a>
+				</div>
+			</div>
+			<div class="col">
+				<div class="list-group shadow mb-5 bg-white rounded">
+					<a th:href="@{/show/graficar}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Generar graficas.</h5>
+						</div>
+						<p class="mb-1">Generar graficas con los datos almacenados en Ausys.</p>
+					</a>
+					<a th:href="@{/show/buscarPeritajes}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Busqueda de Peritajes</h5>
+						</div>
+						<p class="mb-1">Busqueda de peritajes por medio de nombre o identificador.</p>
+					</a>
+					<a th:href="@{/show/buscarDesaparecidos}"
+						class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Busqueda de Desaparecidos</h5>
+						</div>
+						<p class="mb-1">Busqueda de desaparecidos por medio de nombre o identificador..</p>
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
 </body>
 
 </html>
