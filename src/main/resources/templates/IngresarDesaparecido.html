@@ -78,7 +78,7 @@
                     <div th:if="${#fields.hasErrors('fecha_nacimiento')}" th:errors="*{fecha_nacimiento}"
                         class="alert alert-danger" role="alert"></div>
                     <br>
-                    <label class="col-form-label">Departamento:</label>
+                    <label class="col-form-label">Departamento donde reside:</label>
                     <select class="form-control" id="deptoSelect" th:name="deptoSelect">
                         <option value="0">Selecciona una opci&oacute;n</option>
                         <option th:each="departamento : ${departamentos}" th:value="${departamento.id_departamento}"
