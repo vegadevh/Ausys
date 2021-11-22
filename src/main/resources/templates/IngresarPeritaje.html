@@ -61,7 +61,7 @@
 
                     <br>
 
-                    <label class="col-form-label">Municipio:</label>
+                    <label class="col-form-label">Municipio donde se desarrollo el caso:</label>
                     <select class="form-control" id="municipioSelect" th:field="*{municipio.id_municipio}">
                         <option value="0" selected="selected">Selecciona una opci&oacute;n</option>
                         <option th:each="municipio : ${municipios}" th:id="${municipio.departamento.id_departamento}"

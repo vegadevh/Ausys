@@ -51,7 +51,7 @@
                         </option>
                     </select>
                     <br>
-                    <label>Sexo: </label>
+                    <label>Sexo según DUI: </label>
                     <input type="radio" th:value="Ambos" name="sexo" th:id="Ambos" checked>
                     <label th:for="Ambos" th:text="Ambos"></label>
                     <div th:each="sexo : ${listaSexo}">
@@ -63,13 +63,13 @@
                     <br>
                     <label for="fechaI">Fecha de inicial: </label>
                     <input type="text" id="datepicker" th:name="fechaI" autocomplete="off">
-    
+
                     <label for="fechaF">Fecha final: </label>
                     <input type="text" id="datepicker2" th:name="fechaF" autocomplete="off">
                     <br>
                     <input type="submit" value="Buscar" class="btn btn-primary">
                 </form>
-    
+
                 <form th:action="@{/pdf/filtro}" method="get" id="generarpdf">
                     <label for="filtro">Nombre o apellido: </label>
                     <input type="text" id="filtro" name="keyword">
@@ -81,7 +81,7 @@
                         </option>
                     </select>
                     <br>
-                    <label>Sexo: </label>
+                    <label>Sexo según DUI: </label>
                     <input type="radio" th:value="Ambos" name="sexo" th:id="Ambos" checked>
                     <label th:for="Ambos" th:text="Ambos"></label>
                     <div th:each="sexo : ${listaSexo}">
@@ -93,7 +93,7 @@
                     <br>
                     <label for="fechaI">Fecha de inicial: </label>
                     <input type="text" id="datepicker3" th:name="fechaI" autocomplete="off">
-    
+
                     <label for="fechaF">Fecha final: </label>
                     <input type="text" id="datepicker4" th:name="fechaF" autocomplete="off">
                     <br>
@@ -122,10 +122,10 @@
                 </tbody>
             </table>
             <div class="text-center">
-				<form th:action="@{/}">
-					<input type="submit" class="btn btn-primary" value="Regresar">
-				</form>
-			</div>
+                <form th:action="@{/}">
+                    <input type="submit" class="btn btn-primary" value="Regresar">
+                </form>
+            </div>
         </div>
     </div>
 
