@@ -14,7 +14,7 @@
     <input type="text" id="apellido" th:field="*{apellido}" class="form-control">
     <div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="alert alert-danger" role="alert"></div>
     <br>
-    <label>Sexo según DUI: </label>
+    <label>Sexo: </label>
     <div th:each="sexo : ${listaSexo}">
         <input type="radio" th:field="*{sexo}" th:value="${sexo}">
         <label th:for="${#ids.prev('sexo')}" th:text="${sexo}"></label>
