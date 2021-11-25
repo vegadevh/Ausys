@@ -49,7 +49,7 @@
                 </select>
                 <br>
                 <!--Sexo-->
-                <label>Sexo: </label><br>
+                <label>Sexo por el que se desea buscar: </label><br>
                 <input type="radio" th:value="Ambos" th:name="sexo_registro" th:id="Ambos" checked>
                 <label th:for="Ambos" th:text="Ambos"></label>
                 <div th:each="sexo : ${listaSexo}">

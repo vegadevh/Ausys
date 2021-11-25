@@ -42,7 +42,7 @@
                 <input type="text" placeholder="Nombre" th:name="nombre_registro" class="form-control">
                 <br>
                 <!--Sexo-->
-                <label>Sexo: </label>
+                <label>Sexo por el que se desea buscar: </label>
                 <input type="radio" th:value="Ambos" th:name="sexo_registro" th:id="Ambos" checked>
                 <label th:for="Ambos" th:text="Ambos"></label>
                 <div th:each="sexo : ${listaSexo}">
